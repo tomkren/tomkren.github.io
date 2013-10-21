@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sešítek</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <style>
+    </style>
+
+    <script src="js/libs/jquery-1.10.2.js"></script>
+    <script src="js/libs/underscore-1.5.1.js"></script>
+
+    <script src="js/utils.js"></script>
+    
+<script>
+
+var renderSections = function(contentsSelector){
+
+  $('section').each(function(){
+    var code   = $(this).attr('id');
+    var nadpis = $(this).html();
+    $(this)
+     .html( h2 = $('<h2>').html( nadpis + ' <a href="'+contentsSelector+'">⌂</a>' ) )
+     .prepend( $('<a>').attr('name', code ) );
+    $(contentsSelector)
+      .append( $('<a>').attr('href','#'+code).html( nadpis ) )
+      .append( $('<br>') );
+  });
+
+};
+
+var renderLabels = function(tag,str,color){
+  $(tag).each(function(){
+    $(this)
+     .css('color','white')
+     .css('background-color',color)
+     .css('width','intrinsic')
+     .css('width','-moz-max-content')
+     .css('padding','3px')
+     .prepend('<b>'+str+'</b>')
+     .before('<p>')
+     .after('</p>');
+  });
+};
+
+var runCodes = function(){
+  $('code').each(function(){
+    $(this)
+     .append($('<script>').html( $(this).html() ));
+  });
+};
+
+var showScripts = function(){
+  $('script').each(function(){
+    var it = $(this); 
+    if( it.attr('show') === 'true' ){
+      it.after($('<div>').html( '<pre>'+it.html()+'</pre>' ));
+    }
+  });
+};
+
+$(function(){ 
+  renderSections('#contents');
+  renderLabels('todo','TODO : ','red');
+  renderLabels('note','Note: ','blue');
+  showScripts();
+
+});
+
+</script>
+
+</head>
+<body>
+
+<h1>sešítek</h1>
+
+<section id="contents">Obsah</section>
+
+<section id="mravenci">Mravenci</section>
+
+<canvas id="ant_canvas" width="512" height="512"></canvas>
+
+<div>
+  <input type="button" id="ant_canvas_play" value="play">
+  <span id="ant_canvas_steps">0</span> kroků
+</div>
+
+<p>Výsledek po cca 70 000 krocích (dáno 9x vedle
+  sebe aby vynikly důsledky toroidnosti).
+  (5%, 25%, 25%, 45%)</p>
+
+<img src="img/tridici_mravenci.png" style="width: 512px">
+
+<p>Pokus 2, 310 000 kroků:</p>
+
+<img src="img/tridici_mravenci_2.png" style="width: 512px">
+
+<p>Pokus 3, 40 000 kroků:</p>
+
+<img src="img/tridici_mravenci_3.png" style="width: 512px">
+
+<p>Pokus 4, 60 000 kroků:</p>
+
+<img src="img/tridici_mravenci_4.png" style="width: 512px">
+
+<p>Pokus 5, 20 000 (5, 45, 45, 0): </p>
+
+<img src="img/tridici_mravenci_5.png" style="width: 512px">
+
+<p>Pokus 6, 730 000 (5%, 47.5%, 47.5%, 0%): </p>
+
+<img src="img/tridici_mravenci_6.png" style="width: 512px">
+
+
+<script>
+
+function drawZone2D_ (ctx, zone) {
+  var side = 16;
+  var i = 0;
+  z_each(zone,function(pole,pos){
+    var x = pos[0];
+    var y = pos[1];
+    
+    var color = [119, 140, 79];
+    for (var oi in pole.inside) {
+      var obj = pole.inside[oi];
+      if( obj.color ){
+        color = obj.color;
+        if( obj.typ === 'ant' ){
+          break;
+        }
+      }
+    }
+
+    ctx.fillStyle = 'rgb(' + color.join() + ')';
+    ctx.fillRect(x*side, y*side, (x+1)*side, (y+1)*side);
+  
+    i++;
+  });
+  //log(i);
+}
+
+function stepZone_ (zone) {
+
+  z_each(zone,function(pole,pos){
+    for (var oi in pole.inside) {
+      var obj = pole.inside[oi];
+
+      if (!obj.hasStepped) {
+
+        if (obj.mem) {
+          updateMem(obj.mem, pole);
+        }
+
+        if (obj.step && !obj.hasStepped) { 
+          var stepRes = obj.step( obj.mkInfo(obj,pole) ); 
+          if (stepRes.action) {
+            doAction(stepRes.action,obj,pole);
+          }
+          if (stepRes.move) {
+            moveObj(stepRes.move, zone, pole, obj, pos);
+          }
+        }
+
+        obj.hasStepped = true;
+      }
+    }
+  });
+
+  z_each(zone,function(pole,pos){
+    for (var oi in pole.inside) {
+      var obj = pole.inside[oi];
+      obj.hasStepped = false;
+    }
+  });
+
+}
+
+function updateMem (mem, pole) {
+  mem.shift();
+  
+  var memCell = null;
+  for (var oi in pole.inside) {
+    var obj = pole.inside[oi];
+    if (obj.typ == 'W' || obj.typ == 'B') {
+      memCell = obj.typ;
+    }
+  }
+
+  mem.push(memCell);
+
+  //log(mem);
+}
+
+function moveObj (move, zone, pole, obj, pos) {
+  //log('move ' + move);
+  
+  var poleTam;
+  var dx = 0;
+  var dy = 0;
+
+  switch (move) {
+    case 'U'    : dy = -1;     break;
+    case 'D'    : dy =  1;     break;
+    case 'L'    : dx = -1;     break;
+    case 'R'    : dx =  1;     break;
+  }
+
+  if (dx || dy) {
+    
+    var x = ((ZONE_SIDE+pos[0]+dx) % ZONE_SIDE);
+    var y = ((ZONE_SIDE+pos[1]+dy) % ZONE_SIDE);
+    
+    var poleTam = poleAt(zone, [x,y] );
+    if (poleTam && poleTam.inside){
+      poleTam.inside.push(obj);
+      delObj(pole,obj);
+    }
+  }
+}
+
+function doAction (action,ant,pole) {
+  
+  switch (action) {
+    case 'PICK' : pickObj(ant, pole); break;
+    case 'PUT'  : putObj (ant, pole); break;
+  }  
+
+}
+
+function pickObj (ant, pole) {
+  if (ant.inside.length === 0) {
+    for (var oi in pole.inside) {
+      var obj = pole.inside[oi];
+      if( obj.typ === 'W' || obj.typ === 'B' ) {
+        ant.inside.push(obj);
+        delObj(pole,obj);
+        break;
+      }
+    }
+  }
+}
+
+function putObj (ant, pole) {
+  if (ant.inside.length > 0){
+    var obj = ant.inside.pop();
+    pole.inside.push(obj);
+  }
+}
+
+function delObj (pole,obj) {
+  var del_oi = undefined;
+  var inside = pole.inside;
+  for (var oi in inside) {
+    if (inside[oi].id === obj.id) {
+      del_oi = oi;
+      break;
+    }
+  }
+
+  if( del_oi !== undefined ){
+    pole.inside.splice(del_oi,1);
+  }
+}
+
+
+
+function mkZone_ (initFun, dim, pos) {
+  if (dim === undefined) {dim = NUM_DIM; }
+  if (pos === undefined) {pos = []; }
+  if (initFun === undefined) {initFun = defaultZoneInit2D;}
+  if (dim === 0) {return initFun(pos); }
+  
+  var zone = []; 
+  for (var i = 0; i < ZONE_SIDE; i++) {
+
+    var subZone = mkZone_(initFun, dim-1, pos.concat([i]));
+    zone.push(subZone);
+
+  }
+  return zone;
+}
+
+
+var g_id = 0;
+
+
+function mkAnt () {
+
+  var ANT_MEM_SIZE = 10;
+  var K1 = 0.1;
+  var K2 = 0.1;
+
+  var mkInfo = function (ant,pole) {
+
+    var frekv = function (typ) {
+      var num = 0;
+      for (var i = 0; i < ant.mem.length; i++) {
+        if( ant.mem[i] === typ ){
+          num++;
+        }
+      }
+      return num / ant.mem.length;
+    };
+
+    var getTypNazemi = function () {
+      for (var oi in pole.inside) {
+        var obj = pole.inside[oi];
+        if( obj.typ === 'W' || obj.typ === 'B' ) {
+          return obj.typ;
+        }
+      }
+      return null;
+    };
+
+    var getTypNese = function () {
+      for (var oi in ant.inside) {
+        var obj = ant.inside[oi];
+        if( obj.typ === 'W' || obj.typ === 'B' ) {
+          return obj.typ;
+        }
+      }
+      return null;
+    };
+
+    var canPut = function () {
+      var isFree = ant.inside.length === 0;
+      
+      var poleHasNoBorW = true;
+      for (var oi in pole.inside) {
+        var obj = pole.inside[oi];
+        if( obj.typ === 'W' || obj.typ === 'B' ) {
+          poleHasNoBorW = false;
+          break;
+        }
+      }
+
+      return !isFree && poleHasNoBorW;
+    };
+
+    var canPick = function () {
+      var isFree = ant.inside.length === 0;
+      
+      var reachesOnBorW = false;
+      for (var oi in pole.inside) {
+        var obj = pole.inside[oi];
+        if( obj.typ === 'W' || obj.typ === 'B' ) {
+          reachesOnBorW = true;
+          break;
+        }
+      }
+
+      return isFree && reachesOnBorW;
+    };
+
+    return {
+      canPick: canPick,
+      canPut: canPut,
+      frekv: frekv,
+      getTypNazemi: getTypNazemi,
+      getTypNese: getTypNese
+    };
+  };
+
+  var step = function (antInfo) {
+
+    var typNazemi = antInfo.getTypNazemi();
+    var typNese   = antInfo.getTypNese();
+
+    /*
+    log( 'f_W    : ' + antInfo.frekv('W') );
+    log( 'f_B    : ' + antInfo.frekv('B') );
+    log( 'Nazemi : ' + typNazemi );
+    log( 'Nese   : ' + typNese );
+    */
+
+    var move;
+    var action = undefined;
+    
+    var ball1 = Math.random();
+
+    if (typNazemi === null && typNese !== null) {
+      var fr    = antInfo.frekv(typNese);
+      var p_put = fr / (K2+fr);
+      p_put = p_put * p_put;
+      if(ball1 < p_put){
+        action = 'PUT';
+      }
+    }
+
+    if (typNazemi !== null && typNese === null) {
+      var fre    = antInfo.frekv(typNazemi);
+      var p_pick = K1 / (K1+fre);
+      p_pick = p_pick * p_pick;
+      if(ball1 < p_pick){
+        action = 'PICK';
+      } 
+    }
+
+    /* if (antInfo.canPick()) { 
+      action = 'PICK';
+    } else if (antInfo.canPut()) {
+      action = 'PUT';  
+    } */
+
+    var ball = Math.random();
+
+    if      (ball < 1/4) {move = 'L'; }
+    else if (ball < 2/4) {move = 'R'; }
+    else if (ball < 3/4) {move = 'U'; }
+    else if (ball < 4/4) {move = 'D'; }  
+
+    return {
+      move: move,
+      action: action
+    };
+  };
+
+  var id = g_id;
+  g_id ++;
+
+  var mem = [];
+
+  for (var i = 0; i < ANT_MEM_SIZE; i++){
+    mem.push(null);
+  }
+
+  return {
+    id: id,
+    typ: 'ant', 
+    mem: mem,
+    color: [119,49,65],
+    inside: [],
+    step: step,
+    mkInfo: mkInfo
+  };
+}
+
+//oneAntHax = true;
+
+var POLE_DIST = mkDist([
+    ['ant', 5],
+    ['B'  , 47.5],
+    ['W'  , 47.5],
+    ['nic', 0 ]]);
+
+function poleInit (pos) {
+  var inside = [];
+  
+  switch (POLE_DIST.get()) {
+    case 'ant': inside.push(mkAnt()); break;
+    case 'B'  : inside.push({typ:'B',color:[0,0,0]}); break;
+    case 'W'  : inside.push({typ:'W',color:[255,255,255]}); break;
+    case 'nic': break;
+  }
+
+  return { 
+    inside: inside 
+  };
+};
+
+
+
+$(function () {
+  var fps = 1000;
+
+  var ctx = $('#ant_canvas')[0].getContext('2d'); 
+  var zona = mkZone_(poleInit);
+  drawZone2D_(ctx, zona);
+  
+  var play = false;
+
+  var numStepsEl = $('#ant_canvas_steps');
+  var numSteps = 0;
+
+  var step = function () {
+    if (play) {
+      drawZone2D_(ctx, zona);  
+      stepZone_(zona);
+
+      numSteps++;
+      numStepsEl.html(numSteps);
+      setTimeout(step,1000/fps);
+    }
+  }
+
+  var button = $('#ant_canvas_play');  
+  button.click(function(){
+    play = !play;
+
+    if (play) {
+      button.val('pause');
+      step();  
+    } else {
+      button.val('play');
+    }
+    
+  });
+
+  
+});</script>
+
+
+
+<section id="uvod">Kecy</section>
+
+Pokus jestli je praktické psát si poznámky v html/js a zda
+se to osvědčí jako kontrapart autoepištoly.
+
+Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
+postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
+jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
+
+<section id="fishtron">Fishtron</section>
+
+Asi rozdělit na :
+
+<h3>Střízlivé</h3>
+<h3>Odvážné</h3>
+
+<hr>
+
+<h4>JavaScriptová verze</h4>
+
+<!-- - Propojení těch dvou barandrechtskejch odvozovacích pravidel do jedinýho -->
+
+<h4>Polymorfizmus</h4>
+
+<h4>Typový systém ala logické programování</h4>
+
+<h4>Dependent types</h4>
+
+<h4>ADF</h4>
+
+<h4>"sem-tam-sem" Křížení</h4>
+
+<!-- - ... nahradíme kombinátory ltermama a redukujem -->
+
+<h4>Mutace</h4>
+
+<h4>Generalized genetic operator</h4>
+
+
+
+<h4>Multi-konstanty (aka čísla-like konstanty)</h4>
+
+
+
+<h4>Mravenčí generování</h4>
+
+<!--Roadmap a další Future ideas with Inhabitation trees-->
+
+
+
+<h4>Paralelní běh několika problémů (nápad Petra Pudláka)</h4>
+
+<h4>Module Acquisition</h4>
+
+
+
+<h4>Paralelizace</h4>
+
+<h4>Chytřejší heuristika pro A* která si to předpočítá na Gamma s čárkou</h4>
+
+<h4>šlechtění prohledávacích strategií na generování termů</h4>
+
+
+
+<h4>šlechtění fitness funkcí a nápad s "turnajem olympioniků"</h4>
+
+
+
+<h4>Alternative family trees</h4>
+
+<h4>Meta-evoluce: běhových parametrů ale i samotných algoritmů</h4>
+
+
+<h4>Propojení s kutilem aka jednotné prostředí pro problémy</h4>
+
+
+<h3>Problémy</h3>
+
+<h4>Big Context problém</h4>
+
+<h4>Šlechtění budov</h4>
+
+<h4>Burza</h4>
+
+<h4>Mouchy</h4>
+
+<h4>Simulace ekonomie na urovni firem</h4>
+
+<h4>Fish Fillets</h4>
+
+<h4>Lego robot</h4>
+
+<h4>NS</h4>
+
+<h4>NP-ús</h4>
+
+
+
+<section id="cocky">Čočky</section>
+
+Čočky jsou koncep založený na pozorování, že můžeme řetězit modely a views podobně
+jako při skládání funkcí. Čočka nasazená na nějaký model generuje pohled na ten model, který může být zase
+interpretován jako model další čočkou atd. Jedná se vlastně jen o funkci transformující objektu na jiný objekt,
+nic složitého. Zdá se mi však, že by bylo chytré těmhle objektům dát jednotící "interfece" ve stylu 
+<a href="#json_">JSONu_</a>. 
+
+
+
+
+<section id="simul">Simulátůrek</section>
+
+Několik neuspořádaných nápadů:
+<ul>
+  <li>Základní prvky:
+    <ul>
+      <li>Svět - má zóny</li>
+      <li>Zóna - má políčka</li>
+      <li>Políčko - obsahuje objekty</li>
+      <li>Objekty:
+         <ul>
+          <li>Strom</li>
+          <li>Panáček/Robot - má vnitřek: inventář</li>
+          <li>Barák - má vnitřek: něco jako vnitřní zóna </li>
+         </ul>
+      </li>
+    </ul>
+  </li> 
+
+  <li>
+    Mělo by to být designovaný s ohledem na princip <a href="#cocky">"čoček"</a>
+  </li>
+
+  <li>
+    Měla by to být prostá hierarchie objektů ve stylu <a href="#json_">JSON_</a>,
+    respektive to co to generuje jako výstup.
+    <br> 
+    Konkrétnějc: měl by bejt json_ serializovatelnej ten výstup simulátoru, tzn 
+    stav/model světa. To prakticky asi znamená, že se by funkce (membři) toho 
+    výstupního objektu měli bejt takový, že na nich toString() dá něco co de evalem
+    rekonstruovat. To, jestli tam nejsou nějaký další šity znamená, že by tyhle funkce
+    neměli bejt napojený na neviditelnej closure, tzn např že nevzniknou jako
+    výstup nějaký jiný funkce, což je dost nepříjemný omezení. V <a href="#json_">JSON_</a>
+    se to popisuje podrobněji, uvidí se jestli to bude mít nějaký praktický řešení.
+    <br>
+    To samozřejmě neomezuje použití kloužrů uvnitř toho simulátoru, jen že
+    ve stavu světa by neměli bejt funkce, co maj clousre data.
+  </li>
+
+  <li>
+    "problém cest" :
+    když si budou moct zabrat uzemí kde budou chtít, tak můžou barákama
+    obestavět jinej barák a ten nebude mít možnost dostat se k surovinám.
+    Tzn vzniká tu agrese samovolně [železná ruka oligarchie jako fyzikální zákon]
+    i když by se člověk snažil udělat to hezky "jehovisticky" - tzn explicitně
+    jim tam nezavádět nějaký prvky agrese jako zbraně. 
+  </li>
+
+  <li>snažit se to udělat jako obecnej simulátor, kterej má jako argumenty
+    "bussines rules" který udávaj konkretní arbitrární pravidla. Samozřejmě
+    že tohle je někdy asi na úkor efektivity práce... nebo spíš lehkost
+    práce, a mohlo by to tíhnout k premature rozhodnutím; takže to zklouzne k tomu, že
+    budou nějaký věci co budou v jádru co by tam neměli bejt podle tohodle principu, 
+    ale už od začátku to pojmout tak, že jsou tam rules do kerejch je možno refaktoringem
+    transplantovat hardcoded věci z jádra simulátoru co by tam neměli bejt.
+  </li>
+
+  <li>
+    Je otázka jak se postavit k indexování zón/políček, bylo by hezký, kdyby to bylo udělaný nějak obecně
+    jak pro 2D i 3D. Nebo rovnou 3D? Nebo nejdřív 2D? 
+    <br>
+    Je lepší indexovat přímo stringovou adresou, nebo strukturovaně world[x][y][z]?
+    Jeden string má nevýhodu v adjacentnostech atd - i když můžu použít strukturovaný
+    objek zonePos a ten až přeložit na stringovou adresu.
+  </li>
+ 
+</ul>
+
+<canvas id="sim_canvas" width="512" height="512"></canvas>
+<script>$(function(){
+  var ctx = $('#sim_canvas')[0].getContext('2d'); 
+  var zona = mkZone();
+  drawZone2D(ctx,zona);
+});</script>
+
+<h3>Trocha pokusného kódu</h3>
+
+<script show="true">
+
+var NUM_DIM   = 2;
+var ZONE_SIDE = 32;
+
+
+var mkWorld = function(){
+  return {};
+};
+
+var defaultZoneInit2D = function(pos){
+  var k =  256/ZONE_SIDE ;
+  return {
+    //pos:pos.join(),
+    color : _.map(pos,function(x){return k*x;}).concat([75]) 
+  };
+};
+
+var stepPole1 = function(pole,zone,pos){
+  var ns = nejbrs(pos,true);
+  ns = _.map(ns,function(n){return poleAt(zone,n)});
+  hax = ns;
+  return{ color: [ ns[0].color[2] , pole.color[2] , ns[2].color[2] ] };
+};
+
+var poleAt = function(zone,pos){
+  if(pos.length===0){return zone;}
+  return poleAt(zone[_.head(pos)],_.tail(pos));
+};
+
+var nejbrs = function(pos,isToroid,free){
+  if(isToroid){
+    if(free === undefined){free = true;}
+
+    if(pos.length===0){return [[]];}
+
+
+    var ret1 = [] ,ret2 = [], ret3 = [];
+
+    var x = _.head(pos);
+
+    if( free ){
+      x1 = (x+1) % ZONE_SIDE;
+      x2 = (x-1) % ZONE_SIDE;
+      var ns = nejbrs( _.tail(pos) , isToroid ,false );
+    
+      ret1 = _.map(ns,function(n){return [x1].concat(n);});
+      ret2 = _.map(ns,function(n){return [x2].concat(n);});
+    }
+
+    if( !(pos.length==1 && free) ){
+      var ns_ = nejbrs( _.tail(pos) , isToroid ,free );
+      ret3 = _.map(ns_,function(n){return [x].concat(n);});
+      
+    };
+
+    return ret1.concat(ret2.concat(ret3));
+  }
+
+  throw 'TODO - nejbrs : to be implemented';
+};
+
+var stepZone = function(zone,stepPole){
+  return z_map(zone,function(pole,pos){
+    return stepPole(pole,zone,pos);
+  });
+};
+
+var drawZone2D = function(ctx,zone){
+  var side = 16;
+  var i = 0;
+  z_each(zone,function(pole,pos){
+    var x = pos[0];
+    var y = pos[1];
+    
+    ctx.fillStyle = 'rgb('+pole.color.join()+')';
+    ctx.fillRect(x*side, y*side, (x+1)*side, (y+1)*side);
+  
+    i++;
+  });
+  //log(i);
+};
+
+
+var z_each = function(zone,fun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(dim === 0){ return fun(zone,pos); }
+  
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+    z_each(zone[i],fun,dim-1,pos.concat([i]));
+  }
+};
+
+var z_map = function(zone,fun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(dim === 0){ return fun(zone,pos); }
+  
+  var zone = []; 
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+    var subZone = z_map(zone[i],fun,dim-1,pos.concat([i]));
+    zone.push(subZone);
+  }
+  return zone;
+};
+
+var mkZone = function(initFun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(initFun === undefined){ initFun = defaultZoneInit2D;}
+  if(dim === 0){ return initFun(pos); }
+  
+  var zone = []; 
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+
+    var subZone = mkZone(initFun,dim-1,pos.concat([i]));
+    zone.push(subZone);
+
+  }
+  return zone;
+};
+
+// ZonePos -> String
+var encodeZonePos = function( zonePos ){
+
+  var arr2str = function(xs){
+    return xs.splice(0,NUM_DIM).join();
+  };
+
+  if( _.isArray(zonePos) ){
+    if(zonePos.length < NUM_DIM){
+      var zonePos = _.clone(zonePos);
+      while( zonePos.length < NUM_DIM){
+        zonePos.push(0);
+      }
+    }
+    return arr2str(zonePos);
+  }
+
+  if( _.isObject(zonePos) ){
+    var x = zonePos.x || 0 ;
+    var y = zonePos.y || 0 ;
+    var z = zonePos.z || 0 ;
+    return arr2str([x,y,z]);
+  }
+
+  throw 'encodeZonePos : unsupported zonePos format';  
+};
+
+// World -> ZonePos -> Zone
+var getZone = function( world , zonePos ){
+  return world[encodeZonePos(zonePos)];
+};
+
+
+$(function(){
+
+
+});
+
+</script>
+
+
+
+<section id="json_">JSON_</section>
+
+Rozšíření JSONu o nějaký jednoduchý konstrukt zajišťující 
+rozšíření o funkce. Něco ve stylu:
+
+<pre>
+{
+  "name" : "Chuan",
+  "age" : 10,
+  "foo" : { "_" : "function (x){return x+1;}" }
+}
+</pre>
+
+Který by se ale přeložil pomocí "JSON_.parse"
+na objekt:
+
+<pre>
+{
+  name : 'Chuan',
+  age  : 10,
+  foo  : function(x){return x+1;} 
+}
+</pre>
+
+<p>
+Podstatná vlastnost objektu který má být korektně převeden do JSONu_,
+že by neměl nic schovávat do closure, aby jednoduché .toString() aplikované
+na funkci nestratilo o funkci žádnou inforaci.
+</p>
+
+<p>
+A samozřejmě closure neni jediná potíž, další potíž je, kde to vezme
+context ve kterém bude interpretovat konstanty obecně (jména funkcí, konstant,..).
+Přímočarý a pravděpodobně né moc dobrý je globální scope. Bude moct
+referencovat svoje položky? Jaká bude politika vůči this?
+</p>
+
+
+<p>
+Je otázka, zda se spokojit s esteticky pěkným ale nebezpečným "_". 
+V zásadě však to myslím není problém použít, protože by němělo být vždy
+jasné, že daný JSON  je vlastně JSON_. Případný atribut s klíčem "_" může být
+zakódován jako "__" atd. nebo prostě bude zakázán. Zdá se mi to lepší, než
+používat nějaké "__FUN__" apod. 
+</p>
+
+<p>
+Zdá se, že se zákazem closure je docela netriviální potíž, protože to vylučuje
+použít funkci vrácenou funkcí v objektu, který pak chceme serializovat. Např:
+</p>
+
+<pre>
+foo = function(x){return function(y){return x(y);}}
+bar = foo(Math.sin)
+bar.toString() 
+
+  ===> "function (y){return x(y);}"
+  a né "function (y){return Math.sin(y);}"
+</pre>
+
+Věc co mě napadla a nevim do jaký míry je rylejtlá k tomuhle je to, že jde celkem
+elegantně psát lambda termy přímo v jsonu:
+
+<pre>
+\x y.x y
+{'x':{'y':['x','y']}}
+případně
+{'x y':['x','y']}
+možná i dokonce (ale to už trochu strácí tu jednoduchou parzovatelnost)
+{'x y':'x y'}
+
+tzn něco jako 
+{_:{'x':{'y':['x','y']}}}
+místo
+{_:"function(x){return function(y){return x(y);}}"}
+
+ten seznam tam má hezkou vlastnost že
+\ f g x. f x (g x)
+jde jako
+{f:{g:{x:[f,x,[g,x]]}}}
+(případně)
+{'f g x':[f,x,[g,x]]}
+</pre>
+
+Nevim jestli je to k něčemu dobrý, vypadá to ale že bude třeba ručně řešit
+některý takový věci, pokud se nebudeme chtít ochudit o možnost funkcí co vracej funkce
+a takováhle notace neni až taková pain-in-the-ass a je jednodušejc parsovatelná 
+než plaintext.
+
+<p><note>Možná přendat někam jinam až na to bude někde lepší místo</note></p>
+
+<h3>Links</h3>
+<a href="http://www.kristofdegrave.be/2012/07/json-serialize-and-deserialize.html">
+blogpost : JSON: serialize and deserialize functions in JavaScript</a><br>
+<a href="https://github.com/tarruda/super-json">
+github repo : super-json</a>
+
+
+<section id="typy-vs-dyna">(Typovanost vs dynamičnost) vs (stroj vs člověk)</section>
+
+Zde bych v budoucnu chtěl trochu rozebrat myšlenku, která mě občas napadá ohledně 
+staticky typovaných vs dynamických jazyků. Respektive napadá mě od tý doby co si hraju s javascriptem,
+potom co sem si poměrně dlouho hrál s haskellem. 
+<br><br>
+
+Hrubě ve zkratce: ačkoli oceňuju typovanost a jak člověku pomáhá, zároveň mám velkou 
+zálibu v dynamických jazycích. Zatím si nepřijdu dost pevný v kramflecích abych vynášel moc silné soudy,
+ale přijde mi že typy mohou člověka až nepříjemě svazovat, zvlážť když pracuje s metaprogramovacíma věcma.
+Alespoň takový jsou moje zkušenosti po dělání Fištrona, může to bejt hodně daný mojí nezkušeností
+haskellu nebo nějakejma špatnejma designovejma rozhodnutíma, ale přišlo mi že až nepřiměřeně
+času jsem strávil fajtěnim typovýho systému v eval záležitostech. Naopak v JS je vše evalózní
+jednoduché, jen halt má člověk tu velkou zodpovědnost nestřelit se do nohy, ktrerou typy z velké části
+zjednodušují. Proto mě napadá (možná předčasně vzhledem k tomu že sem toho zas
+tolik v js nenaprogramoval) že může být zajímave nahlížet na typy jako na <i>nástroj kterým 
+koriguje lidský programátor strojového programátora, ale sám si může dovolit luxus nebýt jimy svázán</i>.
+Spíš to tu poznamenávám, abych to měl někde poznamenáno, než že by to už byla moc hotová myšlenka.
+Cejtim jí pocitově, do slov se jí ještě asi moc nechce.
+<p>
+Rozhodně se mi zdá, že dynamický jazyky jsou asi o něco vhodnější na dělání prototypů.
+Kdy člověk ještě nemusí mít v hlavě moc představu o datovejch strukturách který je
+vhjodný použít a ty se až "vyloupávaj" za běhu. Ve chvíli kdy se to vyloupne, tak může
+mít smisl to ukotvit, přepsat v tyxpovanym jazyce - pokud vypadá že by to mohlo přinýst zlepšení
+- zrychlení, zpřehlednění, zbezpečnění.. 
+<p>
+Na druhou stranu jsou zase věci co si člověk bez typů neužije, protože neni drženej tim zábradlíčkem
+a nemůže si dovolit některý úlety. No je to na hlubší zamyšlení, ale aspoň něco.
+
+<todo>ukázka todo :) .. rozepsat to tu víc .. </todo>
+
+
+</body>
+</html>
+
+
+
