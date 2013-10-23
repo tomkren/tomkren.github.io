@@ -1,62 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>fishtron.js</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-    <link rel="stylesheet" href="css/libs/qunit-1.12.0.css">
+    <title>tomkren.github.io</title>
+    <meta charset="utf-8">    
     <style></style>
 
     <script src="js/libs/jquery-1.10.2.js"></script>
     <script src="js/libs/underscore-1.5.1.js"></script>
-    <script src="js/libs/qunit-1.12.0.js"></script>
-    
-    <script src="js/libs/seedrandom.js"></script>
-    <script src="js/ie-compat.js"></script>
-
     <script src="js/utils.js"></script>
-    <script src="js/term.js"></script>
-    <script src="js/zipper.js"></script>
-    <script src="js/show.js"></script>
-    <script src="js/priority-queue.js"></script>
-    <script src="js/prove.js"></script>
-    <script src="js/xover.js"></script>
-    <script src="js/ants.js"></script>
-    <script src="js/eva.js"></script>
-    <script src="js/tests.js"></script>
 
-    
 <script>
-
-fishtronTests();
 
 $(function(){ 
 
-      res = prove({
-         resultMode : 'both',
-         n        : 100,
-         typ      : mkTyp(['int','int','int']),
-         ctx      : mkCtx({
-                      ap42 : [ [['int','int'],'int'],
-                             function(f){return f(42)}  ],
-                      p :    [ ['int','int','int'],
-                             function(x,y){return x+y;} ],
-                      s :    [ ['int','int'],
-                             function(x){return x+1;} ] 
-                    })
-      });
+  log('Welcome!');
 
 });
-
 
 </script>
 </head>
 <body>
 
-  <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
+  <h1>tomkren.github.io</h1>
+
+  <a href="sesitek.html">Sešítek</a><br>
+  <a href="tests.html">fishtron.js tests</a>
 
 </body>
 </html>
