@@ -8,12 +8,14 @@ var prove = function(opts){
   var resultMode = opts.resultMode || 'terms';
 
   var ret = treeAStar({
-    n     : opts.n     || 1,
-    limit : opts.limit || 1000000,
-    start : mkStartZipperSmart(typ,ctx),
-    nexts : smartExpand,
-    isGoal: function(zipper){return zipper.numUnfs === 0 ;},
-    heur  : function(zipper){return zipper.numUnfs;}
+    n        : opts.n        || 1,
+    limit    : opts.limit    || 1000000,
+    start    : mkStartZipperSmart(typ,ctx),
+    nexts    : smartExpand,
+    isGoal   : function(zipper){return zipper.numUnfs === 0 ;},
+    heur     : function(zipper){return zipper.numUnfs;},
+    strategy : opts.strategy || {filter: _.identity},
+    repeat   : opts.repeat !== undefined ? opts.repeat : true 
   });  
 
   ret = _.map(ret,function(z){return gotoTop(z).act;});
@@ -43,6 +45,9 @@ var mkStartZipperSmart = function(t,ctx){
   if( isArr(t) ){
     zipper = gotoNextUnf(expandLam(zipper).zipper);
   }
+
+  // Aby se nepočitali do s_hloubky první lambdy (TODO kinda hax):
+  zipper.s_depth = 0;
 
   return zipper;
 };
@@ -90,8 +95,10 @@ var smartExpand = function( zipper ){
       
       var newNumUnfs = zipper.numUnfs - 1 + ms.length;
 
+      var newSubterm = mkSexpr(row[i],ms);
+
       var newZipper  = mkZipper({
-                          act     : mkSexpr(row[i],ms),
+                          act     : newSubterm,
                           numUnfs : newNumUnfs, 
                           nextVar : varI  
                        },zipper);
@@ -102,8 +109,10 @@ var smartExpand = function( zipper ){
 
 
       ret.push({
-        state : newZipper,
-        dist  : 1 + (varI-zipper.nextVar) 
+        state      : newZipper,
+        dist       : 1 + (varI-zipper.nextVar),
+        newSubterm : newSubterm,
+        s_depth    : zipper.s_depth 
       });
 
     }
@@ -158,51 +167,59 @@ var expandLam = function( zipper ){
 
 var treeAStar = function(problem){
 
-  var start  = {s:problem.start,G:0};
-  var nexts  = problem.nexts;
-  var isGoal = problem.isGoal;
-  var n      = problem.n      || 1;
-  var heur   = problem.heur   || function(x){return 0;};
-  var limit  = problem.limit  || 1000000;
+  var start    = {s:problem.start,G:0};
+  var nexts    = problem.nexts;
+  var isGoal   = problem.isGoal;
+  var n        = problem.n        || 1;
+  var heur     = problem.heur     || function(x){return 0;};
+  var limit    = problem.limit    || 1000000;
+  var strategy = problem.strategy || {filter: _.identity};
+  var repeat   = problem.repeat !== undefined ? problem.repeat : true;    
 
   var q = PriorityQueue(); 
   //var q = Heap();
   
   var results = [];
 
-  q.push( start , heur(start.s) );
+  do {
 
-  while( !q.isEmpty() && limit > 0 ){
-      
-    limit--;
+    if (strategy.init) {strategy.init();}
+    q.push( start , heur(start.s) );
 
-    var st    = q.pop()[0];
-    var state = st.s;
-    var G     = st.G;
-    //log( 'vyndavam : ' + showZipper(state) );
-
-    if( isGoal(state) ){
-      results.push(state);
-      if( results.length === n ){
-        return results;
-      }
-    } else { // TODO : obecně to ale pro grafovej Astrar neplatí
-             // (to že je to v else) prorože i za cílovym může bejt 
-             // další cílovej, u nás toé ale tak rozhodně neni a tak si to dovolíme
-             // vlastně se jedná o treeAStar-s-goalama-v-listech-tho-tree
-
-      var ns = nexts(state);
-      for( var i = 0 ; i < ns.length ; i++ ){
+    while (!q.isEmpty() && limit > 0) {
         
-        var newG = G + ns[i].dist;
-        var next = {s : ns[i].state ,
-                    G : newG  };
-        
-        //log( '  vkladam : ' + showZipper(ns[i].state) );
-        q.push( next , newG + heur(next.s) ); 
+      limit--;
+
+      var st    = q.pop()[0];
+      var state = st.s;
+      var G     = st.G;
+      //log( 'vyndavam : ' + showZipper(state) );
+
+      if (isGoal(state)) {
+        results.push(state);
+        if (results.length === n) {
+          return results;
+        }
+      } else { // TODO : obecně to ale pro grafovej Astrar neplatí
+               // (to že je to v else) prorože i za cílovym může bejt 
+               // další cílovej, u nás to ale tak rozhodně neni a tak si to dovolíme
+               // vlastně se jedná o treeAStar-s-goalama-v-listech-toho-tree
+
+        var ns = strategy.filter(nexts(state));
+        for (var i = 0; i < ns.length; i++) {
+          
+          var newG = G + ns[i].dist;
+          var next = {s : ns[i].state ,
+                      G : newG  };
+          
+          //log( '  vkladam : ' + showZipper(ns[i].state) );
+          q.push(next, newG + heur(next.s)); 
+        }
       }
     }
-  }
+  } while (repeat && results.length < n && limit > 0);
+
+
   return results;
 };
 

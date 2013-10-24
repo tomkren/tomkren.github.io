@@ -22,6 +22,7 @@
     <script src="js/show.js"></script>
     <script src="js/priority-queue.js"></script>
     <script src="js/prove.js"></script>
+    <script src="js/strategy.js"></script>
     <script src="js/xover.js"></script>
     <script src="js/ants.js"></script>
     <script src="js/eva.js"></script>
@@ -30,23 +31,31 @@
     
 <script>
 
+//( _0 . ( _1 . ( ap42 ( _2 . ( ( p _2 ) ( ( p  { [int;ap42,p,s,_0,_1,_2] }  ) [int;ap42,p,s,_0,_1,_2] ))))))
+
+//\ 0 1 . ap42( \ 2 .  p(2,p( {[...]} , [...] )   )
+
 fishtronTests();
 
 $(function(){ 
 
-      res = prove({
-         resultMode : 'both',
-         n        : 100,
-         typ      : mkTyp(['int','int','int']),
-         ctx      : mkCtx({
-                      ap42 : [ [['int','int'],'int'],
-                             function(f){return f(42)}  ],
-                      p :    [ ['int','int','int'],
-                             function(x,y){return x+y;} ],
-                      s :    [ ['int','int'],
-                             function(x){return x+1;} ] 
-                    })
-      });
+
+  var opts = {
+    strategy   : Strategy.rampedHalfAndHalf,
+    resultMode : 'both',
+    n        : 100,
+    typ      : mkTyp(['int','int','int']),
+    ctx      : mkCtx({
+                 ap42 : [ [['int','int'],'int'],
+                        function(f){return f(42)}  ],
+                 p :    [ ['int','int','int'],
+                        function(x,y){return x+y;} ],
+                 s :    [ ['int','int'],
+                        function(x){return x+1;} ] 
+               })
+  };
+
+  res = prove(opts);
 
 });
 

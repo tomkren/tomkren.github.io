@@ -21,6 +21,9 @@ var assert = function(condition, message) {
 };
 
 
+function randomElem (arr) {
+  return arr[_.random(0,arr.length-1)];
+}
 
 
 var empty = null;

@@ -1,9 +1,3 @@
-
-
-
-
-
-
 var mkZipper = function(obj,parentZipper){
 
   var pz = function(prop,defa){
@@ -13,11 +7,13 @@ var mkZipper = function(obj,parentZipper){
   };
 
   return {
-    c       : ZIPPER ,
+    c       : ZIPPER,
     act     : pz('act'),
     zips    : pz('zips',empty),
     nextVar : pz('nextVar',0),
-    numUnfs : pz('numUnfs',0)
+    numUnfs : pz('numUnfs',0),
+    depth   : pz('depth',0),
+    s_depth : pz('s_depth',0)
   };
 };
 
@@ -73,8 +69,10 @@ var mkLamZ = function(m){
 var goDown = function( zipper ){
   assert( isLam(zipper.act) , 'goDown : act must be LAM' );
   return mkZipper({
-    act  : zipper.act.m ,
-    zips : cons( mkLamZ(zipper.act) , zipper.zips )
+    act     : zipper.act.m ,
+    zips    : cons( mkLamZ(zipper.act) , zipper.zips ),
+    depth   : zipper.depth + 1,
+    s_depth : zipper.s_depth + 1
   },zipper);
 };
 
@@ -82,15 +80,18 @@ var goLeft = function( zipper ){
   assert( isApp(zipper.act) , 'goLeft : act must be APP' );
   return mkZipper({ 
     act  : zipper.act.m ,
-    zips : cons( mkAppLZ(zipper.act) , zipper.zips ) 
+    zips : cons( mkAppLZ(zipper.act) , zipper.zips ),
+    depth: zipper.depth + 1 
   },zipper);
 };
 
 var goRight = function( zipper ){
   assert( isApp(zipper.act) , 'goRight : act must be APP' );
   return mkZipper({ 
-    act  : zipper.act.n ,
-    zips : cons( mkAppRZ(zipper.act) , zipper.zips ) 
+    act     : zipper.act.n ,
+    zips    : cons( mkAppRZ(zipper.act) , zipper.zips ),
+    depth   : zipper.depth + 1,
+    s_depth : zipper.s_depth + 1 
   },zipper);
 };
 
@@ -117,16 +118,21 @@ var goUp = function( zipper ){
 
   switch( headZip.c ){
     case 'appLZ' : return mkZipper({
-        act  : mkApp( zipper.act , headZip.n ) ,
-        zips : zipper.zips.tail
+        act     : mkApp( zipper.act , headZip.n ) ,
+        zips    : zipper.zips.tail,
+        depth   : zipper.depth - 1
       },zipper);
     case 'appRZ' : return mkZipper({
-        act  : mkApp( headZip.m , zipper.act ),
-        zips : zipper.zips.tail 
+        act     : mkApp( headZip.m , zipper.act ),
+        zips    : zipper.zips.tail,
+        depth   : zipper.depth - 1,
+        s_depth : zipper.s_depth - 1
       },zipper);
     case 'lamZ' : return mkZipper({ 
-        act  : mkLam_( headZip.x , zipper.act , headZip.t ),
-        zips : zipper.zips.tail 
+        act     : mkLam_( headZip.x , zipper.act , headZip.t ),
+        zips    : zipper.zips.tail,
+        depth   : zipper.depth - 1,
+        s_depth : zipper.s_depth - 1
       },zipper);
     default : throw "Unsupported zip constructor."
   }
@@ -155,19 +161,24 @@ var stepToNextBigger = function( zipper ){
   switch( headZip.c ){
     case 'appLZ' :
       return mkZipper({
-        act  : headZip.n ,
-        zips : cons( mkAppRZfromLZ(headZip,zipper.act)  
-                   , zipper.zips.tail ) 
+        act     : headZip.n ,
+        zips    : cons( mkAppRZfromLZ(headZip,zipper.act)  
+                   , zipper.zips.tail ),
+        s_depth : zipper.s_depth + 1 
       },zipper);
     case 'appRZ' :
       return stepToNextBigger(mkZipper({
-        act  : mkApp( headZip.m , zipper.act ),
-        zips : zipper.zips.tail 
+        act     : mkApp( headZip.m , zipper.act ),
+        zips    : zipper.zips.tail,
+        depth   : zipper.depth - 1,
+        s_depth : zipper.s_depth - 1 
       },zipper));
     case 'lamZ'  :
       return stepToNextBigger(mkZipper({ 
-        act  : mkLam_( headZip.x , zipper.act , headZip.t ),
-        zips : zipper.zips.tail 
+        act     : mkLam_( headZip.x , zipper.act , headZip.t ),
+        zips    : zipper.zips.tail,
+        depth   : zipper.depth - 1,
+        s_depth : zipper.s_depth - 1
       },zipper));
     default : throw "Unsupported zip constructor."
   }

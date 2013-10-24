@@ -53,9 +53,10 @@ var fishtronTests = function(){
       var ctx1 = mkCtx({});
 
       var res = prove({
-        n   : 3,
-        typ : typ1,
-        ctx : ctx1,
+        n      : 3,
+        repeat : false, 
+        typ    : typ1,
+        ctx    : ctx1,
         resultMode: 'both'
       });
 
