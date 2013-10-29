@@ -15,7 +15,9 @@ var prove = function(opts){
     isGoal   : function(zipper){return zipper.numUnfs === 0 ;},
     heur     : function(zipper){return zipper.numUnfs;},
     strategy : opts.strategy || {filter: _.identity},
-    repeat   : opts.repeat !== undefined ? opts.repeat : true 
+    repeat   : opts.repeat !== undefined ? opts.repeat : true,
+    unique   : opts.unique !== undefined ? opts.unique : false,
+    toStr    : function(term){return code(term,'lc');} 
   });  
 
   ret = _.map(ret,function(z){return gotoTop(z).act;});
@@ -54,13 +56,15 @@ var mkStartZipperSmart = function(t,ctx){
 
 
 var smartExpand = function( zipper ){
-  assert( isUnf(zipper.act) , 'smartExpand : act must be unf to be smart-expanded'+
+  assert( isUnf(zipper.act) , 
+    'smartExpand : act must be unf to be smart-expanded'+
   '\n zipper : '+ showZipper(zipper) );
 
   var typ    = zipper.act.t;
   var atmTab = zipper.act.atmTab;
 
-  assert( isAtm(typ), 'smartExpand : Smart-expanded can be only atomic type.' );
+  assert( isAtm(typ), 
+    'smartExpand : Smart-expanded can be only atomic type.' );
 
   var ret = [];
 
@@ -174,7 +178,14 @@ var treeAStar = function(problem){
   var heur     = problem.heur     || function(x){return 0;};
   var limit    = problem.limit    || 1000000;
   var strategy = problem.strategy || {filter: _.identity};
-  var repeat   = problem.repeat !== undefined ? problem.repeat : true;    
+  var repeat   = problem.repeat !== undefined ? problem.repeat : true; 
+  var unique   = problem.unique !== undefined ? problem.unique : true;
+  var toStr    = problem.toStr;
+
+  if (unique) {
+    var uniqueTable = {};
+  }
+
 
   var q = PriorityQueue(); 
   //var q = Heap();
@@ -196,14 +207,26 @@ var treeAStar = function(problem){
       //log( 'vyndavam : ' + showZipper(state) );
 
       if (isGoal(state)) {
-        results.push(state);
+        if (unique) {
+          // pozor, zde se to aplikuje na zipper, ale ok
+          var strId = toStr(state);
+          if ( !uniqueTable[strId] ){
+            uniqueTable[strId] = true;
+            results.push(state); 
+          } else {
+            log('už tam byl');
+          }
+        } else {
+          results.push(state);  
+        }
         if (results.length === n) {
           return results;
         }
       } else { // TODO : obecně to ale pro grafovej Astrar neplatí
                // (to že je to v else) prorože i za cílovym může bejt 
-               // další cílovej, u nás to ale tak rozhodně neni a tak si to dovolíme
-               // vlastně se jedná o treeAStar-s-goalama-v-listech-toho-tree
+               // další cílovej, u nás to ale tak rozhodně neni a 
+               // tak si to dovolíme vlastně se jedná o 
+               // treeAStar-s-goalama-v-listech-toho-tree
 
         var ns = strategy.filter(nexts(state));
         for (var i = 0; i < ns.length; i++) {

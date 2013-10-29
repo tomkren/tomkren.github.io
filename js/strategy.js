@@ -20,12 +20,14 @@ function mkRampedHalfAndHalf(D_init){
 
     for (var i=0; i<ns.length; i++) {
       
-      assert(s_depth === ns[i].s_depth, 's_depth of all succesors should be the same.');
+      assert(s_depth === ns[i].s_depth, 
+        's_depth of all succesors should be the same.');
 
       var newSubterm = ns[i].newSubterm;
 
       //log( showZipper(ns[i].state) );
-      //log( code( newSubterm ,'lc') +' '+ isTerminal(newSubterm)  +' '+ s_depth );
+      //log( code( newSubterm ,'lc') +' '
+      //     + isTerminal(newSubterm)  +' '+ s_depth );
 
       var addIt;
 

@@ -1,5 +1,6 @@
 $(function(){
-
+  //var 
+  res = gp(GPOpts1);
 });
 
 var int = mkAtm('int');
@@ -12,7 +13,8 @@ var GPOpts1 = {
            , function(x,y){return x+y;} ],
     'sin'  : [ [int,int]
            , Math.sin ] 
-  }), 
+  }),
+  strategy: Strategy.rampedHalfAndHalf, 
   popSize : 500,
   numGens : 51,
   probabs : {
@@ -30,7 +32,9 @@ function gp(opts){
     n          : opts.popSize,
     typ        : opts.typ,
     ctx        : opts.ctx,
+    strategy   : opts.strategy,
     resultMode : 'funs',
+    unique     : true,
     logit      : false 
   });
 
