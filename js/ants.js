@@ -58,12 +58,7 @@ var initBest = {
   fitVal : 0
 };
 
-function updateBest( oldRes , newRes ){
-  if( oldRes.fitVal < newRes.fitVal ){
-    return newRes;
-  }
-  return oldRes;
-}
+
 
 function step( from , tau , problem ){
 

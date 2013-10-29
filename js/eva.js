@@ -6,7 +6,13 @@ $(function(){
 var int = mkAtm('int');
 
 var GPOpts1 = {
-  fitness : function(x){return 42;},
+  fitness : function(indiv){
+    var fitVal = 1/(1+Math.abs(indiv(42)-23)); 
+    return {
+      fitVal: fitVal,
+      terminate: false
+    };
+  },
   typ     : mkTyp([int,int]),
   ctx     : mkCtx({
     'plus' : [ [int,int,int]
@@ -38,9 +44,35 @@ function gp(opts){
     logit      : false 
   });
 
+  var terminate = false;
+  var best = {fitVal: 0};
 
+  var popDist = mkDist(_.map(pop,function(indiv){
+    
+    var fitResult = opts.fitness(indiv);
+    fitResult.indiv = indiv;
 
-  return pop;
+    if (_.isNumber(fitResult)) {
+      fitResult = {
+        fitVal: fitResult,
+        terminate: false
+      };
+    }
+
+    if (fitResult.terminate) {
+      terminate = true;
+    }
+
+    best = updateBest(best, fitResult);
+
+    return [indiv,fitResult.fitVal];
+  }));
+
+  return {
+    popDist:   popDist,
+    terminate: terminate,
+    best:      best
+  };
 }
 
 

@@ -53,13 +53,22 @@ var partition = function(mustBeTrue,array){
            notSatisfy : notSatisfy };
 };
 
+function updateBest( oldRes , newRes ){
+  if( oldRes.fitVal < newRes.fitVal ){
+    return newRes;
+  }
+  return oldRes;
+}
+
 function mkDist( distArr_ ){
   
   var distArr = distArr_;
   var sum = 0;
 
   for(var i = 0; i < distArr.length; i++){
-    sum += distArr[i][1];
+    var p = distArr[i][1];
+    assert(p >= 0, 'probability for dist mus be >= 0, was '+p);
+    sum += p;
   }
 
   var get = function(){
@@ -79,7 +88,8 @@ function mkDist( distArr_ ){
   };
 
   return {
-    get : get
+    get : get,
+    distArr : function(){return distArr;}
   };
 }
 
