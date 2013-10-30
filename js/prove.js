@@ -210,12 +210,10 @@ var treeAStar = function(problem){
         if (unique) {
           // pozor, zde se to aplikuje na zipper, ale ok
           var strId = toStr(state);
-          if ( !uniqueTable[strId] ){
+          if (!uniqueTable[strId]) {
             uniqueTable[strId] = true;
             results.push(state); 
-          } else {
-            log('už tam byl');
-          }
+          } 
         } else {
           results.push(state);  
         }

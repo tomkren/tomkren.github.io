@@ -20,18 +20,19 @@ var GPOpts1 = {
     'sin'  : [ [int,int]
            , Math.sin ] 
   }),
-  strategy: Strategy.rampedHalfAndHalf, 
-  popSize : 500,
-  numGens : 51,
-  probabs : {
-    crossover    : 0.9,
-    reproduction : 0.1,
+  strategy : Strategy.rampedHalfAndHalf, 
+  saveBest : true,
+  popSize  : 500,
+  numGens  : 51,
+  probabs  : {
+    crossover    : 0.0, //0.9,
+    reproduction : 1.0, //0.1,
     mutation     : 0.0
   }
 };
 
 
-function gp(opts){
+function gp (opts) {
 
   var gen = 0;
   var pop = prove({
@@ -43,6 +44,27 @@ function gp(opts){
     unique     : true,
     logit      : false 
   });
+
+  var evalResult = evalPop(pop,opts);
+
+  while (gen < opts.numGens && !evalResult.terminate) {
+    pop = [];
+
+    if (opts.saveBest) {
+      pop.push(evalResult.best);
+    }
+
+    //while (pop.length < opts.popSize) {...}
+
+    gen ++ ;
+  }
+
+  return evalResult;
+
+}
+
+
+function evalPop (pop, opts) {
 
   var terminate = false;
   var best = {fitVal: 0};
@@ -73,10 +95,8 @@ function gp(opts){
     terminate: terminate,
     best:      best
   };
+
 }
-
-
-
 
 
 
