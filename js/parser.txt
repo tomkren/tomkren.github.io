@@ -1,0 +1,21 @@
+expr =  lam / app / paren / var
+
+paren = '(' e:expr ')' {return e}
+
+app = x:appHead xs:appTail {return [x].concat(xs)}
+
+appHead = lam / paren / var
+
+
+lam = &lamH xs:lamH m:expr {
+  var vs  = xs.join(' ');
+  var ret = {};
+  ret[vs] = m;
+  return ret;
+}
+
+lamH = x:var xs:(' ' y:var {return y})* ' '* '.' ' '* {return [x].concat(xs)}
+
+appTail = ( ' ' x:appHead {return x} )+
+
+var = x:[a-z]+ {return x.join('')}

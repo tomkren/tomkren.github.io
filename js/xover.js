@@ -7,33 +7,6 @@
 //           : spojit unSKI a toBNF, a následně otestovat že se to "nuluje" s AE.
 
 
-//S( K(  S(  S(K(p) , S( K(ap42) , S(K(K),I)  )  )) )  , S(K(K),I)    )
-
-//var S = function(f,g){
-//  return function(x){
-//    return f(x)(g(x));
-//    //_partial(_.partial(f,x),_.partial(g,x)); //taky blbě pač _.partial(f_1arg,42) je fce co čekí na ()
-//  };
-//};
-//
-//var K = function(x){
-//  return function(y){
-//    return x;
-//  };
-//};
-//
-//var I = function(x){
-//  return x;
-//};
-
-//var cur2 = function(f){
-//  return function(x){
-//    return function(y){
-//      return f(x,y);
-//    };
-//  };
-//};
-
 
 var toBNF = function(term){
 
@@ -241,5 +214,33 @@ var changeSubterm = function( term , way , newSubterm ){
   };
 
 };
+
+
+//S( K(  S(  S(K(p) , S( K(ap42) , S(K(K),I)  )  )) )  , S(K(K),I)    )
+
+//var S = function(f,g){
+//  return function(x){
+//    return f(x)(g(x));
+//    //_partial(_.partial(f,x),_.partial(g,x)); //taky blbě pač _.partial(f_1arg,42) je fce co čekí na ()
+//  };
+//};
+//
+//var K = function(x){
+//  return function(y){
+//    return x;
+//  };
+//};
+//
+//var I = function(x){
+//  return x;
+//};
+
+//var cur2 = function(f){
+//  return function(x){
+//    return function(y){
+//      return f(x,y);
+//    };
+//  };
+//};
 
 
