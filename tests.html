@@ -13,6 +13,7 @@
     <script src="js/libs/underscore-1.5.1.js"></script>
     <script src="js/libs/wu-0.1.8.js"></script>
     <script src="js/libs/qunit-1.12.0.js"></script>
+    <script src="js/libs/peg-0.7.0.js"></script>
 
     <script src="js/libs/seedrandom.js"></script>
     <script src="js/ie-compat.js"></script>
@@ -27,6 +28,8 @@
     <script src="js/xover.js"></script>
     <script src="js/ants.js"></script>
     <script src="js/eva.js"></script>
+    <script src="js/parser.js"></script>
+
     <script src="js/tests.js"></script>
 
     
@@ -40,20 +43,21 @@ fishtronTests();
 
 $(function(){ 
 
+  ctx1 = mkCtx({
+    ap42: [ [['int','int'],'int'],
+          function(f){return f(42)}  ],
+    p:    [ ['int','int','int'],
+          function(x,y){return x+y;} ],
+    s:    [ ['int','int'],
+          function(x){return x+1;} ] 
+  });
   
   var opts = {
     strategy   : Strategy.rampedHalfAndHalf,
     resultMode : 'both',
     n        : 100,
     typ      : mkTyp(['int','int','int']),
-    ctx      : mkCtx({
-                 ap42 : [ [['int','int'],'int'],
-                        function(f){return f(42)}  ],
-                 p :    [ ['int','int','int'],
-                        function(x,y){return x+y;} ],
-                 s :    [ ['int','int'],
-                        function(x){return x+1;} ] 
-               })
+    ctx      : ctx1
   };
 
   resu = prove(opts);

@@ -57,7 +57,7 @@ var mkVal = function(x,t){
 
 var mkApp = function(m,n){
 
-  assert( isArr( m.t ) );
+  assert( isArr(m.t) );
 
   return { 
     c : APP,
