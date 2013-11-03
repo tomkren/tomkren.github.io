@@ -57,7 +57,7 @@ var mkVal = function(x,t){
 
 var mkApp = function(m,n){
 
-  assert( isArr(m.t) );
+  assert( isArr(m.t) , 'mkApp: m must be an arrow.');
 
   return { 
     c : APP,
@@ -68,7 +68,10 @@ var mkApp = function(m,n){
 };
 
 var mkLam_ = function(x,m,t){
-  assert( _.isEqual( m.t , t.b )  );
+  assert( _.isEqual(m.t,t.b) , 
+    'mkLam_: m='+code(m,'lc')+
+         ' m.t='+code(m.t)+
+         ' t.b='+code(t.b) );
   return { 
     c : LAM,
     x : x,

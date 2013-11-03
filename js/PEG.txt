@@ -1,0 +1,19 @@
+s      = sp0 e:expr sp0 {return e}                              
+typ    = x:t_prim sp0 '->' sp0 y:typ {return [x,y]} / t_prim    
+atm    = var                                                    
+t_prim = atm / '(' t:typ ')' { return t; }                      
+expr   =  lam / app / paren / var                               
+paren  = '(' e:expr ')' {return e}                              
+app    = x:appX xs:appXS {return [x].concat(xs)}                
+appX   = lam / paren / var                                      
+appXS  = ( sp1 x:appX {return x} )+                             
+lam = &lamH xs:lamH m:expr {return {head : xs, body : m};}      
+lamH = '\\'? sp0 x:typedVar xs:(sp1 y:typedVar {return y})*   
+       sp0 '.' sp0 {return [x].concat(xs)}                      
+typedVar = x:var sp0 ty:(':' sp0 t:typ {return t}) {            
+  return [x,ty];                                                
+}                                                               
+var = x:[a-z]+ {return x.join('')}                              
+sp  = [ \n\t]                                                 
+sp1 = sp+                                                       
+sp0 = sp* 

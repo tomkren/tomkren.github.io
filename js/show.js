@@ -78,15 +78,8 @@ var ctxToLocalcode = function(ctx){
 };
 
 
-
-
-
-
-
-
-
-
 //TODO asi smazat, divně je to řešený
+/*
 var ctxCompile = function( m , ctx ){
   var ctxc = function(m){ 
     switch(m.c){
@@ -105,6 +98,7 @@ var ctxCompile = function( m , ctx ){
   }
   return code(ctxc(m));
 };
+*/
 
 var code = function(m,opt){
   if( isTyp(m) ){
@@ -122,7 +116,8 @@ var code = function(m,opt){
       case 'jsstr'    : return toJSstr     (m);
       case 'nicejs'   : return toNiceJSexpr(m);
       case 'nicejsstr': return toNicejs    (m);
-      default         : return toNicejs    (m); //toJSexpr    (m);
+      default         : return toLCstr     (m);
+      //toNicejs    (m); //toJSexpr    (m);
     }
   }
 };

@@ -218,7 +218,7 @@ var fishtronTests = function(){
       var newS    = allSubterms_byWays(tt2)[5];
       var newTerm = changeSubterm(tt1,way,newS).newTerm;
 
-      strictEqual( code(newTerm) ,  
+      strictEqual( code(newTerm,'nicejsstr') ,  
                    'function(_0,_1){return p(s(_0),ap42(function(_2){return _1}))}' ,
                    'Primitive changeSubterm test on two arbitrary terms (swapping their subterms).' );      
 

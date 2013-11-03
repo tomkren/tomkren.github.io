@@ -1,33 +1,28 @@
-var parse = function () {
+var LC_GRAMMAR = 
+"                                                               \n\
+s      = sp0 e:expr sp0 {return e}                              \n\
+typ    = x:t_prim sp0 '->' sp0 y:typ {return [x,y]} / t_prim    \n\
+atm    = var                                                    \n\
+t_prim = atm / '(' t:typ ')' { return t; }                      \n\
+expr   =  lam / app / paren / var                               \n\
+paren  = '(' e:expr ')' {return e}                              \n\
+app    = x:appX xs:appXS {return [x].concat(xs)}                \n\
+appX   = lam / paren / var                                      \n\
+appXS  = ( sp1 x:appX {return x} )+                             \n\
+lam = &lamH xs:lamH m:expr {return {head : xs, body : m};}      \n\
+lamH = '\\\\'? sp0 x:typedVar xs:(sp1 y:typedVar {return y})*   \n\
+       sp0 '.' sp0 {return [x].concat(xs)}                      \n\
+typedVar = x:var sp0 ty:(':' sp0 t:typ {return t}) {            \n\
+  return [x,ty];                                                \n\
+}                                                               \n\
+var = x:[a-z]+ {return x.join('')}                              \n\
+sp  = [ \\n\\t]                                                 \n\
+sp1 = sp+                                                       \n\
+sp0 = sp*                                                       \n\
+";
 
-  var LC_GRAMMAR = 
-  "                                                               \n\
-  s      = sp0 e:expr sp0 {return e}                              \n\
-  typ    = x:t_prim sp0 '->' sp0 y:typ {return [x,y]} / t_prim    \n\
-  atm    = var                                                    \n\
-  t_prim = atm / '(' t:typ ')' { return t; }                      \n\
-  expr   =  lam / app / paren / var                               \n\
-  paren  = '(' e:expr ')' {return e}                              \n\
-  app    = x:appX xs:appXS {return [x].concat(xs)}                \n\
-  appX   = lam / paren / var                                      \n\
-  appXS  = ( sp1 x:appX {return x} )+                             \n\
-  lam = &lamH xs:lamH m:expr {                                    \n\
-    return {                                                      \n\
-      head : xs,                                                  \n\
-      body : m                                                    \n\
-    };                                                            \n\
-  }                                                               \n\
-  lamH = '\\\\'? sp0 x:typedVar xs:(sp1 y:typedVar {return y})*   \n\
-         sp0 '.' sp0 {return [x].concat(xs)}                      \n\
-  typedVar = x:var sp0 t:(':' sp0 t:typ {return t})? {            \n\
-    if (t === '') {return x;}                                     \n\
-    return [x,t];                                                 \n\
-  }                                                               \n\
-  var = x:[a-z]+ {return x.join('')}                              \n\
-  sp  = [ \\n\\t]                                                 \n\
-  sp1 = sp+                                                       \n\
-  sp0 = sp*                                                       \n\
-  ";
+
+var parse = function () {
 
   var parser = PEG.buildParser(LC_GRAMMAR);
 
@@ -54,7 +49,7 @@ var parse = function () {
       var newVars = _.clone(vars);
 
       for (i=0; i<parseRes.head.length; i++) {
-        var v    = parseRes.head[i]
+        var v = parseRes.head[i];
         var name = v[0];
         var typ  = mkTyp(v[1]);
         newVars[name] = typ;
