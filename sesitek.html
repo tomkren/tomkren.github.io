@@ -16,7 +16,6 @@
 <script>
 
 var renderSections = function(contentsSelector){
-
   $('section').each(function(){
     var code   = $(this).attr('id');
     var nadpis = $(this).html();
@@ -27,8 +26,21 @@ var renderSections = function(contentsSelector){
       .append( $('<a>').attr('href','#'+code).html( nadpis ) )
       .append( $('<br>') );
   });
-
 };
+
+function mkTodoIndex (indexSelector) {
+  $('todo').each(function(i){
+    var j = i+1;
+    var code = '__todo-'+j;
+    var text = '('+ j +') '+ $(this).html();
+
+    $(this).before('<a name="'+code+'"></a>');
+    $(indexSelector)
+      .append( $('<a>').attr('href','#'+code).html( text ) )
+      .append( $('<br>') );
+  });
+
+}
 
 var renderLabels = function(tag,str,color){
   $(tag).each(function(){
@@ -39,8 +51,8 @@ var renderLabels = function(tag,str,color){
      .css('width','-moz-max-content')
      .css('padding','3px')
      .prepend('<b>'+str+'</b>')
-     .before('<p>')
-     .after('</p>');
+     .before('<p></p>')
+     .after('<p></p>');
   });
 };
 
@@ -65,6 +77,7 @@ $(function(){
   renderLabels('todo','TODO : ','red');
   renderLabels('note','Note: ','blue');
   showScripts();
+  mkTodoIndex ('#todoIndex');
 
 });
 
@@ -76,6 +89,7 @@ $(function(){
 <h1>sešítek</h1>
 
 <section id="contents">Obsah</section>
+<section id="todoIndex">TODO index</section>
 
 <!-- 
 
@@ -555,24 +569,34 @@ YP      Y888888P `8888Y' YP   YP    YP    88   YD  `Y88P'  VP   V8P
 <h4>Současný stav poznání</h4>
 
 Genetické programování (GP) je technika umělé inteligence spadající do
-širší kategorie evolučních algoritmů - metaheuristických prohledávacích algoritmů
-inspirovaných
+širší kategorie evolučních algoritmů - metaheuristických optimalizačních algoritmů
+inspirovaných přirozeným výběrem probíhajícím v přírodě. 
+GP se pro zadaný problém snaží nalézt počítačový program (přesněji jeho syntaktický strom) 
+schopný tento problém vyřešit. Tato technika byla navržena Johnem Kozou [KOZA1].
+Ukazuje se, že se jedná o velmi úspěšnou techniku v řadě oblastí,
+její úspěšnost se navíc dále podstatně zvyšuje s přibývající výpočetní silou 
+kterou lze navíc dobře paralelizovat [KOZA4].
+GP pracuje s populací řešení, na začátku vygenerovanou pomocí generujícího algoritmu.
+Každá další generace je z předchozí vytvořena na základě selekce a genetických operátorů 
+(nejčastěji křížení a mutace).
+Další sympatickou vlastností GP je jeho snadná hybridizace s jinými optimalizačními 
+algoritmy; ty lze chápat jako konkrétní algoritmus generování, případně jako genetické operátry.
+Na druhou stranu je standardní GP jednoduše popsatelný algoritmus, což je výhoda pro 
+jeho další zobecňování.
+GP sestavuje jedince (počítačový program) z dvou množin stavebních symbolu;
+z množiny funkčních symbolů F a množiny terminálů T. Ve standardním GP je vyžadována
+tzv. closure podmínka nad těmito množinami, tzn. že všechny funkce z F musí přijímat
+všechny prvky T jako své argumenty a vracet jen výstupní hodnoty akceptovatelné jako
+argumenty všemi funkcemi z F. Toto můžeme shrnout tvrzením, že všechny stavební symboly
+musejí být nad jediným typem. Pokud toto omezení odstraníme, dostáváme genetické programování 
+nad typovaným jazykem.
 
-Genetic programming is a technique inspired by biological evolution that for a
-given problem tries to find computer programs able to solve that problem. GP
-was developed by John Koza in 1992 [1].
-
-Genetic programming (GP) represents an efficient method for automatic gener-
-ating of programs by means of evolutionary techniques [1, 2].
 
 <pre>
-GP
-(Uvod co je to gp udelat podle diplomky a podle fild guidy)
-- možná zde zmínit že GP (respektive eva obecně) má tu moc zastřešovat hodně optimalizačních technik 
-najednou protože jakákoliv metoda zdokonalující řešení de zakodovat do mutace, jakákoliv řešící metoda de 
-zakodovat do generujícího mechanizmu… čili je velkej prostor pro hybridizaci [která se ukazuje jako silná 
-věc v poslední době]. Na druhou stranu je std GP natolik jednoduchá metoda že se dá ‘napsat na stránku’, 
-což je dobrý když to chceme zobecnovat na něco fikanějšího než je to ted.
+Kde zmínit citace na konkurenci a čim se od nich odlišujem?
+- konkurenci asi zmínit zde
+- odlišnosti ve způsobu řešení
+
 TYPY
 (a pro další propagandu o typovanym se inspirovat v článkach - yu a kanadani a kombinatoři)
 
