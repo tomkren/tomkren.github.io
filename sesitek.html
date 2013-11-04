@@ -77,6 +77,37 @@ $(function(){
 
 <section id="contents">Obsah</section>
 
+<!-- 
+
+db   dD d88888b  .o88b. db    db 
+88 ,8P' 88'     d8P  Y8 `8b  d8' 
+88,8P   88ooooo 8P       `8bd8'  
+88`8b   88~~~~~ 8b         88    
+88 `88. 88.     Y8b  d8    88    
+YP   YD Y88888P  `Y88P'    YP    
+
+-->
+
+<section id="kecy">Kecy</section>
+
+Pokus jestli je praktické psát si poznámky v html/js a zda
+se to osvědčí jako kontrapart autoepištoly.
+
+Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
+postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
+jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
+
+<!--
+
+.88b  d88. d8888b.  .d8b.  db    db d88888b d8b   db  .o88b. d888888b 
+88'YbdP`88 88  `8D d8' `8b 88    88 88'     888o  88 d8P  Y8   `88'   
+88  88  88 88oobY' 88ooo88 Y8    8P 88ooooo 88V8o 88 8P         88    
+88  88  88 88`8b   88~~~88 `8b  d8' 88~~~~~ 88 V8o88 8b         88    
+88  88  88 88 `88. 88   88  `8bd8'  88.     88  V888 Y8b  d8   .88.   
+YP  YP  YP 88   YD YP   YP    YP    Y88888P VP   V8P  `Y88P' Y888888P
+
+-->
+
 <section id="mravenci">Mravenci</section>
 
 <canvas id="ant_canvas" width="512" height="512"></canvas>
@@ -503,23 +534,166 @@ $(function () {
 
 
 
-<section id="uvod">Kecy</section>
 
-Pokus jestli je praktické psát si poznámky v html/js a zda
-se to osvědčí jako kontrapart autoepištoly.
 
-Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
-postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
-jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
+<!--
+
+d88888b d888888b .d8888. db   db d888888b d8888b.  .d88b.  d8b   db 
+88'       `88'   88'  YP 88   88 `~~88~~' 88  `8D .8P  Y8. 888o  88 
+88ooo      88    `8bo.   88ooo88    88    88oobY' 88    88 88V8o 88 
+88~~~      88      `Y8b. 88~~~88    88    88`8b   88    88 88 V8o88 
+88        .88.   db   8D 88   88    88    88 `88. `8b  d8' 88  V888 
+YP      Y888888P `8888Y' YP   YP    YP    88   YD  `Y88P'  VP   V8P
+
+-->
+
 
 <section id="fishtron">Fishtron</section>
 
-Asi rozdělit na :
+<h3>GAUK kecy</h3>
 
-<h3>Střízlivé</h3>
-<h3>Odvážné</h3>
+<h4>Současný stav poznání</h4>
+
+Genetické programování (GP) je technika umělé inteligence spadající do
+širší kategorie evolučních algoritmů - metaheuristických prohledávacích algoritmů
+inspirovaných
+
+Genetic programming is a technique inspired by biological evolution that for a
+given problem tries to find computer programs able to solve that problem. GP
+was developed by John Koza in 1992 [1].
+
+Genetic programming (GP) represents an efficient method for automatic gener-
+ating of programs by means of evolutionary techniques [1, 2].
+
+<pre>
+GP
+(Uvod co je to gp udelat podle diplomky a podle fild guidy)
+- možná zde zmínit že GP (respektive eva obecně) má tu moc zastřešovat hodně optimalizačních technik 
+najednou protože jakákoliv metoda zdokonalující řešení de zakodovat do mutace, jakákoliv řešící metoda de 
+zakodovat do generujícího mechanizmu… čili je velkej prostor pro hybridizaci [která se ukazuje jako silná 
+věc v poslední době]. Na druhou stranu je std GP natolik jednoduchá metoda že se dá ‘napsat na stránku’, 
+což je dobrý když to chceme zobecnovat na něco fikanějšího než je to ted.
+TYPY
+(a pro další propagandu o typovanym se inspirovat v článkach - yu a kanadani a kombinatoři)
+
+Duvody proc jsou typy fajn: 
+- Odstraňujou omezení zavedený standardnim GP, tzv. closure
+- NAopak zavaděj ‘správný’ omezení na to jak mohou být funkce a terminály navzájem skládány.
+- Typy tak efektivně zmenšují prohledávaný prostor
+- výsledné programy jsou vyjádřeny v přirozeném jazyce a né v ukuchtěném nepřirozeném jazyce
+- mohou být využity složité konstrukty, vše de zakodovat jako funkce (cykly, atd..) pro což se jinak musí 
+zavádět speciální konstrukty dané metody (ADF vs trivialní fce explicitní aplikace)
+- jetě si projít starý slajdy co sem dělal na štěpánka tam mám další propagandu (ale záměrně na to 
+kouknout až pak abych měl víc formulací a nebyl ovlivněnej tim starym)
+
+LK
+co říct o LK?
+- jedno z nejelegantnějších reprezentací turingovsky kompletního jazyka, vzásadě má 3 konstrukty (proměná, 
+aplikace funkce, anonymní fce) a virtualní stroj popsatelný jedním řádkem (beta-redukce) [nevim, jak moc 
+se tu hodí takováhle propaganda ale...]
+- zaroveň se používá jako jeden z formalizmů pro formální uchopení důkazů (díky curry-howardově izomorfizmu
+), v automat. dk. vět se používá jako ‘stavební jednotka matematiky’ 
+- v LK je velice propracovaná typová teorie, kde typy pak odpovídaj výrokům.
+- říct že se v barendrechtovi popisuje způsob jak generovat termy v normální formě
+</pre>
+
+<h4>Cíle řešení projektu</h4>
+<pre>
+(DULEZITY)
+začít monumentalni vetou co to celý schrnouje: navrhnout zpusob... efektivniho začlenění typů do GP.
+
+rovnovaha mezi induktivnosti a deduktivnosti
+- je tu spektrum 
+- std GP je čistě induktivní přístup (doložit to, najít si formální def induktivnosti)
+   - vytvořit jedince je trivialní 
+   - celá komplexnost tkví v tom postupně operatory 
+      kombinovat  nedokonalá řešíní (tyto jednoduše 
+      vytvořený) a postupně dostavat lepší 
+-  druhej extrém je automatický dokazování/ verifikace správnosti atd (takový ty veci co řeší surinek)
+   - tam je veškerá komplexnost v tom vytvořit jednoho     
+      jakýhokoliv jedince : tzn dk. a s tim jsme 
+     spokojený, už nehledáme nějakej v něčem nejlepší důkaz.
+   - tenhle přístup můžeme označit za čistě deduktivní
+- typovaný GP můžeme chápat jako pokus o vyvážení těchto dvou přístupů -   induktivního a deduktivního
+   - typ pak zajistí netriviální vlastnosti jedince že budou splněny
+  - evoluce pak tyto jedince splnujici daný vlastnosti daný typem dál zdokonaluje aby byly co nejlepší k 
+  požadovaný fitness 
+  - toto tema neni novinka pro EVA algoritmy - (to že mám jednak optimalizační požadavky daný fitnes a 
+  vedle toho pevný požadavky který musí jedinbec plnit) - typy to ale uchopujouv konzistentní a dobře 
+  popsaný formě která je napojená na formální metody logiky. 
+- zvolenim vhodneho typoveho systemu pak muzem balancovat pozici na teto skale 
+- jedno takovy rozsireni do deduktivnosti je pridani predikatovejch symbolu v podobe typovejch trid. To 
+nam umozni efektivne popsat struktury od listu pevne delky, pres neuronove site pres monady atd linearni  
+gp atd. do řešení
+typy odstranej nutnost problemove zavysle definice "stavebnich bloku"
+- ve std gp je tuf specificky "vykrafteny" na miru danymu problemu,
+-  typovany gp umoznuje pouzit stejnou sadu pro vice problemu. tim ze Typy pak efektivne redukujou 
+velikost prohl prostoru je realny pouzit i velky sady ktery by jinak nebylo mozno v std gp pouzit. 
+- zlaty gral by pak bylo mit jednu sadu univerzalni pro vsechny problemy . Pak by se redukovalo jeste vic [
+ten termin co pouziva koza ve 4ce pro to co se musi vykraftit clovekem aby... jakoby human supplied 
+knowledge] 
+- meZiproblemove interakce  - krizeni napric problemy , module acvision v globalni mape kombinatoru
+- tohle spolecne s roadmapama pak tvori knowlidge base pro programovani "vyslovena" v jazyce logiky 
+odpovidajici tomu typovimu systemu 
+
+návrh genetickejch operací, vypíchnout generovaní (dá se v mutacích)
+- pojmout asi vzletnejc a todle dat do zpusobu reseni
+-  úvod - v každým gp nutno definovat operátory, tady to je otevřený problém
+- zde se bude navazovat na praci z diplomky, kde se podarilo formulovat generovani takovym zpusobem ze je 
+param (todle se spis hodi do zpusob reseni) atd...
+- velkej duraz budeme klast na generovani jedincu kterezto se pak primocare da vyuzit i na mutace
+- u operatoru budou prozkoumany aplikovatelnost lk teoretickych konceptu jako sou ruznu redukce, 
+eliminace, atd 
+- budou zkoumany formy 'chytrych operatoru' vyuzivajici znalost daneho problemu. Diky tomu bude umoznena 
+spoluprace s dalsimi opt metodami jako je aco atd
+- inhabitation tree, inhabitation machine, inhabitation paths. Roadmaps
+meta - zkusit sloučit s implementací
+- opt metody maj mnoho prichuti ale uvnitr se opakuji ta sama temata, ty de podchytit zas nakou "knihovnou 
+fci" a tyto metody pak muzem slechtit jako by se nechumelilo
+- zacnem od jednoduchosti jako nastaveni gp algoritmu jehoz soucasti je ale i strat kera je program a tu 
+teda muzem slechtit. Nakonec se muzem dostat az ke slechteni samotnejch opt metod
+- otazkou je jak efektivne slechtit tydle meta veci, nsbizi se napr oddeleny subpipulace bezici rizeny 
+temi slechtenymi parametry
+implementace a odzkoušení, publikace
+… inspirovat se martinovou formulací
+</pre>
+
+<h4>Způsob řešení</h4>
+<pre>
+(nejtechnictejsi cast formulare)
+(neni to jen výčet metod, ale mělo by to jít chronologicky)
+(mělo by to adresovat cíle)
+
+metody: odstavec o GP, krátkej, rychle jít na l. kalkuly
+věci kolem prohledávání
+typový systemy -- ty druhy
+ACO
+
+Chronologie - zkopírovat shora a utřídit dle cílů
+-operatory: Vyzkouset krizeni s expanzi do ski vzdy pri skrizeni a nasledne to zase normalizovat - bojovat 
+tim proti bloatu
+-operatory: vyzkouset ACO na generovani jedincu a mutace - specialni aco se trema presnostma roadmap (
+tree,machine,paths)
+- meta: vyzkouset zdokonalit strategii z diplomky pomoci systemu samotneho
+- posileni deduktivnosti: polymorfni typy
+-  meta: rizeni sady ruznorodych ridicich parametru jako subpopulaci, krizeni subpopulaci skrizenim jejich 
+ridicich parametru a slitim jejich populaci.
+- posileni deduktivnosti:  skusit napasovat na typovej system logicky programovani v typovejch tridach, 
+pomoci toho skusit nasimulovat klasickou GAs pres seznamy pevny dylky krs typ pro cisla, dal nervovy site 
+krs nasobeni scitani prenos fun a sipky a permutace zavorek (rotace na stromech) a polymorfni kartezsky 
+souciny
+- bigcontext - vytvoreni sady problemu se stejnym kontexem v tuhle dobu uz bych mel mit z predchozich veci 
+dostatek problemu na slucovani
+-operatory: zrychlit generovani pomoci chytrejsi heuristiky v A* pro presny odhad vzdalenosti do 
+nejblizsiho kompletniho termu z danyho unfin termu pres identifikaci unfin termu s tim samim "gama s 
+pruhem"
+</pre>
 
 <hr>
+
+<h3>Odvážnější výčet témat</h3>
+
+
 
 <h4>JavaScriptová verze</h4>
 
@@ -600,17 +774,80 @@ Asi rozdělit na :
 <h4>NP-ús</h4>
 
 
+<!--
 
-<section id="cocky">Čočky</section>
+db       .d88b.  d8888b.     d8888b. db       .d8b.  d88888D d8b   db db    db 
+88      .8P  Y8. 88  `8D     88  `8D 88      d8' `8b YP  d8' 888o  88 88    88 
+88      88    88 88   88     88oooY' 88      88ooo88    d8'  88V8o 88 88    88 
+88      88    88 88   88     88~~~b. 88      88~~~88   d8'   88 V8o88 88    88 
+88booo. `8b  d8' 88  .8D     88   8D 88booo. 88   88  d8' db 88  V888 88b  d88 
+Y88888P  `Y88P'  Y8888D'     Y8888P' Y88888P YP   YP d88888P VP   V8P ~Y8888P' 
 
-Čočky jsou koncep založený na pozorování, že můžeme řetězit modely a views podobně
-jako při skládání funkcí. Čočka nasazená na nějaký model generuje pohled na ten model, který může být zase
-interpretován jako model další čočkou atd. Jedná se vlastně jen o funkci transformující objektu na jiný objekt,
-nic složitého. Zdá se mi však, že by bylo chytré těmhle objektům dát jednotící "interfece" ve stylu 
-<a href="#json_">JSONu_</a>. 
+-->
 
 
+<section id="lod-blaznu">Loď bláznů</section>
+<h3>Vincent a tekutý dědci</h3>
+<i>(Anglicky: Vincent and the fluid geezers)</i>
 
+<pre>
+V hlave ma hlasu par
+Je to zhouba? nebo dar?
+V hlave ma hlasu par
+Je to zhouba? nebo dar?
+
+Z mesta byl vyhnan v dal
+osudu napospas
+Kdysi se tem zrudam smal
+A ted s nima zdili kompas
+
+V hlave ma hlasu par
+Je to zhouba? nebo dar?
+V hlave ma hlasu par
+Je to zhouba? nebo dar?
+
+Ve snu-se divny dedci mihaj
+Jejich ksichty uz mu splivaj
+Byl to vagus? nebo dabel?
+a ten kus masa co se tam valel
+v hube divna pachut kovu
+Ted boji se usnout znovu
+Dedci splivaj, je jich mnoho
+Je jen jeden? A co z toho?
+
+V hlave ma hlasu par
+Neni to zhouba, je to dar
+V hlave ma hlasu par
+Neni to zhouba, je to dar
+</pre>
+
+<a href="sound/nastrel_theme_songu.mp3">poslechnout nástřel</a>
+
+<todo>Projít si ty starý pokusy o příběh, patrně bych to měl mýt někde
+v google dokumentech: tyhle věci si ted vybavuju : </todo>
+
+<ol>
+<li> <b>organix machina</b> - ta je nějakej už celkem rafinovanej systém metafor 
+bez konkrétního příběhu kerej jsem právě nechtěl uspěchat tak by se to mohlo pěkně doplnit,</li>
+<li> <b>Mytologie Kutilství</b>, <b>hra</b>, - ta divadelní hra co sme plánovali s Aničkou,</li>
+<li> <b>Oříšková singularita</b> pak tam mám nakej deleší slepenec takovej sešítek... -
+je tam i dost zaznamů rozhovorů na fb (se ščem, pomem,..) atd co mi přišli zajímavý,</li>
+<li> pak asi kouknout na <b>x-masakr mozek</b>,</li>
+<li> <b>Myšlenkovník</b>,</li>
+<li> a kouknout znova na obě <b>havle</b></li>
+</ol>
+
+
+<!--
+
+.d8888. d888888b .88b  d88. db    db db       .d8b.  d888888b db    db d8888b. d88888b db   dD 
+88'  YP   `88'   88'YbdP`88 88    88 88      d8' `8b `~~88~~' 88    88 88  `8D 88'     88 ,8P' 
+`8bo.      88    88  88  88 88    88 88      88ooo88    88    88    88 88oobY' 88ooooo 88,8P   
+  `Y8b.    88    88  88  88 88    88 88      88~~~88    88    88    88 88`8b   88~~~~~ 88`8b   
+db   8D   .88.   88  88  88 88b  d88 88booo. 88   88    88    88b  d88 88 `88. 88.     88 `88. 
+`8888Y' Y888888P YP  YP  YP ~Y8888P' Y88888P YP   YP    YP    ~Y8888P' 88   YD Y88888P YP   YD 
+
+-->
 
 <section id="simul">Simulátůrek</section>
 
@@ -852,7 +1089,35 @@ $(function(){
 
 </script>
 
+<!--
 
+ .o88b.  .d88b.   .o88b. db   dD db    db 
+d8P  Y8 .8P  Y8. d8P  Y8 88 ,8P' `8b  d8' 
+8P      88    88 8P      88,8P    `8bd8'  
+8b      88    88 8b      88`8b      88    
+Y8b  d8 `8b  d8' Y8b  d8 88 `88.    88    
+ `Y88P'  `Y88P'   `Y88P' YP   YD    YP    
+
+-->
+
+<section id="cocky">Čočky</section>
+
+Čočky jsou koncep založený na pozorování, že můžeme řetězit modely a views podobně
+jako při skládání funkcí. Čočka nasazená na nějaký model generuje pohled na ten model, který může být zase
+interpretován jako model další čočkou atd. Jedná se vlastně jen o funkci transformující objektu na jiný objekt,
+nic složitého. Zdá se mi však, že by bylo chytré těmhle objektům dát jednotící "interfece" ve stylu 
+<a href="#json_">JSONu_</a>. 
+
+<!--
+
+   d88b .d8888.  .d88b.  d8b   db         
+   `8P' 88'  YP .8P  Y8. 888o  88         
+    88  `8bo.   88    88 88V8o 88         
+    88    `Y8b. 88    88 88 V8o88         
+db. 88  db   8D `8b  d8' 88  V888         
+Y8888P  `8888Y'  `Y88P'  VP   V8P C88888D 
+                                          
+-->
 
 <section id="json_">JSON_</section>
 
@@ -951,6 +1216,17 @@ blogpost : JSON: serialize and deserialize functions in JavaScript</a><br>
 <a href="https://github.com/tarruda/super-json">
 github repo : super-json</a>
 
+
+<!-- 
+
+d888888b db    db d8888b. db    db        db    db .d8888.        d8888b. db    db d8b   db  .d8b.  
+`~~88~~' `8b  d8' 88  `8D `8b  d8'        88    88 88'  YP        88  `8D `8b  d8' 888o  88 d8' `8b 
+   88     `8bd8'  88oodD'  `8bd8'         Y8    8P `8bo.          88   88  `8bd8'  88V8o 88 88ooo88 
+   88       88    88~~~      88    C8888D `8b  d8'   `Y8b. C8888D 88   88    88    88 V8o88 88~~~88 
+   88       88    88         88            `8bd8'  db   8D        88  .8D    88    88  V888 88   88 
+   YP       YP    88         YP              YP    `8888Y'        Y8888D'    YP    VP   V8P YP   YP
+
+-->
 
 <section id="typy-vs-dyna">(Typovanost vs dynamičnost) vs (stroj vs člověk)</section>
 
