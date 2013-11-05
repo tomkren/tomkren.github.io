@@ -568,6 +568,7 @@ YP      Y888888P `8888Y' YP   YP    YP    88   YD  `Y88P'  VP   V8P
 
 <h4>Současný stav poznání</h4>
 
+<p>
 Genetické programování (GP) je technika umělé inteligence spadající do
 širší kategorie evolučních algoritmů - metaheuristických optimalizačních algoritmů
 inspirovaných přirozeným výběrem probíhajícím v přírodě. 
@@ -576,79 +577,117 @@ schopný tento problém vyřešit. Tato technika byla navržena Johnem Kozou [KO
 Ukazuje se, že se jedná o velmi úspěšnou techniku v řadě oblastí,
 její úspěšnost se navíc dále podstatně zvyšuje s přibývající výpočetní silou 
 kterou lze navíc dobře paralelizovat [KOZA4].
-GP pracuje s populací řešení, na začátku vygenerovanou pomocí generujícího algoritmu.
-Každá další generace je z předchozí vytvořena na základě selekce a genetických operátorů 
-(nejčastěji křížení a mutace).
+GP pracuje s populací jedinců (programů řešících daný problém), na začátku vygenerovanou pomocí generujícího algoritmu.
+Každá další generace je z předchozí vytvořena na základě selekce (založené na kvalitě řešení) a genetických operátorů (nejčastěji křížení a mutace).
 Další sympatickou vlastností GP je jeho snadná hybridizace s jinými optimalizačními 
 algoritmy; ty lze chápat jako konkrétní algoritmus generování, případně jako genetické operátry.
 Na druhou stranu je standardní GP jednoduše popsatelný algoritmus, což je výhoda pro 
 jeho další zobecňování.
-GP sestavuje jedince (počítačový program) z dvou množin stavebních symbolu;
+GP sestavuje jedince (program) z dvou množin stavebních symbolu;
 z množiny funkčních symbolů F a množiny terminálů T. Ve standardním GP je vyžadována
 tzv. closure podmínka nad těmito množinami, tzn. že všechny funkce z F musí přijímat
 všechny prvky T jako své argumenty a vracet jen výstupní hodnoty akceptovatelné jako
 argumenty všemi funkcemi z F. Toto můžeme shrnout tvrzením, že všechny stavební symboly
 musejí být nad jediným typem. Pokud toto omezení odstraníme, dostáváme genetické programování 
 nad typovaným jazykem.
+</p>
+<p>
+Tímto rozšířením GP se zabívalo již několik prací [CITACE].
+Z jiného úhlu pohledu můžeme zavedení typů do GP naopak chápat jako zavedení omezení na jednotlivé
+stavební symboly, tedy na způsob jakým mohou být tyto symboly navzájem skládány.  
+Typy tak efektivně zmenšují prohledávaný prostor programů, množina stavebních symbolů tak 
+může být podstatně větší a rozmanitější.
+Odstranění closure podmínky umožňuje použití přirozenějších funkcí a terminálů používaných
+v člověkem psaných programech na rozdíl od netypovaného GP, kde je tato množina 
+pečlivě navržena přesně na míru danému programu. Jak ukazuje praxe z funkcionálních jazyků, 
+konstrukcí polymorfních higher-order funkcí můžeme pohodlně tvořit konstrukty odpovídající 
+prvkům, které jsou standardně pevnou součástí jazyka (podmínky, cykly, atd.) ale 
+i obecnější matematické konstrukty uchopující pojem výpočtu jako jsou monady či arrows 
+[Hug00?? nevim esli citovat - to je obecny o šipkacha monadach].
+</p>
+<p>
+Pro reprezentaci typovaného programovacího jazyka může být použit lambda kalkulus,
+který se standardně využívá při studiu typových systémů. 
+Můžeme ho navíc považovat za zobecnění S-výrazů (přidáním anonymních funkcí) 
+používaných ve standardním GP. Je to jazyk velice kompaktní a pro porgramování přirozený, 
+v zásadě má tři konstrukty (proměnná/konstanta, aplikace funkce, anonymní funkce), 
+přes svou jednoduchost je lambda kalkul ve své netypované verzi turingovsky kompletní.
+Naproti tomu např. programy v symply typed lambda kalkulu mají garantováno, že vždy zastaví. 
+Díky Curry-Howardově korespondeci se navíc lambda kalkulus používá jako prostředek pro 
+formální uchopení pojmu důkazu (typ odpovídá logickému tvrzení, lambda term důkazu tohoto tvrzení),
+z čehož je patrné, že problém generování lambda termů daného typu a automatické dokazování logických
+tvrzení jsou velmi příbuzné problémy.
+Lambda kalkulus a s ním spojené typové systémy jsou podrobně sudovány v [POSLEDNí-BARENDRECHT],
+kde je mimojiné diskutována metoda pro generování lambda termů (v normální formě) pro daný typ.
+</p>
 
 
-<pre>
-Kde zmínit citace na konkurenci a čim se od nich odlišujem?
-- konkurenci asi zmínit zde
-- odlišnosti ve způsobu řešení
-
-TYPY
-(a pro další propagandu o typovanym se inspirovat v článkach - yu a kanadani a kombinatoři)
-
-Duvody proc jsou typy fajn: 
-- Odstraňujou omezení zavedený standardnim GP, tzv. closure
-- NAopak zavaděj ‘správný’ omezení na to jak mohou být funkce a terminály navzájem skládány.
-- Typy tak efektivně zmenšují prohledávaný prostor
-- výsledné programy jsou vyjádřeny v přirozeném jazyce a né v ukuchtěném nepřirozeném jazyce
-- mohou být využity složité konstrukty, vše de zakodovat jako funkce (cykly, atd..) pro což se jinak musí 
-zavádět speciální konstrukty dané metody (ADF vs trivialní fce explicitní aplikace)
-- jetě si projít starý slajdy co sem dělal na štěpánka tam mám další propagandu (ale záměrně na to 
-kouknout až pak abych měl víc formulací a nebyl ovlivněnej tim starym)
-
-LK
-co říct o LK?
-- jedno z nejelegantnějších reprezentací turingovsky kompletního jazyka, vzásadě má 3 konstrukty (proměná, 
-aplikace funkce, anonymní fce) a virtualní stroj popsatelný jedním řádkem (beta-redukce) [nevim, jak moc 
-se tu hodí takováhle propaganda ale...]
-- zaroveň se používá jako jeden z formalizmů pro formální uchopení důkazů (díky curry-howardově izomorfizmu
-), v automat. dk. vět se používá jako ‘stavební jednotka matematiky’ 
-- v LK je velice propracovaná typová teorie, kde typy pak odpovídaj výrokům.
-- říct že se v barendrechtovi popisuje způsob jak generovat termy v normální formě
-</pre>
 
 <h4>Cíle řešení projektu</h4>
-<pre>
-(DULEZITY)
-začít monumentalni vetou co to celý schrnouje: navrhnout zpusob... efektivniho začlenění typů do GP.
 
-rovnovaha mezi induktivnosti a deduktivnosti
-- je tu spektrum 
-- std GP je čistě induktivní přístup (doložit to, najít si formální def induktivnosti)
-   - vytvořit jedince je trivialní 
-   - celá komplexnost tkví v tom postupně operatory 
-      kombinovat  nedokonalá řešíní (tyto jednoduše 
-      vytvořený) a postupně dostavat lepší 
--  druhej extrém je automatický dokazování/ verifikace správnosti atd (takový ty veci co řeší surinek)
-   - tam je veškerá komplexnost v tom vytvořit jednoho     
-      jakýhokoliv jedince : tzn dk. a s tim jsme 
-     spokojený, už nehledáme nějakej v něčem nejlepší důkaz.
-   - tenhle přístup můžeme označit za čistě deduktivní
-- typovaný GP můžeme chápat jako pokus o vyvážení těchto dvou přístupů -   induktivního a deduktivního
-   - typ pak zajistí netriviální vlastnosti jedince že budou splněny
-  - evoluce pak tyto jedince splnujici daný vlastnosti daný typem dál zdokonaluje aby byly co nejlepší k 
-  požadovaný fitness 
-  - toto tema neni novinka pro EVA algoritmy - (to že mám jednak optimalizační požadavky daný fitnes a 
-  vedle toho pevný požadavky který musí jedinbec plnit) - typy to ale uchopujouv konzistentní a dobře 
-  popsaný formě která je napojená na formální metody logiky. 
-- zvolenim vhodneho typoveho systemu pak muzem balancovat pozici na teto skale 
-- jedno takovy rozsireni do deduktivnosti je pridani predikatovejch symbolu v podobe typovejch trid. To 
-nam umozni efektivne popsat struktury od listu pevne delky, pres neuronove site pres monady atd linearni  
-gp atd. do řešení
+<p>
+Cílem projektu je navrhnout systém efektivního začlenění typů do GP spolu s
+vhodnými genetickými operátory a programy generujícími algoritmy. 
+Dále pak podrobněji prozkoumat důsledky, které takový systém má na možnosti volby
+množiny stavebních symbolů pro různé problémy.
+</p>
+
+<p>
+Nalezení typového systému vhodné síly není triviální problém. 
+Pro lepší ilustraci tohoto problému je užitečné představit si spektrum 
+systémů řešících problémy v závyslosti na síle typového systému, 
+nad kterým takový systém pracuje. 
+Na jednom konci takového spektra leží standardní netypované GP; 
+zde je vygenerování jedince triviální operací a práce takového systému
+tkví v kombinování těchto nedokonalých řešení do čím dál lepších pomocí
+selekce a genetických operátorů. Takový přístup můžeme označit za induktivní;
+začíná s konkrétními "pozorováními" (množina náhodných jedinců a jejich kvalita)
+a pokračuje k širším zobecněním (výsledný (sub)optimální jedinec).
+Na druhém konci spektra leží metody automatického dokazování vět (a s ním
+příbuzné metody jako je formální verifikace atd.); zde naproti tomu jde
+o vygenerování libovolného důkazu (jedince) vstupního tvrzení (požadovaného typu)
+a o další kombinování několika takových důkazů za účelem zdokonalení
+nám typicky nejde. Takový přístup můžeme označit za deduktivní;
+začíná z teorie (množina stavebních symbolů s přiřazenými typy) a
+zadaného tvrzení k dokázaní (typ jedince) a snažíme se dostat k 
+libovolnému důkazu tohoto tvrzení (program daného typu).
+Typované genetické programování můžeme chápat jako systém někde uprostřed
+tohoto spektra, vyvažující a využívající oba přístupy - induktivní i deduktivní.
+Volba typového systému proto musí být rozvážná, pokud bychom totiž zvolili příliš
+silný typový systém, bude problém nalézt vůbec jediného jedince, natož celou
+různorodou populaci.
+S mocnějším typovým systémem také přichází možnost zakódovat do něj netriviální
+vlastnosti, které chceme aby vygenerovaný jedinec splňoval. Evoluce pak
+tyto jedince splňující dané vlastnosti dále zdokonaluje. Při volbě 
+genetických operátorů, které zachovávají správné otypování, je zajištěno, že evoluce
+tyto požadované vlastnosti neporuší. Splňování určitých vyžadovaných vlastností jedince
+je v oblasti evolučních algoritmů často se vyskytující téma, typové systémy 
+umožnují toto téma uchupit systematickým a formálně vyzrálým způsobem kompatibilním
+s formálními metodami matematické logiky.  
+</p>
+
+<p>
+V každém evolučním algoritmu je důležitou fází návrh genetických operátorů,
+v typovaném GP nad lambda kalkulem je to otevřený problém.
+V tomto ohledu budeme klást hlavní důraz na algoritmus generování jedinců,
+kterýžto lze přímočaře využít při standardní podobě operátoru mutace.
+Dále bude při návrhu genetických operací prozkoumána aplikovatelnost 
+teoretických konstruktů z oblasti lambda kalkulu 
+(různé redukce, eliminace abstrakcí, atd.).
+Budou zkoumany formy "chytrých" genetických operátorů využívající znalost daného problému,
+díky tomu bude umožněna spolupráce s dalšími optimalizačními metodami jakou je například
+Ant colony optimisation (ACO). 
+</p>
+
+<p>
+</p>
+
+
+<pre>
+ZBYLé POZNAMKY:
+---------------
+
+
 typy odstranej nutnost problemove zavysle definice "stavebnich bloku"
 - ve std gp je tuf specificky "vykrafteny" na miru danymu problemu,
 -  typovany gp umoznuje pouzit stejnou sadu pro vice problemu. tim ze Typy pak efektivne redukujou 
@@ -656,21 +695,9 @@ velikost prohl prostoru je realny pouzit i velky sady ktery by jinak nebylo mozn
 - zlaty gral by pak bylo mit jednu sadu univerzalni pro vsechny problemy . Pak by se redukovalo jeste vic [
 ten termin co pouziva koza ve 4ce pro to co se musi vykraftit clovekem aby... jakoby human supplied 
 knowledge] 
-- meZiproblemove interakce  - krizeni napric problemy , module acvision v globalni mape kombinatoru
-- tohle spolecne s roadmapama pak tvori knowlidge base pro programovani "vyslovena" v jazyce logiky 
-odpovidajici tomu typovimu systemu 
 
-návrh genetickejch operací, vypíchnout generovaní (dá se v mutacích)
-- pojmout asi vzletnejc a todle dat do zpusobu reseni
--  úvod - v každým gp nutno definovat operátory, tady to je otevřený problém
-- zde se bude navazovat na praci z diplomky, kde se podarilo formulovat generovani takovym zpusobem ze je 
-param (todle se spis hodi do zpusob reseni) atd...
-- velkej duraz budeme klast na generovani jedincu kterezto se pak primocare da vyuzit i na mutace
-- u operatoru budou prozkoumany aplikovatelnost lk teoretickych konceptu jako sou ruznu redukce, 
-eliminace, atd 
-- budou zkoumany formy 'chytrych operatoru' vyuzivajici znalost daneho problemu. Diky tomu bude umoznena 
-spoluprace s dalsimi opt metodami jako je aco atd
-- inhabitation tree, inhabitation machine, inhabitation paths. Roadmaps
+
+
 meta - zkusit sloučit s implementací
 - opt metody maj mnoho prichuti ale uvnitr se opakuji ta sama temata, ty de podchytit zas nakou "knihovnou 
 fci" a tyto metody pak muzem slechtit jako by se nechumelilo
@@ -678,12 +705,30 @@ fci" a tyto metody pak muzem slechtit jako by se nechumelilo
 teda muzem slechtit. Nakonec se muzem dostat az ke slechteni samotnejch opt metod
 - otazkou je jak efektivne slechtit tydle meta veci, nsbizi se napr oddeleny subpipulace bezici rizeny 
 temi slechtenymi parametry
+
 implementace a odzkoušení, publikace
 … inspirovat se martinovou formulací
 </pre>
 
+
+
+
+
 <h4>Způsob řešení</h4>
 <pre>
+přesunuto sem:
+---------------
+- jedno takovy rozsireni do deduktivnosti je pridani predikatovejch symbolu v podobe typovejch trid. To 
+  nam umozni efektivne popsat struktury od listu pevne delky, pres neuronove site pres monady atd linearni 
+  gp atd. do řešení
+- zde se bude navazovat na praci z diplomky, kde se podarilo formulovat generovani takovym zpusobem ze je 
+  param (todle se spis hodi do zpusob reseni) atd...
+- inhabitation tree, inhabitation machine, inhabitation paths. Roadmaps
+- meZiproblemove interakce  - krizeni napric problemy , module acvision v globalni mape kombinatoru
+- tohle spolecne s roadmapama pak tvori knowlidge base pro programovani "vyslovena" v jazyce logiky 
+  odpovidajici tomu typovimu systemu 
+
+--------------------------------------------------------
 (nejtechnictejsi cast formulare)
 (neni to jen výčet metod, ale mělo by to jít chronologicky)
 (mělo by to adresovat cíle)
@@ -712,6 +757,24 @@ dostatek problemu na slucovani
 nejblizsiho kompletniho termu z danyho unfin termu pres identifikaci unfin termu s tim samim "gama s 
 pruhem"
 </pre>
+
+
+<pre>
+
+  
+Souč Stav Pozn : ZBYLé POZNAMKY
+--------------------------------
+
+- Kde zmínit citace na konkurenci a čim se od nich odlišujem?
+  - konkurenci asi zmínit zde
+  - odlišnosti ve způsobu řešení
+- jetě si projít starý slajdy co sem dělal na štěpánka tam mám další propagandu (ale záměrně na to 
+  kouknout až pak abych měl víc formulací a nebyl ovlivněnej tim starym)
+- možná ještě kouknout na propagandu o typovanym v článkach - yu a kanadani a kombinatoři
+- ADF vs trivialní fce explicitní aplikace
+- LK : virtualní stroj popsatelný jedním řádkem (beta-redukce) 
+</pre>
+
 
 <hr>
 
@@ -845,9 +908,10 @@ V hlave ma hlasu par
 Neni to zhouba, je to dar
 </pre>
 
-<a href="sound/nastrel_theme_songu.mp3">poslechnout nástřel</a>
+<a href="sound/nastrel_theme_songu.mp3">poslechnout nástřel (lame)</a><br>
+<a href="sound/prosekolashi3t.mp3">refrém s hudbičkou od gorge</a>
 
-<todo>Projít si ty starý pokusy o příběh, patrně bych to měl mýt někde
+<todo>Projít si ty starý pokusy o příběh, patrně bych to měl mít někde
 v google dokumentech: tyhle věci si ted vybavuju : </todo>
 
 <ol>
