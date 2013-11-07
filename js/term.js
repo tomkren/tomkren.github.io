@@ -39,32 +39,41 @@ var mkArr = function(a,b){
   };
 };
 
+
+function mkTerm (obj) {
+  obj.code = function (opts) {
+    return code(obj,opts);
+  };
+  obj.toString = obj.code;
+  return obj;
+}
+
 var mkVar = function(x,t){
-  return { 
+  return mkTerm({ 
     c : VAR,
     x : x,
     t : t
-  };
+  });
 };
 
 var mkVal = function(x,t){
-  return { 
+  return mkTerm({ 
     c : VAL,
     x : x,
     t : t
-  };
+  });
 };
 
 var mkApp = function(m,n){
 
   assert( isArr(m.t) , 'mkApp: m must be an arrow.');
 
-  return { 
+  return mkTerm({ 
     c : APP,
     m : m,
     n : n,
     t : m.t.b
-  };
+  });
 };
 
 var mkLam_ = function(x,m,t){
@@ -72,12 +81,12 @@ var mkLam_ = function(x,m,t){
     'mkLam_: m='+code(m,'lc')+
          ' m.t='+code(m.t)+
          ' t.b='+code(t.b) );
-  return { 
+  return mkTerm({ 
     c : LAM,
     x : x,
     m : m,
     t : t
-  };
+  });
 };
 
 var mkLam = function(x,y,z){
@@ -86,29 +95,29 @@ var mkLam = function(x,y,z){
 };
 
 var mkLam_fromStr = function(x,tx,m){
-  return {
+  return mkTerm({
     c : LAM, 
     x : x,
     m : m,
     t : mkArr( tx , m.t )
-  };
+  });
 };
 
 var mkLam_fromVar = function(x,m){
-  return {
+  return mkTerm({
     c : LAM, 
     x : x.x,
     m : m,
     t : mkArr( x.t , m.t )
-  };
+  });
 };
 
 var mkUnf = function(t,atmTab){
-  return { 
+  return mkTerm({ 
     c      : UNF,
     t      : t,
     atmTab : atmTab 
-  };
+  });
 };
 
 
