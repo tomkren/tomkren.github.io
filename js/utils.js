@@ -1,4 +1,6 @@
 
+function nop () {}
+
 var log = function(x){
   console.log(x);
 };

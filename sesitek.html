@@ -12,6 +12,7 @@
     <script src="js/libs/underscore-1.5.1.js"></script>
 
     <script src="js/utils.js"></script>
+    <script src="js/fishtronDB.js"></script>
     
 <script>
 
@@ -73,11 +74,20 @@ var showScripts = function(){
 };
 
 $(function(){ 
+
   renderSections('#contents');
   renderLabels('todo','TODO : ','red');
   renderLabels('note','Note: ','blue');
   showScripts();
   mkTodoIndex ('#todoIndex');
+
+  FishtronDB.get('zobrazeni',function (n) {
+    if (n === undefined){n = 0;}
+    n++;
+    log('FishtronDB API URL: ' +FishtronDB.apiURL+ '; #zobrazení: ' + n);
+    FishtronDB.set('zobrazeni', n,nop);
+  });
+
 
 });
 
