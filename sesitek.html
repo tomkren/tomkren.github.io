@@ -138,7 +138,9 @@ YP  YP  YP 88   YD YP   YP    YP    Y88888P VP   V8P  `Y88P' Y888888P
 
 <div>
   <input type="button" id="ant_canvas_play" value="play">
-  <span id="ant_canvas_steps">0</span> kroků
+  kroků na vykreslení:
+  <input id="ant_canvas_steps_per_draw" value="5" style="width:30px">
+  Proběhlo <span id="ant_canvas_steps">0</span> kroků.
 </div>
 
 <p>Výsledek po cca 70 000 krocích (dáno 9x vedle
@@ -528,13 +530,18 @@ $(function () {
 
   var numStepsEl = $('#ant_canvas_steps');
   var numSteps = 0;
+  var stepsPerDrawInput = $('#ant_canvas_steps_per_draw');
+  var stepsPerDraw = stepsPerDrawInput.val();
 
   var step = function () {
     if (play) {
       drawZone2D_(ctx, zona);  
-      stepZone_(zona);
 
-      numSteps++;
+      for(var i=0; i<stepsPerDraw; i++){
+        stepZone_(zona);
+        numSteps++;
+      }
+      
       numStepsEl.html(numSteps);
       setTimeout(step,1000/fps);
     }
@@ -552,6 +559,17 @@ $(function () {
     }
     
   });
+
+  stepsPerDrawInput.change(function(){
+    var newVal = parseInt(stepsPerDrawInput.val());
+    if (isNaN(newVal)) {
+      stepsPerDrawInput.val(stepsPerDraw);
+      newVal = stepsPerDraw;
+    }
+    stepsPerDraw = newVal;
+    log(stepsPerDraw);
+  });
+
 
   
 });</script>
