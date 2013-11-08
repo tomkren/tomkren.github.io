@@ -2,13 +2,19 @@ var FishtronDB = function () {
 
   var url = 'http://kutil.php5.cz/fishtronDB'; 
   //var url = 'http://localhost/fishtronDB';
-  var callback = log;
+  var nextHandlerID = 1;
+
+  var handlers = {};
 
   function load (args,fun) {
 
-    var reqUrl = url + '?' + args ;
+    var handlerID = 'id' + nextHandlerID;
+    nextHandlerID++;
+    
 
-    var id = '__fishtronDB__script__';
+    var reqUrl = url + '?id=' + handlerID + '&' + args ;
+
+    var id = '__fishtronDB__script__'+ handlerID ;
 
     var res = $('#'+id);
 
@@ -22,12 +28,12 @@ var FishtronDB = function () {
         .attr('type','text/javascript')
         .attr('src',reqUrl);
 
-    if (fun !== undefined) {
-      callback = function (x) {
-        $('#'+id).remove(); // uklidí po sobě
-        fun(x);
-      };  
-    }
+
+    handlers[handlerID] = function (x) {
+      $('#'+id).remove(); // uklidí po sobě
+      delete handlers[handlerID];
+      fun(x);
+    };  
 
     try {
       $('head').append(newScript);
@@ -53,8 +59,8 @@ var FishtronDB = function () {
     load('action=whole',fun);  
   }
 
-  function handle (x) {
-    return callback(x);
+  function handle (handlerID,x) {
+    handlers[handlerID](x);
   }
 
   return {
@@ -62,6 +68,6 @@ var FishtronDB = function () {
     set   : set,
     whole : whole,
     handle: handle,
-    apiURL: url 
+    apiURL: url,
   };
 }();

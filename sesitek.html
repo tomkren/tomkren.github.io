@@ -90,11 +90,6 @@ $(function(){
     FishtronDB.set('zobrazeni', n,nop);
   });
 
-  var editor = ace.edit("editor");
-  editor.setTheme("ace/theme/monokai");
-  editor.getSession().setMode("ace/mode/javascript");  
-
-
 });
 
 </script>
@@ -127,49 +122,54 @@ Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
 postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
 
+<!--
+
+d88888b d8888b. d888888b d888888b  .d88b.  d8888b. 
+88'     88  `8D   `88'   `~~88~~' .8P  Y8. 88  `8D 
+88ooooo 88   88    88       88    88    88 88oobY' 
+88~~~~~ 88   88    88       88    88    88 88`8b   
+88.     88  .8D   .88.      88    `8b  d8' 88 `88. 
+Y88888P Y8888D' Y888888P    YP     `Y88P'  88   YD 
+
+-->
 
 <section id="editor-pokus">Editor pokus</section>
 
-<div id="editor" style="width: 615px; height: 640px;">
-var z_each = function(zone,fun,dim,pos){
-  if(dim === undefined){ dim = NUM_DIM; }
-  if(pos === undefined){ pos = []; }
-  if(dim === 0){ return fun(zone,pos); }
-  
-  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
-    z_each(zone[i],fun,dim-1,pos.concat([i]));
+<div id="editor_result"></div>
+
+<input type="button" id="editor_save" value="save">
+<div id="editor" style="width: 615px; height: 640px;"></div>
+
+<script>
+$(function(){
+  //var 
+  editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/html"); 
+  editor.getSession().setTabSize(2); 
+  editor.getSession().setUseSoftTabs(true);
+
+  function change () {
+    var newHtml = editor.getSession().getValue();
+    $('#editor_result').html(newHtml);
   }
-};
 
-var z_map = function(zone,fun,dim,pos){
-  if(dim === undefined){ dim = NUM_DIM; }
-  if(pos === undefined){ pos = []; }
-  if(dim === 0){ return fun(zone,pos); }
+  FishtronDB.get('editor', function(str){ 
+    editor.getSession().setValue(str);
+    change(); 
+  });
+
+  $('#editor_save').click(function(){
+    FishtronDB.set('editor',editor.getSession().getValue(),function(){
+      log('Editor saved..');
+    });
+    change();
+  });
+
+
   
-  var zone = []; 
-  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
-    var subZone = z_map(zone[i],fun,dim-1,pos.concat([i]));
-    zone.push(subZone);
-  }
-  return zone;
-};
-
-var mkZone = function(initFun,dim,pos){
-  if(dim === undefined){ dim = NUM_DIM; }
-  if(pos === undefined){ pos = []; }
-  if(initFun === undefined){ initFun = defaultZoneInit2D;}
-  if(dim === 0){ return initFun(pos); }
-  
-  var zone = []; 
-  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
-
-    var subZone = mkZone(initFun,dim-1,pos.concat([i]));
-    zone.push(subZone);
-
-  }
-  return zone;
-};
-</div>
+});
+</script>
 
 
 <!--
