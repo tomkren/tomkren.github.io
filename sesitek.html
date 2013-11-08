@@ -10,6 +10,8 @@
 
     <script src="js/libs/jquery-1.10.2.js"></script>
     <script src="js/libs/underscore-1.5.1.js"></script>
+    <script src="js/libs/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
 
     <script src="js/utils.js"></script>
     <script src="js/fishtronDB.js"></script>
@@ -88,6 +90,10 @@ $(function(){
     FishtronDB.set('zobrazeni', n,nop);
   });
 
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/javascript");  
+
 
 });
 
@@ -120,6 +126,51 @@ se to osvědčí jako kontrapart autoepištoly.
 Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
 postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
+
+
+<section id="editor-pokus">Editor pokus</section>
+
+<div id="editor" style="width: 615px; height: 640px;">
+var z_each = function(zone,fun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(dim === 0){ return fun(zone,pos); }
+  
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+    z_each(zone[i],fun,dim-1,pos.concat([i]));
+  }
+};
+
+var z_map = function(zone,fun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(dim === 0){ return fun(zone,pos); }
+  
+  var zone = []; 
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+    var subZone = z_map(zone[i],fun,dim-1,pos.concat([i]));
+    zone.push(subZone);
+  }
+  return zone;
+};
+
+var mkZone = function(initFun,dim,pos){
+  if(dim === undefined){ dim = NUM_DIM; }
+  if(pos === undefined){ pos = []; }
+  if(initFun === undefined){ initFun = defaultZoneInit2D;}
+  if(dim === 0){ return initFun(pos); }
+  
+  var zone = []; 
+  for( var i = 0 ; i < ZONE_SIDE ; i++ ){
+
+    var subZone = mkZone(initFun,dim-1,pos.concat([i]));
+    zone.push(subZone);
+
+  }
+  return zone;
+};
+</div>
+
 
 <!--
 
