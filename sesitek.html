@@ -137,35 +137,62 @@ Y88888P Y8888D' Y888888P    YP     `Y88P'  88   YD
 
 <div id="editor_result"></div>
 
-<input type="button" id="editor_save" value="save">
-<div id="editor" style="width: 615px; height: 640px;"></div>
+<br>
+
+<div id="editor" style="width: 612px; height: 612px;"></div>
+<input type="button" id="editor_save" value="save" title="Ctrl+S"><small>Ctrl+S</small>
 
 <script>
 $(function(){
+  
   //var 
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   editor.getSession().setMode("ace/mode/html"); 
   editor.getSession().setTabSize(2); 
   editor.getSession().setUseSoftTabs(true);
+  editor.getSession().setUseWrapMode(true);
 
-  function change () {
+
+
+  function changeHTML () {
     var newHtml = editor.getSession().getValue();
     $('#editor_result').html(newHtml);
   }
 
-  FishtronDB.get('editor', function(str){ 
-    editor.getSession().setValue(str);
-    change(); 
-  });
-
-  $('#editor_save').click(function(){
-    FishtronDB.set('editor',editor.getSession().getValue(),function(){
+  function save () {
+    FishtronDB.set('editor',editor.getSession().getValue(),function () {
       log('Editor saved..');
     });
-    change();
+    changeHTML();    
+  }
+
+  function resize () {
+    var newHeight =
+      editor.getSession().getScreenLength()
+      * editor.renderer.lineHeight
+      + editor.renderer.scrollBar.getWidth();
+    $('#editor').css('height',newHeight+'px');
+    editor.resize();
+  }
+
+  FishtronDB.get('editor', function(str){ 
+    editor.getSession().setValue(str);
+    resize();
+    changeHTML(); 
   });
 
+  $('#editor_save').click(save);
+
+  editor.commands.addCommand({
+    name: 'save',
+    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+    exec: save
+  });
+
+  editor.getSession().on('change', function(e) {
+    resize();
+  });
 
   
 });
