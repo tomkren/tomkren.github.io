@@ -19,19 +19,30 @@
 <script>
 
 var renderSections = function(contentsSelector){
+  $(contentsSelector).html('');
   $('section').each(function(){
-    var code   = $(this).attr('id');
-    var nadpis = $(this).html();
-    $(this)
-     .html( h2 = $('<h2>').html( nadpis + ' <a href="'+contentsSelector+'">⌂</a>' ) )
-     .prepend( $('<a>').attr('name', code ) );
+    var it = $(this);  
+
+    var code   = it.attr('id');
+    var nadpis = it.attr('text') ? it.attr('text') : it.html();
+
+    if (!it.attr('done')) {
+      log(it.html());
+      it.html( $('<h2>').html( nadpis + ' <a href="'+contentsSelector+'">⌂</a>' ) )
+        .prepend( $('<a>').attr('name', code ) )
+        .attr('done','1')
+        .attr('text',nadpis);
+    }
+
     $(contentsSelector)
       .append( $('<a>').attr('href','#'+code).html( nadpis ) )
       .append( $('<br>') );
+
   });
 };
 
 function mkTodoIndex (indexSelector) {
+  $(indexSelector).html('');
   $('todo').each(function(i){
     var j = i+1;
     var code = '__todo-'+j;
@@ -42,20 +53,23 @@ function mkTodoIndex (indexSelector) {
       .append( $('<a>').attr('href','#'+code).html( text ) )
       .append( $('<br>') );
   });
-
 }
 
 var renderLabels = function(tag,str,color){
   $(tag).each(function(){
-    $(this)
-     .css('color','white')
-     .css('background-color',color)
-     .css('width','intrinsic')
-     .css('width','-moz-max-content')
-     .css('padding','3px')
-     .prepend('<b>'+str+'</b>')
-     .before('<p></p>')
-     .after('<p></p>');
+    var it = $(this);
+    if (!it.attr('done')) {
+      it
+       .attr('done','1')
+       .css('color','white')
+       .css('background-color',color)
+       .css('width','intrinsic')
+       .css('width','-moz-max-content')
+       .css('padding','3px')
+       .prepend('<b>'+str+'</b>')
+       .before('<p></p>')
+       .after('<p></p>');
+    }
   });
 };
 
@@ -69,19 +83,24 @@ var runCodes = function(){
 var showScripts = function(){
   $('script').each(function(){
     var it = $(this); 
-    if( it.attr('show') === 'true' ){
-      it.after($('<div>').html( '<pre>'+it.html()+'</pre>' ));
+    if (!it.attr('done') && it.attr('show') === 'true') {
+      it.attr('done','1').after($('<div>').html( '<pre>'+it.html()+'</pre>' ));
     }
   });
 };
 
-$(function(){ 
-
+function renderAll () {
   renderSections('#contents');
   renderLabels('todo','TODO : ','red');
-  renderLabels('note','Note: ','blue');
-  showScripts();
+  renderLabels('note','Note: ','blue');  
   mkTodoIndex ('#todoIndex');
+  showScripts();
+}
+
+$(function(){ 
+
+  renderAll();
+    
 
   FishtronDB.get('zobrazeni',function (n) {
     if (n === undefined){n = 0;}
@@ -99,8 +118,11 @@ $(function(){
 
 <h1>sešítek</h1>
 
-<section id="contents">Obsah</section>
-<section id="todoIndex">TODO index</section>
+<section id="obsah">Obsah</section>
+<div id="contents"></div>
+
+<section id="todo-index">TODO index</section>
+<div id="todoIndex"></div>
 
 <!-- 
 
@@ -181,6 +203,7 @@ $(function(){
     function changeHTML (el) {
       var newHtml = editor.getSession().getValue();
       el.html(newHtml);
+      renderAll();
     }
 
     function save () {
@@ -310,7 +333,10 @@ $(function(){
   function loadCards () {
 
     function loadCards_ (ids) {
-      if (ids.length === 0) {return;}
+      if (ids.length === 0) {
+        renderAll();
+        return;
+      }
       var cardID = ids.shift();
       FishtronDB.get(cardID,function (card) {
         cardsDiv.append(mkCard(card,cardID));
@@ -364,7 +390,7 @@ YP  YP  YP 88   YD YP   YP    YP    Y88888P VP   V8P  `Y88P' Y888888P
 
 -->
 
-<section id="mravenci">Mravenci</section>
+<section id="mravenci">Mravenci pokusy</section>
 
 <!--
 <canvas id="ant_canvas" width="512" height="512"></canvas>
