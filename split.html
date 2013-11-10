@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<head>
+
+    <title>jQuery Splitter Demo</title>
+
+
+    
+    <script src="js/libs/jquery-1.10.2.js"></script>
+    <script src="js/libs/jquery.splitter-0.8.0.js"></script>
+    <link href="css/libs/jquery.splitter.css" rel="stylesheet">
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div id="id1" style="width:500px;height:300px;">
+
+  <div style="background-color: #E92727;">
+    eeee Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed dolor nisl, in suscipit justo. Donec a enim et est porttitor semper at vitae augue. Proin at nulla at dui mattis mattis. Nam a volutpat ante. Aliquam consequat dui eu sem convallis ullamcorper. Nulla suscipit, massa vitae suscipit ornare, tellus est consequat nunc, quis blandit elit odio eu arcu. 
+  </div> 
+
+  <div style="background-color: #BEE927;">DDDD Lorem ipsum dolor sit amet, consectetur adipiscing elit.   
+    Nulla sed dolor nisl, in suscipit justo. Donec a enim et est porttitor semper at vitae augue. Proin at 
+    nulla at dui mattis mattis. Nam a volutpat ante. 
+  </div>
+
+</div> 
+
+<script>
+  $(function() {
+    $('#id1').split({orientation:'vertical', limit:0});
+  });
+</script>
+
+
+</body>
+</html>
