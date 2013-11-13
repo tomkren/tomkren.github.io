@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/underscore-1.5.1.js"></script>
+
+  <script src="js/utils.js"></script>
+
+</head>
+<body>
+
+<canvas id="canwass" width="480" height="480"></canvas>
+
+<script>
+
+$(function () {
+
+  brot = mkFractal('canwass',{
+    fun      : isIn,
+    numIter  : 50, 
+    deltaIter: 12
+  }).draw();
+
+});
+
+
+function isIn (xy,numIter) {
+  var c = xy[0], d = xy[1];
+  var a = c, b = d;
+  var a2 = a*a, b2 = b*b;
+  var i  = 0;
+  var a_;
+  while (i < numIter && a2+b2 <= 4) {
+    a_ = a2-b2 + c;
+    b  = 2*a*b + d;
+    a  = a_;
+    a2 = a*a; b2 = b*b; 
+    i++;
+  }
+  return i == numIter ? {in:true} : {in:false, iter:i};
+}
+
+
+
+function mkFractal (canvasId, opts) {
+
+  var fractalFun = opts.fun       || isIn;
+  var numIter    = opts.numIter   || 50;
+  var deltaIter  = opts.deltaIter || 0;
+
+  var self, center, zoom, cX, cY, left, right, top, bottom, p, q;
+  
+  var el     = $('#'+canvasId);
+  var canvas = el[0];
+  var ctx    = canvas.getContext('2d');
+  var xSize  = canvas.width;
+  var ySize  = canvas.height;
+
+  var imageData = ctx.getImageData(0, 0, xSize, ySize);
+  var data = imageData.data;
+
+  var paleta = []; 
+  //for (var i = 0; i<256; i++){
+  //  paleta.push([_.random(0,255),
+  //               _.random(0,255),
+  //               _.random(0,255)]);
+  //}
+  
+  for (var i = 0; i<256; i++){
+    paleta.push([0,
+                 0,
+                 i]);
+  }
+
+  var mouseDown = false;
+
+  el.mousedown(function(e){
+    mouseDown = true;
+  });
+  el.mouseup(function(e){
+    mouseDown = false;
+  });
+
+  function move (e) {
+    var x = e.offsetX;
+    var y = e.offsetY;
+    setCenter(convert(x,y));
+    draw();
+  }
+
+  el.click(function(e){
+    move(e);
+  });
+  el.mousemove(function(e){//click(function(e){
+    if (!mouseDown){return;}
+    move(e);
+  });
+
+  //handles scrolling
+  var mousewheelevt = 
+    (/Firefox/i.test(navigator.userAgent)) ? 
+      "DOMMouseScroll" : 
+      "mousewheel"; //FF doesn't recognize mousewheel as of FF3.x
+  el.bind(mousewheelevt, function(e){
+
+    var evt = window.event || e //equalize event object
+    //convert to originalEvent if possible                    
+    evt = evt.originalEvent ? evt.originalEvent : evt; 
+    //check for detail first, because it is used by Opera and FF
+    var delta = evt.detail ? evt.detail*(-40) : evt.wheelDelta 
+
+    zoomIt(delta > 0);
+    draw(); 
+  });
+
+  //prevents scrolling 
+  el.on('DOMMouseScroll mousewheel', function(ev) {
+    var $this = $(this),
+        scrollTop = this.scrollTop,
+        scrollHeight = this.scrollHeight,
+        height = $this.height(),
+        delta = (ev.type == 'DOMMouseScroll' ?
+            ev.originalEvent.detail * -40 :
+            ev.originalEvent.wheelDelta),
+        up = delta > 0;
+
+    var prevent = function() {
+        ev.stopPropagation();
+        ev.preventDefault();
+        ev.returnValue = false;
+        return false;
+    }
+
+    if (!up && -delta > scrollHeight - height - scrollTop) {
+        // Scrolling down, but this will take us past the bottom.
+        $this.scrollTop(scrollHeight);
+        return prevent();
+    } else if (up && delta > scrollTop) {
+        // Scrolling up, but this will take us past the top.
+        $this.scrollTop(0);
+        return prevent();
+    }
+  });
+
+
+  center = [0,0];
+  zoom = 0.5;
+  setCenter(center);
+
+  function init () {
+    left   = cX - (1/zoom);
+    right  = cX + (1/zoom);
+    top    = cY + (1/zoom);
+    bottom = cY - (1/zoom);
+    p = (right-left)/(xSize-1); 
+    q = (bottom-top)/(ySize-1);
+    return self; 
+  }
+
+  function setCenter(pos) {
+    cX = pos[0] || 0;
+    cY = pos[1] || 0;
+    return init();
+  }
+
+  function zoomIt (zoomIn) {
+    zoom    *= ( zoomIn ? 2 : 0.5 ) ;
+    numIter += ( zoomIn ? 1 :  -1 )*deltaIter ;
+    numIter  = ( numIter >= 2 ? numIter : 2 );
+    return init();
+  } 
+
+  function convert(x,y) {
+    return [x*p + left, y*q + top];
+  }
+
+  function getValue (x,y) {
+    var res = fractalFun(convert(x,y),numIter);
+    return res.in ? 0 : 
+      Math.round(255*res.iter/(numIter) );
+  }
+
+  function draw() {
+    var start = new Date().getTime();
+    console.time('brot');
+    for (var y = 0; y < ySize; ++y) {
+      for (var x = 0; x < xSize; ++x) {
+        var v = getValue(x,y);
+
+        var color = paleta[v];
+
+        var index = (y * xSize + x) * 4;          
+        data[index]   = color[0];  // red
+        data[++index] = color[1];  // green
+        data[++index] = color[2];  // blue
+        data[++index] = 255;  // alpha
+      }
+    }
+    ctx.putImageData(imageData, 0, 0);
+    drawOther();
+        
+    var end = new Date().getTime();
+    var time = end - start;
+    ctx.font = "bold 12px sans-serif";
+    ctx.fillStyle = "#413839";
+    ctx.fillText(time+'ms', 2, 12);
+    ctx.fillText(numIter+' iters',2,24);
+  }
+
+  function drawOther () {
+    drawLine('#413839',[xSize/2-3,ySize/2],[xSize/2+3,ySize/2]);
+    drawLine('#413839',[xSize/2,ySize/2-3],[xSize/2,ySize/2+3]);
+  }
+
+  function drawLine (col,from,to) {
+    ctx.strokeStyle = col;
+    ctx.beginPath();
+    ctx.moveTo(from[0],from[1]);
+    ctx.lineTo(to[0],to[1]);
+    ctx.stroke();    
+  }
+
+  self = {
+    convert: convert,
+    setCenter: setCenter,
+    zoom: zoomIt,
+    draw: draw
+  }
+
+  return self;
+}
+
+
+
+
+
+function randIxs(xSize,ySize, fun) {
+  var xs = [];
+  for (var y = 0; y < ySize; ++y) {
+    for (var x = 0; x < xSize; ++x) {
+      xs.push([x,y]);
+    }
+  } 
+
+  xs = _.shuffle(xs);
+
+  function run () {
+    if (xs.length === 0){return;}
+    var x = xs.pop();
+    fun(x[0],x[1]);
+    setTimeout(run,0);
+  }
+  run();
+}
+
+
+</script>
+
+</body>
+</html>
