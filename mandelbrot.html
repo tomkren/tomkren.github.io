@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<canvas id="canwass" width="480" height="480"></canvas>
+<canvas id="canwass" width="640" height="640"></canvas>
 
 <table id="tab">
   <tr><td id="plus">+</td>
@@ -18,7 +18,7 @@
 </table>
 
 <style>
- #tab    {width:480px;}
+ #tab    {width:654px;position: relative; right:7px;}
  #tab td {border:5px solid white;
           color:white;
           background-color:black;
@@ -37,6 +37,7 @@ $(function () {
 
   brot = mkFractal('canwass',{
     fun      : isIn,
+    paleta   : paleta,
     numIter  : 50, 
     deltaIter: 12,
     plusButt : 'plus',
@@ -44,6 +45,33 @@ $(function () {
   }).draw();
 
 });
+
+var paleta = function () {
+  var p = [];
+
+  p.push([  9,   1,  47]); // darkest blue
+  p.push([  4,   4,  73]); // blue 5
+  p.push([  0,   7, 100]); // blue 4
+  p.push([ 12,  44, 138]); // blue 3
+  p.push([ 24,  82, 177]); // blue 2
+  p.push([ 57, 125, 209]); // blue 1
+  p.push([134, 181, 229]); // blue 0
+  p.push([211, 236, 248]); // lightest blue
+  p.push([241, 233, 191]); // lightest yellow
+  p.push([248, 201,  95]); // light yellow
+  p.push([255, 170,   0]); // dirty yellow
+  p.push([204, 128,   0]); // brown 0
+  p.push([153,  87,   0]); // brown 1
+  p.push([106,  52,   3]); // brown 2
+  p.push([ 66,  30,  15]); // brown 3
+  p.push([ 25,   7,  26]); // dark violett
+
+  var len = p.length;
+  return function (i) {
+    if (i===-1) {return [0,0,0];}
+    return p[i%len];
+  }
+}();
 
 
 function isIn (xy,numIter) {
@@ -70,7 +98,7 @@ function mkFractal (canvasId, opts) {
   var numIter    = opts.numIter   || 50;
   var deltaIter  = opts.deltaIter || 0;
 
-  var self, center, zoom, cX, cY, left, right, top, bottom, p, q;
+  var self, zoom, cX, cY, left, right, top, bottom, p, q;
   
   var el     = $('#'+canvasId);
   var canvas = el[0];
@@ -81,31 +109,38 @@ function mkFractal (canvasId, opts) {
   var imageData = ctx.getImageData(0, 0, xSize, ySize);
   var data = imageData.data;
 
-  var paleta = []; 
-  //for (var i = 0; i<256; i++){
-  //  paleta.push([_.random(0,255),
-  //               _.random(0,255),
-  //               _.random(0,255)]);
-  //}
-  
-  for (var i = 0; i<256; i++){
-    paleta.push([0,
-                 0,
-                 i]);
-  }
+  var paleta = opts.paleta;
 
+  zoom = 0.5;
+  setCenter([-0.3,0]);
 
-  function move (e) {
-    var x = e.offsetX || e.pageX - $(e.target).position().left;
-    var y = e.offsetY || e.pageY - $(e.target).position().top;
+  function move (e,max) {
+    x_ = e.offsetX || e.pageX - $(e.target).position().left;
+    y_ = e.offsetY || e.pageY - $(e.target).position().top;
 
-    setCenter(convert(x,y));
-    draw();
-    log(x+' '+y);
+    if (max) {
+      draged = true;
+
+      var dx = x_ - xSize/2;
+      var dy = y_ - ySize/2;
+
+      var delta = 5;
+      var d = delta / Math.sqrt(dx*dx+dy*dy);
+      
+      dx = dx * d;
+      dy = dy * d;
+      
+      setCenter(convert(xSize/2+dx,ySize/2+dy));
+      draw();
+
+    } else {
+      setCenter(convert(x_,y_));
+      draw();
+    }
   }
 
   el.click(function(e){
-    move(e);
+    //move(e);
   });
 
   if (opts.plusButt) {
@@ -116,18 +151,24 @@ function mkFractal (canvasId, opts) {
   }
   
   var mouseDown = false;
+  var draged = false;
 
   el.mousedown(function(e){
     mouseDown = true;
   });
   el.mouseup(function(e){
     mouseDown = false;
+    if (draged) {
+      draged = false;
+    } else {
+      move(e);  
+    }
   });
 
 
-  el.mousemove(function(e){//click(function(e){
+  el.mousemove(function(e){
     if (!mouseDown){return;}
-    move(e);
+    move(e,5);
   });
   
 
@@ -178,9 +219,7 @@ function mkFractal (canvasId, opts) {
   
 
 
-  center = [0,0];
-  zoom = 0.5;
-  setCenter(center);
+
 
   function init () {
     left   = cX - (1/zoom);
@@ -211,8 +250,8 @@ function mkFractal (canvasId, opts) {
 
   function getValue (x,y) {
     var res = fractalFun(convert(x,y),numIter);
-    return res.in ? 0 : 
-      Math.round(255*res.iter/(numIter) );
+    return res.in ? -1 : res.iter ;
+    //Math.round(255*res.iter/(numIter) );
   }
 
   function draw() {
@@ -221,7 +260,7 @@ function mkFractal (canvasId, opts) {
       for (var x = 0; x < xSize; ++x) {
         var v = getValue(x,y);
 
-        var color = paleta[v];
+        var color = paleta(v);
 
         var index = (y * xSize + x) * 4;          
         data[index]   = color[0];  // red
@@ -243,8 +282,8 @@ function mkFractal (canvasId, opts) {
   }
 
   function drawOther () {
-    drawLine('#413839',[xSize/2-3,ySize/2],[xSize/2+3,ySize/2]);
-    drawLine('#413839',[xSize/2,ySize/2-3],[xSize/2,ySize/2+3]);
+    drawLine('red',[xSize/2-3,ySize/2],[xSize/2+3,ySize/2]);
+    drawLine('red',[xSize/2,ySize/2-3],[xSize/2,ySize/2+3]);
   }
 
   function drawLine (col,from,to) {
