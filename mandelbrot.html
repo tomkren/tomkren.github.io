@@ -14,8 +14,6 @@
 
 <script>
 
-// BUGZ: v mozile nejede klikání a šoupáni :(
-
 $(function () {
 
   brot = mkFractal('canwass',{
@@ -75,6 +73,22 @@ function mkFractal (canvasId, opts) {
                  i]);
   }
 
+
+  function move (e) {
+    var x = e.offsetX || e.pageX - $(e.target).position().left;
+    var y = e.offsetY || e.pageY - $(e.target).position().top;
+
+    setCenter(convert(x,y));
+    draw();
+    log(x+' '+y);
+  }
+
+  el.click(function(e){
+    move(e);
+  });
+
+
+  
   var mouseDown = false;
 
   el.mousedown(function(e){
@@ -84,20 +98,12 @@ function mkFractal (canvasId, opts) {
     mouseDown = false;
   });
 
-  function move (e) {
-    var x = e.offsetX;
-    var y = e.offsetY;
-    setCenter(convert(x,y));
-    draw();
-  }
 
-  el.click(function(e){
-    move(e);
-  });
   el.mousemove(function(e){//click(function(e){
     if (!mouseDown){return;}
     move(e);
   });
+  
 
   //handles scrolling
   var mousewheelevt = 
@@ -144,6 +150,7 @@ function mkFractal (canvasId, opts) {
         return prevent();
     }
   });
+  
 
 
   center = [0,0];
