@@ -12,6 +12,25 @@
 
 <canvas id="canwass" width="480" height="480"></canvas>
 
+<style>
+ #tab    {width:480px;}
+ #tab td {border:5px solid white;
+          color:white;
+          background-color:black;
+          text-align:center;
+          width:50%;
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 42px;
+          } 
+</style>
+
+<table id="tab">
+  <tr><td id="plus">+</td>
+      <td id="minus">-</td></tr>
+</table>
+
+
 <script>
 
 $(function () {
@@ -19,7 +38,9 @@ $(function () {
   brot = mkFractal('canwass',{
     fun      : isIn,
     numIter  : 50, 
-    deltaIter: 12
+    deltaIter: 12,
+    plusButt : 'plus',
+    minusButt: 'minus'
   }).draw();
 
 });
@@ -87,7 +108,12 @@ function mkFractal (canvasId, opts) {
     move(e);
   });
 
-
+  if (opts.plusButt) {
+    $('#'+opts.plusButt).click(function(){zoomIt(true)});
+  }
+  if (opts.minusButt) {
+    $('#'+opts.minusButt).click(function(){zoomIt(false)});
+  }
   
   var mouseDown = false;
 
@@ -119,7 +145,6 @@ function mkFractal (canvasId, opts) {
     var delta = evt.detail ? evt.detail*(-40) : evt.wheelDelta 
 
     zoomIt(delta > 0);
-    draw(); 
   });
 
   //prevents scrolling 
@@ -177,7 +202,7 @@ function mkFractal (canvasId, opts) {
     zoom    *= ( zoomIn ? 2 : 0.5 ) ;
     numIter += ( zoomIn ? 1 :  -1 )*deltaIter ;
     numIter  = ( numIter >= 2 ? numIter : 2 );
-    return init();
+    return init().draw();
   } 
 
   function convert(x,y) {
@@ -214,6 +239,7 @@ function mkFractal (canvasId, opts) {
     ctx.fillStyle = "#413839";
     ctx.fillText(time+'ms', 2, 12);
     ctx.fillText(numIter+' iters',2,24);
+    return self;
   }
 
   function drawOther () {
@@ -232,7 +258,7 @@ function mkFractal (canvasId, opts) {
   self = {
     convert: convert,
     setCenter: setCenter,
-    zoom: zoomIt,
+    zoomIt: zoomIt,
     draw: draw
   }
 
