@@ -25,10 +25,7 @@
 </style>
 
 
-<select id="paletteSelect">
-  <option value="wiki">Wiki palette</option>
-  <option value="eXtreme">eXtreme palette</option>
-</select><br>
+<select id="paletteSelect"></select><br>
 
 <canvas id="canwass" width="640" height="640" ></canvas>
 
@@ -54,8 +51,18 @@ $(function () {
 
   $paletteSel = $('#paletteSelect');
 
+  for (var p in palettes) {
+    $paletteSel.append($('<option>').attr('value',p).html(p+' palette'));
+  }
+
   function changePalette () {
-    brot.changePalette( palettes[ $paletteSel.val() ] );
+    var val = $paletteSel.val();
+    if (val === 'random') {
+      brot.changePalette( randPalette() );
+    } else {
+      brot.changePalette( palettes[val] );
+    }
+    
   }
 
   
@@ -71,27 +78,21 @@ var mkPaleta = function (p) {
   }
 };
 
+var hues = [
+    [1,0,128],[0,47,115],[0,74,101],[0,88,76],[0,128,1],[79,173,1],[139,188,0],
+    [184,208,0],[247,235,1],[246,176,0],[245,132,0],[243,99,0],[242,74,1],
+    [241,54,0],[241,30,0],[240,17,0],[240,0,1],[189,0,54],[175,0,69],
+    [157,0,87],[139,0,103],[106,0,108],[70,0,114],[41,0,118] ];
 
-var palettes = {
-  wiki: mkPaleta( 
-    [[  9,   1,  47], [  4,   4,  73], [  0,   7, 100], [ 12,  44, 138], 
-     [ 24,  82, 177], [ 57, 125, 209], [134, 181, 229], [211, 236, 248],
-     [241, 233, 191], [248, 201,  95], [255, 170,   0], [204, 128,   0], 
-     [153,  87,   0], [106,  52,   3], [ 66,  30,  15], [ 25,   7,  26]
-    ]),
-  eXtreme: mkPaleta(
-    [[  8,   0, 195],  [ 25,   0, 204],  [ 41,   0, 212],  [ 74,   0, 229],
-     [ 90,   0, 238],  [107,   0, 246],  [123,   0, 255],  [132,   0, 232],
-     [148,   0, 185],  [181,  36,  93],  [197,  73,  46],  [214, 109,   0],
-     [239, 164,   0],  [251, 219,   0],  [243, 255,   0],  [238, 229,   0],
-     [230, 178,   0],  [222, 127,   0],  [218, 102,   0],  [209,  51,   0],
-     [197,   0,  16],  [189,   0,  48],  [176,   0,  96],  [176,   0, 128],
-     [192,   0, 191],  [200,   0, 223],  [208,  11, 255],  [219,  43, 240],
-     [227,  64, 229],  [243, 106, 209],  [251, 128, 199],  [219, 159, 183],
-     [182, 181, 183],  [127, 213, 197],  [ 73, 244, 212],  [ 36, 239, 221],
-     [  0, 206, 231],  [  0, 157, 245],  [  0, 108, 241],  [  0,  75, 214],
-     [  0,  42, 187],  [  0,  46, 146],  [  0,  76, 105],  [  0,  86,  92],
-     [  0, 106,  65],  [  0, 126,  66],  [  0, 155, 109],  [  0, 185, 153],
+var eXtreme = [
+     [8,0,195],[25,0,204],[41,0,212],[74,0,229],[90,0,238],[107,0,246],  
+     [123,0,255],[132,0,232],[148,0,185],[181,36,93],[197,73,46],[214,109,0],
+     [239,164,0],[251,219,0],[243,255,0],[238,229,0],[230,178,0],[222,127,0],
+     [218,102,0],[209,51,0],[197,0,16],[189,0,48],[176,0,96],[176,0,128],
+     [192,0,191],[200,0,223],[208,11,255],[219,43,240],[227,64,229],[243,106,209],
+     [251,128,199],[219,159,183],[182,181,183],[127,213,197],[73,244,212],  
+     [36,239,221],[0,206,231],[0,157,245],[0,108,241],[0,75,214],[0,42,187],
+     [0,46,146],[0,76,105],[0,86,92],[0,106,65],[0,126,66],[0,155,109],[0,185,153],
      [  0, 215, 197],  [  0, 235, 226],  [ 30, 255, 255],  [ 60, 237, 255],
      [ 75, 228, 255],  [120, 200, 255],  [164, 190, 255],  [194, 188, 255],
      [239, 187, 255],  [254, 186, 255],  [242, 185, 255],  [229, 176, 233],
@@ -103,9 +104,90 @@ var palettes = {
      [ 97, 241, 155],  [113, 220, 182],  [129, 198, 208],  [140, 184, 211],
      [156, 163, 193],  [166, 149, 185],  [183, 127, 164],  [199, 106, 146],
      [189,  92, 134],  [146,  71, 117],  [117,  57, 105],  [ 73,  35, 137],
-     [ 29,  14, 170]
-    ])
+     [ 29,  14, 170] ];
+
+function randPalette () {
+  var m = _.random(2,15);
+  var n = _.random(1,15);
+  var pal1 = [];
+  for (var i=0; i<m; i++) {
+    pal1.push([_.random(0,255),_.random(0,255),_.random(0,255)]);
+  }
+  return mkPaleta( vyplnPalette(pal1,n) );
+}
+
+var palettes = {
+  wiki: mkPaleta([ 
+     [  9,   1,  47], [  4,   4,  73], [  0,   7, 100], [ 12,  44, 138], 
+     [ 24,  82, 177], [ 57, 125, 209], [134, 181, 229], [211, 236, 248],
+     [241, 233, 191], [248, 201,  95], [255, 170,   0], [204, 128,   0], 
+     [153,  87,   0], [106,  52,   3], [ 66,  30,  15], [ 25,   7,  26]
+    ]),
+  random: randPalette(),
+  eXtreme: mkPaleta(eXtreme),
+  eXtreme2: mkPaleta(vyplnPalette(eXtreme,2)),
+  hues: mkPaleta(hues),
+  hues2: mkPaleta( vyplnPalette(hues,3) ),
+  gray : mkSimplePalette(10,function(i){return [i,i,i]}),
+  //gray2: mkPaleta( vyplnPalette([[0,0,0],[255,255,255],[0,0,0]],25) ),
+  blue : mkSimplePalette(10,function(i){return [0,0,i]}),
+  green: mkSimplePalette(10,function(i){return [0,i,0]}),
+  red  : mkSimplePalette(10,function(i){return [i,0,0]}),
 };
+
+function mkSimplePalette (step,fun) {
+  var i, ret = [];
+  for (i=0;   i<256; i+=step) {ret.push(fun(i));}
+  for (i=255; i>=0;  i-=step) {ret.push(fun(i));}    
+  return mkPaleta(ret);  
+} 
+
+function vypln (i,j,n) {
+  if (i === j) {
+    var res = [];
+    for (var k = 0; k<n; k++){res.push(i)}
+    return res;
+  }
+  //log('vyp ' +i+' '+j+' '+n);
+  assert(n>=1,'n must be >= 1');
+  var obracene = false;
+  if (i>j) {obracene = true; var temp=i; i=j; j=temp;}
+  var ret   = [];
+  var delta = (j-i)/n; 
+  var epsilon = 0.00001;
+  for (var k=i; (k+epsilon)<j; k+=delta) {
+    ret.push(k);
+  }
+  if (obracene) {
+    ret.reverse();
+    ret.pop();
+    ret.unshift(j);
+  }
+  return ret;
+}
+
+function vyplnCol (c1,c2,n) {
+  var rs = vypln(c1[0],c2[0],n);
+  var gs = vypln(c1[1],c2[1],n);
+  var bs = vypln(c1[2],c2[2],n);
+  var ret = [];
+  for (var i=0; i<rs.length; i++) {
+    ret.push([rs[i],gs[i],bs[i]]);
+  }
+  return ret;
+}
+
+function vyplnPalette (p,n) {
+  var ret = [];
+  for (var i=0; i<p.length-1; i++) {
+    var c1 = p[i];
+    var c2 = p[i+1];
+    ret = ret.concat( vyplnCol(c1,c2,n) );
+  }
+  ret.push(p[p.length-1]);
+  return ret;
+}
+
 
 
 function isIn (xy,numIter) {
