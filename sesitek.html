@@ -18,101 +18,17 @@
 
 
     <script src="js/utils.js"></script>
-    <script src="js/fishtronDB.js"></script>
+    <!--<script src="js/fishtronDB.js"></script>-->
+    <script src="js/sesitek.js"></script>
+
     
 <script>
 
-var renderSections = function(contentsSelector){
-  $(contentsSelector).html('');
-  $('section').each(function(){
-    var it = $(this);  
-
-    var code   = it.attr('id');
-    var nadpis = it.attr('text') ? it.attr('text') : it.html();
-
-    if (!it.attr('done')) {
-      log(it.html());
-      it.html( $('<h2>').html( nadpis + ' <a href="'+contentsSelector+'">⌂</a>' ) )
-        .prepend( $('<a>').attr('name', code ) )
-        .attr('done','1')
-        .attr('text',nadpis);
-    }
-
-    $(contentsSelector)
-      .append( $('<a>').attr('href','#'+code).html( nadpis ) )
-      .append( $('<br>') );
-
-  });
-};
-
-function mkTodoIndex (indexSelector) {
-  $(indexSelector).html('');
-  $('todo').each(function(i){
-    var j = i+1;
-    var code = '__todo-'+j;
-    var text = '('+ j +') '+ $(this).html();
-
-    $(this).before('<a name="'+code+'"></a>');
-    $(indexSelector)
-      .append( $('<a>').attr('href','#'+code).html( text ) )
-      .append( $('<br>') );
-  });
-}
-
-var renderLabels = function(tag,str,color){
-  $(tag).each(function(){
-    var it = $(this);
-    if (!it.attr('done')) {
-      it
-       .attr('done','1')
-       .css('color','white')
-       .css('background-color',color)
-       .css('width','intrinsic')
-       .css('width','-moz-max-content')
-       .css('padding','3px')
-       .prepend('<b>'+str+'</b>')
-       .before('<p></p>')
-       .after('<p></p>');
-    }
-  });
-};
-
-var runCodes = function(){
-  $('code').each(function(){
-    $(this)
-     .append($('<script>').html( $(this).html() ));
-  });
-};
-
-var showScripts = function(){
-  $('script').each(function(){
-    var it = $(this); 
-    if (!it.attr('done') && it.attr('show') === 'true') {
-      it.attr('done','1').after($('<div>').html( '<pre>'+it.html()+'</pre>' ));
-    }
-  });
-};
-
-function renderAll () {
-  renderSections('#contents');
-  renderLabels('todo','TODO : ','red');
-  renderLabels('note','Note: ','blue');  
-  mkTodoIndex ('#todoIndex');
-  showScripts();
-}
 
 $(function(){ 
 
   renderAll();
     
-
-  FishtronDB.get('zobrazeni',function (n) {
-    if (n === undefined){n = 0;}
-    n++;
-    log('FishtronDB API URL: ' +FishtronDB.apiURL+ '; #zobrazení: ' + n);
-    FishtronDB.set('zobrazeni', n,nop);
-  });
-
 });
 
 </script>
@@ -148,238 +64,7 @@ Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
 postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
 
-<!--
 
-d88888b d8888b. d888888b d888888b  .d88b.  d8888b. 
-88'     88  `8D   `88'   `~~88~~' .8P  Y8. 88  `8D 
-88ooooo 88   88    88       88    88    88 88oobY' 
-88~~~~~ 88   88    88       88    88    88 88`8b   
-88.     88  .8D   .88.      88    `8b  d8' 88 `88. 
-Y88888P Y8888D' Y888888P    YP     `Y88P'  88   YD 
-
--->
-
-<section id="editor-pokus">Editor pokus</section>
-
-
-
-
-<style>
-  .tab    { width: 100%; border: 1px solid #F0F0F0;}
-  .tab td {vertical-align: top;}
-  .editor { width: 612px;}
-  .card   { position: relative;}
-</style>
-
-<input type="button" id="add-card-top" value="add card">
-
-<div id="cards"></div>
-
-<input type="button" id="add-card-bottom" value="add card">
-
-
-<script>
-
-
-$(function(){
-
-  $.fn.moveUp = function() {
-    $.each(this, function() {
-         $(this).after($(this).prev());   
-    });
-  };
-  $.fn.moveDown = function() {
-      $.each(this, function() {
-           $(this).before($(this).next());   
-      });
-  };
-
-  var cardsDiv = $('#cards');
-
-  function mkEditor (elId, result, dbPropId, container) {
-
-    var editor = ace.edit(elId);
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/html"); 
-    editor.getSession().setTabSize(2); 
-    editor.getSession().setUseSoftTabs(true);
-    editor.getSession().setUseWrapMode(true);
-
-    function changeHTML (el) {
-      var newHtml = editor.getSession().getValue();
-      el.html(newHtml);
-      renderAll();
-    }
-
-    function save () {
-      changeHTML(result);
-      FishtronDB.set(dbPropId,editor.getSession().getValue(),function () {
-        //log('Editor saved..');
-      });    
-    }
-
-    function closeIt () {
-      var html = result.html();
-      result.html('');
-      container.after(mkCard(html,dbPropId));
-      container.remove();
-    }
-
-    function saveAndClose () {
-      save();
-      closeIt();
-    }
-
-    function mkMove (isUp) {
-      return function () {
-        if (isUp) { container.moveUp();   }
-        else      { container.moveDown(); } 
-        FishtronDB.get('cards',function (cards) {
-          var i    = _.indexOf(cards.ids,dbPropId);
-          var j    = isUp ? (i-1) : (i+1);  
-          var isOk = isUp ? (i>0) : (i < cards.ids.length-1);
-          if (isOk) {
-            var temp = cards.ids[i];
-            cards.ids[i] = cards.ids[j];
-            cards.ids[j] = temp;
-            FishtronDB.set('cards',cards,nop);
-          }
-        });
-      }
-    }
-
-
-    function resize () {
-      var newHeight =
-        editor.getSession().getScreenLength()
-        * editor.renderer.lineHeight
-        + editor.renderer.scrollBar.getWidth();
-      $('#'+elId).css('height',newHeight+'px');
-      editor.resize();
-    }
-
-    FishtronDB.get(dbPropId, function(str){ 
-      editor.getSession().setValue(str);
-      resize();
-      changeHTML(result); 
-    });
-
-    function mkButton (text, keys, fun) {
-      if (keys !== '') {
-        editor.commands.addCommand({
-          name: text,
-          bindKey: {win: keys},
-          exec: fun
-        });
-      }
-      var ret = $('<input>')
-                 .attr('type','button')
-                 .attr('value',text)
-                 .attr('title',keys); 
-      ret.click(fun);
-      return ret;
-    }
-        
-    $('#'+elId)
-     .after(mkButton('save and close','Ctrl-Shift-S', saveAndClose))
-     .after(mkButton('down','',mkMove(false) ))
-     .after(mkButton('up',  '',mkMove(true ) ))
-     .after(mkButton('save', 'Ctrl-S', save));
-    
-    editor.getSession().on('change', function(e) {
-      resize();
-    });
-
-  }
-
-  function mkCard (card,cardID) {
-
-    var editButton = 
-      $('<input>')
-        .attr('type','button')
-        .attr('value','edit')
-        .css('position','absolute')
-        .css('top','0px')
-        .css('right','0px');
-
-    var cardDiv = 
-      $('<div>').addClass('card').append(editButton).append(card);
-
-    editButton.click(function(){
-      
-      var editorID = '__editor_'+cardID+'__';
-      var result = $('<div>');
-      var td1 = $('<td>').append( result );
-      var td2 = $('<td>')
-                  .addClass('editor')
-                  .append( $('<div>').addClass('editor').attr('id',editorID) );
-      var container = 
-       $('<table>')
-        .addClass('tab')
-        .append( $('<tr>').append(td1).append(td2) );
-
-      cardDiv.after(container);
-      cardDiv.remove();
-
-      mkEditor( editorID , result, cardID, container);
-
-    });
-
-    editButton.hover(
-      function () {
-        cardDiv.css('background-color','#F0F0F0');
-      }, function () {
-        cardDiv.css('background-color','');
-      });
-
-    return cardDiv;
-  }
-
-  function loadCards () {
-
-    function loadCards_ (ids) {
-      if (ids.length === 0) {
-        renderAll();
-        return;
-      }
-      var cardID = ids.shift();
-      FishtronDB.get(cardID,function (card) {
-        cardsDiv.append(mkCard(card,cardID));
-        loadCards_(ids);
-      });
-    }
-
-    FishtronDB.get('cards',function (cards) {
-      cardsDiv.html('');
-      loadCards_(cards.ids);
-    });  
-  }
-  
-  loadCards();
-
-  function mkAddCardFun(operace) {
-    return function () {
-      FishtronDB.get('cards', function (cards) {
-        log(cards);
-        var newCardID = '__card-'+cards.nextCard+'__';
-        log(newCardID);
-        cards.ids[operace](newCardID);
-        cards.nextCard++;
-        log(cards);
-        FishtronDB.set('cards', cards, function () {
-          FishtronDB.set(newCardID,'EMPTY!',function () {
-            loadCards();
-          });
-        });
-      });
-    };
-  }
-
-  $('#add-card-top')   .click( mkAddCardFun('unshift') );
-  $('#add-card-bottom').click( mkAddCardFun('push'   ) );
-
-});
-</script>
 
 
 
@@ -397,7 +82,7 @@ YP  YP  YP 88   YD YP   YP    YP    Y88888P VP   V8P  `Y88P' Y888888P
 
 <section id="mravenci">Mravenci pokusy</section>
 
-<!--
+
 <canvas id="ant_canvas" width="512" height="512"></canvas>
 
 <div>
@@ -463,7 +148,7 @@ $(function () {
   
 });
 </script>
--->
+
 
 
 
