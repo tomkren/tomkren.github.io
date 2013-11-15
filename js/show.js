@@ -112,6 +112,7 @@ var code = function(m,opt){
   } else {
     switch( opt ){
       case 'lc'       : return toLCstr     (m);
+      case 'tlc'      : return toTLCstr    (m);
       case 'js'       : return toJSexpr    (m);
       case 'jsstr'    : return toJSstr     (m);
       case 'nicejs'   : return toNiceJSexpr(m);
@@ -195,7 +196,16 @@ var toLCstr = function(m){
   }
 };
 
-
+var toTLCstr = function(m){
+  switch(m.c){
+    case VAL : return m.x; 
+    case VAR : return m.x;
+    case APP : return '( '+ toTLCstr(m.m) +' '+ toTLCstr(m.n) +' )';
+    case LAM : return '( '+ m.x + ':'+ code(m.t) +' . '+ toLCstr(m.m) +' )';
+    case UNF : return '[' + code(m.t) +';'+ showAtmTab(m.atmTab,'short')+']';
+    default  : throw 'Unsupported term structure (toLCstr).'
+  }
+};
 
 
 

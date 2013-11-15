@@ -18,6 +18,10 @@
     <script src="js/libs/seedrandom.js"></script>
     <script src="js/ie-compat.js"></script>
 
+    <script>
+      oldGlobals = _.keys(window);
+    </script>
+
     <script src="js/utils.js"></script>
     <script src="js/term.js"></script>
     <script src="js/parser.js"></script>
@@ -34,6 +38,8 @@
 
     
 <script>
+
+
 
 //( _0 . ( _1 . ( ap42 ( _2 . ( ( p _2 ) ( ( p  { [int;ap42,p,s,_0,_1,_2] }  ) [int;ap42,p,s,_0,_1,_2] ))))))
 
@@ -61,6 +67,9 @@ $(function(){
   };
 
   resu = prove(opts);
+
+  //console.log( _.size( _.difference( _.keys(window) , oldGlobals ) ) + ' new global vars.' );
+
 
 });
 

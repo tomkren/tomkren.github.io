@@ -17,8 +17,20 @@ var GPOpts1 = {
   ctx     : mkCtx({
     'plus' : [ [int,int,int]
            , function(x,y){return x+y;} ],
+    'minus': [ [int,int,int]
+           , function(x,y){return x+y;} ],
+    'mul'  : [ [int,int,int]
+           , function(x,y){return x*y;} ],
+    'rdiv' : [ [int,int,int] 
+           , function(x,y){return y===0 ? 1 : x/y ;} ],          
     'sin'  : [ [int,int]
-           , Math.sin ] 
+           , Math.sin ], 
+    'cos'  : [ [int,int]
+           , Math.cos ],
+    'exp'  : [ [int,int]
+           , Math.exp ],
+    'rlog' : [ [int,int]
+           , function(x){return x===0 ? 0 : Math.log(x) ;} ]
   }),
   strategy : Strategy.rampedHalfAndHalf, 
   saveBest : true,
@@ -40,13 +52,18 @@ function gp (opts) {
     typ        : opts.typ,
     ctx        : opts.ctx,
     strategy   : opts.strategy,
-    resultMode : 'funs',
+    resultMode : 'both',
     unique     : true,
     logit      : false 
   });
 
+  pop = _.map(_.zip(pop[0],pop[1]),function(p){
+    return {term:p[0], js:p[1]};
+  });
+
   var evalResult = evalPop(pop,opts);
 
+ /*
   while (gen < opts.numGens && !evalResult.terminate) {
     pop = [];
 
@@ -58,6 +75,7 @@ function gp (opts) {
 
     gen ++ ;
   }
+ */
 
   return evalResult;
 
@@ -71,7 +89,7 @@ function evalPop (pop, opts) {
 
   var popDist = mkDist(_.map(pop,function(indiv){
     
-    var fitResult = opts.fitness(indiv);
+    var fitResult = opts.fitness(indiv.js);
     fitResult.indiv = indiv;
 
     if (_.isNumber(fitResult)) {
@@ -79,6 +97,11 @@ function evalPop (pop, opts) {
         fitVal: fitResult,
         terminate: false
       };
+    }
+
+    if (isNaN(fitResult.fitVal)) {
+      log('Fitness value is NaN, converted to 0.');
+      fitResult.fitVal = 0;
     }
 
     if (fitResult.terminate) {

@@ -13,8 +13,12 @@ var I = function(x){return x};
 
 $(function () {
 
-  t1 = parse('f :a->b->c g :a->b x :a . f x (g x) ');
-  t2 = parse('x:a  y:b . x');
+  //TODO parse() BUG!!!!
+  //t0 = parse('(f :a->b->c g :a->b x :a . f x (g x))');
+
+
+  t1 = parse('f :a->b->c g :a->b x :a . f x (g x)');
+  t2 = parse('x:a->a  y:b . x');
   t3 = AE(t2);
   t4 = AE(t1);
   t5 = parse('x:a y:a z:a.(u:a v:a w:a.u) x y z');
@@ -23,6 +27,8 @@ $(function () {
   t8 = toBetaNF( unSKI(t4).ret );
   t9 = toEtaNF( t5 );
 });
+
+
 
 
 function subs (m,x,n) {
@@ -270,39 +276,128 @@ function AE (term) {
 }
 
 
+/*
+xover
+-----
+
+nejdřív je potřeba sehnat pozice, které mají v druhém rodiči podporu
+...
+
+*/
 
 
+function mkXover (mode,p) {
 
-function isWayToLeaf (way) {
-  return way.isLeaf;
+  function selectNode (partitionResult) {
+    var ts = partitionResult.satisfy;
+    var ns = partitionResult.notSatisfy;
+    if (ts.length === 0 && 
+        ns.length === 0) {return null;}
+    if (ts.length === 0) {return randomElem(ns);}
+    if (ns.length === 0) {return randomElem(ts);}
+    if (Math.random()<p) {return randomElem(ns);}
+    else                 {return randomElem(ts);}
+  }
+
+  return function (mum, dad) {
+    var mumWays = allWays(mum, mode);
+    var dadWays = allWays(dad, mode);
+
+    var dadTypSet = {};
+    
+    _.each(dadWays,function(way){
+      if (dadTypSet[code(way.term.t)] === undefined) {
+        dadTypSet[code(way.term.t)] = [way];
+      } else {
+        dadTypSet[code(way.term.t)].push(way);
+      }  
+    });
+
+    var compatMumWays = _.filter(mumWays, function(way){
+      return dadTypSet[code(way.term.t)] !== undefined;
+    });
+
+    var CMW    = partition(isWayToLeaf, compatMumWays);
+    var mumWay = selectNode(CMW);
+    
+    if (mumWay === null) {return [mum,dad];}
+
+    var theTyp = mumWay.term.t;
+    var CDW    = partition(isWayToLeaf, dadTypSet[ code(theTyp) ] );
+    var dadWay = selectNode(CDW);
+
+    assert(dadWay !== null, 'dadWay can\'t be null, something went wrong.');
+
+    var dadSubterm = subterm(dad, dadWay);
+
+    var mumResult  = changeSubterm(mum, mumWay, dadSubterm);
+    var daughter   = mumResult.newTerm;
+    var mumSubterm = mumResult.oldSubterm;
+
+    var dadResult = changeSubterm(dad, dadWay, mumSubterm);
+    var son       = dadResult.newTerm; 
+
+    return [daughter, son];
+  };
 }
 
+var xover1 = mkXover('sexprTree',0.9);
+var xover2 = mkXover('atTree',0.9);
+
+
+
+function partitionLeafs (term, mode) {
+  return partition(isWayToLeaf, allWays(term, mode));
+}
+
+function subtermTypSet (term, mode) {
+  var set = {}; 
+  _.each(allSubterms(term,mode), function (t) {
+    if (set[code(t.t)] === undefined) {
+      set[code(t.t)] = 1;
+    } else {
+      set[code(t.t)]++;
+    }
+  });
+  return set;
+}
+
+function allSubterms (term, mode) {
+  var ways = allWays(term,mode);
+  return _.map(ways,function(way){
+    return subterm(term,way);
+  });
+};
+
+// mode = 'atTree' | 'sexprTree'
 function allWays (term, mode) {
 
     var isAtTreeMode = !mode || mode !== 'sexprTree';
 
     var allWays_ = function( term , wayToTerm ){
       switch(term.c){
-        case VAR : return [{way : wayToTerm, t: term.t, isLeaf: true}];
-        case VAL : return [{way : wayToTerm, t: term.t, isLeaf: true}];
+        case VAR : return [{way : wayToTerm, term: term, isLeaf: true}];
+        case VAL : return [{way : wayToTerm, term: term, isLeaf: true}];
         case APP : 
           if( isAtTreeMode ){
             var mWays = allWays_( term.m , wayToTerm.concat(['m']) );
             var nWays = allWays_( term.n , wayToTerm.concat(['n']) );
-            return [{way : wayToTerm, t: term.t, isLeaf: false}].concat(mWays).concat(nWays);    
+            return [{way : wayToTerm, term: term, isLeaf: false}].concat(mWays).concat(nWays);    
           } else { //sexprTreeMode
             var ret = [];
             var accWay = wayToTerm;
-            while( isApp(term) ){
-                ret = allWays_( term.n , accWay.concat(['n']) ).concat(ret);
+            var term_ = term;
+            while( isApp(term_) ){
+                ret = allWays_( term_.n , accWay.concat(['n']) ).concat(ret);
                 accWay = accWay.concat(['m']);
-                term = term.m;
+                term_ = term_.m;
             }
-            return [{way : wayToTerm, t: term.t, isLeaf: false}].concat( ret );            
+            return [{way : wayToTerm, term: term, isLeaf: false}].concat( ret );            
           }
         case LAM : 
-          var mWayz = allWays_( term.m , wayToTerm.concat(['m']) );
-          return [{way : wayToTerm, t: term.t, isLeaf: false}].concat(mWayz);
+          var mWayz   = allWays_( term.m , wayToTerm.concat(['m']) );
+          var lamWays = isAtTreeMode ? [{way : wayToTerm, term: term, isLeaf: false}] : [];  
+          return lamWays.concat(mWayz);
         case UNF : throw 'allPoses : UNF in switch'
         default  : throw 'allPoses : default in switch '
       }
@@ -311,6 +406,10 @@ function allWays (term, mode) {
     return allWays_(term,[]);
 }
 
+
+function isWayToLeaf (way) {
+  return way.isLeaf;
+}
 
 
 function subterm (term, wayToSubterm) {
@@ -322,7 +421,8 @@ function subterm (term, wayToSubterm) {
 
 function changeSubterm (term, way, newSubterm) {
 
-  assert( _.isEqual(way.t,newSubterm.t) , 'changeSubterm : way typ and newSubterm typ do not match.' );
+  assert( _.isEqual(way.term.t,newSubterm.t) , 
+    'changeSubterm : way typ and newSubterm typ do not match.' );
 
   var w = way.way;
   var zipper = mkZipperFromTerm(term);
@@ -337,7 +437,8 @@ function changeSubterm (term, way, newSubterm) {
 
   var oldSubterm = zipper.act ;
 
-  assert( _.isEqual(way.t,oldSubterm.t) , 'changeSubterm : way typ and oldSubterm typ do not match.' );
+  assert( _.isEqual(way.term.t,oldSubterm.t) , 
+    'changeSubterm : way typ and oldSubterm typ do not match.' );
 
   zipper = mkZipper({act : newSubterm} , zipper);
   zipper = gotoTop(zipper);

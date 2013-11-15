@@ -41,7 +41,7 @@ function sum(xs){
 
 
 var partition = function(mustBeTrue,array){
-  assert(_.isArray(array),'partition : the array argument mus be an array.');
+  assert(_.isArray(array),'partition : the array argument must be an array.');
   var satisfy    = [];
   var notSatisfy = [];
   for( var i = 0 ; i < array.length ; i++ ){

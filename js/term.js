@@ -24,6 +24,7 @@ var isTerm   = mkTypeChecker([isVar,isVal,isApp,isLam,isUnf]);
 var isZipper = mkTypeChecker(ZIPPER);
 
 
+
 var mkAtm = function(a){
   return {
     c : ATM ,
@@ -284,14 +285,27 @@ var checkTerm = function(term,typ,ctx){ // TODO z venčí by měl bejt danej eš
 
 var termSize = function(term,mode){
   assert( isTerm(term) , 'termSize : argument must be terms.' );
-  switch(term.c){
-    case VAR : return 1;
-    case VAL : return 1;
-    case APP : return (mode && mode.countAPPs ? 1 : 0) + termSize(term.m,mode) + termSize(term.n,mode);
-    case LAM : return 1 + termSize(term.m,mode);
-    case UNF : throw 'termSize : unfinished term';
-    default  : throw 'termSize : default-in-switch error';
+
+  mode = _.extend({
+    countAPPs: false,
+    countLAMs: true
+  },mode);
+
+  var appInc = mode.countAPPs ? 1 : 0;
+  var lamInc = mode.countLAMs ? 1 : 0;
+
+  function size (term) {
+    switch(term.c){
+      case VAR : return 1;
+      case VAL : return 1;
+      case APP : return appInc + size(term.m) + size(term.n);
+      case LAM : return lamInc + size(term.m);
+      case UNF : throw 'termSize : unfinished term';
+      default  : throw 'termSize : default-in-switch error';
+    }
   }
+
+  return size(term);
 };
 
 

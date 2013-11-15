@@ -247,12 +247,12 @@ var invariant_partitionedByIsLeaf = function( term ){
 
   var ok1 = _.every( pWays.satisfy , function(way){
     var sTerm = subterm(term,way);
-    return (sTerm.t === way.t) && ( isVar(sTerm) || isVal(sTerm) );
+    return (sTerm.t === way.term.t) && ( isVar(sTerm) || isVal(sTerm) );
   });
 
   var ok2 = _.every( pWays.notSatisfy , function(way){
     var sTerm = subterm(term,way);
-    return (sTerm.t === way.t) && ( isApp(sTerm) || isLam(sTerm) );
+    return (sTerm.t === way.term.t) && ( isApp(sTerm) || isLam(sTerm) );
   });
 
   return ok1 && ok2 ;
@@ -261,7 +261,9 @@ var invariant_partitionedByIsLeaf = function( term ){
 
 
 var allWays_mustBeTrue = function( term , mode ){
-  return allWays(term,mode).length === termSize(term,{countAPPs:(mode!=='sexprTree')});
+  var isAt = (mode!=='sexprTree'); 
+  var sizeMode = {countAPPs:isAt,countLAMs:isAt};
+  return allWays(term,mode).length === termSize(term,sizeMode);
 };
           
 var allSubterms_byWays = function( term , mode ){
@@ -270,7 +272,9 @@ var allSubterms_byWays = function( term , mode ){
 };
        
 var allSubterms_mustBeTrue = function( term , mode ){
-  return allSubterms_byWays(term,mode).length === termSize(term,{countAPPs:(mode!=='sexprTree')});
+  var isAt = (mode!=='sexprTree'); 
+  var sizeMode = {countAPPs:isAt,countLAMs:isAt};
+  return allSubterms_byWays(term,mode).length === termSize(term,sizeMode);
 };
 
 
@@ -285,7 +289,7 @@ var isNondecreasing = function(xs){
   
 var areTermsNondecreasing = function(terms){
   return isNondecreasing(_.map(terms, function(term){
-    return termSize(term, {countAPPs:false} );
+    return termSize(term, {countAPPs:false,countLAMs:true} );
   }));
 };
  
