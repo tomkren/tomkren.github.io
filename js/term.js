@@ -283,6 +283,39 @@ var checkTerm = function(term,typ,ctx){ // TODO z venčí by měl bejt danej eš
 
 
 
+
+// určená pro kompatibilitu s kozovskejma operacema,
+// npro jednoduchost vubec nepočitá lambda abstrakce a 
+// term si "představuje" v sexpr notaci
+// a kontroluje i esli na
+// levym konci řady aplikácí neni lambda 
+// abstrakce která by byla hlubší než její argumenty
+// ale na pořádnou typovanou depth by se slušelo udělat něco lepšího
+function kozaCompatibleDepth (term) {
+  switch(term.c){
+    case VAR : return 0;
+    case VAL : return 0;
+    case APP : 
+      var curTerm = term;
+      var maxSonDepth = 0;
+      while (isApp(curTerm)) {
+        var sonDepth = kozaCompatibleDepth(curTerm.n);
+        if (sonDepth > maxSonDepth) {
+          maxSonDepth = sonDepth;
+        }
+        curTerm = curTerm.m;
+      }
+      var nodeDepth = kozaCompatibleDepth(curTerm);
+      if (nodeDepth > maxSonDepth) {
+        maxSonDepth = nodeDepth;
+      }
+      return 1 + maxSonDepth;
+    case LAM : return 0 + kozaCompatibleDepth(term.m);
+    case UNF : throw 'kozaCompatibleDepth : unfinished term';
+    default  : throw 'kozaCompatibleDepth : default-in-switch error';
+  }  
+}
+
 var termSize = function(term,mode){
   assert( isTerm(term) , 'termSize : argument must be terms.' );
 

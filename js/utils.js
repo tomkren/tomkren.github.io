@@ -73,8 +73,7 @@ function mkDist( distArr_ ){
     sum += p;
   }
 
-  var get = function(){
-
+  function get () {
     var ball = Math.random() * sum;
     var sumNow = 0;
     var i;
@@ -84,14 +83,23 @@ function mkDist( distArr_ ){
         break;
       }
     }
-
     return distArr[i][0];
+  }
 
-  };
+  function prettyPrint (fun) {
+    fun = fun || _.identity;
+
+    _.each(_.sortBy(distArr,function (p) {
+      return -p[1];
+    }), function (row) {
+      log( fun(row[0]) + ' : ' + row[1]);
+    });
+  }
 
   return {
     get : get,
-    distArr : function(){return distArr;}
+    distArr : function(){return distArr;},
+    prettyPrint: prettyPrint 
   };
 }
 

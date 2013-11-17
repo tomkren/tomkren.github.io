@@ -1,93 +1,143 @@
 $(function(){
   //var 
-  res = gp(GPOpts1);
+  //res1 = gp(GPOpts1);
+  //res2 = gp(GPOpts1);
+
+
+
 });
+
+function runGP (optsStr, msgHandler) {
+  msgHandler = msgHandler || log;
+  var worker = new Worker('js/worker.js');
+  worker.addEventListener('message', function(e) {
+    msgHandler( JSON.parse(e.data) );
+  }, false);
+  worker.postMessage( JSON.stringify({optsStr: optsStr}) );  
+}
 
 var int = mkAtm('int');
 
-var GPOpts1 = {
-  fitness : function(indiv){
-    var fitVal = 1/(1+Math.abs(indiv(42)-23)); 
-    return {
-      fitVal: fitVal,
-      terminate: false
-    };
-  },
-  typ     : mkTyp([int,int]),
-  ctx     : mkCtx({
-    'plus' : [ [int,int,int]
-           , function(x,y){return x+y;} ],
-    'minus': [ [int,int,int]
-           , function(x,y){return x+y;} ],
-    'mul'  : [ [int,int,int]
-           , function(x,y){return x*y;} ],
-    'rdiv' : [ [int,int,int] 
-           , function(x,y){return y===0 ? 1 : x/y ;} ],          
-    'sin'  : [ [int,int]
-           , Math.sin ], 
-    'cos'  : [ [int,int]
-           , Math.cos ],
-    'exp'  : [ [int,int]
-           , Math.exp ],
-    'rlog' : [ [int,int]
-           , function(x){return x===0 ? 0 : Math.log(x) ;} ]
-  }),
-  strategy : Strategy.rampedHalfAndHalf, 
-  saveBest : true,
-  popSize  : 500,
-  numGens  : 51,
-  probabs  : {
-    crossover    : 0.0, //0.9,
-    reproduction : 1.0, //0.1,
-    mutation     : 0.0
-  }
-};
+var SSR_str = "{\
+  fitness: (function () {\
+    var xs  = _.range(-1,1,0.1);\
+    var ys  = _.map(xs, function (x) {return x*x*x*x + x*x*x + x*x + x ;});\
+    var len = xs.length;\
+    return function (f) {\
+      var terminate = true;\
+      var sumErr = 0;\
+      var i, err;\
+      for (i=0; i<len; i++) {\
+        err = Math.abs( f(xs[i]) - ys[i] );\
+        sumErr += err;\
+        if (isNaN(err))  {return {fitVal:0, terminate: false};}\
+        if (err >= 0.01) {terminate = false;}\
+      }\
+      return {\
+        fitVal: 1 / (1+sumErr),\
+        terminate: terminate\
+      };\
+    };\
+  }()),\
+  typ: mkTyp([int,int]),\
+  ctx: mkCtx({\
+    'plus' : [ [int,int,int]\
+           , function(x,y){return x+y;} ],\
+    'minus': [ [int,int,int]\
+           , function(x,y){return x-y;} ],\
+    'mul'  : [ [int,int,int]\
+           , function(x,y){return x*y;} ],\
+    'rdiv' : [ [int,int,int]\
+           , function(x,y){return y===0 ? 1 : x/y ;} ],\
+    'sin'  : [ [int,int]\
+           , Math.sin ],\
+    'cos'  : [ [int,int]\
+           , Math.cos ],\
+    'exp'  : [ [int,int]\
+           , Math.exp ],\
+    'rlog' : [ [int,int]\
+           , function(x){return x===0 ? 0 : Math.log(x) ;} ]\
+  }),\
+  strategy : Strategy.rampedHalfAndHalf,\
+  saveBest : true,\
+  popSize  : 500,\
+  numGens  : 51,\
+  operators : [\
+    [xover1      , 0.9],\
+    [copyOperator, 0.1]\
+  ]\
+}";
 
+
+function prettyPrintEvaledPop (evaledPop) {
+  evaledPop.popDist.prettyPrint( function (indiv) {
+    return indiv.js(42);
+  });
+  log('-----------------------------------------');
+}
 
 function gp (opts) {
 
-  var gen = 0;
+  var startTime = new Date().getTime();
+
+  var operatorsDist = mkDist(opts.operators);
+
   var pop = prove({
     n          : opts.popSize,
     typ        : opts.typ,
     ctx        : opts.ctx,
     strategy   : opts.strategy,
-    resultMode : 'both',
+    resultMode : 'terms',
     unique     : true,
     logit      : false 
   });
 
-  pop = _.map(_.zip(pop[0],pop[1]),function(p){
-    return {term:p[0], js:p[1]};
-  });
+  var evaledPop = evalPop(pop, opts);
 
-  var evalResult = evalPop(pop,opts);
-
- /*
-  while (gen < opts.numGens && !evalResult.terminate) {
+  var gen = 0;
+  while (gen < opts.numGens-1 && !evaledPop.terminate) {
     pop = [];
-
+    
     if (opts.saveBest) {
-      pop.push(evalResult.best);
+      pop.push(evaledPop.best.indiv.term);
     }
 
-    //while (pop.length < opts.popSize) {...}
+    while (pop.length < opts.popSize) {
+      var operator = operatorsDist.get();
+      
+      var parents  = [];
+      for (var i=0; i<operator.in; i++) {
+        parents.push( evaledPop.popDist.get().term );
+      }
+      
+      var children = _.take( operator.operate(parents) , opts.popSize-pop.length);
+      _.each(children, function (child) {
+        pop.push(child);  
+      });
+    }
 
-    gen ++ ;
+    evaledPop = evalPop(pop, opts);  
+    gen ++;
+    log('GEN');
   }
- */
 
-  return evalResult;
+  var time = (new Date().getTime()) - startTime;
+  log('time: '+ Math.round(time/1000) +' s' );
 
+  return evaledPop;
 }
 
-
 function evalPop (pop, opts) {
+
+  var popJS     = evalTerms(pop, opts.ctx);
+  var popWithJS = _.map(_.zip(pop,popJS), function (p) {
+    return {term:p[0], js:p[1]};
+  });
 
   var terminate = false;
   var best = {fitVal: 0};
 
-  var popDist = mkDist(_.map(pop,function(indiv){
+  var popDist = mkDist(_.map(popWithJS, function (indiv) {
     
     var fitResult = opts.fitness(indiv.js);
     fitResult.indiv = indiv;
@@ -113,11 +163,15 @@ function evalPop (pop, opts) {
     return [indiv,fitResult.fitVal];
   }));
 
-  return {
+  var ret = {
     popDist:   popDist,
     terminate: terminate,
     best:      best
   };
+
+  //prettyPrintEvaledPop(ret);
+
+  return ret;
 
 }
 

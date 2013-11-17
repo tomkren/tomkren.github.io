@@ -18,10 +18,6 @@
     <script src="js/libs/seedrandom.js"></script>
     <script src="js/ie-compat.js"></script>
 
-    <script>
-      oldGlobals = _.keys(window);
-    </script>
-
     <script src="js/utils.js"></script>
     <script src="js/term.js"></script>
     <script src="js/parser.js"></script>
@@ -33,45 +29,24 @@
     <script src="js/xover.js"></script>
     <script src="js/ants.js"></script>
     <script src="js/eva.js"></script>
-  
+
     <script src="js/tests.js"></script>
+    <script src="js/gui.js"></script>
 
     
 <script>
 
-
-
-//( _0 . ( _1 . ( ap42 ( _2 . ( ( p _2 ) ( ( p  { [int;ap42,p,s,_0,_1,_2] }  ) [int;ap42,p,s,_0,_1,_2] ))))))
-
-//\ 0 1 . ap42( \ 2 .  p(2,p( {[...]} , [...] )   )
-
 fishtronTests();
 
-$(function(){ 
+$(function(){
 
-  ctx1 = mkCtx({
-    ap42: [ [['int','int'],'int'],
-          function(f){return f(42)}  ],
-    p:    [ ['int','int','int'],
-          function(x,y){return x+y;} ],
-    s:    [ ['int','int'],
-          function(x){return x+1;} ] 
-  });
-  
-  var opts = {
-    strategy   : Strategy.rampedHalfAndHalf,
-    resultMode : 'both',
-    n        : 100,
-    typ      : mkTyp(['int','int','int']),
-    ctx      : ctx1
-  };
+  gui1 = mkGUI('gui');
 
-  resu = prove(opts);
-
-  //console.log( _.size( _.difference( _.keys(window) , oldGlobals ) ) + ' new global vars.' );
 
 
 });
+
+
 
 
 </script>
@@ -80,6 +55,8 @@ $(function(){
 
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
+
+  <div id="gui"></div>
 
 </body>
 </html>

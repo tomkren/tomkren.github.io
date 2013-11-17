@@ -286,7 +286,15 @@ nejdřív je potřeba sehnat pozice, které mají v druhém rodiči podporu
 */
 
 
-function mkXover (mode,p) {
+
+var copyOperator = {
+  operate: function(p) {
+    return p;
+  },
+  in : 1
+}
+
+function mkXover (mode, p, maxDepth) {
 
   function selectNode (partitionResult) {
     var ts = partitionResult.satisfy;
@@ -299,7 +307,10 @@ function mkXover (mode,p) {
     else                 {return randomElem(ts);}
   }
 
-  return function (mum, dad) {
+  function xover (parents) {
+    var mum = parents[0];
+    var dad = parents[1];
+
     var mumWays = allWays(mum, mode);
     var dadWays = allWays(dad, mode);
 
@@ -337,12 +348,21 @@ function mkXover (mode,p) {
     var dadResult = changeSubterm(dad, dadWay, mumSubterm);
     var son       = dadResult.newTerm; 
 
-    return [daughter, son];
+    var ret1 = kozaCompatibleDepth(daughter) <= maxDepth ? daughter : mum;
+    var ret2 = kozaCompatibleDepth(son)      <= maxDepth ? son      : dad;
+
+
+    return [ret1, ret2];
+  }
+
+  return {
+    operate: xover,
+    in : 2
   };
 }
 
-var xover1 = mkXover('sexprTree',0.9);
-var xover2 = mkXover('atTree',0.9);
+var xover1 = mkXover('sexprTree', 0.9, 17);
+var xover2 = mkXover('atTree',    0.9, 17);
 
 
 

@@ -727,7 +727,8 @@
         try {
             return window;
         } catch (x) {
-            return exports;
+            //return exports;    // MUJ ZASAH
+            return self;         // MUJ ZASAH
         }
     }())
 

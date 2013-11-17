@@ -169,7 +169,9 @@ var toNicejs = function(m){
       }
       return 'function('+ xs.join()  +'){return '+ toNicejs(m) +'}';
     
-    default : throw 'Unsupported term structure (toJSstr).'
+    default : 
+      log(m);
+      throw 'Unsupported term structure (toNicejs).'
   }
 };
 
@@ -180,7 +182,9 @@ var toJSstr = function(m){
     case APP : return toJSstr(m.m) + '(' + toJSstr(m.n) + ')';
     case LAM : return 'function(' + m.x  + '){' +
                            'return ' + toJSstr(m.m) + ';}';
-    default  : throw 'Unsupported term structure (toJSstr).'
+    default  : 
+      log(m);
+      throw 'Unsupported term structure (toJSstr).'
   }
 };
 
