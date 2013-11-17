@@ -76,7 +76,7 @@ function sendStats (gen, evaledPop, logFun) {
       '  BEST '+ popDist.bestVal().toFixed(4) +  
       '  AVG '+ popDist.avgVal().toFixed(4) +
       '  WORST '+ popDist.worstVal().toFixed(4) +'\n\n'+
-      break80(evaledPop.best.indiv.term.code('lc'),2)+'\n';
+      formatBreak(80,evaledPop.best.indiv.term.code('lc'),2)+'\n';
     logFun(msg);
 }
 

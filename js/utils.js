@@ -53,12 +53,16 @@ function repeat (str, n) {
   return ret;
 }
 
-function break80 (str, ods) {
+function formatBreak (n, str, ods) {
   var parts = str.split('\n');
-  var ret = ''; 
+  var ret = '';
+  if (ods) {n = n - ods;}
+  var re = new RegExp('.{1,'+n+'}','g');
+   
   _.each(parts, function (part) {
-    _.each(part.match(/.{1,80}/g), function (subpart) {
-      ret += (ods ? repeat(' ',ods) : '') + subpart + '\n';
+    _.each(part.match(re), function (subpart) {
+      if (ods) {subpart = repeat(' ',ods) + subpart;}
+      ret += subpart + '\n';
     });
   });
   return ret;
