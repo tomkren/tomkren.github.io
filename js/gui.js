@@ -2,7 +2,6 @@
 
 function mkGUI (cId,containerId) {
 
-  var $el = $('#'+containerId);
   var $el_ = $('#'+cId);
 
 
@@ -18,7 +17,7 @@ function mkGUI (cId,containerId) {
   function mkTabMenu (arr) {
     $ret = $('<ul>')
       .addClass('nav nav-tabs')
-      .css('margin-bottom:', '3px');
+      .css('margin-bottom', '3px');
     _.each(arr, function (tabId,i) {
       var $li = $('<li>')
         .append(
@@ -34,6 +33,21 @@ function mkGUI (cId,containerId) {
 
   $tabMenu = mkTabMenu(['solver','tests']);
 
+  
+  var htm = 
+  '<div class="tab-content">\
+    <div class="tab-pane active" id="solver">\
+    </div>\
+    <div class="tab-pane" id="tests">\
+      <div id="qunit"></div>\
+      <div id="qunit-fixture"></div>\
+    </div>\
+  </div>';
+
+  $el_.append($tabMenu).append(htm);
+
+  var $solver = $('#solver');
+  
   
 
   function mkButt (text, ico) {
@@ -65,11 +79,12 @@ function mkGUI (cId,containerId) {
 
   $(window).resize(autosetLogHeight);
 
-  $el_.append($tabMenu);
 
-  $el.append($startButt)
-     .append($clearButt)
-     .append($log);
+
+  $solver
+    .append($startButt)
+    .append($clearButt)
+    .append($log);
 
 
   $startButt.click(function (e) {
