@@ -17,7 +17,12 @@ importScripts(
  'eva.js'
 );
   
-
+function send (subject, content) {
+  self.postMessage(JSON.stringify({
+    subject: subject,
+    content: content
+  }));
+} 
 
 self.addEventListener('message', function(e) {
   
@@ -26,9 +31,11 @@ self.addEventListener('message', function(e) {
   var opts;
   eval('opts = '+ msg.optsStr );
 
-  var gpResult = gp( opts );
+  var gpResult = gp(opts, function (logStr) {
+    send('log', logStr); 
+  });
 
-  self.postMessage( JSON.stringify(gpResult) );
+  send('result', gpResult);
 
   self.close();
 

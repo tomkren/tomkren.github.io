@@ -69,14 +69,17 @@ var SSR_str = "{\
 }";
 
 
-function prettyPrintEvaledPop (evaledPop) {
-  evaledPop.popDist.prettyPrint( function (indiv) {
-    return indiv.js(42);
-  });
-  log('-----------------------------------------');
+function sendStats (gen, evaledPop, logFun) {
+    var popDist = evaledPop.popDist; 
+    var msg = 
+      'GEN ' + gen +'\n' +
+      'best : '+ popDist.bestVal().toFixed(4) + '\n'+ 
+      'avg  : '+ popDist.avgVal().toFixed(4) +'\n'+
+      evaledPop.best.indiv.term.code('lc')+'\n';
+    logFun(msg);
 }
 
-function gp (opts) {
+function gp (opts, logFun) {
 
   var startTime = new Date().getTime();
 
@@ -92,19 +95,20 @@ function gp (opts) {
     logit      : false 
   });
 
-  var evaledPop = evalPop(pop, opts);
-
   var gen = 0;
+  var evaledPop = evalPop(pop, opts);
+  sendStats(gen, evaledPop, logFun);
+
   while (gen < opts.numGens-1 && !evaledPop.terminate) {
     pop = [];
-    
+        
     if (opts.saveBest) {
       pop.push(evaledPop.best.indiv.term);
     }
 
     while (pop.length < opts.popSize) {
       var operator = operatorsDist.get();
-      
+        
       var parents  = [];
       for (var i=0; i<operator.in; i++) {
         parents.push( evaledPop.popDist.get().term );
@@ -116,16 +120,17 @@ function gp (opts) {
       });
     }
 
-    evaledPop = evalPop(pop, opts);  
     gen ++;
-    log('GEN');
+    evaledPop = evalPop(pop, opts);  
+    sendStats(gen, evaledPop, logFun);
   }
 
   var time = (new Date().getTime()) - startTime;
-  log('time: '+ Math.round(time/1000) +' s' );
+  logFun('time: '+ Math.round(time/1000) +' s' );
 
   return evaledPop;
 }
+
 
 function evalPop (pop, opts) {
 
@@ -168,8 +173,6 @@ function evalPop (pop, opts) {
     terminate: terminate,
     best:      best
   };
-
-  //prettyPrintEvaledPop(ret);
 
   return ret;
 

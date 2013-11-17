@@ -39,6 +39,20 @@ function sum(xs){
   return _.reduce(xs,function(x,y){return x+y;},0);  
 }
 
+function times (n, fun) {
+  for (var i = 1; i<=n; i++) {
+    fun(i);
+  }
+}
+
+function repeat (str, n) {
+  var ret = '';
+  times(n, function(){
+    ret += str;
+  });
+  return ret;
+}
+
 
 var partition = function(mustBeTrue,array){
   assert(_.isArray(array),'partition : the array argument must be an array.');
@@ -62,12 +76,12 @@ function updateBest( oldRes , newRes ){
   return oldRes;
 }
 
-function mkDist( distArr_ ){
+function mkDist( distArr ){
   
-  var distArr = distArr_;
   var sum = 0;
+  var len = distArr.length;
 
-  for(var i = 0; i < distArr.length; i++){
+  for(var i = 0; i < len; i++){
     var p = distArr[i][1];
     assert(p >= 0, 'probability for dist mus be >= 0, was '+p);
     sum += p;
@@ -77,13 +91,25 @@ function mkDist( distArr_ ){
     var ball = Math.random() * sum;
     var sumNow = 0;
     var i;
-    for(i = 0; i < distArr.length; i++){
+    for(i = 0; i < len; i++){
       sumNow += distArr[i][1];
       if( ball < sumNow ){
         break;
       }
     }
     return distArr[i][0];
+  }
+
+  function avgVal () {
+    return sum / len;
+  }
+
+  function bestVal () {
+    var best = {fitVal: 0};
+    for (var i = 0; i < len; i++){
+      best = updateBest(best, {fitVal:distArr[i][1]});
+    }
+    return best.fitVal;
   }
 
   function prettyPrint (fun) {
@@ -99,7 +125,9 @@ function mkDist( distArr_ ){
   return {
     get : get,
     distArr : function(){return distArr;},
-    prettyPrint: prettyPrint 
+    prettyPrint: prettyPrint,
+    avgVal: avgVal,
+    bestVal: bestVal
   };
 }
 

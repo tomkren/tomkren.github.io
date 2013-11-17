@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>fishtron.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="css/libs/qunit-1.12.0.css">
+  
+  <style></style>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <script src="js/libs/underscore-1.5.1.js"></script>
+  <script src="js/libs/wu-0.1.8.js"></script>
+  <script src="js/libs/qunit-1.12.0.js"></script>
+  <script src="js/libs/peg-0.7.0.js"></script>
+
+  <script src="js/libs/seedrandom.js"></script>
+  <script src="js/ie-compat.js"></script>
+
+  <script src="js/utils.js"></script>
+  <script src="js/term.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/zipper.js"></script>
+  <script src="js/show.js"></script>
+  <script src="js/priority-queue.js"></script>
+  <script src="js/prove.js"></script>
+  <script src="js/strategy.js"></script>
+  <script src="js/xover.js"></script>
+  <script src="js/ants.js"></script>
+  <script src="js/eva.js"></script>
+
+  <script src="js/tests.js"></script>
+  <script src="js/gui.js"></script>
+
+<script>
+
+
+
+fishtronTests();
+
+$(function(){
+
+
+  gui1 = mkGUI('gui');
+
+
+});
+
+
+
+
+</script>
+</head>
+<body style="margin:3px;">
+
+<ul class="nav nav-tabs" 
+    style="margin-bottom:3px">
+  <li class="active">
+      <a href="#solver" data-toggle="tab">solver</a></li>
+  <li><a href="#tests" id="tests-link" data-toggle="tab">tests</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="solver">
+    <div id="gui"></div>
+  </div>
+  <div class="tab-pane" id="tests">
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+  </div>
+</div>
+
+
+  
+
+
+
+</body>
+</html>
+
+
+

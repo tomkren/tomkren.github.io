@@ -11,7 +11,7 @@ var fishtronTests = function(){
     
     test( 'PriorityQueue', function(){
 
-      console.time('tests');
+      //console.time('tests');
 
       var q = PriorityQueue();
       //var q = Heap();
@@ -226,13 +226,14 @@ var fishtronTests = function(){
       ok( checkRes1.ok , '... ' + checkRes1.msg );
 
 
-      console.timeEnd('tests');
+      
     });
 
   test( 'ants', function(){
 
-    ok(true,'fake test...' );
+    ok(true, 'fake test...' );
 
+    //console.timeEnd('tests');
   });
 
   
