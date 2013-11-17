@@ -1,21 +1,46 @@
 
 
-function mkGUI (containerId) {
+function mkGUI (cId,containerId) {
 
   var $el = $('#'+containerId);
+  var $el_ = $('#'+cId);
 
-/*  var $startButt = 
-    $('<input>')
-      .attr('value','start')
-      .attr('type','button');
+
+/*
+<ul class="nav nav-tabs" 
+    style="margin-bottom:3px">
+  <li class="active">
+      <a href="#solver" data-toggle="tab">solver</a></li>
+  <li><a href="#tests" id="tests-link" data-toggle="tab">tests</a></li>
+</ul>
 */
 
+  function mkTabMenu (arr) {
+    $ret = $('<ul>')
+      .addClass('nav nav-tabs')
+      .css('margin-bottom:', '3px');
+    _.each(arr, function (tabId,i) {
+      var $li = $('<li>')
+        .append(
+          $('<a>')
+            .attr('href','#'+tabId)
+            .attr('data-toggle','tab')
+            .html(tabId) );
+      if (i===0) {$li.addClass('active');}
+      $ret.append($li);
+    });
+    return $ret;
+  }
+
+  $tabMenu = mkTabMenu(['solver','tests']);
+
+  
+
   function mkButt (text, ico) {
-    var $butt =      
-      $('<button>')
-        .attr('type', 'button')
-        .addClass('btn btn-default btn-lg')
-        .css('margin-right','3px');
+    var $butt = $('<button>')
+      .attr('type', 'button')
+      .addClass('btn btn-default btn-lg')
+      .css('margin-right','3px');
     if (ico) {
       $butt.append($('<span>').addClass('glyphicon glyphicon-'+ico));
     }
@@ -40,6 +65,7 @@ function mkGUI (containerId) {
 
   $(window).resize(autosetLogHeight);
 
+  $el_.append($tabMenu);
 
   $el.append($startButt)
      .append($clearButt)
