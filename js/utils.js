@@ -53,6 +53,17 @@ function repeat (str, n) {
   return ret;
 }
 
+function break80 (str, ods) {
+  var parts = str.split('\n');
+  var ret = ''; 
+  _.each(parts, function (part) {
+    _.each(part.match(/.{1,80}/g), function (subpart) {
+      ret += (ods ? repeat(' ',ods) : '') + subpart + '\n';
+    });
+  });
+  return ret;
+}
+
 
 var partition = function(mustBeTrue,array){
   assert(_.isArray(array),'partition : the array argument must be an array.');
@@ -112,6 +123,14 @@ function mkDist( distArr ){
     return best.fitVal;
   }
 
+  function worstVal () {
+    var best = {fitVal: -Number.MAX_VALUE};
+    for (var i = 0; i < len; i++){
+      best = updateBest(best, {fitVal:-distArr[i][1]});
+    }
+    return -best.fitVal;
+  }
+
   function prettyPrint (fun) {
     fun = fun || _.identity;
 
@@ -126,8 +145,9 @@ function mkDist( distArr ){
     get : get,
     distArr : function(){return distArr;},
     prettyPrint: prettyPrint,
-    avgVal: avgVal,
-    bestVal: bestVal
+    avgVal:   avgVal,
+    bestVal:  bestVal,
+    worstVal: worstVal
   };
 }
 

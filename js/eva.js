@@ -72,10 +72,11 @@ var SSR_str = "{\
 function sendStats (gen, evaledPop, logFun) {
     var popDist = evaledPop.popDist; 
     var msg = 
-      'GEN ' + gen +'\n' +
-      'best : '+ popDist.bestVal().toFixed(4) + '\n'+ 
-      'avg  : '+ popDist.avgVal().toFixed(4) +'\n'+
-      evaledPop.best.indiv.term.code('lc')+'\n';
+      'GEN ' + gen + '  :' +
+      '  BEST '+ popDist.bestVal().toFixed(4) +  
+      '  AVG '+ popDist.avgVal().toFixed(4) +
+      '  WORST '+ popDist.worstVal().toFixed(4) +'\n\n'+
+      break80(evaledPop.best.indiv.term.code('lc'),2)+'\n';
     logFun(msg);
 }
 
