@@ -29,7 +29,7 @@ self.addEventListener('message', function(e) {
   var msg = JSON.parse(e.data); 
 
   var opts;
-  eval('opts = '+ msg.optsStr );
+  eval( msg.optsStr );
 
   var gpResult = gp(opts, function (logStr) {
     send('log', logStr); 

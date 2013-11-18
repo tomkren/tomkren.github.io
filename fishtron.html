@@ -17,6 +17,7 @@
   <script src="js/libs/wu-0.1.8.js"></script>
   <script src="js/libs/qunit-1.12.0.js"></script>
   <script src="js/libs/peg-0.7.0.js"></script>
+  <script src="js/libs/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="js/libs/seedrandom.js"></script>
   <script src="js/ie-compat.js"></script>
@@ -38,36 +39,14 @@
 
 <script>
 
-fishtronTests();
-
-$(function(){
-  gui1 = mkGUI('guinew','gui');
-});
+  $(function(){
+    gui1 = mkGUI('gui');
+    fishtronTests();
+  });
 
 </script>
 </head>
 <body style="margin:3px;">
-
-<div id="guinew"></div>
-
-<!--
-<ul class="nav nav-tabs" 
-    style="margin-bottom:3px">
-  <li class="active">
-      <a href="#solver" data-toggle="tab">solver</a></li>
-  <li><a href="#tests" id="tests-link" data-toggle="tab">tests</a></li>
-</ul>
--->
-
-
-
-
-  
-
-
-
+  <div id="gui"></div>
 </body>
 </html>
-
-
-

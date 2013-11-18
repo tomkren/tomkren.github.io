@@ -18,55 +18,55 @@ function runGP (optsStr, msgHandler) {
 
 var int = mkAtm('int');
 
-var SSR_str = "{\
-  fitness: (function () {\
-    var xs  = _.range(-1,1,0.1);\
-    var ys  = _.map(xs, function (x) {return x*x*x*x + x*x*x + x*x + x ;});\
-    var len = xs.length;\
-    return function (f) {\
-      var terminate = true;\
-      var sumErr = 0;\
-      var i, err;\
-      for (i=0; i<len; i++) {\
-        err = Math.abs( f(xs[i]) - ys[i] );\
-        sumErr += err;\
-        if (isNaN(err))  {return {fitVal:0, terminate: false};}\
-        if (err >= 0.01) {terminate = false;}\
-      }\
-      return {\
-        fitVal: 1 / (1+sumErr),\
-        terminate: terminate\
-      };\
-    };\
-  }()),\
-  typ: mkTyp([int,int]),\
-  ctx: mkCtx({\
-    'plus' : [ [int,int,int]\
-           , function(x,y){return x+y;} ],\
-    'minus': [ [int,int,int]\
-           , function(x,y){return x-y;} ],\
-    'mul'  : [ [int,int,int]\
-           , function(x,y){return x*y;} ],\
-    'rdiv' : [ [int,int,int]\
-           , function(x,y){return y===0 ? 1 : x/y ;} ],\
-    'sin'  : [ [int,int]\
-           , Math.sin ],\
-    'cos'  : [ [int,int]\
-           , Math.cos ],\
-    'exp'  : [ [int,int]\
-           , Math.exp ],\
-    'rlog' : [ [int,int]\
-           , function(x){return x===0 ? 0 : Math.log(x) ;} ]\
-  }),\
-  strategy : Strategy.rampedHalfAndHalf,\
-  saveBest : true,\
-  popSize  : 500,\
-  numGens  : 51,\
-  operators : [\
-    [xover1      , 0.9],\
-    [copyOperator, 0.1]\
-  ]\
-}";
+var SSR_str = "opts = {\n\
+  fitness: (function () {\n\
+    var xs  = _.range(-1,1,0.1);\n\
+    var ys  = _.map(xs, function (x) {return x*x*x*x + x*x*x + x*x + x ;});\n\
+    var len = xs.length;\n\
+    return function (f) {\n\
+      var terminate = true;\n\
+      var sumErr = 0;\n\
+      var i, err;\n\
+      for (i=0; i<len; i++) {\n\
+        err = Math.abs( f(xs[i]) - ys[i] );\n\
+        sumErr += err;\n\
+        if (isNaN(err))  {return {fitVal:0, terminate: false};}\n\
+        if (err >= 0.01) {terminate = false;}\n\
+      }\n\
+      return {\n\
+        fitVal: 1 / (1+sumErr),\n\
+        terminate: terminate\n\
+      };\n\
+    };\n\
+  }()),\n\
+  typ: mkTyp([int,int]),\n\
+  ctx: mkCtx({\n\
+    'plus' : [ [int,int,int]\n\
+           , function(x,y){return x+y;} ],\n\
+    'minus': [ [int,int,int]\n\
+           , function(x,y){return x-y;} ],\n\
+    'mul'  : [ [int,int,int]\n\
+           , function(x,y){return x*y;} ],\n\
+    'rdiv' : [ [int,int,int]\n\
+           , function(x,y){return y===0 ? 1 : x/y ;} ],\n\
+    'sin'  : [ [int,int]\n\
+           , Math.sin ],\n\
+    'cos'  : [ [int,int]\n\
+           , Math.cos ],\n\
+    'exp'  : [ [int,int]\n\
+           , Math.exp ],\n\
+    'rlog' : [ [int,int]\n\
+           , function(x){return x===0 ? 0 : Math.log(x) ;} ]\n\
+  }),\n\
+  strategy : Strategy.rampedHalfAndHalf,\n\
+  saveBest : true,\n\
+  popSize  : 500,\n\
+  numGens  : 51,\n\
+  operators : [\n\
+    [xover1      , 0.9],\n\
+    [copyOperator, 0.1]\n\
+  ]\n\
+};";
 
 
 function sendStats (gen, evaledPop, logFun) {

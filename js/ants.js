@@ -12,7 +12,7 @@ $(function(){
   });
 
   
-  test = aco( mkTspProblem(tsp1,'Praha',1000,1) );
+  testik = aco( mkTspProblem(tsp1,'Praha',1000,1) );
 
 });
 
