@@ -1,7 +1,5 @@
 function mkGUI (containerId) {
 
-  var $el = $('#'+containerId);
-
   function mkTabMenu (arr) {
     var $ret = $('<ul>')
       .addClass('nav nav-tabs')
@@ -10,7 +8,8 @@ function mkGUI (containerId) {
       var $li = $('<li>').append(
         $('<a>').attr({
           'href': '#'+tabId,
-          'data-toggle': 'tab'
+          'data-toggle': 'tab',
+          'id': tabId+'-link'
         }).html(tabId) 
       );
       if (i===0) {$li.addClass('active');}
@@ -31,6 +30,7 @@ function mkGUI (containerId) {
     return ret;
   }
 
+/*
   function mkButt (text, ico) {
     var $butt = $('<button>')
       .attr('type', 'button')
@@ -40,6 +40,29 @@ function mkGUI (containerId) {
       $butt.append($('<span>').addClass('glyphicon glyphicon-'+ico));
     }
     $butt.append(' '+text);
+    return $butt;
+  }
+*/
+  
+  function setButtText ($butt, text, ico) {
+    $butt.html('');
+    if (ico) {
+      $butt.append($('<span>')
+           .addClass('glyphicon glyphicon-'+ico));
+    }
+    $butt.append(' '+text);
+  }
+
+  function mkAButt (text, ico, href, isTab, isSmall,clickFun) {
+    var $butt = $('<a>')
+      .addClass('btn btn-default btn-'+(isSmall?'xs':'lg'))
+      .css('margin-right','3px');
+    if (href)  {$butt.attr('href',href);}
+    if (isTab) {$butt.attr('data-toggle','tab');}
+    setButtText($butt, text, ico);
+    if (clickFun) {
+      $butt.click(clickFun);
+    }
     return $butt;
   }
 
@@ -52,81 +75,108 @@ function mkGUI (containerId) {
     $('<div>').attr('id','qunit'), 
     $('<div>').attr('id','qunit-fixture') );
 
+  var $el = $('#'+containerId);
   $el.append($tabMenu, tabs.$el);
 
-  var $startButt = mkButt('start', 'play');
-  var $editButt  = mkButt('edit',  'pencil'); 
-  var $doneButt  = mkButt('done',  'ok');
-  var $clearButt = mkButt('clear', 'remove');
+ 
+  var $log = $('<pre>').css({
+    'height'    : '400px',
+    'overflow-y': 'scroll',
+    'font-size' : '8pt',
+    'margin-top': '3px'
+  });
 
-  var $solverContent = $('<div>');
+  var $editor = $('<pre>')
+    .attr('id','editor')
+    .css('width', '100%');
+
+
+  var subTabs = mkTabs(['editor_','log_','stats_']);
+
+  var $clearButt = mkAButt('clear','remove',false,false,true);
+  subTabs.log_.append($log,$clearButt);
+
+
+  subTabs.editor_.append($editor);
+
+  var $startButt = mkAButt('start', 'play'  );
+  var $logButt   = mkAButt('log', 'book', '#log_', true);   
+  var $editButt  = mkAButt('edit', 'pencil', '#editor_', true);
+
   
-  var $log = 
-    $('<pre>').css({
-      'height'    : '400px',
-      'overflow-y': 'scroll'
-    });
-
-  var $editor = $('<pre>').attr('id','editor').css('width', '100%').hide();
-
-  $solverContent.append($log);
-
-  tabs.solver.append( $('<div>').css('margin', '3px').append(
-    $startButt, $clearButt, $editButt), $solverContent,  $editor );
+  tabs.solver.append( 
+    $('<div>').css('margin', '3px').append(
+      $startButt, 
+      $editButt,
+      $logButt,
+      mkAButt('stats','stats','#stats_', true)
+    ), 
+    subTabs.$el );
 
   var editor = ace.edit('editor');
+  var ses = editor.getSession();
   editor.setTheme("ace/theme/monokai");
-  editor.getSession().setMode("ace/mode/javascript"); 
-  editor.getSession().setTabSize(2); 
-  editor.getSession().setUseSoftTabs(true);
-  editor.getSession().setUseWrapMode(true);
-  editor.getSession().setValue(SSR_str);
-
+  ses.setMode("ace/mode/javascript"); 
+  ses.setTabSize(2); 
+  ses.setUseSoftTabs(true);
+  ses.setUseWrapMode(true);
+  
+  $.ajax({
+    url : 'js/problems/SSR.js',
+    dataType: "text",
+    success : function (data) {
+      ses.setValue(data);
+    }
+  });
 
   function guiLog (msg) {
     $log.append(msg).append('\n');
     $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
   }
 
-  function autosetLogHeight () {
+  //TODO : nefacha když je rezizlej hidden editor
+  function resize () {
     var newHeight = window.innerHeight-106;
-    $log   .css('height', newHeight+'px');
+    $log   .css('height', (newHeight-30)+'px');
     $editor.css('height', (newHeight+0)+'px');
     editor.resize();
   }
 
-  autosetLogHeight();
-  $(window).resize(autosetLogHeight);
+  resize();
+  $(window).resize(resize);
+  
+  var isRunning = false;
+  var worker;
 
   $startButt.click(function (e) {
+
+    if (isRunning) {
+      isRunning = false;
+      worker.terminate();
+      setButtText($startButt, 'start', 'play');
+      return;
+    }
+
+    isRunning = true;
     if ($log.html() !== '') {
       guiLog('\n'+repeat('-',80)+'\n');
     }
-    guiLog('starting ...');
-    runGP(editor.getSession().getValue(), function(msg){
+    $logButt.tab('show');
+    guiLog('starting ...\n');
+    worker = startGPworker(ses.getValue(), function(msg){
       var content = msg.content;
       switch (msg.subject) {
         case 'log'    : guiLog(content); break;
-        case 'result' : log(res1 = content); break;
-        default       : log(content); break;
+        case 'result' : 
+          log(res1 = content); 
+          isRunning = false;
+          setButtText($startButt, 'start', 'play');
+          break;
+        default : log(content); break;
 
       }
     });
-  });
-
-  $editButt.click(function (e) {
-    $editor.show();
-    $solverContent.html($editor);
-    $editButt.after($doneButt);
-    $editButt.detach();
-    $clearButt.detach();
-  });
-
-  $doneButt.click(function (e) {
-    $solverContent.html($log);
-    $doneButt.after($editButt);
-    $doneButt.detach();
-    $startButt.after($clearButt);
+    setButtText($startButt, 'stop', 'stop');
   });
 
   $clearButt.click(function (e) {

@@ -231,7 +231,7 @@ var fishtronTests = function(){
 
   test( 'ants', function(){
 
-    ok(true, 'fake test...' );
+    ok(!!true, 'fake test...' );
 
     //console.timeEnd('tests');
   });

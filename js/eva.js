@@ -1,83 +1,13 @@
-$(function(){
-  //var 
-  //res1 = gp(GPOpts1);
-  //res2 = gp(GPOpts1);
+var int = mkAtm('int');
 
-
-
-});
-
-function runGP (optsStr, msgHandler) {
+function startGPworker (optsStr, msgHandler) {
   msgHandler = msgHandler || log;
   var worker = new Worker('js/worker.js');
   worker.addEventListener('message', function(e) {
     msgHandler( JSON.parse(e.data) );
   }, false);
-  worker.postMessage( JSON.stringify({optsStr: optsStr}) );  
-}
-
-var int = mkAtm('int');
-
-var SSR_str = "opts = {\n\
-  fitness: (function () {\n\
-    var xs  = _.range(-1,1,0.1);\n\
-    var ys  = _.map(xs, function (x) {return x*x*x*x + x*x*x + x*x + x ;});\n\
-    var len = xs.length;\n\
-    return function (f) {\n\
-      var terminate = true;\n\
-      var sumErr = 0;\n\
-      var i, err;\n\
-      for (i=0; i<len; i++) {\n\
-        err = Math.abs( f(xs[i]) - ys[i] );\n\
-        sumErr += err;\n\
-        if (isNaN(err))  {return {fitVal:0, terminate: false};}\n\
-        if (err >= 0.01) {terminate = false;}\n\
-      }\n\
-      return {\n\
-        fitVal: 1 / (1+sumErr),\n\
-        terminate: terminate\n\
-      };\n\
-    };\n\
-  }()),\n\
-  typ: mkTyp([int,int]),\n\
-  ctx: mkCtx({\n\
-    'plus' : [ [int,int,int]\n\
-           , function(x,y){return x+y;} ],\n\
-    'minus': [ [int,int,int]\n\
-           , function(x,y){return x-y;} ],\n\
-    'mul'  : [ [int,int,int]\n\
-           , function(x,y){return x*y;} ],\n\
-    'rdiv' : [ [int,int,int]\n\
-           , function(x,y){return y===0 ? 1 : x/y ;} ],\n\
-    'sin'  : [ [int,int]\n\
-           , Math.sin ],\n\
-    'cos'  : [ [int,int]\n\
-           , Math.cos ],\n\
-    'exp'  : [ [int,int]\n\
-           , Math.exp ],\n\
-    'rlog' : [ [int,int]\n\
-           , function(x){return x===0 ? 0 : Math.log(x) ;} ]\n\
-  }),\n\
-  strategy : Strategy.rampedHalfAndHalf,\n\
-  saveBest : true,\n\
-  popSize  : 500,\n\
-  numGens  : 51,\n\
-  operators : [\n\
-    [xover1      , 0.9],\n\
-    [copyOperator, 0.1]\n\
-  ]\n\
-};";
-
-
-function sendStats (gen, evaledPop, logFun) {
-    var popDist = evaledPop.popDist; 
-    var msg = 
-      'GEN ' + gen + '  :' +
-      '  BEST '+ popDist.bestVal().toFixed(4) +  
-      '  AVG '+ popDist.avgVal().toFixed(4) +
-      '  WORST '+ popDist.worstVal().toFixed(4) +'\n\n'+
-      formatBreak(80,evaledPop.best.indiv.term.code('lc'),2)+'\n';
-    logFun(msg);
+  worker.postMessage( JSON.stringify({optsStr: optsStr}) ); 
+  return worker; 
 }
 
 function gp (opts, logFun) {
@@ -98,7 +28,7 @@ function gp (opts, logFun) {
 
   var gen = 0;
   var evaledPop = evalPop(pop, opts);
-  sendStats(gen, evaledPop, logFun);
+  sendStats(opts, gen, evaledPop, logFun);
 
   while (gen < opts.numGens-1 && !evaledPop.terminate) {
     pop = [];
@@ -123,15 +53,14 @@ function gp (opts, logFun) {
 
     gen ++;
     evaledPop = evalPop(pop, opts);  
-    sendStats(gen, evaledPop, logFun);
+    sendStats(opts, gen, evaledPop, logFun);
   }
 
   var time = (new Date().getTime()) - startTime;
-  logFun('time: '+ Math.round(time/1000) +' s' );
+  logFun('\ntime: '+ Math.round(time/1000) +' s' );
 
   return evaledPop;
 }
-
 
 function evalPop (pop, opts) {
 
@@ -180,7 +109,17 @@ function evalPop (pop, opts) {
 }
 
 
-
-
-
+function sendStats (opts, gen, evaledPop, logFun) {
+    var popDist = evaledPop.popDist; 
+    var msg = 
+      'GEN ' + prefill(gen,3) + '  :' +
+      '  BEST '+ popDist.bestVal().toFixed(4) +  
+      '  AVG '+ popDist.avgVal().toFixed(4) +
+      '  WORST '+ popDist.worstVal().toFixed(4);
+    if (opts.logOpts.logBestIndiv) {
+      msg += '\n\n'+ formatBreak(80,
+        evaledPop.best.indiv.term.code('lc'),2);
+    }
+    logFun(msg);
+}
 

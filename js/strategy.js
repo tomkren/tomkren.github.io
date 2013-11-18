@@ -1,4 +1,37 @@
 
+function mkGeom (q) {
+
+  function filter (ns) {
+
+    
+    if (ns.length === 0) {return ns;}
+
+    var ret = [];
+
+    var s_depth = ns[0].s_depth;
+
+    //log(s_depth);
+    
+    for (var i=0; i<ns.length; i++) { 
+      assert(s_depth === ns[i].s_depth, 
+        's_depth of all succesors should be the same.');
+
+      var p = Math.pow(q, s_depth);
+      
+      if (Math.random()<p) {
+        ret.push(ns[i]);
+      }
+    }
+
+    return ret;
+  }
+
+  return {
+    filter : filter
+  };
+}
+
+
 
 function mkRampedHalfAndHalf(D_init){
 
@@ -43,8 +76,6 @@ function mkRampedHalfAndHalf(D_init){
 
     //log(ns);
 
-    
-
     return [randomElem(toSelectFrom)];
   }
 
@@ -72,6 +103,7 @@ function mkRampedHalfAndHalf(D_init){
 var Strategy = {
 
   systematic        : {filter: _.identity},
-  rampedHalfAndHalf : mkRampedHalfAndHalf(6)
+  rampedHalfAndHalf : mkRampedHalfAndHalf(6),
+  geom075           : mkGeom(0.75)
 
 }; 

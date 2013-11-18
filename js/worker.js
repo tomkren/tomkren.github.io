@@ -16,6 +16,11 @@ importScripts(
  'ants.js',
  'eva.js'
 );
+
+var log = function (logStr) {
+  send('log', logStr); 
+};
+
   
 function send (subject, content) {
   self.postMessage(JSON.stringify({
@@ -31,9 +36,7 @@ self.addEventListener('message', function(e) {
   var opts;
   eval( msg.optsStr );
 
-  var gpResult = gp(opts, function (logStr) {
-    send('log', logStr); 
-  });
+  var gpResult = gp(opts, log);
 
   send('result', gpResult);
 

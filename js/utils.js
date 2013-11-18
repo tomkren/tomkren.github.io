@@ -68,6 +68,14 @@ function formatBreak (n, str, ods) {
   return ret;
 }
 
+function prefill (str,n) {
+  str = str+'';
+  if (str.length < n){
+    return repeat(' ',n-str.length) + str;
+  }
+  return str;
+}
+
 
 var partition = function(mustBeTrue,array){
   assert(_.isArray(array),'partition : the array argument must be an array.');
