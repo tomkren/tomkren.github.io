@@ -91,7 +91,7 @@ function mkGUI (containerId) {
     .css('width', '100%');
 
 
-  var subTabs = mkTabs(['editor_','log_','stats_']);
+  var subTabs = mkTabs(['editor_','log_','stats']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
   subTabs.log_.append($log,$clearButt);
@@ -99,9 +99,21 @@ function mkGUI (containerId) {
 
   subTabs.editor_.append($editor);
 
+
+  var $graphContainer = 
+   $('<div>').css({ width:  '100%',
+                    height: '400px'});
+  subTabs.stats.append($graphContainer);
+  
+
+
   var $startButt = mkAButt('start', 'play'  );
   var $logButt   = mkAButt('log', 'book', '#log_', true);   
   var $editButt  = mkAButt('edit', 'pencil', '#editor_', true);
+  var $statsButt = mkAButt('stats','stats','#stats', true, false,
+    function () {
+      setTimeout(testGraph.draw, 10);
+    });
 
   
   tabs.solver.append( 
@@ -109,9 +121,12 @@ function mkGUI (containerId) {
       $startButt, 
       $editButt,
       $logButt,
-      mkAButt('stats','stats','#stats_', true)
+      $statsButt
     ), 
     subTabs.$el );
+
+  var testGraph = mkGraph($graphContainer, {});
+
 
   var editor = ace.edit('editor');
   var ses = editor.getSession();
@@ -139,7 +154,9 @@ function mkGUI (containerId) {
     var newHeight = window.innerHeight-106;
     $log   .css('height', (newHeight-30)+'px');
     $editor.css('height', (newHeight+0)+'px');
+    $graphContainer.css('height',(newHeight+0)+'px');
     editor.resize();
+    testGraph.draw();
   }
 
   resize();
@@ -195,9 +212,12 @@ function mkGUI (containerId) {
     }
   });
 
+
+
   return {
     log: guiLog,
-    tabs: tabs
+    tabs: tabs,
+    testGraph: testGraph
   };
 
 }

@@ -1,3 +1,5 @@
+//UTF8 test: ěščřžýáíé
+
 opts = {
   strategy : Strategy.rampedHalfAndHalf,
   //strategy : Strategy.geom075, 
