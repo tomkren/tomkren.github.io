@@ -21,7 +21,8 @@ var log = function (logStr) {
   send('log', logStr); 
 };
 
-  
+
+
 function send (subject, content) {
   self.postMessage(JSON.stringify({
     subject: subject,
@@ -36,11 +37,19 @@ self.addEventListener('message', function(e) {
   var opts;
   eval( msg.optsStr );
 
-  var gpResult = gp(opts, log);
+  var communicator = {
+    log: log, 
+    sendStats: function (stats) {
+      send('stats', stats);
+    },
+    runBegin: function (run){
+      send('runBegin', run);
+    }
+  };
+  var gpResult = gp(opts, communicator);
 
   send('result', gpResult);
-
   self.close();
 
-
 },false);
+

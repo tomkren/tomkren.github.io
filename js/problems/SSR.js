@@ -1,17 +1,32 @@
 //UTF8 test: ěščřžýáíé
 
 opts = {
+  numRuns: 4,
+  numGens: 51,
+  popSize: 500,
+  
   strategy : Strategy.rampedHalfAndHalf,
   //strategy : Strategy.geom075, 
   saveBest : true,
-  popSize  : 500,
-  numGens  : 51,
   operators : [
     [xover1      , 0.9],
     [copyOperator, 0.1]
   ],
+  statsOpts: {
+    maxFitVal: 1.0,
+    show: {
+      best:  true,
+      avg:   true,
+      worst: false
+    },
+  },
   logOpts: {
-    logBestIndiv: false,
+    bestIndiv: false,
+    bestVal:   true,
+    avgVal:    true,
+    worstVal:  false,
+    valPrecision: 4,
+    startTab: 'stats'
   },
   typ: mkTyp([int,int]),
   ctx: mkCtx({

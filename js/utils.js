@@ -1,9 +1,13 @@
 
 function nop () {}
 
-var log = function(x){
-  console.log(x);
-};
+//var log = function(x){
+//  console.log(x);
+//};
+
+function log () {
+  console.log.apply(console, arguments);
+}
 
 var logArray = function(xs){
   if(!_.isArray(xs)){xs=[xs];}

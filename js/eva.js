@@ -10,56 +10,58 @@ function startGPworker (optsStr, msgHandler) {
   return worker; 
 }
 
-function gp (opts, logFun) {
-
-  var startTime = new Date().getTime();
+function gp (opts, communicator) {
 
   var operatorsDist = mkDist(opts.operators);
 
-  var pop = prove({
-    n          : opts.popSize,
-    typ        : opts.typ,
-    ctx        : opts.ctx,
-    strategy   : opts.strategy,
-    resultMode : 'terms',
-    unique     : true,
-    logit      : false 
-  });
+  for (var run = 1; run <= opts.numRuns; run++) {
 
-  var gen = 0;
-  var evaledPop = evalPop(pop, opts);
-  sendStats(opts, gen, evaledPop, logFun);
+    communicator.runBegin(run);
 
-  while (gen < opts.numGens-1 && !evaledPop.terminate) {
-    pop = [];
-        
-    if (opts.saveBest) {
-      pop.push(evaledPop.best.indiv.term);
-    }
+    var pop = prove({
+      n          : opts.popSize,
+      typ        : opts.typ,
+      ctx        : opts.ctx,
+      strategy   : opts.strategy,
+      resultMode : 'terms',
+      unique     : true,
+      logit      : false 
+    });
 
-    while (pop.length < opts.popSize) {
-      var operator = operatorsDist.get();
-        
-      var parents  = [];
-      for (var i=0; i<operator.in; i++) {
-        parents.push( evaledPop.popDist.get().term );
+    var gen = 0;
+    var evaledPop = evalPop(pop, opts);
+    sendGenInfo(opts, run, gen, evaledPop, communicator);
+
+    while (gen < opts.numGens-1 && !evaledPop.terminate) {
+      pop = [];
+          
+      if (opts.saveBest) {
+        pop.push(evaledPop.best.indiv.term);
       }
-      
-      var children = _.take( operator.operate(parents) , opts.popSize-pop.length);
-      _.each(children, function (child) {
-        pop.push(child);  
-      });
+
+      while (pop.length < opts.popSize) {
+        var operator = operatorsDist.get();
+          
+        var parents  = [];
+        for (var i=0; i<operator.in; i++) {
+          parents.push( evaledPop.popDist.get().term );
+        }
+        
+        var children = _.take( operator.operate(parents), 
+                               opts.popSize-pop.length  );
+        _.each(children, function (child) {
+          pop.push(child);  
+        });
+      }
+
+      gen ++;
+      evaledPop = evalPop(pop, opts);  
+      sendGenInfo(opts, run, gen, evaledPop, communicator);
     }
 
-    gen ++;
-    evaledPop = evalPop(pop, opts);  
-    sendStats(opts, gen, evaledPop, logFun);
   }
 
-  var time = (new Date().getTime()) - startTime;
-  logFun('\ntime: '+ Math.round(time/1000) +' s' );
-
-  return evaledPop;
+  return {};//evaledPop;
 }
 
 function evalPop (pop, opts) {
@@ -98,28 +100,62 @@ function evalPop (pop, opts) {
     return [indiv,fitResult.fitVal];
   }));
 
-  var ret = {
+  var evaledPop = {
     popDist:   popDist,
     terminate: terminate,
     best:      best
   };
 
-  return ret;
+  return evaledPop;
 
 }
 
 
-function sendStats (opts, gen, evaledPop, logFun) {
-    var popDist = evaledPop.popDist; 
-    var msg = 
-      'GEN ' + prefill(gen,3) + '  :' +
-      '  BEST '+ popDist.bestVal().toFixed(4) +  
-      '  AVG '+ popDist.avgVal().toFixed(4) +
-      '  WORST '+ popDist.worstVal().toFixed(4);
-    if (opts.logOpts.logBestIndiv) {
-      msg += '\n\n'+ formatBreak(80,
-        evaledPop.best.indiv.term.code('lc'),2);
-    }
-    logFun(msg);
+function sendGenInfo (opts, run, gen, evaledPop, communicator) {
+
+  var popDist = evaledPop.popDist;
+  
+  communicator.sendStats({
+    run:       run,
+    gen:       gen,
+    terminate: evaledPop.terminate,
+    bestVal:   popDist.bestVal(),
+    avgVal:    popDist.avgVal(),
+    worstVal:  popDist.worstVal()
+  });
+
+  var logOpts = opts.logOpts; 
+  var somethingWritten = false;
+  var valPrecision = logOpts.valPrecision;
+
+  if (gen === 0) {
+    communicator.log('\nRUN '+run+'\n');
+  }
+
+  function showVal (title, prop) {
+    if (logOpts[prop]) {
+      somethingWritten = true;
+      return '  '+title+' '+ 
+      popDist[prop]().toFixed(valPrecision); 
+    } 
+    return '';
+  }
+
+  var best  = showVal('BEST' , 'bestVal' );
+  var avg   = showVal('AVG'  , 'avgVal'  );
+  var worst = showVal('WORST', 'worstVal');
+
+  var msg = 
+    'GEN ' + prefill(gen,3) + 
+    (somethingWritten ? '  :' : '') +
+    best + avg + worst;
+
+  if (logOpts.bestIndiv || evaledPop.terminate) {
+    msg += '\n\n'+ formatBreak(80,
+      evaledPop.best.indiv.term.code('lc'),2);
+  }
+
+  communicator.log(msg);
 }
+
 

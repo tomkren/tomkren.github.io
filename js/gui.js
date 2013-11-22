@@ -29,20 +29,6 @@ function mkGUI (containerId) {
     });
     return ret;
   }
-
-/*
-  function mkButt (text, ico) {
-    var $butt = $('<button>')
-      .attr('type', 'button')
-      .addClass('btn btn-default btn-lg')
-      .css('margin-right','3px');
-    if (ico) {
-      $butt.append($('<span>').addClass('glyphicon glyphicon-'+ico));
-    }
-    $butt.append(' '+text);
-    return $butt;
-  }
-*/
   
   function setButtText ($butt, text, ico) {
     $butt.html('');
@@ -87,48 +73,48 @@ function mkGUI (containerId) {
   });
 
   var $editor = $('<pre>')
-    .attr('id','editor')
+    .attr('id','editor-pre')
     .css('width', '100%');
 
 
-  var subTabs = mkTabs(['editor_','log_','stats']);
+  var sTabs = mkTabs(['editor','log','stats']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
-  subTabs.log_.append($log,$clearButt);
+  sTabs.log.append($log,$clearButt);
 
 
-  subTabs.editor_.append($editor);
+  sTabs.editor.append($editor);
 
 
   var $graphContainer = 
    $('<div>').css({ width:  '100%',
                     height: '400px'});
-  subTabs.stats.append($graphContainer);
+  sTabs.stats.append($graphContainer);
   
 
 
-  var $startButt = mkAButt('start', 'play'  );
-  var $logButt   = mkAButt('log', 'book', '#log_', true);   
-  var $editButt  = mkAButt('edit', 'pencil', '#editor_', true);
-  var $statsButt = mkAButt('stats','stats','#stats', true, false,
+  var $startButt     = mkAButt('start', 'play'  );
+  sTabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
+  sTabs.editor.$butt = mkAButt('edit', 'pencil', '#editor', true);
+  sTabs.stats .$butt = mkAButt('stats','stats','#stats', true, false,
     function () {
-      setTimeout(testGraph.draw, 10);
+      setTimeout(graphs.draw, 10);
     });
 
   
   tabs.solver.append( 
-    $('<div>').css('margin', '3px').append(
+    $('<div>').css('margin', '3px').append([
       $startButt, 
-      $editButt,
-      $logButt,
-      $statsButt
-    ), 
-    subTabs.$el );
+      sTabs.editor.$butt,
+      sTabs.log.$butt,
+      sTabs.stats.$butt
+    ]), 
+    sTabs.$el );
 
-  var testGraph = mkGraph($graphContainer, {});
+  var graphs = mkGraph($graphContainer, {});
 
 
-  var editor = ace.edit('editor');
+  var editor = ace.edit('editor-pre');
   var ses = editor.getSession();
   editor.setTheme("ace/theme/monokai");
   ses.setMode("ace/mode/javascript"); 
@@ -149,6 +135,14 @@ function mkGUI (containerId) {
     $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
   }
 
+  function guiStats (stats) {
+    graphs.handleStats(stats);
+  }
+
+  function runInit () {
+    graphs.runInit();
+  }
+
   //TODO : nefacha když je rezizlej hidden editor
   function resize () {
     var newHeight = window.innerHeight-106;
@@ -156,41 +150,56 @@ function mkGUI (containerId) {
     $editor.css('height', (newHeight+0)+'px');
     $graphContainer.css('height',(newHeight+0)+'px');
     editor.resize();
-    testGraph.draw();
+    graphs.draw();
   }
 
   resize();
   $(window).resize(resize);
   
   var isRunning = false;
-  var worker;
+  var worker, startTime;
+
+  function stopped () {
+    isRunning = false;
+    setButtText($startButt, 'start', 'play');
+    var time = (new Date().getTime()) - startTime;
+    guiLog('\nruntime: '+ Math.round(time/1000) +' s' );
+  }
 
   $startButt.click(function (e) {
 
     if (isRunning) {
-      isRunning = false;
       worker.terminate();
-      setButtText($startButt, 'start', 'play');
+      guiLog('\nstopped ...');
+      stopped();
       return;
     }
 
     isRunning = true;
+    startTime = new Date().getTime();
     if ($log.html() !== '') {
       guiLog('\n'+repeat('-',80)+'\n');
     }
-    $logButt.tab('show');
-    guiLog('starting ...\n');
-    worker = startGPworker(ses.getValue(), function(msg){
+
+    var optsStr = ses.getValue();
+    var opts; eval(optsStr);
+
+    graphs.experimentBegin(opts);
+
+    if (opts.logOpts.startTab) {
+      sTabs[opts.logOpts.startTab].$butt.tab('show');
+      resize();
+    }
+
+    guiLog('starting ...');
+    worker = startGPworker(optsStr, function(msg){
       var content = msg.content;
       switch (msg.subject) {
-        case 'log'    : guiLog(content); break;
-        case 'result' : 
-          log(res1 = content); 
-          isRunning = false;
-          setButtText($startButt, 'start', 'play');
-          break;
-        default : log(content); break;
-
+        case 'log'     : guiLog(content);             break;
+        case 'stats'   : guiStats(content);           break;
+        case 'result'  : stopped();                   break;
+        case 'runBegin': graphs.runBegin(content); break;
+        default        : log(content);                break;
       }
     });
     setButtText($startButt, 'stop', 'stop');
@@ -217,7 +226,7 @@ function mkGUI (containerId) {
   return {
     log: guiLog,
     tabs: tabs,
-    testGraph: testGraph
+    graphs: graphs
   };
 
 }
