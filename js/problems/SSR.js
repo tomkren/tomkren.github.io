@@ -14,11 +14,11 @@ opts = {
   ],
   statsOpts: {
     maxFitVal: 1.0,
-    show: {
-      best:  true,
-      avg:   true,
-      worst: false
-    },
+    graph: {
+      best : { color: 'green' }, 
+      avg  : { color: 'blue'  }, 
+      worst: { color: 'red'   }
+    }
   },
   logOpts: {
     bestIndiv: false,
