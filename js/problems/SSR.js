@@ -1,7 +1,7 @@
 //UTF8 test: ěščřžýáíé
 
 opts = {
-  numRuns: 4,
+  numRuns: 50,
   numGens: 51,
   popSize: 500,
   

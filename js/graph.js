@@ -69,9 +69,15 @@ function mkGraph ($el, opts) {
       xaxis: {
         min: 0,
         max: numGens -1,
+        axisLabel: 'Generation',
+        axisLabelFontSizePixels: 11,
+        //axisLabelUseCanvas: !true,
+        //axisLabelFontFamily: 'Arial'
       },
       yaxis: {
-        min: 0
+        min: 0,
+        axisLabel: 'Fitness',
+        axisLabelFontSizePixels: 11
       },
       legend: {
         show: true,
@@ -99,7 +105,7 @@ function mkGraph ($el, opts) {
   }
 
   function runBegin (run) {
-    log('run '+run+' begins');
+    //log('run '+run+' begins');
     
     _.each(seriesToDraw, function (id) {
       series[id].data = [];
@@ -129,7 +135,7 @@ function mkGraph ($el, opts) {
       setAvgVal(x);
 
       if (stats.terminate && id === 'best') {
-        log('terminate');
+        //log('terminate');
         for (var x_ = x+1; x_ < numGens; x_++) {
           setAvgVal(x_);
         }

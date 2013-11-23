@@ -20,12 +20,12 @@ function mkGUI (containerId) {
 
   function mkTabs (arr) {
     var $el = $('<div>').addClass('tab-content');
-    var ret = {'$el': $el};
+    var ret = {'$el': $el, tabs:{} };
     _.each(arr, function (tabId,i) {
       var $tab = $('<div>').addClass('tab-pane').attr('id',tabId);
       if (i===0) {$tab.addClass('active');}
       $el.append($tab);
-      ret[tabId] = $tab;
+      ret.tabs[tabId] = $tab;
     });
     return ret;
   }
@@ -57,7 +57,7 @@ function mkGUI (containerId) {
   var $tabMenu = mkTabMenu(tabIds);
   var tabs     = mkTabs   (tabIds);
 
-  tabs.tests.append(  
+  tabs.tabs.tests.append(  
     $('<div>').attr('id','qunit'), 
     $('<div>').attr('id','qunit-fixture') );
 
@@ -77,38 +77,35 @@ function mkGUI (containerId) {
     .css('width', '100%');
 
 
-  var sTabs = mkTabs(['editor','log','stats']);
+  var sTabs = mkTabs(['editor','stats','log']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
-  sTabs.log.append($log,$clearButt);
+  sTabs.tabs.log.append($log,$clearButt);
 
 
-  sTabs.editor.append($editor);
+  sTabs.tabs.editor.append($editor);
 
 
   var $graphContainer = 
    $('<div>').css({ width:  '100%',
                     height: '400px'});
-  sTabs.stats.append($graphContainer);
+  sTabs.tabs.stats.append($graphContainer);
   
 
 
   var $startButt     = mkAButt('start', 'play'  );
-  sTabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
-  sTabs.editor.$butt = mkAButt('edit', 'pencil', '#editor', true);
-  sTabs.stats .$butt = mkAButt('stats','stats','#stats', true, false,
-    function () {
-      setTimeout(graphs.draw, 10);
-    });
+  sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
+  sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor', true);
+  sTabs.tabs.stats .$butt = mkAButt('stats','stats','#stats', true, 
+    false, function () {setTimeout(graphs.draw, 10);});
 
-  
-  tabs.solver.append( 
-    $('<div>').css('margin', '3px').append([
-      $startButt, 
-      sTabs.editor.$butt,
-      sTabs.log.$butt,
-      sTabs.stats.$butt
-    ]), 
+  var sTabsButts = _.map(_.keys(sTabs.tabs),function(key){
+    return sTabs.tabs[key].$butt;
+  });
+
+  tabs.tabs.solver.append( 
+    $('<div>').css('margin', '3px')
+     .append([$startButt].concat(sTabsButts)), 
     sTabs.$el );
 
   var graphs = mkGraph($graphContainer, {});
@@ -187,7 +184,7 @@ function mkGUI (containerId) {
     graphs.experimentBegin(opts);
 
     if (opts.logOpts.startTab) {
-      sTabs[opts.logOpts.startTab].$butt.tab('show');
+      sTabs.tabs[opts.logOpts.startTab].$butt.tab('show');
       resize();
     }
 
