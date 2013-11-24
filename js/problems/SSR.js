@@ -14,11 +14,16 @@ opts = {
   ],
   statsOpts: {
     maxFitVal: 1.0,
-    graph: {
-      best : { color: 'green' }, 
-      avg  : { color: 'blue'  }, 
-      worst: { color: 'red'   }
-    }
+    graphs:{
+      fitness: {
+        best:  { color: 'green', avg: true, minmax: true }, 
+        avg:   { color: 'blue',  avg: true, minmax: true },
+        worst: { color: 'red',   avg: true, minmax: true }
+      },
+      'Fake Second Graph': {
+        size:  { color: 'black', avg:true , minmax: true }
+      }
+    },
   },
   logOpts: {
     bestIndiv: false,

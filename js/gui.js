@@ -1,3 +1,31 @@
+function setButtText ($butt, text, ico) {
+  $butt.html('');
+  if (ico) {
+    $butt.append($('<span>')
+         .addClass('glyphicon glyphicon-'+ico));
+  }
+  $butt.append(' '+text);
+}
+
+function mkAButt (text, ico, href, isTab, isSmall,clickFun) {
+  var $butt = $('<a>')
+    .addClass('btn btn-default btn-'+(isSmall?'xs':'lg'))
+    .css('margin-right','3px');
+  if (href)  {$butt.attr('href',href);}
+  if (isTab) {$butt.attr('data-toggle','tab');}
+  setButtText($butt, text, ico);
+  if (clickFun) {
+    $butt.click(clickFun);
+  }
+  return $butt;
+}
+
+function mkEasyButt (opts) {
+  opts = opts || {};
+  return mkAButt(opts.text, opts.ico, opts.href, opts.isTab,
+                 opts.isSmall, opts.click );
+}
+
 function mkGUI (containerId) {
 
   function mkTabMenu (arr) {
@@ -28,28 +56,6 @@ function mkGUI (containerId) {
       ret.tabs[tabId] = $tab;
     });
     return ret;
-  }
-  
-  function setButtText ($butt, text, ico) {
-    $butt.html('');
-    if (ico) {
-      $butt.append($('<span>')
-           .addClass('glyphicon glyphicon-'+ico));
-    }
-    $butt.append(' '+text);
-  }
-
-  function mkAButt (text, ico, href, isTab, isSmall,clickFun) {
-    var $butt = $('<a>')
-      .addClass('btn btn-default btn-'+(isSmall?'xs':'lg'))
-      .css('margin-right','3px');
-    if (href)  {$butt.attr('href',href);}
-    if (isTab) {$butt.attr('data-toggle','tab');}
-    setButtText($butt, text, ico);
-    if (clickFun) {
-      $butt.click(clickFun);
-    }
-    return $butt;
   }
 
   var tabIds = ['solver','tests'];
@@ -85,14 +91,6 @@ function mkGUI (containerId) {
 
   sTabs.tabs.editor.append($editor);
 
-
-  var $graphContainer = 
-   $('<div>').css({ width:  '100%',
-                    height: '400px'});
-  sTabs.tabs.stats.append($graphContainer);
-  
-
-
   var $startButt     = mkAButt('start', 'play'  );
   sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
   sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor', true);
@@ -103,12 +101,23 @@ function mkGUI (containerId) {
     return sTabs.tabs[key].$butt;
   });
 
+  var $graphContainer = $('<div>').css({ 
+    width:  '100%',
+    height: '400px',
+    'margin-top' : '3px'
+  });
+  var $graphButts = $('<div>');
+  sTabs.tabs.stats.append([
+    $graphContainer,
+    $graphButts
+  ]);
+
   tabs.tabs.solver.append( 
-    $('<div>').css('margin', '3px')
+    $('<div>').css('margin-bottom', '3px')
      .append([$startButt].concat(sTabsButts)), 
     sTabs.$el );
 
-  var graphs = mkGraph($graphContainer, {});
+  var graphs = mkGraph($graphContainer, $graphButts, {});
 
 
   var editor = ace.edit('editor-pre');
@@ -145,7 +154,7 @@ function mkGUI (containerId) {
     var newHeight = window.innerHeight-106;
     $log   .css('height', (newHeight-30)+'px');
     $editor.css('height', (newHeight+0)+'px');
-    $graphContainer.css('height',(newHeight+0)+'px');
+    $graphContainer.css('height',(newHeight-20)+'px');
     editor.resize();
     graphs.draw();
   }
@@ -192,11 +201,11 @@ function mkGUI (containerId) {
     worker = startGPworker(optsStr, function(msg){
       var content = msg.content;
       switch (msg.subject) {
-        case 'log'     : guiLog(content);             break;
-        case 'stats'   : guiStats(content);           break;
-        case 'result'  : stopped();                   break;
+        case 'log'     : guiLog(content);          break;
+        case 'stats'   : guiStats(content);        break;
+        case 'result'  : stopped();                break;
         case 'runBegin': graphs.runBegin(content); break;
-        default        : log(content);                break;
+        default        : log(content);             break;
       }
     });
     setButtText($startButt, 'stop', 'stop');

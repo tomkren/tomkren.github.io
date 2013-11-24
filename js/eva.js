@@ -119,9 +119,10 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
     run:       run,
     gen:       gen,
     terminate: evaledPop.terminate,
-    bestVal:   popDist.bestVal(),
-    avgVal:    popDist.avgVal(),
-    worstVal:  popDist.worstVal()
+    best:      popDist.bestVal(),
+    avg:       popDist.avgVal(),
+    worst:     popDist.worstVal(),
+    size:      Math.random()
   });
 
   var logOpts = opts.logOpts; 
