@@ -46,21 +46,6 @@
   $(function(){
     gui1 = mkGUI('gui');
     fishtronTests();
-
-    obj = _.extend({
-      data:[],
-      init: function(){
-        this.data = [];
-      }
-    },{
-      update: function(){
-        this.data.push(42);
-      },
-      init: function () {
-        this.data = [111];
-      }
-    });
-
   });
 
 </script>

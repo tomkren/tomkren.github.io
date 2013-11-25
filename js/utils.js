@@ -139,6 +139,18 @@ function mkDist( distArr ){
     return best.fitVal;
   }
 
+  function bestObj () {
+    var best = {fitVal: 0};
+    for (var i = 0; i < len; i++){
+      best = updateBest(best, {
+        fitVal: distArr[i][1],
+        obj: distArr[i][0]
+      });
+    }
+    return best;
+  }
+
+
   function worstVal () {
     var best = {fitVal: -Number.MAX_VALUE};
     for (var i = 0; i < len; i++){

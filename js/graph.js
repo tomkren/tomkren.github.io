@@ -142,13 +142,14 @@ function mkGraph ($graphEl, $buttsEl, opts) {
   }
 
 
-  var series, observedVariables, numGens, plotOpts;
+  var series, observedVariables, numGens, plotOpts, drawStep;
 
 
   function experimentBegin (gpOpts) {
 
     var graphsOpts = gpOpts.statsOpts.graphs;
-
+    drawStep       = gpOpts.statsOpts.drawStep;
+    
     series            = mkSeries(graphsOpts);
     observedVariables = getObservedVariables(graphsOpts);
     numGens           = gpOpts.numGens;
@@ -219,7 +220,13 @@ function mkGraph ($graphEl, $buttsEl, opts) {
     draw();
   }
 
+  
+  var numDrawSteps = 0;
+
   function draw () {
+    numDrawSteps ++;
+    if (numDrawSteps % drawStep === 1) {return;}
+
     $.plot($graphEl, _.values(_.pick(series, graphKeys)), plotOpts);   
   }
   

@@ -13,15 +13,16 @@ opts = {
     [copyOperator, 0.1]
   ],
   statsOpts: {
-    maxFitVal: 1.0,
+    //maxFitVal: 1.0,
+    drawStep: 2,
     graphs:{
       fitness: {
         best:  { color: 'green', avg: true, minmax: true }, 
         avg:   { color: 'blue',  avg: true, minmax: true },
         worst: { color: 'red',   avg: true, minmax: true }
       },
-      'Fake Second Graph': {
-        size:  { color: 'black', avg:true , minmax: true }
+      size: {
+        bestSize:  { color: 'green', avg:true , minmax: true }
       }
     },
   },

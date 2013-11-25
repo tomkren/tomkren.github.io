@@ -113,8 +113,10 @@ function evalPop (pop, opts) {
 
 function sendGenInfo (opts, run, gen, evaledPop, communicator) {
 
-  var popDist = evaledPop.popDist;
-  
+  var popDist  = evaledPop.popDist;
+  var bestTerm = evaledPop.best.indiv.term;
+  var sizeMode = {countAPPs:false,countLAMs:false};
+
   communicator.sendStats({
     run:       run,
     gen:       gen,
@@ -122,7 +124,7 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
     best:      popDist.bestVal(),
     avg:       popDist.avgVal(),
     worst:     popDist.worstVal(),
-    size:      Math.random()
+    bestSize:  termSize(bestTerm, sizeMode)//Math.random()
   });
 
   var logOpts = opts.logOpts; 
@@ -153,7 +155,7 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
 
   if (logOpts.bestIndiv || evaledPop.terminate) {
     msg += '\n\n'+ formatBreak(80,
-      evaledPop.best.indiv.term.code('lc'),2);
+      bestTerm.code('lc'),2);
   }
 
   communicator.log(msg);
