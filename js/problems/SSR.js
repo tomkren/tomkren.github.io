@@ -23,7 +23,10 @@ opts = {
       },
       size: {
         vars: {
-          bestSize:  { color: 'green', avg:true , minmax: true }
+          bestSize: { color: 'green', avg:true },
+          avgSize:  { color: 'blue' , avg:true },
+          maxSize:  { color: 'red'  , avg:true },
+          minSize:  { color: 'gray' , avg:true }
         }
       }
     }

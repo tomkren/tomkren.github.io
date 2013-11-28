@@ -117,6 +117,21 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
   var bestTerm = evaledPop.best.indiv.term;
   var sizeMode = {countAPPs:false,countLAMs:false};
 
+  var popArr      = popDist.distArr();
+  var sumTermSize = 0;
+  var largest     = {fitVal: 0};
+  var smallest    = {fitVal: -Number.MAX_VALUE};
+  for (var i = 0; i < popArr.length; i++) {
+    var indivTerm = popArr[i][0].term;
+    var size      = termSize(indivTerm, sizeMode); 
+    sumTermSize  += size;
+    largest       = updateBest(largest,  {term: indivTerm, fitVal:  size});
+    smallest      = updateBest(smallest, {term: indivTerm, fitVal: -size});
+  }
+  var avgTermSize = sumTermSize / popArr.length;
+  var maxTermSize = largest.fitVal;
+  var minTermSize = -smallest.fitVal;
+
   communicator.sendStats({
     run:       run,
     gen:       gen,
@@ -124,7 +139,10 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
     best:      popDist.bestVal(),
     avg:       popDist.avgVal(),
     worst:     popDist.worstVal(),
-    bestSize:  termSize(bestTerm, sizeMode)//Math.random()
+    bestSize:  termSize(bestTerm, sizeMode),
+    avgSize:   avgTermSize,
+    maxSize:   maxTermSize,
+    minSize:   minTermSize
   });
 
   var logOpts = opts.logOpts; 
