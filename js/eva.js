@@ -133,16 +133,17 @@ function sendGenInfo (opts, run, gen, evaledPop, communicator) {
   var minTermSize = -smallest.fitVal;
 
   communicator.sendStats({
-    run:       run,
-    gen:       gen,
-    terminate: evaledPop.terminate,
-    best:      popDist.bestVal(),
-    avg:       popDist.avgVal(),
-    worst:     popDist.worstVal(),
-    bestSize:  termSize(bestTerm, sizeMode),
-    avgSize:   avgTermSize,
-    maxSize:   maxTermSize,
-    minSize:   minTermSize
+    run:        run,
+    gen:        gen,
+    terminate:  evaledPop.terminate,
+    best:       popDist.bestVal(),
+    avg:        popDist.avgVal(),
+    worst:      popDist.worstVal(),
+    bestSize:   termSize(bestTerm, sizeMode),
+    avgSize:    avgTermSize,
+    maxSize:    maxTermSize,
+    minSize:    minTermSize,
+    best_jsStr: evaledPop.best.indiv.js.toString()
   });
 
   var logOpts = opts.logOpts; 

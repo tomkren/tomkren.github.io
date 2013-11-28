@@ -7,9 +7,10 @@ function setButtText ($butt, text, ico) {
   $butt.append(' '+text);
 }
 
-function mkAButt (text, ico, href, isTab, isSmall,clickFun) {
+function mkAButt (text, ico, href, isTab, isSmall,clickFun, btnClass) {
+  var btnClass = btnClass || 'btn-default';  
   var $butt = $('<a>')
-    .addClass('btn btn-default btn-'+(isSmall?'xs':'lg'))
+    .addClass('btn '+btnClass+' btn-'+(isSmall?'xs':'lg'))
     .css('margin-right','3px');
   if (href)  {$butt.attr('href',href);}
   if (isTab) {$butt.attr('data-toggle','tab');}
@@ -23,7 +24,7 @@ function mkAButt (text, ico, href, isTab, isSmall,clickFun) {
 function mkEasyButt (opts) {
   opts = opts || {};
   return mkAButt(opts.text, opts.ico, opts.href, opts.isTab,
-                 opts.isSmall, opts.click );
+                 opts.isSmall, opts.click, opts.btnClass );
 }
 
 function mkGUI (containerId) {
@@ -82,21 +83,29 @@ function mkGUI (containerId) {
     .attr('id','editor-pre')
     .css('width', '100%');
 
-
-  var sTabs = mkTabs(['editor','stats','log']);
+  
+  var sTabs = mkTabs(['editor','stats','results','log']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
+  
   sTabs.tabs.log.append($log,$clearButt);
-
-
+  
   sTabs.tabs.editor.append($editor);
 
-  var $startButt = mkAButt('start', 'play'  );
+  var $results = $('<div>');
+  sTabs.tabs.results.append($results);
+
+  var $startButt = mkEasyButt({
+    text: 'start', 
+    ico:  'play',
+    btnClass: 'btn-success' 
+  });
   sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
   sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor',
     true, false, function(){setTimeout(resize,10);});
   sTabs.tabs.stats .$butt = mkAButt('stats','stats','#stats', true, 
     false, function(){setTimeout(graphs.draw, 10);});
+  sTabs.tabs.results.$butt = mkAButt('results','eye-open','#results', true);
 
   var sTabsButts = _.map(_.keys(sTabs.tabs),function(key){
     return sTabs.tabs[key].$butt;
@@ -142,13 +151,11 @@ function mkGUI (containerId) {
     $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
   }
 
-  function guiStats (stats) {
-    graphs.handleStats(stats);
-  }
-
+  
+  /*
   function runInit () {
     graphs.runInit();
-  }
+  }*/
 
   //TODO : nefacha když je rezizlej hidden editor
   function resize () {
@@ -175,6 +182,8 @@ function mkGUI (containerId) {
 
   $startButt.click(function (e) {
 
+    $startButt.toggleClass('btn-success btn-danger');
+
     if (isRunning) {
       worker.terminate();
       guiLog('\nstopped ...');
@@ -183,6 +192,7 @@ function mkGUI (containerId) {
     }
 
     isRunning = true;
+    $startButt.
     startTime = new Date().getTime();
     if ($log.html() !== '') {
       guiLog('\n'+repeat('-',80)+'\n');
@@ -190,6 +200,10 @@ function mkGUI (containerId) {
 
     var optsStr = ses.getValue();
     var opts; eval(optsStr);
+
+    var pheno = opts.phenotype;
+
+    var $phenoUpdateEl = Phenotype.init(pheno, $results, opts);
 
     graphs.experimentBegin(opts);
 
@@ -202,11 +216,18 @@ function mkGUI (containerId) {
     worker = startGPworker(optsStr, function(msg){
       var content = msg.content;
       switch (msg.subject) {
-        case 'log'     : guiLog(content);          break;
-        case 'stats'   : guiStats(content);        break;
-        case 'result'  : stopped();                break;
-        case 'runBegin': graphs.runBegin(content); break;
-        default        : log(content);             break;
+        case 'log'     : guiLog(content); break;
+        case 'stats'   : 
+          var stats = content;
+          graphs.handleStats(stats);
+          Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best);
+          break;
+        case 'result'  : stopped(); break;
+        case 'runBegin': 
+          graphs.runBegin(content);
+          Phenotype.runBegin(content);
+          break;
+        default: log(content); break;
       }
     });
     setButtText($startButt, 'stop', 'stop');

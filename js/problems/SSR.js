@@ -1,4 +1,15 @@
 opts = {
+  phenotype: {
+    init: function ($el) { // $el : container for phenotype
+      var $pre = $('<pre>');
+      $el.append($pre);
+      return $pre;          // returns (sub)query for update function
+    },
+    update: function ($el, indiv) {
+      $el.html( indiv );
+    }
+  },
+
   numRuns: 50,
   numGens: 51,
   popSize: 500,
@@ -79,5 +90,6 @@ opts = {
         terminate: terminate
       };
     };
-  }()
+  }(),
+
 };
