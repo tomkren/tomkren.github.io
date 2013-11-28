@@ -230,7 +230,7 @@ function mkGraph ($graphEl, $buttsEl, opts) {
   }
 
   
-  var numDrawSteps = 0;
+  var numDrawSteps = 1;
 
   function draw () {
     numDrawSteps ++;

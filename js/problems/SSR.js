@@ -11,7 +11,7 @@ opts = {
     [copyOperator, 0.1]
   ],
   statsOpts: {
-    drawStep: 1,
+    drawStep: 2,
     graphs: {
       fitness: {
         yMax: 1.0,
