@@ -1,5 +1,3 @@
-//UTF8 test: ěščřžýáíé
-
 opts = {
   numRuns: 50,
   numGens: 51,
@@ -13,18 +11,22 @@ opts = {
     [copyOperator, 0.1]
   ],
   statsOpts: {
-    //maxFitVal: 1.0,
-    drawStep: 2,
-    graphs:{
+    drawStep: 1,
+    graphs: {
       fitness: {
-        best:  { color: 'green', avg: true, minmax: true }, 
-        avg:   { color: 'blue',  avg: true, minmax: true },
-        worst: { color: 'red',   avg: true, minmax: true }
+        yMax: 1.0,
+        vars: {
+          best:  { color: 'green', avg: true, minmax: true }, 
+          avg:   { color: 'blue',  avg: true, minmax: true },
+          worst: { color: 'red',   avg: true, minmax: true }
+        }
       },
       size: {
-        bestSize:  { color: 'green', avg:true , minmax: true }
+        vars: {
+          bestSize:  { color: 'green', avg:true , minmax: true }
+        }
       }
-    },
+    }
   },
   logOpts: {
     bestIndiv: false,

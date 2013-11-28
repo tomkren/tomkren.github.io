@@ -13,6 +13,7 @@ function mkGraph ($graphEl, $buttsEl, opts) {
   }
 
   var graphKeys = [];
+  var actualGraphName;
 
   function mkSeries (graphsOpts) {
     var ret = {};
@@ -25,9 +26,11 @@ function mkGraph ($graphEl, $buttsEl, opts) {
       
       var aGraphKeys = (function () {
         var theGraphKeys = [];
+        var theGraphName = graphName; 
 
         if (prvni) {
-          graphKeys = theGraphKeys;
+          graphKeys       = theGraphKeys;
+          actualGraphName = theGraphName;
           prvni = false;
         }
 
@@ -36,7 +39,8 @@ function mkGraph ($graphEl, $buttsEl, opts) {
             text: graphName,
             isSmall: true,
             click: function () {
-              graphKeys = theGraphKeys;
+              graphKeys       = theGraphKeys;
+              actualGraphName = theGraphName;
               draw();
             }
           })
@@ -45,8 +49,8 @@ function mkGraph ($graphEl, $buttsEl, opts) {
         return theGraphKeys;
       })();
 
-      for (var name in graph) {
-        var opt = graph[name];
+      for (var name in graph.vars) {
+        var opt = graph.vars[name];
         var color = opt.color;
 
         if (opt.avg || opt.minmax) {
@@ -136,14 +140,13 @@ function mkGraph ($graphEl, $buttsEl, opts) {
   function getObservedVariables (graphsOpts) {
     var ret = [];
     for (var prop in graphsOpts) {
-      ret = ret.concat(_.keys(graphsOpts[prop]));
+      ret = ret.concat(_.keys(graphsOpts[prop].vars));
     }
     return ret;
   }
 
 
-  var series, observedVariables, numGens, plotOpts, drawStep;
-
+  var series, observedVariables, numGens, drawStep, plotOpts;
 
   function experimentBegin (gpOpts) {
 
@@ -154,27 +157,33 @@ function mkGraph ($graphEl, $buttsEl, opts) {
     observedVariables = getObservedVariables(graphsOpts);
     numGens           = gpOpts.numGens;
 
-    plotOpts = {
-      xaxis: {
-        min: 0,
-        max: numGens-1,
-        axisLabel: 'Generation',
-        axisLabelFontSizePixels: 11,
-      },
-      yaxis: {
-        min: 0,
-        axisLabel: 'Fitness',
-        axisLabelFontSizePixels: 11
-      },
-      legend: {
-        show: true,
-        position: 'nw'
-      }
-    };
+    plotOpts = {};
+    for (var graphName in graphsOpts) {
 
-    var maxFitVal = gpOpts.statsOpts.maxFitVal;
-    if (maxFitVal) {
-      plotOpts.yaxis.max = maxFitVal;
+      var plotOptions = {
+        xaxis: {
+          min: 0,
+          max: numGens-1,
+          axisLabel: 'Generation',
+          axisLabelFontSizePixels: 11,
+        },
+        yaxis: {
+          min: 0,
+          axisLabel: 'Fitness',
+          axisLabelFontSizePixels: 11
+        },
+        legend: {
+          show: true,
+          position: 'nw'
+        }
+      };
+
+      var yMax = graphsOpts[graphName].yMax;
+      if (yMax) {
+        plotOptions.yaxis.max = yMax;
+      }
+
+      plotOpts[graphName] = plotOptions;
     }
 
     for (var id in series) {
@@ -227,7 +236,12 @@ function mkGraph ($graphEl, $buttsEl, opts) {
     numDrawSteps ++;
     if (numDrawSteps % drawStep === 1) {return;}
 
-    $.plot($graphEl, _.values(_.pick(series, graphKeys)), plotOpts);   
+    var plotOptions = 
+      plotOpts ? plotOpts[actualGraphName] : {};
+
+    $.plot($graphEl, 
+           _.values(_.pick(series, graphKeys)), 
+           plotOptions);   
   }
   
   draw();

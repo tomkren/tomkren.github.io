@@ -91,11 +91,12 @@ function mkGUI (containerId) {
 
   sTabs.tabs.editor.append($editor);
 
-  var $startButt     = mkAButt('start', 'play'  );
+  var $startButt = mkAButt('start', 'play'  );
   sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
-  sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor', true);
+  sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor',
+    true, false, function(){setTimeout(resize,10);});
   sTabs.tabs.stats .$butt = mkAButt('stats','stats','#stats', true, 
-    false, function () {setTimeout(graphs.draw, 10);});
+    false, function(){setTimeout(graphs.draw, 10);});
 
   var sTabsButts = _.map(_.keys(sTabs.tabs),function(key){
     return sTabs.tabs[key].$butt;
