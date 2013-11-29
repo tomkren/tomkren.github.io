@@ -35,7 +35,7 @@ opts = (function(){
     'exp'  : [ [int,int]
            , Math.exp ],
     'rlog' : [ [int,int]
-           , function(x){return x===0 ? 0 : Math.log(x) ;} ]
+           , function(x){return x===0 ? 0 : Math.log(Math.abs(x)) ;} ]
   });
 
   var xs  = _.range(-1,1,0.1);
