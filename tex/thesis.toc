@@ -1,0 +1,71 @@
+\contentsline {chapter}{Introduction}{3}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Genetic Programming}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Program trees}{6}{section.1.1}
+\contentsline {section}{\numberline {1.2}Building blocks}{6}{section.1.2}
+\contentsline {section}{\numberline {1.3}Generating individuals}{7}{section.1.3}
+\contentsline {section}{\numberline {1.4}Evaluation}{7}{section.1.4}
+\contentsline {section}{\numberline {1.5}Selection}{8}{section.1.5}
+\contentsline {section}{\numberline {1.6}Crossover}{8}{section.1.6}
+\contentsline {section}{\numberline {1.7}Reproduction}{9}{section.1.7}
+\contentsline {section}{\numberline {1.8}Mutation}{9}{section.1.8}
+\contentsline {section}{\numberline {1.9}Construction of next population}{9}{section.1.9}
+\contentsline {section}{\numberline {1.10}GP algorithm in pseudocode}{10}{section.1.10}
+\contentsline {chapter}{\numberline {2}Mathematical background}{12}{chapter.2}
+\contentsline {section}{\numberline {2.1}$\lambda $-terms\xspace }{12}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1} Subterms, free variables and substitution }{13}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}$\beta $-reduction}{14}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}$\eta $-reduction}{15}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}$\eta ^{-1}$-reduction}{15}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}$\beta $-normal form}{15}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}Tree representations of $\lambda $-terms\xspace }{15}{subsection.2.1.6}
+\contentsline {section}{\numberline {2.2}Types}{17}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Statements of the form $M : \sigma $}{17}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Context}{18}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Simply typed $\lambda $-calculus}{19}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Tree representations of typed $\lambda $-terms\xspace }{20}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Term generating grammar}{21}{section.2.3}
+\contentsline {section}{\numberline {2.4}Long normal form}{23}{section.2.4}
+\contentsline {section}{\numberline {2.5}Grammar producing $\lambda $-terms\xspace in \textit {lnf}\xspace }{23}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Benefits of generating $\lambda $-terms\xspace in \textit {lnf}\xspace }{25}{subsection.2.5.1}
+\contentsline {section}{\numberline {2.6}Inhabitation tree}{28}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}And-or tree and searching in Inhabitation tree}{31}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2} Generating terms in \textit {lnf}\xspace by solving inhabitation tree }{32}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}In defense of inhabitation trees}{34}{subsection.2.6.3}
+\contentsline {chapter}{\numberline {3} Design of our system }{35}{chapter.3}
+\contentsline {section}{\numberline {3.1}Individuals and Building blocks}{35}{section.3.1}
+\contentsline {section}{\numberline {3.2}Generating individuals}{36}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}A* algorithm}{36}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Our state space}{38}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Our heuristic function}{40}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Further improvements}{40}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Search strategy}{40}{subsection.3.2.5}
+\contentsline {subsubsection}{Systematic strategy}{42}{section*.3}
+\contentsline {subsubsection}{Ramped half-and-half strategy}{42}{section*.4}
+\contentsline {subsubsection}{Geometric strategy}{42}{section*.5}
+\contentsline {subsection}{\numberline {3.2.6}Final remarks}{43}{subsection.3.2.6}
+\contentsline {section}{\numberline {3.3}Crossover}{44}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Abstraction elimination}{45}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Typed subtree swapping}{46}{subsection.3.3.2}
+\contentsline {chapter}{\numberline {4} Implementation }{48}{chapter.4}
+\contentsline {chapter}{\numberline {5}Results}{51}{chapter.5}
+\contentsline {section}{\numberline {5.1}Simple Symbolic Regression}{51}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Experiments}{52}{subsection.5.1.1}
+\contentsline {section}{\numberline {5.2}Artificial Ant}{54}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Experiments}{55}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Even-parity problem}{61}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Experiments}{62}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Comparison with other results}{65}{subsection.5.3.2}
+\contentsline {section}{\numberline {5.4}Flies and Apples}{66}{section.5.4}
+\contentsline {chapter}{\numberline {6}Previous related work}{72}{chapter.6}
+\contentsline {section}{\numberline {6.1}Evolution of Constrained Syntactic Structures }{72}{section.6.1}
+\contentsline {section}{\numberline {6.2}Strongly Typed Genetic Programming}{72}{section.6.2}
+\contentsline {section}{\numberline {6.3}Higher-Order Functions and Lambda Abstractions}{73}{section.6.3}
+\contentsline {section}{\numberline {6.4}Functional Genetic Programming with Combinators}{73}{section.6.4}
+\contentsline {chapter}{\numberline {7}Future work}{75}{chapter.7}
+\contentsline {section}{\numberline {7.1}Polymorphic variant}{75}{section.7.1}
+\contentsline {section}{\numberline {7.2}Mutation}{75}{section.7.2}
+\contentsline {section}{\numberline {7.3}Big Context}{75}{section.7.3}
+\contentsline {section}{\numberline {7.4}Parallelisation}{75}{section.7.4}
+\contentsline {section}{\numberline {7.5}Future ideas with Inhabitation trees}{75}{section.7.5}
+\contentsline {chapter}{Conclusion}{78}{Item.55}
+\contentsline {chapter}{\numberline {A}Enclosed CD}{80}{appendix.A}
