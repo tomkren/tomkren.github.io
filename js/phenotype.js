@@ -1,6 +1,6 @@
 var Phenotype = function () {
 
-  var $links, $genRow, $stage;
+  var $links, $runRow, $stage;
   var valPrecision;
 
   function init (pheno, $el, opts) {
@@ -23,8 +23,8 @@ var Phenotype = function () {
 
   
   function runBegin (gen) {
-    $genRow = $('<div>').html('gen '+gen+' : ');
-    $links.append( $genRow );
+    $runRow = $('<div>').html('run '+gen+' : ');
+    $links.append( $runRow );
   }
 
   function update (pheno, $el, best_jsStr, fitVal) {
@@ -57,7 +57,7 @@ var Phenotype = function () {
       $link.css('background-color','green');
     });
 
-    $genRow.append($link);
+    $runRow.append($link);
     //
   }
 
