@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  11 NOV 2013 12:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  29 NOV 2013 14:00
 entering extended mode
 **evogp.tex
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\evogp13\evogp.tex
+(C:\wamp\www\tomkren.github.io\tex\evogp13\evogp.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\evogp13\llncs.cls
+(C:\wamp\www\tomkren.github.io\tex\evogp13\llncs.cls
 Document Class: llncs 2013/09/27 v2.18 
  LaTeX document class for Lecture Notes in Computer Science
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -490,7 +490,7 @@ Package color Info: Driver file: pdftex.def on input line 130.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\dvipsnam.def"
 File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\evogp13\evogp.aux)
+(C:\wamp\www\tomkren.github.io\tex\evogp13\evogp.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
 LaTeX Font Info:    ... okay on input line 85.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
@@ -570,7 +570,7 @@ Overfull \hbox (27.80557pt too wide) in paragraph at lines 643--658
 \OT1/cmr/m/n/10 where $[]$$[]$ 
  []
 
-<imgs/SSR_FINAL.png, id=42, 2520.41624pt x 811.53188pt>
+<imgs/SSR_FINAL.png, id=43, 2520.41624pt x 811.53188pt>
 File: imgs/SSR_FINAL.png Graphic file (type png)
 
 <use imgs/SSR_FINAL.png>
@@ -580,7 +580,7 @@ Package pdftex.def Info: imgs/SSR_FINAL.png used on input line 662.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] <imgs/ANT_FINAL.png, id=47, 2520.41624pt x 768.62157pt>
+[8] <imgs/ANT_FINAL.png, id=48, 2520.41624pt x 768.62157pt>
 File: imgs/ANT_FINAL.png Graphic file (type png)
 
 <use imgs/ANT_FINAL.png>
@@ -590,7 +590,7 @@ Package pdftex.def Info: imgs/ANT_FINAL.png used on input line 720.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <C:/Users/sekol/Documents/GitHub/fishtron/tex/evogp13/imgs/SSR_FINAL.png>]
+[9 <C:/wamp/www/tomkren.github.io/tex/evogp13/imgs/SSR_FINAL.png>]
 <imgs/EP_FINAL.png, id=52, 2520.41624pt x 794.2172pt>
 File: imgs/EP_FINAL.png Graphic file (type png)
  <use imgs/EP_FINAL.png>
@@ -600,21 +600,24 @@ Package pdftex.def Info: imgs/EP_FINAL.png used on input line 773.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10 <C:/Users/sekol/Documents/GitHub/fishtron/tex/evogp13/imgs/ANT_FINAL.png>]
+[10 <C:/wamp/www/tomkren.github.io/tex/evogp13/imgs/ANT_FINAL.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <C:/Users/sekol/Documents/GitHub/fishtron/tex/evogp13/imgs/EP_FINAL.png>]
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\evogp13\evogp.bbl) [12]
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\evogp13\evogp.aux)
+ [11 <C:/wamp/www/tomkren.github.io/tex/evogp13/imgs/EP_FINAL.png>]
+(C:\wamp\www\tomkren.github.io\tex\evogp13\evogp.bbl) [12]
+(C:\wamp\www\tomkren.github.io\tex\evogp13\evogp.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3172 strings out of 493921
- 39198 string characters out of 3144876
- 111834 words of memory out of 3000000
- 6414 multiletter control sequences out of 15000+200000
+ 3175 strings out of 493921
+ 39102 string characters out of 3144876
+ 112834 words of memory out of 3000000
+ 6417 multiletter control sequences out of 15000+200000
  12351 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  29i,16n,24p,599b,250s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -638,7 +641,7 @@ pe1/public/amsfonts/cm/cmti9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/symbols/msbm10.pfb>
-Output written on evogp.pdf (12 pages, 595844 bytes).
+Output written on evogp.pdf (12 pages, 599701 bytes).
 PDF statistics:
  124 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
