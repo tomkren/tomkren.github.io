@@ -14,6 +14,7 @@ function mkGraph ($graphEl, $buttsEl, opts) {
 
   var graphKeys = [];
   var actualGraphName;
+  var isDrawStats = true;
 
   function mkSeries (graphsOpts) {
     var ret = {};
@@ -43,8 +44,7 @@ function mkGraph ($graphEl, $buttsEl, opts) {
               actualGraphName = theGraphName;
               draw();
             }
-          })
-        );
+          }));
 
         return theGraphKeys;
       })();
@@ -133,6 +133,26 @@ function mkGraph ($graphEl, $buttsEl, opts) {
 
       }
     }
+
+    $drawStatsButt = $('<input>').attr({
+      'type':'checkbox',
+      'checked':isDrawStats
+    }).click(function(){
+      isDrawStats = !isDrawStats;
+      log(isDrawStats);
+    });
+
+    $buttsEl.append([
+      $('<span>').append([
+        '&nbsp; draw stats? ',
+        $drawStatsButt
+      ]).css({
+          'font-size':'8pt',
+          'position' :'absolute',
+          'bottom':'1px',
+          'right':'1px'
+      }) 
+       ]);
 
     return ret;
   }
@@ -230,21 +250,39 @@ function mkGraph ($graphEl, $buttsEl, opts) {
   }
 
   
-  var numDrawSteps = 1;
+  var numDrawSteps = 0;
+
+  var drawNow = false;
 
   function draw () {
     numDrawSteps ++;
-    if (numDrawSteps % drawStep === 1) {return;}
+    if (!isDrawStats || (numDrawSteps % drawStep !== 0) ) {return;}
+    
+    drawNow = true;
+    //draw2();
+  }
+
+  var timeoutTime = 100;
+
+  function draw2 () {
+    if ( !(drawNow && isDrawStats) ) {
+      setTimeout(draw2,timeoutTime);
+      return;
+    }
 
     var plotOptions = 
       plotOpts ? plotOpts[actualGraphName] : {};
 
     $.plot($graphEl, 
            _.values(_.pick(series, graphKeys)), 
-           plotOptions);   
+           plotOptions); 
+
+    setTimeout(draw2,timeoutTime);  
   }
   
   draw();
+
+  draw2();
 
   return {
     draw: draw,

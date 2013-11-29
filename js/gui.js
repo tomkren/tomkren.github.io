@@ -84,11 +84,13 @@ function mkGUI (containerId) {
     .css('width', '100%');
 
   
-  var sTabs = mkTabs(['editor','stats','results','log']);
+  var sTabs = mkTabs(['editor','results','stats','log']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
+  var $downButt = mkAButt('down','arrow-down',false,false,true);
+
   
-  sTabs.tabs.log.append($log,$clearButt);
+  sTabs.tabs.log.append($log, $downButt, $clearButt);
   
   sTabs.tabs.editor.append($editor);
 
@@ -163,6 +165,11 @@ function mkGUI (containerId) {
     $log   .css('height', (newHeight-30)+'px');
     $editor.css('height', (newHeight+0)+'px');
     $graphContainer.css('height',(newHeight-20)+'px');
+    var $bars = Phenotype.get$bars();
+    if ($bars) {
+      //var ph = 
+      $bars.css('height',(newHeight-(90+Phenotype.getPhenoHeight()))+'px');
+    }
     editor.resize();
     graphs.draw();
   }
@@ -192,7 +199,6 @@ function mkGUI (containerId) {
     }
 
     isRunning = true;
-    $startButt.
     startTime = new Date().getTime();
     if ($log.html() !== '') {
       guiLog('\n'+repeat('-',80)+'\n');
@@ -206,6 +212,8 @@ function mkGUI (containerId) {
     var $phenoUpdateEl = Phenotype.init(pheno, $results, opts);
 
     graphs.experimentBegin(opts);
+
+    resize();
 
     if (opts.logOpts.startTab) {
       sTabs.tabs[opts.logOpts.startTab].$butt.tab('show');
@@ -221,6 +229,7 @@ function mkGUI (containerId) {
           var stats = content;
           graphs.handleStats(stats);
           Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best);
+          resize();
           break;
         case 'result'  : stopped(); break;
         case 'runBegin': 
@@ -233,9 +242,13 @@ function mkGUI (containerId) {
     setButtText($startButt, 'stop', 'stop');
   });
 
-  $clearButt.click(function (e) {
+  $clearButt.click(function () {
     $log.html('');
   });
+  $downButt.click(function () {
+    guiLog('');
+  });
+
 
   QUnit.done(function( details ) {
     console.log( "[TESTS] ",
