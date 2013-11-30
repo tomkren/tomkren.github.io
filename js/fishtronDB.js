@@ -1,9 +1,10 @@
 var FishtronDB = function () {
 
-  var apiURL = 'http://kutil.php5.cz/fishtronDB'; 
+  var apiURL = 'http://146.255.30.53/fishtronDB'; 
+  //var apiURL = 'http://kutil.php5.cz/fishtronDB'; 
   //var apiURL = 'http://localhost/fishtronDB';
+  
   var nextHandlerID = 1;
-
   var handlers = {};
 
   function load (args,fun) {
