@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage{xspace}
+
+
+\newcommand{\lterm}{$\lambda$-term\xspace}
+\newcommand{\lterms}{$\lambda$-terms\xspace}
+\newcommand{\ro}[1]{{\color{blue} #1}}
+
+
+\begin{document}
+
+
+\section{Related work}
+\label{related}
+
+\ro{
+In \cite{yu01} Yu presents a GP system utilizing
+polymorphic higher-order functions\footnote{Higher-order 
+function is a function taking another function as 
+input parameter.} and lambda abstractions.
+Important point of interest in this work is use of
+\texttt{foldr} function as a tool for \textit{implicit recursion},
+i.e. recursion without explicit recursive calls. 
+The terminal set for constructing lambda abstraction subtrees 
+is limited to use only constants and variables of that particular
+lambda abstraction, i.e., outer variables are not allowed to be used
+as terminals in this work. This is significant difference from our approach 
+since we permit all well-typed normalized \lterms. From this difference also
+comes different crossover operation. We focus more on term generating process; 
+their term generation is performed in a similar way as the standard one, 
+whereas our term generation also tries to utilize techniques of systematic enumeration. 
+}
+In \cite{kes} Briggs and O’Neill present technique 
+utilizing typed GP with combinators.
+The difference between approach presented in this work
+and our approach is that in this work terms are generated
+straight from \textit{library} of combinators and no lambda abstractions
+are used. They are using more general polymorphic type system then us
+-- the Hindley–Milner type system. They also discuss the 
+properties of exhaustive enumeration of terms and compare it with GP search.  
+They also present interesting concept of \textit{Generalized
+genetic operator} based on term generation. 
+
+In \cite{binard2008genetic} by Binard and Felty even 
+stronger type system (\textit{System F}) is used.  
+But with increasing power of the type system comes increasing difficulty of term generation.
+For this reason evolution in this work takes interesting and nonstandard shape 
+(fitness is associated with \textit{genes} which are evolved together with \textit{species}
+which together participate in creation of individuals).
+This differs from our approach, which tries to be generalization of
+the standard GP\cite{koza92}.
+
+In contrast with above mentioned works our approach uses very simple type system 
+(simply typed lambda calculus) and concentrates on process of generation  
+able to generate all possible well-typed normalized lambda terms. In order to do
+so we use technique based on \textit{inhabitation machines} 
+described by Barendregt in~\cite{barendregt10}.    
+
+
+\begin{thebibliography}{1}
+
+
+\bibitem{koza92}
+  John R. Koza,
+  \emph{Genetic Programming: On the Programming of Computers by Means of Natural Selection}.
+  MIT Press, Cambridge, MA,
+  1992. 
+
+\bibitem{yu01}
+  T. Yu. 
+  \emph{Hierachical processing for evolving recursive and modular 
+        programs using higher order functions and lambda abstractions}. 
+  Genetic Programming and Evolvable Machines,
+  2(4):345–380, December 2001. ISSN 1389-2576.
+
+\bibitem{binard2008genetic}
+Binard, F., Felty, A.: Genetic programming with polymorphic types and higher-order 
+functions. In: Proceedings of the 10th annual conference on Genetic and
+evolutionary computation, ACM (2008) 1187-1194
+
+\bibitem{kes}
+Forrest Briggs, Melissa O’Neill.
+\emph{Functional Genetic Programming and Exhaustive
+Program Search with Combinator Expressions.}
+International Journal of Knowledge-based and Intelligent Engineering Systems,
+Volume 12 Issue 1, Pages 47-68, January 2008. 
+
+
+\bibitem{barendregt10}
+  Henk Barendregt, Wil Dekkers, Richard Statman,
+  \emph{Lambda Calculus With Types}.
+  Cambridge University Press,
+  2010. 
+  %URL \url{http://www.cs.ru.nl/~henk/book.pdf}.
+
+
+\end{thebibliography}
+
+\end{document}
