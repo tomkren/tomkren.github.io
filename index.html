@@ -15,15 +15,8 @@
   .male {font-size: 7pt;}
 </style>
 
-<script>
-$(function(){ 
-  log('Welcome!');
-});
-</script>
-
 </head>
 <body>
-
 
   <!-- Wrap all page content here -->
   <div id="wrap">
@@ -57,8 +50,9 @@ $(function(){
     <div class="container">
 
     <div class="text-muted credit male">
-      <a href="http://tomkren.cz">tomkren.cz</a> 
-        (mělo by bejt nejstabilnější, jakože ofiko rylíz)<br>
+      <a href="http://tomkren.cz">tomkren.cz</a>
+        (mělo by bejt nejst<span id="admin">a</span>bilnější, 
+        jakože ofiko rylíz) <br>
       <a href="http://146.255.30.53/tomkren.github.io">
         146.255.30.53/tomkren.github.io</a>
         (z repa na serveru)<br>
@@ -72,15 +66,16 @@ $(function(){
     
     </div>
   </div>
-
-  
-  
-  <p>
-  </p>
-
-  
-
-
+ 
+<script>
+$(function(){ 
+  log('Welcome!');
+  $('#admin').click(function(){
+    window.location.href = 
+     'https://www.angel-hosting.cz/administrace/';
+  });
+});
+</script>
 </body>
 </html>
 
