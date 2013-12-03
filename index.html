@@ -1,46 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>tk</title>
-    <meta charset="utf-8">    
-    <style></style>
+<head>
+  <title>tk</title>
+  <meta charset="utf-8">    
+    
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="bootstrap/css/sticky-footer.css" rel="stylesheet">
+    
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/underscore-1.5.1.js"></script>
+  <script src="js/utils.js"></script>
 
-    <script src="js/libs/jquery-1.10.2.js"></script>
-    <script src="js/libs/underscore-1.5.1.js"></script>
-    <script src="js/utils.js"></script>
+<style>
+  .male {font-size: 7pt;}
+</style>
 
 <script>
-
 $(function(){ 
-
   log('Welcome!');
-
 });
-
 </script>
+
 </head>
 <body>
 
-  <h1><a href="http://tomkren.cz">tk</a></h1>
 
-  <h2><a href="fishtron.html">fishtron.js</a></h2>
-  <a href="mandelbrot.html">Mandelbrot</a><br>
-  <a href="sesitek.html">Sešítek</a><br>
-  <br>
-  <a href="tex/thesis.pdf">diplomka</a><br>
-  <a href="tex/evogp13/evogp.pdf">článek 1</a><br>
-  <br>
-  <a href="http://tomkren.cz">tomkren.cz</a> 
-    (mělo by bejt nejstabilnější, jakože ofiko rylíz)<br>
-  <a href="http://146.255.30.53/tomkren.github.io">
-    146.255.30.53/tomkren.github.io</a>
-    (z repa na serveru)<br>
-  <a href="http://tomkren.github.io">tomkren.github.io</a>
-    (z origin repa)<br>
-  <a href="http://localhost/tomkren.github.io">
-    localhost/tomkren.github.io</a> (lokálek) <br>
-  <a href="http://146.255.30.53:8080">
-    146.255.30.53:8080</a> (node.js pokus)<br> 
+  <!-- Wrap all page content here -->
+  <div id="wrap">
+
+    <!-- Begin page content -->
+    <div class="container">
+
+      <div class="page-header">
+        <h1><a href="http://tomkren.cz">tk</a></h1>
+      </div>
+
+      <p class="lead">
+        <a href="fishtron.html">fishtron.js</a>
+      </p>
+
+      <p>
+        <a href="mandelbrot.html">Mandelbrot</a><br>
+        <a href="sesitek.html">Sešítek</a>
+      </p>
+
+      <p class="male">
+        <a href="tex/thesis.pdf">diplomka</a><br>
+        <a href="tex/evogp13/evogp.pdf">článek 1</a>
+      </p>
+
+
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+
+    <div class="text-muted credit male">
+      <a href="http://tomkren.cz">tomkren.cz</a> 
+        (mělo by bejt nejstabilnější, jakože ofiko rylíz)<br>
+      <a href="http://146.255.30.53/tomkren.github.io">
+        146.255.30.53/tomkren.github.io</a>
+        (z repa na serveru)<br>
+      <a href="http://tomkren.github.io">tomkren.github.io</a>
+        (z origin repa)<br>
+      <a href="http://localhost/tomkren.github.io">
+        localhost/tomkren.github.io</a> (lokálek) <br>
+      <a href="http://146.255.30.53:8080">
+        146.255.30.53:8080</a> (node.js pokus)
+      </div>
+    
+    </div>
+  </div>
+
+  
+  
+  <p>
+  </p>
+
+  
+
 
 </body>
 </html>
