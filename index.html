@@ -131,17 +131,22 @@ var panakImgs = {
 
 var imgOs = {
   sedi: {
-    front: [{x:16,y:36,w:14,h:33}],
+    front: [{x:16,y:36,w:14,h:33},
+            {x:1, y:36,w:14,h:31}],
     right: [{x:30+14, y:36, w:15,h:31,dx:4,dy:2}], 
     left:  [{x:30+14+15, y:36, w:15,h:31,dx:-4,dy:2}],
   },
   stoji: {
-    front: [{x:0, y:1, w:13,h:33}],
+    front: [{x:0, y:1, w:13,h:33},
+            {x:40, y:1, w:13,h:33},
+            {x:53,y:1, w:12,h:33}],
     right: [{x:14, y:1, w:13,h:33,dx:2}],
     left:  [{x:30, y:36, w:13,h:33,dx:-1}]
   },
   chodi: {
-    right: [{x:40, y:1, w:13,h:33}],
+    right: [{x:143,y:0, w:16,h:34,dy:-1,dx:4}],
+    left:  [{x:145,y:41, w:16,h:34,dy:-1,dx:-4}],
+
   }
 } 
 
@@ -234,6 +239,8 @@ $(function () {
           if (oldDir !== smer && oldMode === SEDI) {
             panak.stav.mode = SEDI;
             panak.pos.y -= SKOK;
+          } else if (oldDir === smer && oldMode === STOJI) {
+            panak.stav.mode = CHODI;
           }
           break;
       }
