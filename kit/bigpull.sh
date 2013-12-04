@@ -5,3 +5,4 @@ echo
 cd /kit
 ./pull.sh
 ./tkreset.sh
+./ftreset.sh
