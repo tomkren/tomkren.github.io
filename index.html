@@ -13,10 +13,60 @@
 
 <style>
   .male {font-size: 7pt;}
+  /*a {color: green;}*/
 </style>
 
 </head>
 <body>
+
+
+<script>
+$(function () {
+
+  var ctx = $('#canvas-hra').attr({
+    width:  300, height: 300
+  }).css({
+    position: 'absolute',
+    left: '-15px', top: '-40px',
+    border: '1px dotted white',
+    'z-index': -1
+  })[0].getContext('2d');
+
+  var img = new Image();
+  
+  var panak1    = {x:1,y:1,w:12,h:33};
+  var panak5    = {x:53,y:1,w:12,h:33};
+  var panakSed  = {x:1,y:36,w:14,h:31};
+  var panakSed2 = {x:16,y:36,w:14,h:33};
+
+
+  function myDraw (obj,x,y) {
+    var w = obj.w, h = obj.h;
+    ctx.drawImage(img, obj.x, obj.y, w, h, x, y, w, h);
+  }
+
+  img.onload = function () {
+    //ctx.drawImage(img, );
+    
+    var dx = -6;
+    var dy = -0;
+
+    ctx.beginPath();
+    ctx.arc(160+dx,72+dy,6,0,2*Math.PI,false);
+    ctx.fillStyle='#428BCA';
+    ctx.fill();
+
+    myDraw(panakSed2, 153+dx, 40+dy);
+    
+
+  }
+  img.src = 'img/hra/img.png';
+
+
+
+});
+</script>
+
 
   <!-- Wrap all page content here -->
   <div id="wrap">
@@ -24,8 +74,10 @@
     <!-- Begin page content -->
     <div class="container">
 
-      <div class="page-header">
-        <h1><a href="http://tomkren.cz">tk</a></h1>
+      <div class="page-header" style="position:relative">
+        <h1><a href="http://tomkren.cz">tomkren &nbsp;cz</a></h1>
+        <canvas id="canvas-hra"></canvas>
+
       </div>
 
       <p class="lead">
@@ -51,8 +103,7 @@
 
     <div class="text-muted credit male">
       <a href="http://tomkren.cz">tomkren.cz</a>
-        (mělo by bejt nejst<span id="admin">a</span>bilnější, 
-        jakože ofiko rylíz) <br>
+        (jakože ofiko r<span id="admin">y</span>líz) <br>
       <a href="http://git.tomkren.cz/tomkren.github.io">
         git.tomkren.cz/tomkren.github.io</a>
         (z repa na serveru)<br>
@@ -69,8 +120,10 @@
  
 <script>
 $(function(){ 
-  log('Welcome!');
-  $('#admin').click(function(){
+  log('Vítejte v mé picérii!');
+  $('#admin').css({
+    cursor: 'pointer'
+  }).click(function(){
     window.location.href = 
      'https://www.angel-hosting.cz/administrace/';
   });
