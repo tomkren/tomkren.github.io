@@ -38,25 +38,48 @@ var FRONT= 'front';
 //type mode:
 var SEDI = 'sedi';
 var CHODI= 'chodi';
+var STOJI= 'stoji';
 
 var panakImgs = {
   p1   : {x:0, y:1, w:13,h:33},
   p5   : {x:53,y:1, w:12,h:33},
+  chodL: {},
+  stojL: {},
+  chodR: {},
+  stojR: {},
   sed  : {x:1, y:36,w:14,h:31},
   sed2 : {x:16,y:36,w:14,h:33}
 };
 
+var imgOs = {
+  sedi: {
+    front: [{x:16,y:36,w:14,h:33}],
+    right: [{x:30+14, y:36, w:15,h:31,dx:4,dy:2}], 
+    left:  [{x:30+14+15, y:36, w:15,h:31,dx:-4,dy:2}],
+  },
+  stoji: {
+    front: [{x:0, y:1, w:13,h:33}],
+    right: [{x:14, y:1, w:13,h:33,dx:2}],
+    left:  [{x:30, y:36, w:13,h:33,dx:-1}]
+  },
+  chodi: {
+    right: [{x:40, y:1, w:13,h:33}],
+  }
+} 
+
 
 //type panakStavy :
-var SEDI_FRONT = {mode:SEDI,  dir:FRONT, img: panakImgs.sed2};
-var CHODI_LEFT = {mode:CHODI, dir:LEFT };
-var CHODI_RIGHT= {mode:CHODI, dir:RIGHT, img: panakImgs.p1};
+var SEDI_FRONT  = {mode:SEDI,  dir:FRONT};
+var STOJI_FRONT = {mode:STOJI, dir:FRONT};
+var STOJI_RIGHT = {mode:STOJI, dir:RIGHT};
+var CHODI_LEFT  = {mode:CHODI, dir:LEFT };
+var CHODI_RIGHT = {mode:CHODI, dir:RIGHT};
 
 $(function () {
 
   var panak = {
     stav : SEDI_FRONT,
-    pos  : [0,0],
+    pos  : {x:0,y:0},
   };
 
 
@@ -72,11 +95,18 @@ $(function () {
   var ctx = $canvas[0].getContext('2d');
 
   function myDraw (obj,x,y) {
-    var objj = obj.stav.img;
-    var w = objj.w, h = objj.h;
+    var stav = obj.stav;
+    var os = imgOs[stav.mode][stav.dir];
+    if (!os) {log('chybí obrazkove souřadnice:',
+                  stav.mode,stav.dir);}
+    var objj = os[0];
+    var dx = objj.dx || 0;
+    var dy = objj.dy || 0;
+    var w = objj.w;
+    var h = objj.h;
     ctx.drawImage(img, 
       objj.x,       objj.y,       w, h, 
-      obj.pos[0]+x, obj.pos[1]+y, w, h);
+      obj.pos.x+dx+x, obj.pos.y+dy+y, w, h);
   }
 
   function draw () {
@@ -99,22 +129,41 @@ $(function () {
   img.onload = draw;
   img.src = 'img/hra/img.png';
 
+  var SKOK = 20;
 
   function arrow (smer) {
     return function(){
-      if (panak.stav.mode === SEDI  &&
-          panak.stav.dir  === FRONT &&
-          smer            === DOWN) {
-        log('hop');
-        panak.stav = CHODI_RIGHT;
-        panak.pos[1] += 20;
+
+      var oldMode = panak.stav.mode; 
+      var oldDir  = panak.stav.dir;
+
+
+      if (oldMode === SEDI) {
+        panak.stav.mode = STOJI;
+        if (smer !== UP) {
+          panak.pos.y += SKOK;
+        }
       }
+
+
       switch (smer) {
-        case UP   : log('hore'); break;
-        case DOWN : log('dolu'); break;
-        case LEFT : log('levo'); break;
-        case RIGHT: log('prav'); break;
+        case UP   : panak.pos.y   -= SKOK; 
+                    panak.stav.mode= SEDI; break;
+        case DOWN : panak.stav.dir = FRONT;break;
+        case LEFT :  
+        case RIGHT: 
+          panak.stav.dir = smer; 
+          if (oldDir !== smer && oldMode === SEDI) {
+            panak.stav.mode = SEDI;
+            panak.pos.y -= SKOK;
+          }
+          break;
       }
+
+      
+
+
+
       draw();
     }
   }
@@ -142,7 +191,8 @@ $(function () {
       </div>
 
       <p class="lead">
-        <a href="fishtron.html">fishtron.js</a>
+        <a href="fishtron.html" class="btn btn-primary btn-lg">
+          fishtron.js</a>
       </p>
 
       <p>
@@ -181,7 +231,7 @@ $(function () {
  
 <script>
 $(function(){ 
-  log('Vítejte v mé picérii!');
+  //log('Vítejte v mé picérii!');
   $('#admin').css({
     cursor: 'pointer'
   }).click(function(){
