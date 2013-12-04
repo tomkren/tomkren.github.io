@@ -9,6 +9,8 @@
     
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/underscore-1.5.1.js"></script>
+  <script src="js/libs/keypress.js"></script>
+
   <script src="js/utils.js"></script>
 
 <style>
@@ -25,47 +27,102 @@
 
 
 <script>
+
+//type dir :
+var UP   = 'up';
+var DOWN = 'down';
+var LEFT = 'left';
+var RIGHT= 'right';
+var FRONT= 'front';
+
+//type mode:
+var SEDI = 'sedi';
+var CHODI= 'chodi';
+
+var panakImgs = {
+  p1   : {x:0, y:1, w:13,h:33},
+  p5   : {x:53,y:1, w:12,h:33},
+  sed  : {x:1, y:36,w:14,h:31},
+  sed2 : {x:16,y:36,w:14,h:33}
+};
+
+
+//type panakStavy :
+var SEDI_FRONT = {mode:SEDI,  dir:FRONT, img: panakImgs.sed2};
+var CHODI_LEFT = {mode:CHODI, dir:LEFT };
+var CHODI_RIGHT= {mode:CHODI, dir:RIGHT, img: panakImgs.p1};
+
 $(function () {
 
-  var ctx = $('#canvas-hra').attr({
+  var panak = {
+    stav : SEDI_FRONT,
+    pos  : [0,0],
+  };
+
+
+
+  var $canvas = $('#canvas-hra').attr({
     width:  300, height: 300
   }).css({
     position: 'absolute',
     left: '-15px', top: '-40px',
     border: '1px dotted white',
     'z-index': -1
-  })[0].getContext('2d');
-
-  var img = new Image();
-  
-  var panak1    = {x:1,y:1,w:12,h:33};
-  var panak5    = {x:53,y:1,w:12,h:33};
-  var panakSed  = {x:1,y:36,w:14,h:31};
-  var panakSed2 = {x:16,y:36,w:14,h:33};
-
+  });
+  var ctx = $canvas[0].getContext('2d');
 
   function myDraw (obj,x,y) {
-    var w = obj.w, h = obj.h;
-    ctx.drawImage(img, obj.x, obj.y, w, h, x, y, w, h);
+    var objj = obj.stav.img;
+    var w = objj.w, h = objj.h;
+    ctx.drawImage(img, 
+      objj.x,       objj.y,       w, h, 
+      obj.pos[0]+x, obj.pos[1]+y, w, h);
   }
 
-  img.onload = function () {
-    //ctx.drawImage(img, );
-    
-    var dx = -11;
-    var dy = -2;
+  function draw () {
+
+    ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
+
+    var dx = 0;
+    var dy = 0;
 
     ctx.beginPath();
-    ctx.arc(160+dx,72+dy,6,0,2*Math.PI,false);
+    ctx.arc(160-11+dx,72-2+dy,6,0,2*Math.PI,false);
     ctx.fillStyle='#428BCA';
     ctx.fill();
 
-    myDraw(panakSed2, 153+dx, 40+dy);
-    
+    myDraw(panak, 153-11+dx, 40-2+dy);
 
   }
+
+  var img = new Image();
+  img.onload = draw;
   img.src = 'img/hra/img.png';
 
+
+  function arrow (smer) {
+    return function(){
+      if (panak.stav.mode === SEDI  &&
+          panak.stav.dir  === FRONT &&
+          smer            === DOWN) {
+        log('hop');
+        panak.stav = CHODI_RIGHT;
+        panak.pos[1] += 20;
+      }
+      switch (smer) {
+        case UP   : log('hore'); break;
+        case DOWN : log('dolu'); break;
+        case LEFT : log('levo'); break;
+        case RIGHT: log('prav'); break;
+      }
+      draw();
+    }
+  }
+
+  keypress.combo('up',    arrow(UP));
+  keypress.combo('down',  arrow(DOWN));
+  keypress.combo('left',  arrow(LEFT));
+  keypress.combo('right', arrow(RIGHT));
 
 
 });
