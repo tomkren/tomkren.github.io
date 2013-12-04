@@ -32,7 +32,7 @@
     color: white;
     margin-top: 15px; 
     padding-top:5px;
-    padding-left:11px;
+    padding-left:12px;
     border: 0px solid white;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -85,11 +85,17 @@
         (jakože ofiko r<span id="admin">y</span>líz) <br>
       <a href="http://git.tomkren.cz/tomkren.github.io">
         git.tomkren.cz/tomkren.github.io</a>
+        <a href="http://git.tomkren.cz/tomkren.github.io/fishtron.html">
+        [ft]</a>
         (z repa na serveru)<br>
       <a href="http://tomkren.github.io">tomkren.github.io</a>
+        <a href="http://tomkren.github.io/fishtron.html">
+        [ft]</a>
         (z origin repa)<br>
       <a href="http://localhost/tomkren.github.io">
-        localhost/tomkren.github.io</a> (lokálek) <br>
+        localhost/tomkren.github.io</a>
+        <a href="http://localhost/tomkren.github.io/fishtron.html">
+        [ft]</a> (lokálek)<br>
       <a href="http://146.255.30.53:8080">
         146.255.30.53:8080</a> (node.js pokus)
       </div>
@@ -254,12 +260,15 @@ $(function () {
 <script>
 $(function() {
   $('#mystery-box').click(function(){
-    $('#mystery-box').attr({
-      value: ''
-    }).animate({
+    $('#mystery-box').val('').animate({
       width: '350px'
     });
   }); 
+  $('#mystery-box').blur(function(){
+    $('#mystery-box').val('?').animate({
+      width: '32px'
+    });
+  });
   //log('Vítejte v mé picérii!');
   $('#admin').css({
     cursor: 'pointer'
