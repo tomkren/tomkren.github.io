@@ -308,11 +308,20 @@ $(function () {
   }
 
 
+  var arrowUP    = arrow(UP);
+  var arrowDOWN  = arrow(DOWN);
+  var arrowLEFT  = arrow(LEFT);
+  var arrowRIGHT = arrow(RIGHT);  
 
-  keypress.combo('up',    arrow(UP));
-  keypress.combo('down',  arrow(DOWN));
-  keypress.combo('left',  arrow(LEFT));
-  keypress.combo('right', arrow(RIGHT));
+  keypress.combo('up',    arrowUP);
+  keypress.combo('down',  arrowDOWN);
+  keypress.combo('left',  arrowLEFT);
+  keypress.combo('right', arrowRIGHT);
+
+  keypress.combo('w', arrowUP);
+  keypress.combo('s', arrowDOWN);
+  keypress.combo('a', arrowLEFT);
+  keypress.combo('d', arrowRIGHT);
 
 
 });
