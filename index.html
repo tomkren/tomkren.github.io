@@ -14,7 +14,8 @@
   <script src="js/utils.js"></script>
 
 <style>
-  .stroj {font-family: "Lucida Console", Courier, monospace;}
+  .stroj {font-family: "Lucida Console", Courier, monospace;
+          font-size: 20pt; }
   .male {font-size: 7pt;}
   /*a {color: #4CBB17;}*/
   h1 {
@@ -53,7 +54,9 @@
     <div class="container">
 
       <div class="page-header" style="position:relative">
-        <h1 class="stroj"><a href="http://tomkren.cz">tomkren cz</a></h1>
+        <h1 class="stroj" style="opacity: 0.0;">
+          <a href="http://tomkren.cz">tomkren.cz</a>
+        </h1>
         <canvas id="canvas-hra"></canvas>
 
       </div>
@@ -131,6 +134,8 @@ var panakImgs = {
   sed2 : {x:16,y:36,w:14,h:33}
 };
 
+var logoFrame = {x:0,y:79,w:158,h:24};
+
 var imgOs = {
   sedi: {
     front: [{x:16,y:36,w:14,h:33},
@@ -190,14 +195,21 @@ $(function () {
 
 
   var $canvas = $('#canvas-hra').attr({
-    width:  300, height: 300
+    width:  700, height: 300
   }).css({
     position: 'absolute',
-    left: '-15px', top: '-40px',
+    left: '-215px', top: '-40px',
     border: '1px dotted white',
     'z-index': -1
   });
   var ctx = $canvas[0].getContext('2d');
+
+  function drawFrame (frame, x,y) {
+    var w = frame.w, h = frame.h;
+    var dx = frame.dx || 0, dy = frame.dy || 0;    
+    ctx.drawImage(img, frame.x, frame.y, w, h, 
+                       x+dx,    y+dy,    w, h);
+  }
 
   function drawPanak (panak,x,y) {
     var stav = panak.stav;
@@ -207,14 +219,8 @@ $(function () {
       return;
     }
     var frame = os[panak.phase%os.length];
-    var dx = frame.dx || 0;
-    var dy = frame.dy || 0;
-    var w = frame.w;
-    var h = frame.h;
-    ctx.drawImage(img, 
-      frame.x, frame.y, w, h, 
-      panak.pos.x+dx+x, 
-      panak.pos.y+dy+y, w, h);
+
+    drawFrame(frame, panak.pos.x+x, panak.pos.y+y);
 
     if (panak.stav.mode === CHODI) {
       if (panak.phase < os.length-1) {
@@ -236,8 +242,10 @@ $(function () {
 
     ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
 
-    var dx = 0;
-    var dy = 0;
+    var dx = 200-13;
+    var dy = -13;
+
+    drawFrame(logoFrame,29+dx,56+dy);
 
     ctx.beginPath();
     ctx.arc(160-11+dx,72-2+dy,6,0,2*Math.PI,false);
@@ -246,13 +254,14 @@ $(function () {
 
     drawPanak(panak, 153-11+dx, 40-2+dy);
 
+
   }
 
   var img = new Image();
   img.onload = draw;
   img.src = 'img/hra/img.png';
 
-  var SKOK = 20;
+  var SKOK = 29;
 
   function arrow (smer) {
     return function(){
@@ -297,6 +306,8 @@ $(function () {
       draw();
     }
   }
+
+
 
   keypress.combo('up',    arrow(UP));
   keypress.combo('down',  arrow(DOWN));
