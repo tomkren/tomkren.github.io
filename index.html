@@ -144,8 +144,24 @@ var imgOs = {
     left:  [{x:30, y:36, w:13,h:33,dx:-1}]
   },
   chodi: {
-    right: [{x:143,y:0, w:16,h:34,dy:-1,dx:4}],
-    left:  [{x:145,y:41, w:16,h:34,dy:-1,dx:-4}],
+    right: [{x:143,y:0, w:16,h:34,dy:-1,dx: 4},
+            {x:160,y:0, w:20,h:34,dy:-1,dx: 4},
+            {x:181,y:0, w:22,h:34,dy:-1,dx: 6-1},
+            {x:203,y:0, w:20,h:34,dy:-1,dx: 13-1},
+            {x:223,y:0, w:15,h:34,dy:-1,dx: 18-1},
+            {x:79, y:0, w:19,h:34,dy:-1,dx: 22-1},
+            {x:98, y:0, w:22,h:34,dy:-1,dx: 24-1-1},
+            {x:120,y:0, w:23,h:34,dy:-1,dx: 32-1-1}
+           ],
+    left:  [{x:145,y:41, w:16,h:34,dy:-1,dx:-4-1-1},
+            {x:163,y:41, w:20,h:34,dy:-1,dx:-10-1-1-1-1},
+            {x:181+3,y:41, w:22,h:34,dy:-1,dx:-6-3-1-1-1-1-1-1},
+            {x:203+1,y:41, w:19,h:34,dy:-1,dx:-13-1-1-1-1-1-1},
+            {x:223,y:41, w:15,h:34,dy:-1,dx:-18-1-1-1-1-1-1},
+            {x:79, y:41, w:19,h:34,dy:-1,dx:-22-1-1-1-1-1-1-1},
+            {x:98, y:41, w:22,h:34,dy:-1,dx:-24-1-1-1-1-1-1-1-1},
+            {x:120,y:41, w:23,h:34,dy:-1,dx:-32+2-1-1-1-1-1-1-1}
+           ],
 
   }
 } 
@@ -158,11 +174,15 @@ var STOJI_RIGHT = {mode:STOJI, dir:RIGHT};
 var CHODI_LEFT  = {mode:CHODI, dir:LEFT };
 var CHODI_RIGHT = {mode:CHODI, dir:RIGHT};
 
+var STEP_TIME = 70;//555;//70;
+var STEP_PX   = 32;
+
 $(function () {
 
   var panak = {
     stav : SEDI_FRONT,
     pos  : {x:0,y:0},
+    phase: 0
   };
 
 
@@ -177,19 +197,37 @@ $(function () {
   });
   var ctx = $canvas[0].getContext('2d');
 
-  function myDraw (obj,x,y) {
-    var stav = obj.stav;
+  function drawPanak (panak,x,y) {
+    var stav = panak.stav;
     var os = imgOs[stav.mode][stav.dir];
-    if (!os) {log('chybí obrazkove souřadnice:',
-                  stav.mode,stav.dir);}
-    var objj = os[0];
-    var dx = objj.dx || 0;
-    var dy = objj.dy || 0;
-    var w = objj.w;
-    var h = objj.h;
+    if (!os) {
+      log('ERR: chybí obrazkove souřadnice:', stav.mode, stav.dir);
+      return;
+    }
+    var frame = os[panak.phase%os.length];
+    var dx = frame.dx || 0;
+    var dy = frame.dy || 0;
+    var w = frame.w;
+    var h = frame.h;
     ctx.drawImage(img, 
-      objj.x,       objj.y,       w, h, 
-      obj.pos.x+dx+x, obj.pos.y+dy+y, w, h);
+      frame.x, frame.y, w, h, 
+      panak.pos.x+dx+x, 
+      panak.pos.y+dy+y, w, h);
+
+    if (panak.stav.mode === CHODI) {
+      if (panak.phase < os.length-1) {
+        //log('skedžld next frame');
+        panak.phase++;
+        setTimeout(draw, STEP_TIME);
+      } else {
+        //log('anim loop complete');
+        panak.phase = 0;
+        panak.stav.mode = STOJI;
+        panak.pos.x += STEP_PX * (panak.stav.dir===RIGHT?1:-1); 
+        setTimeout(draw, STEP_TIME);
+      }
+    }
+
   }
 
   function draw () {
@@ -204,7 +242,7 @@ $(function () {
     ctx.fillStyle='#428BCA';
     ctx.fill();
 
-    myDraw(panak, 153-11+dx, 40-2+dy);
+    drawPanak(panak, 153-11+dx, 40-2+dy);
 
   }
 
@@ -230,9 +268,16 @@ $(function () {
 
 
       switch (smer) {
-        case UP   : panak.pos.y   -= SKOK; 
-                    panak.stav.mode= SEDI; break;
-        case DOWN : panak.stav.dir = FRONT;break;
+        case UP   : 
+          panak.pos.y   -= SKOK;            
+          panak.stav.mode= SEDI; 
+          break;
+        case DOWN : 
+          if (oldMode === CHODI) {
+            panak.stav.mode = STOJI;
+          }
+          panak.stav.dir = FRONT;
+          break;
         case LEFT :  
         case RIGHT: 
           panak.stav.dir = smer; 
@@ -246,8 +291,6 @@ $(function () {
       }
 
       
-
-
 
       draw();
     }
