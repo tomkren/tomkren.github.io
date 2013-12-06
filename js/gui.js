@@ -1,3 +1,30 @@
+function ajaxes (opts) {
+  opts = _.extend({
+    urls : [],
+    dataType : 'text',
+    success : function(){},
+    finish  : function(){}
+  }, opts);
+
+  function step (urls) {
+    if (urls.length === 0) {
+      opts.finish();
+    } else {
+      var url = _.head(urls);
+      $.ajax({
+        url: url,
+        dataType: opts.dataType,
+        success: function (data) {
+          opts.success(data, url);
+          step(_.tail(urls));
+        }
+      });        
+    }  
+  }
+  
+  step(opts.urls);
+}
+
 function setButtText ($butt, text, ico) {
   $butt.html('');
   if (ico) {
@@ -79,11 +106,28 @@ function mkGUI (containerId) {
     'margin-top': '3px'
   });
 
-  var $editor = $('<pre>')
-    .attr('id','editor-pre')
-    .css('width', '100%');
+  var $editor = $('<pre>').attr({
+    id: 'editor-pre'
+  }).css({
+    width: '100%',
+    'margin-top': '3px'
+  });
 
-  
+  var $editorButts = $('<div>').append(
+    '<div class="btn-group">'+
+      '<button type="button" class="btn btn-default dropdown-toggle"'+
+      'data-toggle="dropdown">'+
+      '<span class="glyphicon glyphicon-folder-open"></span> '+
+      '&nbsp;open <span class="caret"></span></button>'+
+      '<ul class="dropdown-menu" role="menu"></ul>'+
+    '</div>'
+  );
+
+  var $openUL = $editorButts.children().children('ul');
+
+  var $editorContainer = $('<div>').append([
+    $editorButts, $editor]);
+
   var sTabs = mkTabs(['editor','results','stats','log']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
@@ -92,7 +136,7 @@ function mkGUI (containerId) {
   
   sTabs.tabs.log.append($log, $downButt, $clearButt);
   
-  sTabs.tabs.editor.append($editor);
+  sTabs.tabs.editor.append($editorContainer);
 
   var $results = $('<div>');
   sTabs.tabs.results.append($results);
@@ -140,30 +184,43 @@ function mkGUI (containerId) {
   ses.setUseSoftTabs(true);
   ses.setUseWrapMode(true);
   
-  $.ajax({
-    url : 'js/problems/SSR.js',
-    dataType: "text",
-    success : function (data) {
-      ses.setValue(data);
+  
+  var problemFiles = [];
+
+  ajaxes({
+    urls: ['js/problems/SSR.js', 'js/problems/SSR_long.js'],
+    dataType: 'text',
+    success: function (data, url) {
+      var opts; eval(data);
+      problemFiles.push({
+        str:  data,
+        opts: opts
+      });
+      $openUL.append( 
+        $('<li>').html($('<a>')
+          .attr('href', '#')
+          .html(opts.name))
+          .click(function(){
+            //log(data.split('\n')[0]);
+            ses.setValue(data);
+          })
+      );
+    },
+    finish: function () {
+      ses.setValue(problemFiles[0].str);
     }
   });
+  
 
   function guiLog (msg) {
     $log.append(msg).append('\n');
     $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
   }
 
-  
-  /*
-  function runInit () {
-    graphs.runInit();
-  }*/
-
-  //TODO : nefacha když je rezizlej hidden editor
   function resize () {
     var newHeight = window.innerHeight-106;
     $log   .css('height', (newHeight-30)+'px');
-    $editor.css('height', (newHeight+0)+'px');
+    $editor.css('height', (newHeight-37)+'px');
     $graphContainer.css('height',(newHeight-20)+'px');
     var $bars = Phenotype.get$bars();
     if ($bars) {
