@@ -6,6 +6,8 @@ function ajaxes (opts) {
     finish  : function(){}
   }, opts);
 
+  var i = 0;
+
   function step (urls) {
     if (urls.length === 0) {
       opts.finish();
@@ -15,7 +17,8 @@ function ajaxes (opts) {
         url: url,
         dataType: opts.dataType,
         success: function (data) {
-          opts.success(data, url);
+          opts.success(data, i);
+          i++;
           step(_.tail(urls));
         }
       });        
@@ -188,9 +191,11 @@ function mkGUI (containerId) {
   var problemFiles = [];
 
   ajaxes({
-    urls: ['js/problems/SSR.js', 'js/problems/SSR_long.js'],
     dataType: 'text',
-    success: function (data, url) {
+    urls: _.map(ProblemRegister, function(x){
+      return 'js/problems/'+x;
+    }),
+    success: function (data, i) {
       var opts; eval(data);
       problemFiles.push({
         str:  data,
@@ -201,7 +206,6 @@ function mkGUI (containerId) {
           .attr('href', '#')
           .html(opts.name))
           .click(function(){
-            //log(data.split('\n')[0]);
             ses.setValue(data);
           })
       );

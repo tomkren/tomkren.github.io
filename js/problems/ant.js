@@ -15,7 +15,7 @@ opts = (function(){
   var phenotypeHeight = 200;
 
   return {
-    name: 'SSR',
+    name: 'ant',
     numRuns: 50,
     numGens: 51,
     popSize: 500,

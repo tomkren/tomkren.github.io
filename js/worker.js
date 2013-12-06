@@ -14,7 +14,8 @@ importScripts(
  'strategy.js',
  'xover.js',
  'ants.js',
- 'eva.js'
+ 'eva.js',
+ 'problem-opts.js'
 );
 
 var log = function (logStr) {

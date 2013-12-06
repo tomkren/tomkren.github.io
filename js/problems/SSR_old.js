@@ -1,9 +1,7 @@
-//SSR_long.js
-
 opts = (function(){
 
   var basicOpts = {
-    name: 'SSR_long',
+    name: 'SSR_old',
     numRuns: 50,
     numGens: 51,
     popSize: 500,

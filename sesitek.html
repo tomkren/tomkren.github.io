@@ -20,6 +20,7 @@
     <script src="js/utils.js"></script>
     <!--<script src="js/fishtronDB.js"></script>-->
     <script src="js/sesitek.js"></script>
+    <script src="js/zone2d.js"></script>
 
     
 <script>
@@ -59,6 +60,172 @@ Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
 postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
 
+<!--
+
+d88888D  .d88b.  d8b   db d88888b .d888b. d8888b. 
+YP  d8' .8P  Y8. 888o  88 88'     VP  `8D 88  `8D 
+   d8'  88    88 88V8o 88 88ooooo    odD' 88   88 
+  d8'   88    88 88 V8o88 88~~~~~  .88'   88   88 
+ d8' db `8b  d8' 88  V888 88.     j88.    88  .8D 
+d88888P  `Y88P'  VP   V8P Y88888P 888888D Y8888D' 
+
+-->
+
+<section id="zone2d">Zone2D</section>
+
+<canvas id="zone2d_canvas" width="512" height="512"></canvas>
+
+<script>$(function(){
+
+  
+
+
+  var img = new Image();
+  img.onload = function () {
+  
+    function drawFrame (ctx, frame, x,y) {
+      var w = frame.w, h = frame.h;
+      var dx = frame.dx || 0, dy = frame.dy || 0;    
+      ctx.drawImage(img, frame.x, frame.y, w, h, 
+                         x+dx,    y+dy,    w, h);
+    }
+
+
+    var SANTA_FE = 
+    [ ".FFF............................"
+     , "...F............................"
+     , "...F.....................FFF...." 
+     , "...F....................F....F.." 
+     , "...F....................F....F.." 
+     , "...FFFF.FFFFF........FF........." 
+     , "............F................F.." 
+     , "............F.......F..........." 
+     , "............F.......F..........." 
+     , "............F.......F........F.." 
+     , "....................F..........." 
+     , "............F..................." 
+     , "............F................F.." 
+     , "............F.......F..........." 
+     , "............F.......F.....FFF..." 
+     , ".................F.....F........" 
+     , "................................" 
+     , "............F..................."             
+     , "............F...F.......F......."
+     , "............F...F..........F...." 
+     , "............F...F..............."             
+     , "............F...F..............."
+     , "............F.............F....." 
+     , "............F..........F........" 
+     , "...FF..FFFFF....F..............." 
+     , ".F..............F..............." 
+     , ".F..............F..............." 
+     , ".F......FFFFFFF................." 
+     , ".F.....F........................" 
+     , ".......F........................" 
+     , "..FFFF.........................." 
+     , "................................" ];
+
+    function mkSimpleObj (frame) {
+      return {
+        draw: function (ctx, x, y) {
+          drawFrame(ctx, frame, x, y);
+        }
+      };
+    }
+
+
+
+    //var 
+    ant = (function(){
+      var frames = {
+        u: {x:160,y:78,w:16,h:16},
+        d: {x:176,y:80,w:16,h:16},
+        r: {x:200,y:78,w:16,h:16},
+        l: {x:219,y:78,w:18,h:16},
+      }
+      return {
+        dir: 'r',
+        eaten: 0,
+        isFoodAhead: function () {
+          var ahPos = this.aheadPos();
+          return this.board[ahPos.i][ahPos.j].length > 0;
+        },
+        aheadPos: function () {
+          var i = this.pos.i;
+          var j = this.pos.j;
+          switch( this.dir ){
+            case 'r' : j = (j+1+32) % 32 ; break;
+            case 'l' : j = (j-1+32) % 32 ; break;
+            case 'u' : i = (i-1+32) % 32 ; break;
+            case 'd' : i = (i+1+32) % 32 ; break;
+          }
+          return {i:i,j:j};
+        },
+        move: function () {
+          var i_old = this.pos.i, j_old = this.pos.j;
+          var newPos = this.aheadPos();
+          var i = newPos.i, j = newPos.j;
+
+          var field_old = this.board[i_old][j_old];
+          var index_old = field_old.indexOf(this);
+          field_old.splice(index_old, 1);
+
+          this.eaten += this.board[i][j].length;
+
+          this.board[i][j] = [this];
+          this.pos = {i:i, j:j};
+        },
+        left: function () {
+          switch( this.dir ){
+            case 'r' : this.dir = 'u'; return; 
+            case 'l' : this.dir = 'd'; return; 
+            case 'u' : this.dir = 'l'; return; 
+            case 'd' : this.dir = 'r'; return; 
+          }
+        },
+        right: function () {
+          switch( this.dir ){
+            case 'r' : this.dir = 'd' ; return;
+            case 'l' : this.dir = 'u' ; return;
+            case 'u' : this.dir = 'r' ; return;
+            case 'd' : this.dir = 'l' ; return;
+          } 
+        },
+        draw: function (ctx, x, y) {
+          drawFrame(ctx, frames[this.dir], x, y);
+        }
+      }
+    })();
+
+    var seed = mkSimpleObj({x:212,y:98,w:25,h:22});
+    
+
+    //var 
+    testZona = Zone2D.mk({
+      side: 32,
+      fieldSide: 16,
+      initBoard: function (board) {
+        ant.board = board;
+        ant.pos = {i:0,j:0};
+        board[ant.pos.i][ant.pos.j].push(ant);
+      },
+      initField: function (arr, pos) {
+        if (SANTA_FE[pos.i][pos.j] === 'F') {
+          arr.push(seed);
+        }
+      }
+    });
+
+    //var 
+    ctx = $('#zone2d_canvas')[0].getContext('2d'); 
+    
+    testZona.draw(ctx);   
+  
+  };
+  img.src = 'img/hra/img.png';
+
+    
+});</script>
 
 <!--
 
