@@ -42,7 +42,21 @@ var Zone2D = {
 
     }
 
+    var lastCtx = null;
+
     function draw (ctx) {
+
+      if (ctx === undefined) {
+        if (lastCtx !== null) {
+          ctx = lastCtx;
+        } else {
+          log('ERR: zone2d.draw - no ctx supplied');
+          return;
+        }
+      } else {
+        lastCtx = ctx;
+      }
+
       var w = side*fieldSide;
       ctx.fillStyle = 'white';
       ctx.fillRect(0,0,w,w); 

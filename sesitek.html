@@ -61,6 +61,204 @@ postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvěd�
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
 
 <!--
+ 
+d8888b. db    db d8888b.  .d88b.  db    db db    db 
+88  `8D 88    88 88  `8D .8P  Y8. 88    88 `8b  d8' 
+88oooY' 88    88 88   88 88    88 Y8    8P  `8bd8'  
+88~~~b. 88    88 88   88 88    88 `8b  d8'    88    
+88   8D 88b  d88 88  .8D `8b  d8'  `8bd8'     88    
+Y8888P' ~Y8888P' Y8888D'  `Y88P'     YP       YP    
+                                                   
+-->
+
+<section id="slechteni-budov">Slechtění budov</section>
+
+
+<canvas id="budovy_canvas" width="512" height="512"></canvas>
+
+<script>
+$(function(){
+
+    //var 
+    house = mkHouse();
+
+    var ctx = $('#budovy_canvas')[0].getContext('2d'); 
+    house.draw(ctx);   
+
+});
+</script>
+
+<!--
+<p>Repre:</p>
+<pre>
+trojuhelnik1 = {
+  es : [
+    e1@{ u: #v1, v: #v2, data:{...} },
+    e2@{ u: #v2, v: #v3, data:{...} },
+    e3@{ u: #v3, v: #v1, data:{...} }
+  ],
+  vs : [
+    v1@{ es: [#e1, #e3], data:{...} },    
+    v2@{ es: [#e1, #e2], data:{...} },    
+    v3@{ es: [#e2, #e3], data:{...} }
+  ]
+}
+
+trojuhelnik2 = {
+  vs : {
+    v1: { es: ['e1', 'e3'], data:{...} },    
+    v2: { es: ['e1', 'e2'], data:{...} },    
+    v3: { es: ['e2', 'e3'], data:{...} }
+  }
+  es : {
+    e1: { u: 'v1', v: 'v2', data:{...} },
+    e2: { u: 'v2', v: 'v3', data:{...} },
+    e3: { u: 'v3', v: 'v1', data:{...} }
+  },
+}
+</pre>
+
+Operace:
+
+<pre>
+emptyG() aka mkGraph()
+addV(vid, data)
+addE(eid, vid1, vid2, data)
+popV(vid)
+popE(eid)
+union(g1,g2)
+</pre>
+-->
+
+
+<script show="false">
+
+function mkGraph () {
+  var self;
+
+  var vs = {};
+  var es = {};
+
+  function addV (vid, data) {
+    assert(vs[vid] === undefined, 'mkGraph.addV : vid must be unique.');
+
+    vs[vid] = {
+      vid:  vid,
+      eids: [],
+      es:   [],
+      data: data
+    };
+
+    return self;
+  } 
+
+  function addE (eid, uid, vid, data) {
+    assert(es[eid] === undefined, 'mkGraph.addE : eid must be unique.');    
+
+    if (!vs[uid]) { addV(uid, {}); }
+    if (!vs[vid]) { addV(vid, {}); }
+
+    var u = vs[uid];
+    var v = vs[vid];
+
+    var e = {
+      eid:  eid,
+      uid:  uid,
+      vid:  vid,
+      u:    u,
+      v:    v,
+      data: data
+    };   
+
+    es[eid] = e; 
+
+    vs[uid].eids.push(eid);
+    vs[vid].eids.push(eid);
+    vs[uid].es.push(e);
+    vs[vid].es.push(e);
+
+    return self;
+  }
+
+  self = {
+    vs: vs,
+    es: es,
+    addV: addV,
+    addE: addE
+  };
+
+  return self;
+}
+
+
+function mkHouse (opts) {
+  opts = _.extend({
+    w: 100,
+    h: 100,
+    x: 10,
+    y: 10,
+  },opts);
+
+  var self;
+  var rooms, walls;
+
+  function init () {
+    var x = opts.x;
+    var y = opts.y;
+    var w = opts.w;
+    var h = opts.h;
+
+    walls = mkGraph()
+      .addV('v1', {x: x,   y: y   })
+      .addV('v2', {x: x+w, y: y   })
+      .addV('v3', {x: x+w, y: y+h })
+      .addV('v4', {x: x,   y: y+h })
+      .addE('e1', 'v1', 'v2', {})
+      .addE('e2', 'v2', 'v3', {})
+      .addE('e3', 'v3', 'v4', {})
+      .addE('e4', 'v4', 'v1', {})
+    ;
+
+    var zigZag0 = [ 
+      walls.es['e1'],
+      walls.es['e2'],
+      walls.es['e3'],
+      walls.es['e4'] 
+    ];
+
+    rooms = mkGraph()
+      .addV('in',  {})
+      .addV('out', {})
+      .addE('e0', 'in', 'out', {zigZag: zigZag0} )
+    ;
+
+  }
+
+  var lastCtx = null;
+
+  function draw (ctx) {
+
+    if (ctx === undefined) {
+      if (lastCtx !== null) { ctx = lastCtx; } 
+      else { log('ERR: mkHouse.draw - no ctx supplied'); return; }
+    } else { lastCtx = ctx; }
+
+  }
+
+  init();
+
+  self = {
+    rooms: rooms,
+    walls: walls,
+    draw:  draw,
+  };
+  
+  return self;
+}
+
+</script>
+
+<!--
 
 d88888D  .d88b.  d8b   db d88888b .d888b. d8888b. 
 YP  d8' .8P  Y8. 888o  88 88'     VP  `8D 88  `8D 
@@ -135,8 +333,7 @@ d88888P  `Y88P'  VP   V8P Y88888P 888888D Y8888D'
 
 
 
-    //var 
-    ant = (function(){
+    var ant = (function(){
       var frames = {
         u: {x:160,y:78,w:16,h:16},
         d: {x:176,y:80,w:16,h:16},
@@ -218,8 +415,16 @@ d88888P  `Y88P'  VP   V8P Y88888P 888888D Y8888D'
       }
     });
 
-    //var 
-    ctx = $('#zone2d_canvas')[0].getContext('2d'); 
+    _.extend(testZona, {
+      ant:         ant,
+      left:        function(){ ant.left();  this.draw(); },
+      right:       function(){ ant.right(); this.draw(); },
+      move:        function(){ ant.move();  this.draw(); },
+      isFoodAhead: function(){ return ant.isFoodAhead(); } 
+    });
+
+
+    var ctx = $('#zone2d_canvas')[0].getContext('2d'); 
     
     testZona.draw(ctx);   
   
