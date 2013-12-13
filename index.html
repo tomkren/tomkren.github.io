@@ -62,7 +62,7 @@
       </div>
 
       <p class="lead">
-        <a href="http://fishtron.net" 
+        <a href="http://fishtron.net" id="ft-link"
            class="stin btn btn-primary btn-lg">fishtron.net</a>
       </p>
 
@@ -344,16 +344,23 @@ $(function () {
  
 <script>
 $(function() {
+
   $('#mystery-box').click(function(){
     $('#mystery-box').val('').animate({
       width: '350px'
     });
   }); 
+
   $('#mystery-box').blur(function(){
     $('#mystery-box').val('?').animate({
       width: '32px'
     });
   });
+
+  if (document.URL.split('/')[2] === 'localhost') {
+    $('#ft-link').attr('href', 'http://localhost/tomkren.github.io/fishtron.html');
+  }
+
 });
 </script>
 </body>
