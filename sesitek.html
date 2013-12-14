@@ -95,7 +95,7 @@ $(function(){
     
     
     setTimeout(function(){
-      house.vSplit('in',0.5);
+      house.vSplit('in',0.681);
       house.draw();      
     },500);
 
@@ -117,7 +117,6 @@ function mkGraph () {
 
     vs[vid] = {
       vid:  vid,
-      eids: [],
       es:   [],
       data: data
     };
@@ -136,8 +135,6 @@ function mkGraph () {
 
     var e = {
       eid:  eid,
-      uid:  uid,
-      vid:  vid,
       u:    u,
       v:    v,
       data: data
@@ -145,12 +142,35 @@ function mkGraph () {
 
     es[eid] = e; 
 
-    vs[uid].eids.push(eid);
-    vs[vid].eids.push(eid);
     vs[uid].es.push(e);
     vs[vid].es.push(e);
 
     return self;
+  }
+
+  function removeFromEdgeArray (es, e) {
+    es.splice( es.indexOf(e) , 1);
+  }
+
+  function popEdge (e) {
+    delete es[e.eid];
+    removeFromEdgeArray(e.u.es, e);
+    removeFromEdgeArray(e.v.es, e);
+  }
+
+  function splitEdge (e, vData, e1Data, e2Data) {
+    
+    popEdge(e);
+
+    var vid  = e.eid+'_v' ; 
+    var e1id = e.eid+'_1' ;
+    var e2id = e.eid+'_2' ;
+
+    addV(vid, vData); 
+    addE(e1id, e.u.vid, vid, e1Data );
+    addE(e2id, vid, e.v.vid, e2Data );
+
+    return vs[vid];
   }
 
   function eachE (fun) {
@@ -168,6 +188,8 @@ function mkGraph () {
     addE: addE,
     eachE: eachE,
     eachV: eachV,
+    popEdge: popEdge,
+    splitEdge: splitEdge,
   };
 
   return self;
@@ -259,15 +281,38 @@ function mkHouse (opts) {
 
     log('whereX:', whereX);
 
-    eachRoomWall(room, function (wall) {
-      var uX = wall.u.data.x;
-      var vX = wall.v.data.x;
-      if ( (uX<whereX && whereX<vX) ||
-           (vX<whereX && whereX<uX) ) {
-        log(wall.eid);
-      }
-    });
+    //eachRoomWall(room, function (wall) {
 
+    //});
+
+    var first = true;
+    var newJoint1, newJoint2;
+
+    _.each( room.es, function (roomEdge) {
+      _.each( roomEdge.data.zigZag, function (wall) {
+        var uX = wall.u.data.x;
+        var vX = wall.v.data.x;
+        if ( (uX<whereX && whereX<vX) ||
+             (vX<whereX && whereX<uX) ) {
+          log(wall.eid);
+          var newJoint = walls.splitEdge(wall, {
+            x: whereX, 
+            y: wall.u.data.y , // TODO udelat líp, vzít to kde tam vedla ta wall  
+          }, {}, {});
+
+          if (first) {
+            first = false;
+            newJoint1 = newJoint;
+          } else {
+            newJoint2 = newJoint;
+          }
+
+        }        
+      });
+    });     
+
+    walls.addE(newJoint1.vid+'-'+newJoint2.vid, 
+               newJoint1.vid,    newJoint2.vid, {});
 
   }
 
