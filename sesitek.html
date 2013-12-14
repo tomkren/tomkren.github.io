@@ -71,64 +71,37 @@ Y8888P' ~Y8888P' Y8888D'  `Y88P'     YP       YP
                                                    
 -->
 
-<section id="slechteni-budov">Slechtění budov</section>
+<section id="slechteni-budov">Šlechtění budov</section>
 
 
-<canvas id="budovy_canvas" width="512" height="512"></canvas>
+<canvas id="budovy_canvas" width="512" height="512" style="border: 1px dotted AliceBlue"></canvas>
 
 <script>
 $(function(){
 
     //var 
-    house = mkHouse();
+    house = mkHouse({
+      x: 100,
+      y: 100,
+      w: 168,
+      h: 100,
+      drawJoints: true,
+      jointRadius: 3,
+      outPos: {x:184, y:250}
+    });
 
     var ctx = $('#budovy_canvas')[0].getContext('2d'); 
-    house.draw(ctx);   
+    house.draw({ctx:ctx, w:512, h:512});   
+    
+    
+    setTimeout(function(){
+      house.vSplit('in',0.5);
+      house.draw();      
+    },500);
 
 });
 </script>
 
-<!--
-<p>Repre:</p>
-<pre>
-trojuhelnik1 = {
-  es : [
-    e1@{ u: #v1, v: #v2, data:{...} },
-    e2@{ u: #v2, v: #v3, data:{...} },
-    e3@{ u: #v3, v: #v1, data:{...} }
-  ],
-  vs : [
-    v1@{ es: [#e1, #e3], data:{...} },    
-    v2@{ es: [#e1, #e2], data:{...} },    
-    v3@{ es: [#e2, #e3], data:{...} }
-  ]
-}
-
-trojuhelnik2 = {
-  vs : {
-    v1: { es: ['e1', 'e3'], data:{...} },    
-    v2: { es: ['e1', 'e2'], data:{...} },    
-    v3: { es: ['e2', 'e3'], data:{...} }
-  }
-  es : {
-    e1: { u: 'v1', v: 'v2', data:{...} },
-    e2: { u: 'v2', v: 'v3', data:{...} },
-    e3: { u: 'v3', v: 'v1', data:{...} }
-  },
-}
-</pre>
-
-Operace:
-
-<pre>
-emptyG() aka mkGraph()
-addV(vid, data)
-addE(eid, vid1, vid2, data)
-popV(vid)
-popE(eid)
-union(g1,g2)
-</pre>
--->
 
 
 <script show="false">
@@ -180,16 +153,43 @@ function mkGraph () {
     return self;
   }
 
+  function eachE (fun) {
+    _.each(_.values(es), fun);
+  }
+
+  function eachV (fun) {
+    _.each(_.values(vs), fun);
+  }
+
   self = {
     vs: vs,
     es: es,
     addV: addV,
-    addE: addE
+    addE: addE,
+    eachE: eachE,
+    eachV: eachV,
   };
 
   return self;
 }
 
+function drawEllipse (ctx, color, centerX, centerY, width, height) {
+  var startingAngle = 0;
+  var endingAngle = 2 * Math.PI; 
+
+  var circumference = Math.max(width, height);
+  var scaleX = width / circumference;
+  var scaleY = height / circumference;
+
+  ctx.fillStyle = color;
+  ctx.save();
+  ctx.translate(centerX, centerY);
+  ctx.scale(scaleX, scaleY);
+  ctx.beginPath();
+  ctx.arc(0, 0, circumference/2, startingAngle, endingAngle);
+  ctx.fill();
+  ctx.restore();  
+}
 
 function mkHouse (opts) {
   opts = _.extend({
@@ -197,10 +197,79 @@ function mkHouse (opts) {
     h: 100,
     x: 10,
     y: 10,
+    drawJoints: true,
+    jointRadius: 5,
+    outPos: {x:10, y:10},
   },opts);
 
   var self;
   var rooms, walls;
+
+  function eachRoomWall (room, fun) {
+    _.each( room.es, function (roomEdge) {
+      _.each( roomEdge.data.zigZag, fun);
+    });      
+  }
+
+  function eachRoomJoint (room, fun) {
+    eachRoomWall(room, function (wall) {
+      fun(wall.u); 
+    });     
+  }
+
+  function getRoomInterval (room, axis) {
+    var min =   Number.MAX_VALUE; 
+    var max = - Number.MAX_VALUE;
+
+    eachRoomJoint(room, function (joint) {
+      var x = joint.data[axis];
+      if (x<min) {min = x;}
+      if (x>max) {max = x;}
+    });    
+
+    return [min, max];
+  }
+
+  function getRoomCenter (room) {
+    if (room.vid === 'out') {
+      return opts.outPos;
+    }
+
+    var mmx = getRoomInterval(room, 'x');
+    var mmy = getRoomInterval(room, 'y');
+    return {
+      x: (mmx[1]+mmx[0])/2, 
+      y: (mmy[1]+mmy[0])/2 
+    };
+  }
+
+
+  function vSplit (roomID, where) {
+    assert(where > 0, 'mkHouse.vSplit : "where" must be > 0');
+    assert(where < 1, 'mkHouse.vSplit : "where" must be < 1');
+
+    var room = rooms.vs[roomID];
+
+    assert(room !== undefined, 'mkHouse.vSplit : invalid roomID "'+roomID+'"');
+
+    var roomInterval = getRoomInterval(room, 'x');
+    var min = roomInterval[0];
+    var max = roomInterval[1];
+    var whereX = min + (max - min) * where;
+
+    log('whereX:', whereX);
+
+    eachRoomWall(room, function (wall) {
+      var uX = wall.u.data.x;
+      var vX = wall.v.data.x;
+      if ( (uX<whereX && whereX<vX) ||
+           (vX<whereX && whereX<uX) ) {
+        log(wall.eid);
+      }
+    });
+
+
+  }
 
   function init () {
     var x = opts.x;
@@ -234,15 +303,58 @@ function mkHouse (opts) {
 
   }
 
-  var lastCtx = null;
+  function drawWalls (ctx) {
+    ctx.strokeStyle = 'black';
+    ctx.beginPath();  
+    walls.eachE(function (e) {
+      ctx.moveTo(e.u.data.x, e.u.data.y);
+      ctx.lineTo(e.v.data.x, e.v.data.y);
+    });
+    ctx.stroke();
 
-  function draw (ctx) {
+    if (opts.drawJoints) {
+      ctx.fillStyle = 'black';
+      walls.eachV(function (v) {
+        ctx.beginPath();
+        ctx.arc(v.data.x,v.data.y,opts.jointRadius,0,Math.PI*2);
+        ctx.fill();
+      });
+    }
+  }
 
-    if (ctx === undefined) {
-      if (lastCtx !== null) { ctx = lastCtx; } 
-      else { log('ERR: mkHouse.draw - no ctx supplied'); return; }
-    } else { lastCtx = ctx; }
+  function drawRooms (ctx) {
+    ctx.strokeStyle = 'red';
+    ctx.beginPath();
+    rooms.eachE(function (e) {
+      var cu = getRoomCenter(e.u);
+      var cv = getRoomCenter(e.v);
+      ctx.moveTo(cu.x, cu.y);
+      ctx.lineTo(cv.x, cv.y);
+    });
+    ctx.stroke();
+    rooms.eachV(function (room) {
+      var c = getRoomCenter(room);
+      var w = ctx.measureText(room.vid).width;
+      drawEllipse(ctx, 'red' , c.x, c.y, w+10, 20);
+      ctx.fillStyle = 'white';
+      ctx.fillText(room.vid, c.x-w/2-1, c.y+3);
+    });
+  }
 
+  var drawOpts = null;
+
+  function draw (drawOpts_) {
+
+    if   (drawOpts_ !== undefined) {drawOpts = drawOpts_;} 
+    else {assert(drawOpts !== null, 'ERR: mkHouse.draw - no drawOpts supplied');}
+
+    var ctx = drawOpts.ctx;
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, drawOpts.w, drawOpts.h); 
+
+    drawWalls(ctx);
+    drawRooms(ctx);
   }
 
   init();
@@ -251,6 +363,7 @@ function mkHouse (opts) {
     rooms: rooms,
     walls: walls,
     draw:  draw,
+    vSplit: vSplit,
   };
   
   return self;
