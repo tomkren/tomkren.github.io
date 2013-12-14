@@ -12,7 +12,7 @@ opts = (function(){
   var ys2  = _.map(xs2, targetFun);
   var xys2 = _.zip(xs2,ys2);
   
-  var phenotypeHeight = 200;
+  var phenotypeHeight = 200;  // 200px height
 
   return {
     name: 'SSR',
