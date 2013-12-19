@@ -282,7 +282,9 @@ function mkGUI (containerId) {
     }
 
     guiLog('starting ...');
-    worker = startGPworker(optsStr, function(msg){
+    //worker = startGPworker(optsStr, function(msg){
+    worker = Solver.startWorker(optsStr, function(msg){
+        
       var content = msg.content;
       switch (msg.subject) {
         case 'log'     : guiLog(content); break;

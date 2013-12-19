@@ -16,6 +16,8 @@ opts = (function(){
 
   return {
     name: 'SSR',
+    generatePop: GP.generatePop,
+    evalPop:     GP.evalPop,
     numRuns: 50,
     numGens: 51,
     popSize: 500,

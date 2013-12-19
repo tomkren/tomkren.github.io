@@ -14,7 +14,8 @@ importScripts(
  'strategy.js',
  'xover.js',
  'ants.js',
- 'eva.js',
+ 'solver.js',
+ 'GP.js',
  'problem-opts.js'
 );
 
@@ -35,8 +36,7 @@ self.addEventListener('message', function(e) {
   
   var msg = JSON.parse(e.data); 
 
-  var opts;
-  eval( msg.optsStr );
+  var opts; eval( msg.optsStr );
 
   var communicator = {
     log: log, 
@@ -47,7 +47,8 @@ self.addEventListener('message', function(e) {
       send('runBegin', run);
     }
   };
-  var gpResult = gp(opts, communicator);
+  //var gpResult = gp(opts, communicator);
+  var gpResult = Solver.run(opts, communicator);
 
   send('result', gpResult);
   self.close();
