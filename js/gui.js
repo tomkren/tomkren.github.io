@@ -299,7 +299,10 @@ function mkGUI (containerId) {
           Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best);
           resize();
           break;
-        case 'result'  : stopped(); break;
+        case 'result' : 
+          $startButt.toggleClass('btn-success btn-danger');
+          stopped(); 
+          break;
         case 'runBegin': 
           graphs.runBegin(content);
           Phenotype.runBegin(content);

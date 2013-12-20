@@ -27,18 +27,6 @@ var Ants = (function () {
     return best;
   }
 
-  function initTau (obj, val) {
-    var tau = {};
-    var i,j;
-    for (i in obj) {
-      if (tau[i] === undefined) {tau[i] = {};}
-      for (j in obj[i]) {
-        tau[i][j] = val; 
-      }
-    }
-    return tau;
-  }
-
   function step( from , tau , problem ){
 
     var succsFun = problem.succsFun;
@@ -160,31 +148,113 @@ var Ants = (function () {
     // -- SOLVER interface ----------------
 
     function initRunKnowledge (opts) {
-      //throw 'TODO';
       return antProblem.initTau;
     }
 
-    function generatePop (opts, runKnowledge) {
-      //throw 'TODO';
-      var pop = [];
-      for (var i = 0; i<opts.popSize; i++) {
-        pop.push( mkPath_new(antProblem, runKnowledge) );
+    var Operators = {
+      generatePop : {
+        in: 0,
+        operate: function (_parents, runKnowledge, opts) {
+          var pop = [];
+          for (var i = 0; i<opts.popSize; i++) {
+            pop.push( mkPath_new(antProblem, runKnowledge) );
+          }
+          return pop;        
+        }  
       }
-      return pop;
+    };
+
+    function generatePop (opts, runKnowledge) {
+      return Operators.generatePop.operate([], runKnowledge, opts);
+    }
+
+
+    function updateRunKnowledge (runKnowledge, evaledPop, opts) {
+
+      //TODO !!!
+      return runKnowledge;
     }
 
     var evalPopOpts = {
-      mkIndivArr:     function (pop)  {return pop;},
-      mkIndivFitness: function (opts) {return opts.fitness;} 
+      mkIndivArr: function (pop)  {
+        return _.map(pop, function (path) {
+          return {term:path};
+        }); 
+      },
+      mkIndivFitness: function (opts) {
+        return function (indiv) {
+          return opts.fitness(indiv.term);
+        }
+      } 
     };
+
+    function sendGenInfo (opts, run, gen, evaledPop, communicator) {
+      //TODO !!!
+
+      var popDist  = evaledPop.popDist;
+      var bestTerm = evaledPop.best.indiv.term;
+
+      communicator.sendStats({
+        run:        run,
+        gen:        gen,
+        terminate:  evaledPop.terminate,
+        best:       popDist.bestVal(),
+        avg:        popDist.avgVal(),
+        worst:      popDist.worstVal(),
+        bestSize:   0,//termSize(bestTerm, sizeMode),
+        avgSize:    0,//avgTermSize,
+        maxSize:    0,//maxTermSize,
+        minSize:    0,//minTermSize,
+        best_jsStr: JSON.stringify( bestTerm )
+      });
+
+      var logOpts = opts.logOpts; 
+      var somethingWritten = false;
+      var valPrecision = logOpts.valPrecision;
+
+      if (gen === 0) {
+        communicator.log('\nRUN '+run+'\n');
+      }
+
+      function showVal (title, prop) {
+        if (logOpts[prop]) {
+          somethingWritten = true;
+          return '  '+title+' '+ 
+          popDist[prop]().toFixed(valPrecision); 
+        } 
+        return '';
+      }
+
+      var best  = showVal('BEST' , 'bestVal' );
+      var avg   = showVal('AVG'  , 'avgVal'  );
+      var worst = showVal('WORST', 'worstVal');
+
+      var msg = 
+        'GEN ' + prefill(gen,3) + 
+        (somethingWritten ? '  :' : '') +
+        best + avg + worst;
+
+      if (logOpts.bestIndiv || evaledPop.terminate) {
+        msg += '\n\n'+ formatBreak(80,
+          JSON.stringify( bestTerm ), 2);
+      }
+
+      communicator.log(msg);
+
+
+    }
 
     var ctx = mkCtx({});
 
     return {
       initRunKnowledge: initRunKnowledge,
+      updateRunKnowledge: updateRunKnowledge,
       generatePop: generatePop,
+      sendGenInfo: sendGenInfo,
       evalPopOpts: evalPopOpts,
       ctx: ctx,
+
+      Operators: Operators,
 
       antProblem: antProblem,
       testRun: function() {
@@ -194,127 +264,8 @@ var Ants = (function () {
 
   }
 
-  /*88888b .d8888. d8888b. 
-  `~~88~~' 88'  YP 88  `8D 
-     88    `8bo.   88oodD' 
-     88      `Y8b. 88~~~   
-     88    db   8D 88      
-     YP    `8888Y' */
-
-  var TSP = (function () {
-
-    function mkTspProblem (tspOpts, antOpts) { //(tsp, from, Q, initTauVal) {
-      var tsp = mkTSPInstance(tspOpts.dists);
-      return {
-        from     : tspOpts.from,
-        fitness  : mkTSPFitness(tsp, tspOpts.Q),
-        heur     : mkTspHeur(tsp),
-        succsFun : mkTspSuccs(tsp),
-        initTau  : initTau(tsp, tspOpts.initTauVal),
-        isGoal   : mkTspIsGoal(tsp),
-        opts     : antOpts
-      }
-    }
-
-    function mkTSPInstance (dists) {
-
-      var graph = {};
-
-      for (var prop in dists) {    
-        var ps = prop.split(',');
-
-        var i = ps[0];
-        var j = ps[1];
-
-        if (graph[i] === undefined) {
-          graph[i] = {};      
-        }
-        graph[i][j] = dists[prop];
-
-        if (graph[j] === undefined) {
-          graph[j] = {};      
-        }
-
-        if (graph[j][i] === undefined) {
-          graph[j][i] = graph[i][j];  
-        }
-
-      }
-
-      return graph;
-    }
-
-    function mkTSPFitness (tsp, Q) {
-      return function(path){
-        var sum = 0;
-        for (var s = 0; s < path.length-1; s++) {
-          var i = path[s];
-          var j = path[s+1];
-          sum += tsp[i][j];
-        }
-
-        sum += tsp[ path[path.length-1] ][ path[0] ];
-
-        return Q / sum;
-      };
-    }
-
-    function mkTspHeur (tsp) {
-      return function(i,j) {
-        if (tsp[i][j] === undefined) {return 0;}
-        return 1 / tsp[i][j]; 
-      }
-    }
-
-    function mkTspSuccs (tsp) {
-
-      return function (from, path) {
-        var ret = [];
-
-        for (var to in tsp[from]) {
-
-          var obsahuje = false;
-          for (var s = 0; s < path.length; s++) {
-            if (path[s] === to) {
-              obsahuje = true;
-            }
-          }
-
-          if (!obsahuje) {
-            ret.push(to);
-          }
-
-        }
-
-        return ret;
-      };
-    }
-
-    function mkTspIsGoal (tsp) {
-      var size = _.size(tsp);
-      return function (path) {
-        return path.length === size;
-      }
-    }
-
-
-    return { 
-      mkProblem : mkTspProblem,
-
-      mkInstance : mkTSPInstance,
-      mkFitness  : mkTSPFitness,
-      mkHeur     : mkTspHeur,
-      mkSuccsFun : mkTspSuccs,
-      mkIsGoal   : mkTspIsGoal,
-
-    };
-
-  })();
-
-
   return {
     mkSolver : mkSolver,
-    TSP: TSP,
     defaultAntOpts: defaultAntOpts,
     Operators: {
       generateAll: undefined, // TODO ....

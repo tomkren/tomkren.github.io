@@ -21,6 +21,7 @@
     <!--<script src="js/fishtronDB.js"></script>-->
     <script src="js/sesitek.js"></script>
     <script src="js/zone2d.js"></script>
+    <script src="js/problems/TSP/TSPutils.js"></script>
 
     
 <script>
@@ -59,6 +60,54 @@ se to osvědčí jako kontrapart autoepištoly.
 Zatím tu diskutuju pár věcí co se mi honěj hlavou poslední dobou,
 postupně bych to chtěl obohacovat o obecnější témata - pokud se to osvědčí
 jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou na další postup.
+
+<!--888b .d8888. d8888b. 
+`~~88~~' 88'  YP 88  `8D 
+   88    `8bo.   88oodD' 
+   88      `Y8b. 88~~~   
+   88    db   8D 88      
+   YP    `8888Y' -->
+
+<section id="TSP">TSP</section>
+
+<div id="TSPpanel"></div>
+
+<script>$(function(){
+  
+  function drawTSPpanel (args) {
+
+    var h = 320;
+    var w = $(window).width(); 
+    var w_small = (w-30)/2; 
+
+    $('#TSPpanel').html(
+      '<table><tr>'+
+      '<td><canvas id="TSP_canvas1" width="'+w_small+'" height="'+h+'"></canvas>'+
+      '<td><canvas id="TSP_canvas2" width="'+w_small+'" height="'+h+'"></canvas>'+
+      '</table>'
+    );
+
+    $('#TSPpanel td').css({border: '1px dotted gray'});
+
+    TSPutils.draw($('#TSP_canvas1'), args.data , {
+      drawOptimal: true,
+    });
+
+    TSPutils.draw($('#TSP_canvas2'), args.data , {
+      tauGraph: TSPutils.mkDistGraph(args.data)
+    });
+
+    //window.onresize = function(event) {
+    //  drawTSPpanel(args);
+    //}
+  }
+
+  drawTSPpanel({
+    data : TSPutils.EU4 //TSPutils.EU4 //.Ulysses16
+  });
+
+
+});</script>
 
 <!--
  
@@ -283,7 +332,7 @@ function mkHouse (opts) {
     var max = roomInterval[1];
     var whereX = min + (max - min) * where;
 
-    log('whereX:', whereX);
+    //log('whereX:', whereX);
 
     //eachRoomWall(room, function (wall) {
 
@@ -298,7 +347,7 @@ function mkHouse (opts) {
         var vX = wall.v.data.x;
         if ( (uX<whereX && whereX<vX) ||
              (vX<whereX && whereX<uX) ) {
-          log(wall.eid);
+          //log(wall.eid);
           var newJoint = walls.splitEdge(wall, {
             x: whereX, 
             y: wall.u.data.y , // TODO udelat líp, vzít to kde tam vedla ta wall  

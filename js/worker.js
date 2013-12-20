@@ -17,7 +17,8 @@ importScripts(
  'solver.js',
  'solvers/GP.js',
  'solvers/Ants.js',
- 'problem-opts.js'
+ 'problem-opts.js',
+ 'problems/TSP/TSPutils.js'
 );
 
 var log = function (logStr) {

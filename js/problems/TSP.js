@@ -14,29 +14,24 @@ opts = {
   popSize: 500,
 
   solver: Ants.mkSolver(
-    Ants.TSP.mkProblem({
+    TSPutils.mkTspProblem({
       Q: 1000,
       initTauVal: 1,
       from: 'Praha',
-      dists: {
-        'Praha,Londýn'  : 1034 ,
-        'Praha,Berlín'  : 280  ,
-        'Berlín,Londýn' : 929  ,
-        'Berlín,Paříž'  : 876  ,
-        'Paříž,Praha'   : 885  ,
-        'Paříž,Londýn'  : 340
-      },
+      data: TSPutils.EU4,
+      //dists: TSPutils.EU4_dists,
     }, Ants.defaultAntOpts)
   ),
  
-  saveBest : true,
+  saveBest : !true,
   operators : [],
 
   statsOpts: StatsOpts.default,
   logOpts  : LogOpts.default,
 
   init: function () {
-    this.fitness = this.solver.antProblem.fitness;
+    this.fitness   = this.solver.antProblem.fitness;
+    this.operators = [[this.solver.Operators.generatePop, 1.0]];
     this.phenotype = {
       height: 100,
       init: function ($el){},

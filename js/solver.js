@@ -7,7 +7,9 @@ opts.solver = {
     mkIndivArr: ...,  
     mkIndivFitness: ...
   },
-  ctx              : <CTX>
+  sendGenInfo        : function (opts, run, gen, evaledPop, communicator)
+  updateRunKnowledge : function (runKnowledge, evaledPop, opts) {..returns runKnowledge..}
+  ctx                : <CTX>
 } */
 
 var Solver = (function () {
@@ -35,18 +37,19 @@ var Solver = (function () {
       communicator.runBegin(run);
 
       var runKnowledge = solver.initRunKnowledge(opts);
-      
       var pop          = solver.generatePop(opts, runKnowledge);
-      var evaledPop    = evalPop(pop); //solver.evalPop(pop, opts);
-      
-      sendGenInfo(opts, run, gen, evaledPop, communicator);
 
+      var evaledPop    = evalPop(pop); //solver.evalPop(pop, opts);
+      runKnowledge     = solver.updateRunKnowledge(runKnowledge, evaledPop, opts);
+
+      solver.sendGenInfo(opts, run, gen, evaledPop, communicator);
+      
       while (gen < opts.numGens-1 && !evaledPop.terminate) {
         pop = [];
         
         // preserve best individual (TODO generalize to elitism) 
         if (opts.saveBest) {
-          pop.push(evaledPop.best.indiv.term);
+          pop.push( evaledPop.best.indiv.term );
         }
 
         // fill the new pop
@@ -58,14 +61,18 @@ var Solver = (function () {
             parents.push( evaledPop.popDist.get().term );
           }
           
+          var operatorChilds = operator.operate(parents, runKnowledge, opts);
           var maxNumChildren = opts.popSize - pop.length;
-          var children = _.take( operator.operate(parents), maxNumChildren );
+          var children = _.take( operatorChilds, maxNumChildren );
           _.each(children, function (ch) {pop.push(ch)} );
         }
 
         gen ++;
-        evaledPop = evalPop(pop); //solver.evalPop(pop, opts);  
-        sendGenInfo(opts, run, gen, evaledPop, communicator);
+
+        evaledPop    = evalPop(pop); //solver.evalPop(pop, opts);
+        runKnowledge = solver.updateRunKnowledge(runKnowledge, evaledPop, opts);
+
+        solver.sendGenInfo(opts, run, gen, evaledPop, communicator);
       }
 
     }
@@ -123,6 +130,7 @@ var Solver = (function () {
 
   }
 
+/*
   function sendGenInfo (opts, run, gen, evaledPop, communicator) {
 
     var popDist  = evaledPop.popDist;
@@ -191,7 +199,7 @@ var Solver = (function () {
 
     communicator.log(msg);
   }
-
+*/
 
   return {
     startWorker: startWorker,
