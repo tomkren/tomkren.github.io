@@ -5,7 +5,7 @@ var Phenotype = function () {
 
   function init (pheno_, $el, opts) {
     pheno = pheno_;
-    ctx          = opts.ctx;
+    ctx          = opts.solver.ctx;
     valPrecision = opts.logOpts.valPrecision;
 
     $el.html('');

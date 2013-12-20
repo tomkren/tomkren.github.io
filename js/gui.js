@@ -196,7 +196,11 @@ function mkGUI (containerId) {
       return 'js/problems/'+x;
     }),
     success: function (data, i) {
-      var opts; eval(data);
+      //var opts; eval(data);
+      var opts = evalOptsStr(data);
+
+      App.Opts[opts.name] = opts;
+
       problemFiles.push({
         str:  data,
         opts: opts
@@ -266,7 +270,8 @@ function mkGUI (containerId) {
     }
 
     var optsStr = ses.getValue();
-    var opts; eval(optsStr);
+    //var opts; eval(optsStr);
+    var opts = evalOptsStr(optsStr);
 
     var pheno = opts.phenotype;
 

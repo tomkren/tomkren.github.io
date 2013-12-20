@@ -1,3 +1,14 @@
+var App = {
+  Opts: {},
+};
+
+function evalOptsStr (optsStr) {
+  var opts; eval(optsStr);
+  if (opts.init) {
+    opts.init();
+  }
+  return opts;
+}
 
 //// Array Remove - By John Resig (MIT Licensed)
 //Array.prototype.remove = function(from, to) {

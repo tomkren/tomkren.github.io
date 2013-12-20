@@ -13,9 +13,10 @@ importScripts(
  'prove.js',
  'strategy.js',
  'xover.js',
- 'ants.js',
+ //'ants.js',
  'solver.js',
- 'GP.js',
+ 'solvers/GP.js',
+ 'solvers/Ants.js',
  'problem-opts.js'
 );
 
@@ -36,7 +37,8 @@ self.addEventListener('message', function(e) {
   
   var msg = JSON.parse(e.data); 
 
-  var opts; eval( msg.optsStr );
+  //var opts; eval( msg.optsStr );
+  var opts = evalOptsStr( msg.optsStr );
 
   var communicator = {
     log: log, 

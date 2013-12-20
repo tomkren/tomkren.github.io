@@ -1,4 +1,15 @@
 
+/* -- 'opts.solver' interface --
+opts.solver = {
+  initRunKnowledge : function (opts)               {..},
+  generatePop      : function (opts, runKnowledge) {..},
+  evalPopOpts      : {      
+    mkIndivArr: ...,  
+    mkIndivFitness: ...
+  },
+  ctx              : <CTX>
+} */
+
 var Solver = (function () {
 
   function startWorker (optsStr, msgHandler) {
@@ -13,25 +24,32 @@ var Solver = (function () {
 
   function run (opts, communicator) {
 
+    var solver  = opts.solver;
+    var evalPop = mkEvalPop(opts);
+
     var operatorsDist = mkDist(opts.operators);
 
     for (var run = 1; run <= opts.numRuns; run++) {
 
+      var gen = 0;
       communicator.runBegin(run);
 
-      var pop = opts.generatePop(opts);
-
-      var gen = 0;
-      var evaledPop = opts.evalPop(pop, opts);
+      var runKnowledge = solver.initRunKnowledge(opts);
+      
+      var pop          = solver.generatePop(opts, runKnowledge);
+      var evaledPop    = evalPop(pop); //solver.evalPop(pop, opts);
+      
       sendGenInfo(opts, run, gen, evaledPop, communicator);
 
       while (gen < opts.numGens-1 && !evaledPop.terminate) {
         pop = [];
-            
+        
+        // preserve best individual (TODO generalize to elitism) 
         if (opts.saveBest) {
           pop.push(evaledPop.best.indiv.term);
         }
 
+        // fill the new pop
         while (pop.length < opts.popSize) {
           var operator = operatorsDist.get();
             
@@ -40,19 +58,68 @@ var Solver = (function () {
             parents.push( evaledPop.popDist.get().term );
           }
           
-          var children = _.take( operator.operate(parents), 
-                                 opts.popSize-pop.length  );
-          _.each(children, function (child) {
-            pop.push(child);  
-          });
+          var maxNumChildren = opts.popSize - pop.length;
+          var children = _.take( operator.operate(parents), maxNumChildren );
+          _.each(children, function (ch) {pop.push(ch)} );
         }
 
         gen ++;
-        evaledPop = opts.evalPop(pop, opts);  
+        evaledPop = evalPop(pop); //solver.evalPop(pop, opts);  
         sendGenInfo(opts, run, gen, evaledPop, communicator);
       }
 
     }
+
+  }
+
+  function mkEvalPop (opts) {
+
+    var evalPopOpts = opts.solver.evalPopOpts;
+    
+    return function (pop) {
+      return evalPop_core( evalPopOpts.mkIndivArr(pop), 
+                           evalPopOpts.mkIndivFitness(opts) );
+    }
+  }
+
+  function evalPop_core (indivArr, indivFitness) {
+
+    var terminate = false;
+    var best      = {fitVal: 0};
+    var popDist   = mkDist(_.map(indivArr, function (indiv) {
+      
+      var fitResult = indivFitness(indiv);
+
+      if (_.isNumber(fitResult)) {
+        fitResult = {
+          fitVal: fitResult,
+          terminate: false
+        };
+      }
+
+      fitResult.indiv = indiv; 
+
+      if (isNaN(fitResult.fitVal)) {
+        log('Fitness value is NaN, converted to 0.');
+        fitResult.fitVal = 0;
+      }
+
+      if (fitResult.terminate) {
+        terminate = true;
+      }
+
+      best = updateBest(best, fitResult);
+
+      return [indiv,fitResult.fitVal];
+    }));
+
+    var evaledPop = {
+      popDist:   popDist,
+      terminate: terminate,
+      best:      best
+    };
+
+    return evaledPop;
 
   }
 
