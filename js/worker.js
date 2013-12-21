@@ -13,7 +13,6 @@ importScripts(
  'prove.js',
  'strategy.js',
  'xover.js',
- //'ants.js',
  'solver.js',
  'solvers/GP.js',
  'solvers/ACO.js',

@@ -224,62 +224,16 @@ var ACO = (function () {
       } 
     };
 
-    function sendGenInfo (opts, run, gen, evaledPop, runKnowledge, communicator) {
-      //TODO !!!
-
-      var popDist  = evaledPop.popDist;
-      var bestTerm = evaledPop.best.indiv.term;
-
-      communicator.sendStats({
-        run:        run,
-        gen:        gen,
-        terminate:  evaledPop.terminate,
-        best:       popDist.bestVal(),
-        avg:        popDist.avgVal(),
-        worst:      popDist.worstVal(),
-        bestSize:   0,//termSize(bestTerm, sizeMode),
-        avgSize:    0,//avgTermSize,
-        maxSize:    0,//maxTermSize,
-        minSize:    0,//minTermSize,
-        best_jsStr: JSON.stringify( bestTerm ),
-        runKnowledge: runKnowledge
-      });
-
-      var logOpts = opts.logOpts; 
-      var somethingWritten = false;
-      var valPrecision = logOpts.valPrecision;
-
-      if (gen === 0) {
-        communicator.log('\nRUN '+run+'\n');
+    var commOpts = {
+      size : function (term) {
+        return term.length;
+      },
+      indivStr : function (indiv) {
+        return JSON.stringify( indiv.term );
       }
-
-      function showVal (title, prop) {
-        if (logOpts[prop]) {
-          somethingWritten = true;
-          return '  '+title+' '+ 
-          popDist[prop]().toFixed(valPrecision); 
-        } 
-        return '';
-      }
-
-      var best  = showVal('BEST' , 'bestVal' );
-      var avg   = showVal('AVG'  , 'avgVal'  );
-      var worst = showVal('WORST', 'worstVal');
-
-      var msg = 
-        'GEN ' + prefill(gen,3) + 
-        (somethingWritten ? '  :' : '') +
-        best + avg + worst;
-
-      if (logOpts.bestIndiv || evaledPop.terminate) {
-        msg += '\n\n'+ formatBreak(80,
-          JSON.stringify( bestTerm ), 2);
-      }
-
-      communicator.log(msg);
+    };
 
 
-    }
 
     var ctx = mkCtx({});
 
@@ -287,8 +241,8 @@ var ACO = (function () {
       initRunKnowledge: initRunKnowledge,
       updateRunKnowledge: updateRunKnowledge,
       generatePop: generatePop,
-      sendGenInfo: sendGenInfo,
       evalPopOpts: evalPopOpts,
+      commOpts: commOpts,
       ctx: ctx,
 
       Operators: Operators,
