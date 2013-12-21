@@ -69,6 +69,7 @@ jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou 
    YP    `8888Y' -->
 
 <section id="TSP">TSP</section>
+<p>pokusná plocha... víc ve fištronu</p>
 
 <div id="TSPpanel"></div>
 
@@ -91,6 +92,8 @@ jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou 
 
     TSPutils.draw($('#TSP_canvas1'), args.data , {
       drawOptimal: true,
+      drawPath: ["1","14","12","13","15","7","10","9","5","11","6","16","2","3","4","8"],
+      //drawPath: ['Praha', 'Londýn', 'Berlín', 'Paříž'],
     });
 
     TSPutils.draw($('#TSP_canvas2'), args.data , {
@@ -103,7 +106,7 @@ jako dobrá metoda. Teď navíc zkouším přidat sekci o Fishtronu zaměřenou 
   }
 
   drawTSPpanel({
-    data : TSPutils.EU4 //TSPutils.EU4 //.Ulysses16
+    data : TSPutils.Ulysses16 //TSPutils.EU4 //
   });
 
 

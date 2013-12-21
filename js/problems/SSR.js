@@ -91,7 +91,7 @@ opts = {
           $graph:$graph,
         };     
       },
-      update: function (el, indivFun, indiv) {
+      update: function (el, indivFun, indiv, runKnowledge) {
         var data = _.map(xs2, function(x){
           return [x,indivFun(x)];
         });

@@ -22,7 +22,9 @@ var TSPutils = (function () {
       succsFun : mkTspSuccs(tsp),
       initTau  : initTau(tsp, tspOpts.initTauVal),
       isGoal   : mkTspIsGoal(tsp),
-      opts     : antOpts
+      opts     : antOpts,
+
+      tsp: tsp
     }
   }
 
@@ -185,6 +187,7 @@ var TSPutils = (function () {
     var beta  = - alpha * min;
 
     function normalize (x) {
+      if (max === min) {return 0.5;}
       return alpha*x + beta;
     }
 
@@ -194,7 +197,7 @@ var TSPutils = (function () {
         var J = keys[j];
 
 
-        var x = Math.round( 250 * normalize(graph[I][J]) ) ;
+        var x = Math.round( 250 * ( 1-normalize(graph[I][J]) ) ) ;
 
 
         drawEdge(ctx, pxPos(coords[I]), pxPos(coords[J]), 'rgb('+x+','+x+','+x+')' );        
@@ -210,8 +213,10 @@ var TSPutils = (function () {
     ctx.fill();
   }
 
-  function drawEdge (ctx, pos1, pos2, color) {
+  function drawEdge (ctx, pos1, pos2, color, lineWidth) {
     ctx.strokeStyle = color || 'black';
+    ctx.lineWidth   = lineWidth || 1;
+    ctx.lineCap = 'round';
     ctx.beginPath();  
     ctx.moveTo(pos1[0], pos1[1]);
     ctx.lineTo(pos2[0], pos2[1]);
@@ -229,13 +234,17 @@ var TSPutils = (function () {
   function draw ($el, data, drawOpts) {
 
     drawOpts = _.extend({
+      drawPath:    false,
       drawOptimal: false,
-      tauGraph: false,
+      tauGraph:    false,
     }, drawOpts);
 
     var ctx = $el[0].getContext('2d');
     var w   = $el.width(); 
     var h   = $el.height();
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0,0,w,h); 
     
     var coords = {};
 
@@ -302,10 +311,23 @@ var TSPutils = (function () {
         var pos1 = coords[ optimalPath[ i       ] ];
         var pos2 = coords[ optimalPath[(i+1)%len] ];
 
-        drawEdge(ctx, pxPos(pos1), pxPos(pos2), 'green' );
+        drawEdge(ctx, pxPos(pos1), pxPos(pos2), '#E8E8E8', 10 );
 
       }
-    }   
+    }  
+
+    if (drawOpts.drawPath) {
+      var path = drawOpts.drawPath;
+      var len = path.length;
+
+      for (var i=0; i<len; i++ ){
+        var pos1 = coords[ path[ i       ] ];
+        var pos2 = coords[ path[(i+1)%len] ];
+
+        drawEdge(ctx, pxPos(pos1), pxPos(pos2), 'black', 2 );
+
+      }
+    } 
 
     for (nodeID in coords) {
       var pos = coords[nodeID];

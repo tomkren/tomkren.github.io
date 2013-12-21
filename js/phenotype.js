@@ -39,7 +39,7 @@ var Phenotype = function () {
 
   var theGreen = '#5CB85C';
 
-  function update (pheno_, $el, best_jsStr, fitVal) {
+  function update (pheno_, $el, best_jsStr, fitVal, runKnowledge) {
 
     var __result;
     with(ctxToWithobj(ctx)){
@@ -63,7 +63,7 @@ var Phenotype = function () {
       'height': (100-fitVal*100).toFixed(0) + '%'
     }))
     .click(function(){
-      pheno.update($el, __result, best_jsStr);
+      pheno.update($el, __result, best_jsStr, runKnowledge);
       $code.html( best_jsStr );
     })
     .tooltip({
@@ -73,7 +73,7 @@ var Phenotype = function () {
 
     $link.hover(function(){
       $link.css('background-color','red');
-      pheno.update($el, __result, best_jsStr);
+      pheno.update($el, __result, best_jsStr, runKnowledge);
       $code.html( best_jsStr );
     },function(){
       $link.css('background-color','green');

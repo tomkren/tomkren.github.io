@@ -38,7 +38,7 @@ var GP = {
     }
 
 
-    function sendGenInfo (opts, run, gen, evaledPop, communicator) {
+    function sendGenInfo (opts, run, gen, evaledPop, runKnowledge, communicator) {
 
       var popDist  = evaledPop.popDist;
       var bestTerm = evaledPop.best.indiv.term;
@@ -70,7 +70,8 @@ var GP = {
         avgSize:    avgTermSize,
         maxSize:    maxTermSize,
         minSize:    minTermSize,
-        best_jsStr: evaledPop.best.indiv.js.toString()
+        best_jsStr: evaledPop.best.indiv.js.toString(),
+        runKnowledge: runKnowledge
       });
 
       var logOpts = opts.logOpts; 

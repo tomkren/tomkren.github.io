@@ -170,9 +170,45 @@ var Ants = (function () {
 
 
     function updateRunKnowledge (runKnowledge, evaledPop, opts) {
-
       //TODO !!!
-      return runKnowledge;
+      
+      var antOpts = antProblem.opts;
+      var rho     = antOpts.rho; 
+
+      var oldTau = runKnowledge;
+      var newTau = {};
+
+
+      var i,j;
+
+      // vypařování
+      for (i in oldTau) {
+        if (newTau[i] === undefined) {newTau[i] = {};}
+        for (j in oldTau) {
+          newTau[i][j] = oldTau[i][j] * (1-rho); 
+        }
+      }
+
+      // postříkání
+      _.each( evaledPop.popDist.distArr() , function (p) {
+        var path   = p[0].term;
+        var fitVal = p[1];
+
+        var pathLen = path.length;
+
+        for (var s = 0; s < pathLen-1; s++) {
+
+          i = path[s];
+          j = path[s+1];
+                                   // TODO : (!!!)
+          newTau[i][j] += fitVal ; // nemelo by se to delit?
+                                   // neměl bych i opačnou pocákat? 
+                                   // (ale zas pro nesymetrické ulohy neni tak zřejmý)
+        }
+
+      });
+
+      return newTau;
     }
 
     var evalPopOpts = {
@@ -188,7 +224,7 @@ var Ants = (function () {
       } 
     };
 
-    function sendGenInfo (opts, run, gen, evaledPop, communicator) {
+    function sendGenInfo (opts, run, gen, evaledPop, runKnowledge, communicator) {
       //TODO !!!
 
       var popDist  = evaledPop.popDist;
@@ -205,7 +241,8 @@ var Ants = (function () {
         avgSize:    0,//avgTermSize,
         maxSize:    0,//maxTermSize,
         minSize:    0,//minTermSize,
-        best_jsStr: JSON.stringify( bestTerm )
+        best_jsStr: JSON.stringify( bestTerm ),
+        runKnowledge: runKnowledge
       });
 
       var logOpts = opts.logOpts; 
