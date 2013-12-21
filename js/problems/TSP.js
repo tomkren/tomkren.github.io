@@ -23,14 +23,14 @@ opts = {
     
     var data = TSPutils.Ulysses16; //.EU4,
 
-    this.solver = Ants.mkSolver(
+    this.solver = ACO.mkSolver(
       TSPutils.mkTspProblem({
         Q: 30,
         initTauVal: 1,
         from: '1', // 'Praha'
         data: data, 
         //dists: TSPutils.EU4_dists,
-      }, Ants.defaultAntOpts)
+      }, ACO.defaultAntOpts)
     );
 
     this.fitness   = this.solver.antProblem.fitness;

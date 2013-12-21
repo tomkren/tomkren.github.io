@@ -1,4 +1,4 @@
-var Ants = (function () {
+var ACO = (function () {
 
   var defaultAntOpts = {
     rho          : 0.15 ,

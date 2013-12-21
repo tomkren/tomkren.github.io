@@ -16,7 +16,7 @@ importScripts(
  //'ants.js',
  'solver.js',
  'solvers/GP.js',
- 'solvers/Ants.js',
+ 'solvers/ACO.js',
  'problem-opts.js',
  'problems/TSP/TSPutils.js'
 );
