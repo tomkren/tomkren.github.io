@@ -140,7 +140,7 @@ function mkGUI (containerId) {
 
   var $editorContainer = $('<div>').append([$editorButts, $elRyba, $editor]);
 
-  var sTabs = mkTabs(['editor','results','stats','log']);
+  var sTabs = mkTabs(['editor','mxr','results','stats','log']);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
   var $downButt = mkAButt('down','arrow-down',false,false,true);
@@ -170,10 +170,11 @@ function mkGUI (containerId) {
 
   var $openUL = $openButt.children('ul'); 
 
-  sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
+  sTabs.tabs.mxr.$butt = mkAButt('mixer', 'wrench', '#mxr', true);   
+  sTabs.tabs.log.$butt = mkAButt('log', 'book', '#log', true);   
   sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor',
     true, false, function(){setTimeout(resize,10);});
-  sTabs.tabs.stats .$butt = mkAButt('stats','stats','#stats', true, 
+  sTabs.tabs.stats.$butt = mkAButt('stats','stats','#stats', true, 
     false, function(){setTimeout(graphs.draw, 10);});
   sTabs.tabs.results.$butt = mkAButt('results','eye-open','#results', true);
 
@@ -210,6 +211,9 @@ function mkGUI (containerId) {
     $graphContainer,
     $graphButts
   ]);
+
+  var mxr = MXR.mk({});
+  sTabs.tabs.mxr.append(mxr.$el);
 
   // main solver buttons 
   tabs.tabs.solver.append( 
