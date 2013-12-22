@@ -136,7 +136,8 @@ function mkGUI (containerId) {
                                 // zas budou naky editor butony
 
 
-  var $openUL = $openButt.children('ul'); //$editorButts.children().children('ul');
+  var $openUL = $openButt.children('ul'); 
+
 
   var $editorContainer = $('<div>').append([$editorButts, $editor]);
 
@@ -198,6 +199,26 @@ function mkGUI (containerId) {
   ses.setUseWrapMode(true);
   
   
+  var actOpenInfo = {
+    $el: null,
+    oldText: null
+  };
+
+  function markOpenLink ($link) {
+    actOpenInfo.$el = $link;
+    $link.css('font-weight','bold');
+    actOpenInfo.oldText = $link.html();
+    $link.html( actOpenInfo.oldText  + 
+      ' &nbsp; <span class="glyphicon glyphicon-eye-open"></span>' );
+  }
+
+  function switchOpenLink ($link) {
+    actOpenInfo.$el.css('font-weight', '');
+    actOpenInfo.$el.html(actOpenInfo.oldText);
+    markOpenLink($link);
+  }
+
+
   var problemFiles = [];
 
   ajaxes({
@@ -215,19 +236,24 @@ function mkGUI (containerId) {
         str:  data,
         opts: opts
       });
+
+      var $link = $('<a>')
+        .attr('href', '#')
+        .html(opts.name);
+
       $openUL.append( 
-        $('<li>').html($('<a>')
-          .attr('href', '#')
-          .html(opts.name))
+        $('<li>').html($link)
           .click(function(){
             ses.setValue(data);
             log('marja pano');
             openSTab('editor');
+            switchOpenLink($link);
           })
       );
     },
     finish: function () {
-      ses.setValue(problemFiles[0].str);
+      ses.setValue(problemFiles[0].str); 
+      markOpenLink( $($openUL.find('a')[0]) );
     }
   });
   
