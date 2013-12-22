@@ -90,8 +90,10 @@ function mkGUI (containerId) {
   }
 
   function openSTab (name) {
-    sTabs.tabs[name].$butt.tab('show');
+    var $butt = sTabs.tabs[name].$butt; 
+    $butt.tab('show');
     resize();
+    switchMarkSTab($butt);
   }
 
   var tabIds = ['solver','tests'];
@@ -123,23 +125,20 @@ function mkGUI (containerId) {
 
   var $editorButts = $('<div>');
 
-  var $openButt = $(
-    '<div class="btn-group" style="margin-right: 3px;">'+
-      '<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">'+
-      '<span class="glyphicon glyphicon-folder-open"></span> '+
-      '&nbsp;open <span class="caret"></span></button>'+
-      '<ul class="dropdown-menu" role="menu"></ul>'+
-    '</div>'
-  );
+
 
   //$editorButts.append( ... ); // zde bylo open buton, nechávám to tu na pozdejc až
                                 // zas budou naky editor butony
 
+  var ryba = Ryba.mk({
+    bottom: '23px',
+    right:  '32px'
+  });
 
-  var $openUL = $openButt.children('ul'); 
+  var $elRyba = ryba.$el;
 
 
-  var $editorContainer = $('<div>').append([$editorButts, $editor]);
+  var $editorContainer = $('<div>').append([$editorButts, $elRyba, $editor]);
 
   var sTabs = mkTabs(['editor','results','stats','log']);
 
@@ -159,6 +158,18 @@ function mkGUI (containerId) {
     ico:  'play',
     btnClass: 'btn-success' 
   });
+
+  var $openButt = $(
+    '<div class="btn-group" style="margin-right: 3px;">'+
+      '<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">'+
+      '<span class="glyphicon glyphicon-folder-open"></span> '+
+      '&nbsp;open <span class="caret"></span></button>'+
+      '<ul class="dropdown-menu" role="menu"></ul>'+
+    '</div>'
+  );
+
+  var $openUL = $openButt.children('ul'); 
+
   sTabs.tabs.log   .$butt = mkAButt('log', 'book', '#log', true);   
   sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor',
     true, false, function(){setTimeout(resize,10);});
@@ -166,9 +177,28 @@ function mkGUI (containerId) {
     false, function(){setTimeout(graphs.draw, 10);});
   sTabs.tabs.results.$butt = mkAButt('results','eye-open','#results', true);
 
+  var $activeSTab = null;
+
+  function markSTab ($butt) {
+    $butt.addClass('active');
+    $activeSTab = $butt;
+  }
+
+  function switchMarkSTab ($butt) {
+    $activeSTab.removeClass('active');
+    markSTab($butt);
+  } 
+
   var sTabsButts = _.map(_.keys(sTabs.tabs),function(key){
-    return sTabs.tabs[key].$butt;
+    var $butt = sTabs.tabs[key].$butt;
+    $butt.click(function () {
+      switchMarkSTab($butt);
+    });
+    return $butt;
   });
+
+  markSTab(sTabs.tabs.editor.$butt);
+
 
   var $graphContainer = $('<div>').css({ 
     width:  '100%',
