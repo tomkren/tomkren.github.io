@@ -89,6 +89,11 @@ function mkGUI (containerId) {
     return ret;
   }
 
+  function openSTab (name) {
+    sTabs.tabs[name].$butt.tab('show');
+    resize();
+  }
+
   var tabIds = ['solver','tests'];
 
   var $tabMenu = mkTabMenu(tabIds);
@@ -116,20 +121,24 @@ function mkGUI (containerId) {
     'margin-top': '3px'
   });
 
-  var $editorButts = $('<div>').append(
-    '<div class="btn-group">'+
-      '<button type="button" class="btn btn-default dropdown-toggle"'+
-      'data-toggle="dropdown">'+
+  var $editorButts = $('<div>');
+
+  var $openButt = $(
+    '<div class="btn-group" style="margin-right: 3px;">'+
+      '<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">'+
       '<span class="glyphicon glyphicon-folder-open"></span> '+
       '&nbsp;open <span class="caret"></span></button>'+
       '<ul class="dropdown-menu" role="menu"></ul>'+
     '</div>'
   );
 
-  var $openUL = $editorButts.children().children('ul');
+  //$editorButts.append( ... ); // zde bylo open buton, nechávám to tu na pozdejc až
+                                // zas budou naky editor butony
 
-  var $editorContainer = $('<div>').append([
-    $editorButts, $editor]);
+
+  var $openUL = $openButt.children('ul'); //$editorButts.children().children('ul');
+
+  var $editorContainer = $('<div>').append([$editorButts, $editor]);
 
   var sTabs = mkTabs(['editor','results','stats','log']);
 
@@ -171,9 +180,10 @@ function mkGUI (containerId) {
     $graphButts
   ]);
 
+  // main solver buttons 
   tabs.tabs.solver.append( 
     $('<div>').css('margin-bottom', '3px')
-     .append([$startButt].concat(sTabsButts)), 
+     .append([$startButt, $openButt].concat(sTabsButts)), 
     sTabs.$el );
 
   var graphs = mkGraph($graphContainer, $graphButts, {});
@@ -196,7 +206,7 @@ function mkGUI (containerId) {
       return 'js/problems/'+x;
     }),
     success: function (data, i) {
-      //var opts; eval(data);
+
       var opts = evalOptsStr(data);
 
       App.Opts[opts.name] = opts;
@@ -211,6 +221,8 @@ function mkGUI (containerId) {
           .html(opts.name))
           .click(function(){
             ses.setValue(data);
+            log('marja pano');
+            openSTab('editor');
           })
       );
     },
@@ -228,7 +240,7 @@ function mkGUI (containerId) {
   function resize () {
     var newHeight = window.innerHeight-106;
     $log   .css('height', (newHeight-30)+'px');
-    $editor.css('height', (newHeight-37)+'px');
+    $editor.css('height', (newHeight)+'px');
     $graphContainer.css('height',(newHeight-20)+'px');
     var $bars = Phenotype.get$bars();
     if ($bars) {
@@ -270,7 +282,6 @@ function mkGUI (containerId) {
     }
 
     var optsStr = ses.getValue();
-    //var opts; eval(optsStr);
     var opts = evalOptsStr(optsStr);
 
     var pheno = opts.phenotype;
@@ -282,8 +293,7 @@ function mkGUI (containerId) {
     resize();
 
     if (opts.logOpts.startTab) {
-      sTabs.tabs[opts.logOpts.startTab].$butt.tab('show');
-      resize();
+      openSTab(opts.logOpts.startTab);
     }
 
     guiLog('starting ...');
