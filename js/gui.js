@@ -96,7 +96,7 @@ function mkGUI (containerId) {
     switchMarkSTab($butt);
   }
 
-  var tabIds = ['solver','tests'];
+  var tabIds = ['fishtron','tests'];
 
   var $tabMenu = mkTabMenu(tabIds);
   var tabs     = mkTabs   (tabIds);
@@ -107,6 +107,13 @@ function mkGUI (containerId) {
 
   var $el = $('#'+containerId);
   $el.append($tabMenu, tabs.$el);
+
+  $('#fishtron-link').css({
+    //'font-weight': 'bold',
+    //'font-family': '"Arial Black", Gadget, sans-serif'
+    'font-size' : '15px',
+    'font-family' : "'Prosto One', cursive"
+  }).html('fishtron.net');
 
  
   var $log = $('<pre>').css({
@@ -140,7 +147,8 @@ function mkGUI (containerId) {
 
   var $editorContainer = $('<div>').append([$editorButts, $elRyba, $editor]);
 
-  var sTabs = mkTabs(['editor','mxr','results','stats','log']);
+  var sTabsNames = ['mxr','editor','results','stats','log'];
+  var sTabs = mkTabs(sTabsNames);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
   var $downButt = mkAButt('down','arrow-down',false,false,true);
@@ -172,7 +180,7 @@ function mkGUI (containerId) {
 
   sTabs.tabs.mxr.$butt = mkAButt('mixer', 'wrench', '#mxr', true);   
   sTabs.tabs.log.$butt = mkAButt('log', 'book', '#log', true);   
-  sTabs.tabs.editor.$butt = mkAButt('edit', 'pencil', '#editor',
+  sTabs.tabs.editor.$butt = mkAButt('code', 'pencil', '#editor',
     true, false, function(){setTimeout(resize,10);});
   sTabs.tabs.stats.$butt = mkAButt('stats','stats','#stats', true, 
     false, function(){setTimeout(graphs.draw, 10);});
@@ -198,7 +206,7 @@ function mkGUI (containerId) {
     return $butt;
   });
 
-  markSTab(sTabs.tabs.editor.$butt);
+  markSTab(sTabs.tabs[sTabsNames[0]].$butt);
 
 
   var $graphContainer = $('<div>').css({ 
@@ -212,11 +220,12 @@ function mkGUI (containerId) {
     $graphButts
   ]);
 
-  var mxr = MXR.mk({});
-  sTabs.tabs.mxr.append(mxr.$el);
+  var mxr = MXR.mk({
+    $appendToElem: sTabs.tabs.mxr
+  });
 
   // main solver buttons 
-  tabs.tabs.solver.append( 
+  tabs.tabs.fishtron.append( 
     $('<div>').css('margin-bottom', '3px')
      .append([$startButt, $openButt].concat(sTabsButts)), 
     sTabs.$el );
@@ -253,7 +262,7 @@ function mkGUI (containerId) {
   }
 
 
-  var problemFiles = [];
+  var problemFiles = []; // TODO požívá se zatim jen prvek [0], asi předělat
 
   ajaxes({
     dataType: 'text',
@@ -279,7 +288,7 @@ function mkGUI (containerId) {
         $('<li>').html($link)
           .click(function(){
             ses.setValue(data);
-            log('marja pano');
+            mxr.set(opts);
             openSTab('editor');
             switchOpenLink($link);
           })
@@ -287,6 +296,7 @@ function mkGUI (containerId) {
     },
     finish: function () {
       ses.setValue(problemFiles[0].str); 
+      mxr.set(problemFiles[0].opts);
       markOpenLink( $($openUL.find('a')[0]) );
     }
   });

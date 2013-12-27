@@ -107,6 +107,20 @@ opts = {
     };
   },
 
+  mxrOpts : {
+    propsToShow: [
+      'name',
+      'numRuns',
+      'numGens',
+      'popSize',
+      'saveBest',
+      'fitness',
+      'init',
+      'mxrOpts',
+      'logOpts',
+      'statsOpts'
+    ]
+  }
 
 }
 
