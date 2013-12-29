@@ -164,4 +164,4 @@ Geo.toBrng = function(deg, format, dp) {
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-if (!window.console) window.console = { log: function() {} };
+//if (!window.console) window.console = { log: function() {} };

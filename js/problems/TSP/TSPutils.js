@@ -131,18 +131,20 @@ var TSPutils = (function () {
     return Math.sqrt(dx*dx + dy*dy);
   }
 
+  function geoDist (pos1, pos2) {
+    var p1 = new LatLon(pos1[0], pos1[1]);
+    var p2 = new LatLon(pos2[0], pos2[1]);
+    return parseFloat( p1.distanceTo(p2) ); 
+  }
 
 
   function mkDistGraph (data) {
 
     var coords = data.coords;
-    assert(_.isObject(coords), 'TSPutils.mkGraph: unsupported data format');
+    var dist   = data.dist;
 
-    //function dist (pos1, pos2) {
-    //  var dx = pos1[0] - pos2[0]; 
-    //  var dy = pos1[1] - pos2[1];
-    //  return Math.sqrt(dx*dx + dy*dy);
-    //}
+    assert(_.isObject(coords), 
+      'TSPutils.mkGraph: unsupported data format');
 
     var graph = {};
 
@@ -157,7 +159,7 @@ var TSPutils = (function () {
         if (graph[I] === undefined) {graph[I] = {};}
         if (graph[J] === undefined) {graph[J] = {};}
 
-        var d = euDist(coords[I], coords[J]);
+        var d = dist(coords[I], coords[J]);
 
         graph[I][J] = d;
         graph[J][I] = d;
@@ -343,10 +345,14 @@ var TSPutils = (function () {
     mkTspProblem: mkTspProblem,
     draw: draw,
     mkDistGraph: mkDistGraph,
+
+    euDist: euDist,
+    geoDist: geoDist
   };
 })();
  
 TSPutils.Ulysses16 = {
+  dist: TSPutils.geoDist,
   coords : {
     '1'   : [38.24, 20.42],
     '2'   : [39.57, 26.15],
@@ -369,6 +375,7 @@ TSPutils.Ulysses16 = {
 }; 
 
 TSPutils.EU4 = {
+  dist: TSPutils.geoDist,
   coords: {
     'Praha'  : [14.43, 50.08],
     'Londýn' : [-0.1,  51.52],

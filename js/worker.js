@@ -4,6 +4,8 @@ importScripts(
  'libs/underscore-1.5.1.js',
  'libs/peg-0.7.0.js',
  'libs/wu-0.1.8.js', 
+ 'libs/geo.js',
+ 'libs/latlon.js',
  'utils.js',
  'term.js',
  'parser.js',

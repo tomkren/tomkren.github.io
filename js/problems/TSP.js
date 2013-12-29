@@ -27,7 +27,7 @@ opts = {
 
     this.solver = ACO.mkSolver(
       TSPutils.mkTspProblem({
-        Q: 30,
+        Q: 6792.12,
         initTauVal: 1,
         from: '1', // 'Praha'
         data: data, 

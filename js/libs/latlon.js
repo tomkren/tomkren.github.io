@@ -428,4 +428,4 @@ if (typeof String.prototype.trim == 'undefined') {
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-if (!window.console) window.console = { log: function() {} };
+//if (!window.console) window.console = { log: function() {} };
