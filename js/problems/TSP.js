@@ -12,8 +12,8 @@ opts = {
   name: 'TSP',
 
   numRuns: 50,
-  numGens: 51,
-  popSize: 500,
+  numGens: 201,
+  popSize: 10,
 
   saveBest : true,
   operators : [],
@@ -23,11 +23,11 @@ opts = {
 
   init: function () {
     
-    var data = TSPutils.Ulysses16; //.EU4,
+    var data = TSPutils.tsp225; //Ulysses22; //16; //.EU4,
 
     this.solver = ACO.mkSolver(
       TSPutils.mkTspProblem({
-        Q: 6792.12,
+        Q: data.optVal,//6792.12,
         initTauVal: 1,
         from: '1', // 'Praha'
         data: data, 
@@ -69,13 +69,9 @@ opts = {
       },
       update: function (el, indivFun, indiv, runKnowledge) {
 
-        //log(indivFun);
-        //log(runKnowledge);
-
         TSPutils.draw($('#TSP_canvas1'), data , {
           drawOptimal: true,
           drawPath: indivFun
-          //drawPath: ['Praha', 'Londýn', 'Berlín', 'Paříž'],
         });
 
         TSPutils.draw($('#TSP_canvas2'), data , {
