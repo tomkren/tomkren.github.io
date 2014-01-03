@@ -8,85 +8,6 @@ var ACO = (function () {
     numRounds    : 10   ,
   };
 
-  /*
-  var initBest = {
-    path   : null,
-    fitVal : 0
-  };
-
-  function aco( problem ){
-
-    var best = initBest;
-    var tau  = problem.initTau;
-
-    for(var i = 0 ; i < problem.opts.numRounds ; i++){
-      var stepResult = step( problem.from, tau , problem );
-      tau  = stepResult.tau;
-      best = updateBest(best,stepResult.best); 
-    }
-
-    return best;
-  }
-
-  function step( from , tau , problem ){
-
-    var succsFun = problem.succsFun;
-    var heur     = problem.heur;
-    var isGoal   = problem.isGoal;
-    var fitness  = problem.fitness;
-    var opts     = problem.opts;
-
-    var antPaths = [];
-
-    for( var i = 0; i < opts.antsPerRound; i++ ){
-      var path = mkPath( from , tau , succsFun , heur , isGoal , opts );
-      if(path !== null ){
-        antPaths.push(path);
-      }
-    }
-
-    return updateTau( tau , antPaths , fitness , opts );
-  }
-
-  function updateTau( oldTau , antPaths , fitness , opts ){
-
-    var newTau = {};
-
-    var i,j;
-
-    for( i in oldTau ){
-      if( newTau[i] === undefined ){ newTau[i] = {}; }
-      for( j in oldTau ){
-        newTau[i][j] = oldTau[i][j] * (1-opts.rho); 
-      }
-    }
-
-    var best = initBest;
-
-    for( var k = 0 ; k < antPaths.length ; k++ ){
-      var path    = antPaths[k];
-      var fitVal  = fitness(path);
-
-      best = updateBest(best,{path:path,fitVal:fitVal});
-
-      var pathLen = antPaths[k].length;
-      for( var s = 0 ; s < pathLen-1 ; s ++ ){
-
-        i = antPaths[k][s];
-        j = antPaths[k][s+1];
-
-        newTau[i][j] += fitVal ;
-      }
-
-    }
-
-    return {
-      tau  : newTau, 
-      best : best
-    };
-  }
-  */
-
   function mkPath_new (antProblem, tau) {
     return mkPath(
       antProblem.from, 
@@ -249,10 +170,7 @@ var ACO = (function () {
 
       Operators: Operators,
 
-      antProblem: antProblem,
-      /*testRun: function() {
-        return aco(antProblem);
-      }*/
+      antProblem: antProblem
     };
 
   }
