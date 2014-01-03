@@ -8,6 +8,7 @@ var ACO = (function () {
     numRounds    : 10   ,
   };
 
+  /*
   var initBest = {
     path   : null,
     fitVal : 0
@@ -84,6 +85,7 @@ var ACO = (function () {
       best : best
     };
   }
+  */
 
   function mkPath_new (antProblem, tau) {
     return mkPath(
@@ -248,19 +250,16 @@ var ACO = (function () {
       Operators: Operators,
 
       antProblem: antProblem,
-      testRun: function() {
+      /*testRun: function() {
         return aco(antProblem);
-      }
+      }*/
     };
 
   }
 
   return {
     mkSolver : mkSolver,
-    defaultAntOpts: defaultAntOpts,
-    Operators: {
-      generateAll: undefined, // TODO ....
-    },
+    defaultAntOpts: defaultAntOpts
   };
 
 })();
