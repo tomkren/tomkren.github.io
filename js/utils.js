@@ -2,6 +2,13 @@ var App = {
   Opts: {},
 };
 
+// TODO : postupně všecko z tohoto souboru přendat do tohodle namespacu
+var Utils = {
+  uniformRand : function (a, b) {
+    return (b-a)*Math.random()+a;
+  }
+};
+
 function evalOptsStr (optsStr) {
   var opts; eval(optsStr);
   if (opts.init) {

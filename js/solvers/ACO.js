@@ -8,34 +8,11 @@ var ACO = (function () {
     numRounds    : 10   ,
   };
 
-  function mkPath_new (antProblem, tau) {
-    return mkPath(
-      antProblem.from, 
-      tau, 
-      antProblem.succsFun, 
-      antProblem.heur,
-      antProblem.isGoal,
-      antProblem.opts
-    );
-  }
-
-  function mkPath( from , tau , succsFun , heur , isGoal , opts ){
-    var next = from;
-    var path = [];
-
-    while( !isGoal(path) && next !== null ){
-      path.push(next);
-      var next = selectSucc( next , path , tau , succsFun , heur , opts );  
-    }
-
-    return isGoal(path) ? path : null ;
-  }
-
-  function selectSucc( from , path , tau , succsFun , heur , opts ){
+  function selectSucc (from, path, tau, succsFun, heur, antOpts) {
 
     var ss = succsFun(from,path);
 
-    if( ss.length === 0 ){ return null; }
+    if (ss.length === 0) {return null;}
 
     var ps = [];
 
@@ -44,8 +21,8 @@ var ACO = (function () {
 
     for( i = 0 ; i < ss.length ; i++ ){
       var to = ss[i];
-      var probab = Math.pow( tau[from][to], opts.alpha) 
-                 * Math.pow( heur(from,to), opts.beta);
+      var probab = Math.pow( tau[from][to], antOpts.alpha) 
+                 * Math.pow( heur(from,to), antOpts.beta);
       ps.push( probab );
       pSum += probab;
     }
@@ -60,11 +37,26 @@ var ACO = (function () {
       }
     }
 
-    return ss[i]; //[ss[i],i,ball,ps,ss,pSum];
+    return ss[i]; 
   }
 
+  function mkPath (antProblem, tau) {
 
+    var succsFun = antProblem.succsFun;     
+    var heur     = antProblem.heur; 
+    var antOpts  = antProblem.opts;   
 
+    var isGoal = antProblem.isGoal;   
+    var next   = antProblem.from;
+    var path   = [];
+
+    while( !isGoal(path) && next !== null ){
+      path.push(next);
+      var next = selectSucc(next, path, tau, succsFun, heur, antOpts);  
+    }
+
+    return isGoal(path) ? path : null ;
+  }
 
   function mkSolver (antProblem) {
 
@@ -80,7 +72,7 @@ var ACO = (function () {
         operate: function (_parents, runKnowledge, opts) {
           var pop = [];
           for (var i = 0; i<opts.popSize; i++) {
-            pop.push( mkPath_new(antProblem, runKnowledge) );
+            pop.push( mkPath(antProblem, runKnowledge) );
           }
           return pop;        
         }  
@@ -155,8 +147,6 @@ var ACO = (function () {
         return JSON.stringify( indiv.term );
       }
     };
-
-
 
     var ctx = mkCtx({});
 
