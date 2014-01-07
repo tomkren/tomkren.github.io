@@ -1,6 +1,7 @@
 var PSO = (function () {
 
   function mkSolver (PSOopts) {
+
     PSOopts = _.extend({
       n:     1,
       omega: 1,
@@ -31,8 +32,7 @@ var PSO = (function () {
     }
 
     function moveParticle (particle, g) {
-      throw 'TODO'; // je potřeba prořádně zvládnout .p v pohnutý partikli
-
+      
       var x = particle.x;
       var v = particle.v;
       var p = particle.p;
@@ -61,13 +61,30 @@ var PSO = (function () {
       //           zatímco v origo arlgoritumu se to dělá po každym posunnu
 
 
-      return {x:x_new, v:v_new, p:p}; // p zatim necháváme, jeho update se
+      return {x:x_new, v:v_new, p:p, p_fitVal:particle.p_fitVal}; 
+                                      // p zatim necháváme, jeho update se
                                       // vykoná až ve chvíli kdy budeme pro tuto 
                                       // pohnutou částici počítat fitness
     }
 
+    function movePop (pop, g) {
+      return _.map(pop, function (particle) {
+        return moveParticle(particle, g);
+      });
+    }
+
+    var Operators = {
+      generatePop : {
+        in : function (opts) {
+          return opts.popSize;
+        },
+        operate: function (parents, runKnowledge, opts) {
+          return movePop(parents, runKnowledge.globalBest.x);        
+        }  
+      }
+    };
+
     function initRunKnowledge (opts) {
-      throw 'TODO';
 
       return {
         globalBest: {
@@ -101,8 +118,17 @@ var PSO = (function () {
       } 
     };
 
-    function updateRunKnowledge (runKnowledge, evaledPop, opts) {
-      return runKnowledge;
+    function updateRunKnowledge (runKnowledge, evaledPop, _opts) {
+      if (evaledPop.best.fitVal > runKnowledge.globalBest.fitVal) {
+        return {
+          globalBest: {
+            x:      evaledPop.best.indiv.term.x,
+            fitVal: evaledPop.best.fitVal 
+          }
+        };
+      } else {
+        return runKnowledge;  
+      }
     }
 
     var commOpts = {

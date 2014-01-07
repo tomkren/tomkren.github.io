@@ -59,8 +59,9 @@ var Solver = (function () {
         while (pop.length < opts.popSize) {
           var operator = operatorsDist.get();
             
-          var parents  = [];
-          for (var i=0; i<operator.in; i++) {
+          var parents    = [];
+          var numParents = _.isFunction(operator.in) ? operator.in(opts) : operator.in ;
+          for (var i=0; i<numParents; i++) {
             parents.push( evaledPop.popDist.get().term );
           }
           
