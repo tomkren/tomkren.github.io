@@ -28,6 +28,9 @@ var PSO = (function () {
         v.push( Utils.uniformRand(-delta, delta) );
       }
 
+      // TODO: potřeba promyslet jesli se při vytvoření 
+      //       korektně updatuje .p a .p_fitVal
+
       return {x:x, v:v, p:x};
     }
 
@@ -94,7 +97,7 @@ var PSO = (function () {
       };
     }
 
-    function generatePop (opts, runKnowledge) {
+    function generatePop (opts, _runKnowledge) {
       var popSize = opts.popSize;
       var pop = [];
       
@@ -114,6 +117,19 @@ var PSO = (function () {
       mkIndivFitness: function (opts) {
         return function (indiv) {
           return opts.fitness(indiv.term.x);
+        }
+      },
+      onEvalIndivUpdate: function (indiv, fitVal) {
+
+        if (indiv.term.p_fitVal < fitVal) {
+      
+          var indiv_new = _.clone(indiv);
+          indiv_new.term.p = indiv.term.x;
+          indiv_new.term.p_fitVal = fitVal; 
+          return indiv_new;
+
+        } else {
+          return indiv;  
         }
       } 
     };
@@ -140,13 +156,17 @@ var PSO = (function () {
       }
     };
 
+    var ctx = mkCtx({});
+
     return {
       initRunKnowledge: initRunKnowledge,
       updateRunKnowledge: updateRunKnowledge,
       generatePop: generatePop,
       evalPopOpts: evalPopOpts,
       commOpts: commOpts,
-      ctx: GPopts.ctx
+      ctx: ctx,
+
+      Operators: Operators
     };
   }
 

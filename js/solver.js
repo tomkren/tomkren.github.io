@@ -42,7 +42,7 @@ var Solver = (function () {
       var runKnowledge = solver.initRunKnowledge(opts);
       var pop          = solver.generatePop(opts, runKnowledge);
 
-      var evaledPop    = evalPop(pop); //solver.evalPop(pop, opts);
+      var evaledPop    = evalPop(pop);
       runKnowledge     = solver.updateRunKnowledge(runKnowledge, evaledPop, opts);
 
       sendGenInfo(opts, run, gen, evaledPop, runKnowledge, communicator, solver);
@@ -89,11 +89,12 @@ var Solver = (function () {
     
     return function (pop) {
       return evalPop_core( evalPopOpts.mkIndivArr(pop), 
-                           evalPopOpts.mkIndivFitness(opts) );
+                           evalPopOpts.mkIndivFitness(opts),
+                           evalPopOpts.onEvalIndivUpdate );
     }
   }
 
-  function evalPop_core (indivArr, indivFitness) {
+  function evalPop_core (indivArr, indivFitness, onEvalIndivUpdate) {
 
     var terminate = false;
     var best      = {fitVal: 0};
@@ -106,9 +107,7 @@ var Solver = (function () {
           fitVal: fitResult,
           terminate: false
         };
-      }
-
-      fitResult.indiv = indiv; 
+      } 
 
       if (isNaN(fitResult.fitVal)) {
         log('Fitness value is NaN, converted to 0.');
@@ -118,6 +117,12 @@ var Solver = (function () {
       if (fitResult.terminate) {
         terminate = true;
       }
+
+      if (onEvalIndivUpdate) {
+        indiv = onEvalIndivUpdate(indiv, fitResult.fitVal);
+      }
+
+      fitResult.indiv = indiv;
 
       best = updateBest(best, fitResult);
 

@@ -16,8 +16,7 @@ opts = {
   popSize: 10,
 
   saveBest : true,
-  operators : [],
-
+  
   statsOpts: StatsOpts.default,
   logOpts  : LogOpts.default,
 
