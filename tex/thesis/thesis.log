@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  11 NOV 2013 05:20
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  13 JAN 2014 22:20
 entering extended mode
 **thesis.tex
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.tex
+(C:\wamp\www\tomkren.github.io\tex\thesis\thesis.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -695,7 +695,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip140
 )
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.aux)
+(C:\wamp\www\tomkren.github.io\tex\thesis\thesis.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 154.
 LaTeX Font Info:    ... okay on input line 154.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 154.
@@ -739,8 +739,8 @@ LaTeX Info: Redefining \ref on input line 154.
 LaTeX Info: Redefining \pageref on input line 154.
 LaTeX Info: Redefining \nameref on input line 154.
 
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.out)
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.out)
+(C:\wamp\www\tomkren.github.io\tex\thesis\thesis.out)
+(C:\wamp\www\tomkren.github.io\tex\thesis\thesis.out)
 \@outlinefile=\write3
 
 <logomff.png, id=275, 1367.1075pt x 1304.62407pt>
@@ -763,14 +763,14 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 214.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/se
-kol/Documents/GitHub/fishtron/tex/logomff.png>] [2] [3]
+{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/wamp/www
+/tomkren.github.io/tex/thesis/logomff.png>] [2] [3]
 LaTeX Font Info:    Calculating math sizes for size <9.95863> on input line 324
 .
  [4]
-(C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.tocpdfTeX warning (ext4): 
-destination with the same identifier (name{page.1}) has been already used, dupl
-icate ignored
+(C:\wamp\www\tomkren.github.io\tex\thesis\thesis.tocpdfTeX warning (ext4): dest
+ination with the same identifier (name{page.1}) has been already used, duplicat
+e ignored
 <to be read again> 
                    \relax 
 l.47 ...raction elimination}{45}{subsection.3.3.1}
@@ -1951,7 +1951,7 @@ File: skryn.png Graphic file (type png)
  <use skryn.png>
 Package pdftex.def Info: skryn.png used on input line 3896.
 (pdftex.def)             Requested size: 391.75668pt x 258.66179pt.
- [50 <C:/Users/sekol/Documents/GitHub/fishtron/tex/skryn.png>]
+ [50 <C:/wamp/www/tomkren.github.io/tex/thesis/skryn.png>]
 Chapter 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3937--3938
@@ -2007,14 +2007,14 @@ File: reports/SSR/i.png Graphic file (type png)
 Package pdftex.def Info: reports/SSR/i.png used on input line 4026.
 (pdftex.def)             Requested size: 361.12082pt x 263.55722pt.
 
-[53 <C:/Users/sekol/Documents/GitHub/fishtron/tex/reports/SSR/p.png> <C:/Users/
-sekol/Documents/GitHub/fishtron/tex/reports/SSR/i.png>]
+[53 <C:/wamp/www/tomkren.github.io/tex/thesis/reports/SSR/p.png> <C:/wamp/www/t
+omkren.github.io/tex/thesis/reports/SSR/i.png>]
 <santafe.png, id=750, 394.47375pt x 408.02437pt>
 File: santafe.png Graphic file (type png)
  <use santafe.png>
 Package pdftex.def Info: santafe.png used on input line 4045.
 (pdftex.def)             Requested size: 394.47278pt x 408.02338pt.
- [54 <C:/Users/sekol/Documents/GitHub/fishtron/tex/santafe.png>]
+ [54 <C:/wamp/www/tomkren.github.io/tex/thesis/santafe.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4078--4079
 
  []
@@ -2056,8 +2056,8 @@ File: reports/Ant/i.png Graphic file (type png)
 Package pdftex.def Info: reports/Ant/i.png used on input line 4145.
 (pdftex.def)             Requested size: 363.49214pt x 266.26732pt.
 
-[56 <C:/Users/sekol/Documents/GitHub/fishtron/tex/reports/Ant/p.png> <C:/Users/
-sekol/Documents/GitHub/fishtron/tex/reports/Ant/i.png>]
+[56 <C:/wamp/www/tomkren.github.io/tex/thesis/reports/Ant/p.png> <C:/wamp/www/t
+omkren.github.io/tex/thesis/reports/Ant/i.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4174--4177
 
  []
@@ -2073,7 +2073,7 @@ File: reports/Ant/ts.png Graphic file (type png)
 <use reports/Ant/ts.png>
 Package pdftex.def Info: reports/Ant/ts.png used on input line 4183.
 (pdftex.def)             Requested size: 342.15012pt x 270.67123pt.
- [57 <C:/Users/sekol/Documents/GitHub/fishtron/tex/reports/Ant/ts.png>]
+ [57 <C:/wamp/www/tomkren.github.io/tex/thesis/reports/Ant/ts.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4214--4215
 
  []
@@ -2398,7 +2398,7 @@ Overfull \hbox (8.56638pt too wide) in paragraph at lines 4294--4295
 [][] 
  []
 
-[60 <C:/Users/sekol/Documents/GitHub/fishtron/tex/reports/SSR/ts.png>]
+[60 <C:/wamp/www/tomkren.github.io/tex/thesis/reports/SSR/ts.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4347--4348
 
  []
@@ -2455,9 +2455,8 @@ File: reports/ep/i.png Graphic file (type png)
 <use reports/ep/i.png>
 Package pdftex.def Info: reports/ep/i.png used on input line 4493.
 (pdftex.def)             Requested size: 379.04016pt x 327.47264pt.
- [64 <C:/Users/sekol/Documents/GitHub/fishtron/tex/reports/ep/p.png> <C:/Users/
-sekol/Documents/GitHub/fishtron/tex/reports/ep/i.png>]
-[65]
+ [64 <C:/wamp/www/tomkren.github.io/tex/thesis/reports/ep/p.png> <C:/wamp/www/t
+omkren.github.io/tex/thesis/reports/ep/i.png>] [65]
 Underfull \hbox (badness 10000) in paragraph at lines 4550--4552
 
  []
@@ -2497,7 +2496,7 @@ File: fly/1.png Graphic file (type png)
  <use fly/1.png>
 Package pdftex.def Info: fly/1.png used on input line 4726.
 (pdftex.def)             Requested size: 387.24727pt x 389.05403pt.
- [69 <C:/Users/sekol/Documents/GitHub/fishtron/tex/fly/1.png>]
+ [69 <C:/wamp/www/tomkren.github.io/tex/thesis/fly/1.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4737--4738
 
  []
@@ -2533,9 +2532,9 @@ Overfull \hbox (8.27359pt too wide) in paragraph at lines 4758--4760
 [] 
  []
 
-[70 <C:/Users/sekol/Documents/GitHub/fishtron/tex/fly/2.png> <C:/Users/sekol/Do
-cuments/GitHub/fishtron/tex/fly/3.png> <C:/Users/sekol/Documents/GitHub/fishtro
-n/tex/fly/4.png>]
+[70 <C:/wamp/www/tomkren.github.io/tex/thesis/fly/2.png> <C:/wamp/www/tomkren.g
+ithub.io/tex/thesis/fly/3.png> <C:/wamp/www/tomkren.github.io/tex/thesis/fly/4.
+png>]
 Underfull \hbox (badness 10000) in paragraph at lines 4769--4770
 
  []
@@ -2550,7 +2549,7 @@ Overfull \hbox (22.16188pt too wide) in paragraph at lines 4771--4772
 [][] 
  []
 
-[71 <C:/Users/sekol/Documents/GitHub/fishtron/tex/fly/5.png>]
+[71 <C:/wamp/www/tomkren.github.io/tex/thesis/fly/5.png>]
 Chapter 6.
 
 Underfull \hbox (badness 10000) in paragraph at lines 4801--4803
@@ -2594,7 +2593,7 @@ Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5444.
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 5444.
- (C:\Users\sekol\Documents\GitHub\fishtron\tex\thesis.aux)
+ (C:\wamp\www\tomkren.github.io\tex\thesis\thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5444.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5444.
 
@@ -2612,7 +2611,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5444.
  ) 
 Here is how much of TeX's memory you used:
  8937 strings out of 493921
- 122935 string characters out of 3144876
+ 122883 string characters out of 3144876
  248920 words of memory out of 3000000
  11844 multiletter control sequences out of 15000+200000
  23161 words of font info for 87 fonts, out of 3000000 for 9000
