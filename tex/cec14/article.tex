@@ -12,6 +12,12 @@
 \usepackage{qtree}
 \usepackage{xspace}
 
+\usepackage[ampersand]{easylist}
+
+\newenvironment{lizt}
+{\begin{easylist}[itemize]}
+{\end{easylist}}
+
 
 
 \newcommand{\Lets}{Let us\xspace}
@@ -128,18 +134,20 @@ Eliminaci abstrakcí
 
 ---
 
-Jak reprezentovat stromy programů pro GP?
+\begin{lizt}
+& Jak reprezentovat stromy programu pro GP?
+  && Reprezentace v klasickym kozovy je S-expression.
+  && Nebo mužem používat kombinátory jako Briggs a O’Neil (to si 
+     myslim je jakoby hlavní konkurence, vuči který by to chtělo 
+     obhájit)
+& Lambda termy a jejich awesomeness
+& Povídaní o redukcích
+& Povídání o lnf
+\end{lizt}
 
-Reprezentace v klasickym kozovy je S-expression.
 
-Nebo můžem používat kombinátory jako Briggs a O’Neil (to si myslim je jakoby hlavní 
-konkurence, vůči který by to chtělo obhájit)
 
-Lambda termy a jejich awesomeness
 
-Povídaní o redukcích
-
-Povídání o lnf
 
 že lnf je přirozený rozšíření s-exprešnů do lambda kalkulu
 
