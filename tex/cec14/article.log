@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.15)  14 JAN 2014 15:25
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 JAN 2014 22:20
 entering extended mode
 **article.tex
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
@@ -376,10 +376,10 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\qtree\qtree.sty"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\qtree\qtree.sty
 Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
 Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pict2e\pict2e.sty"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\pict2e.sty
 Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\pict2e.cfg"
@@ -400,7 +400,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pict2e\p2e-pdftex.def"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\p2e-pdftex.def
 File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
@@ -519,7 +519,7 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\easylist\easylist.sty"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
 Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \el@CounterTotal=\count109
 \el@Scratch=\count110
@@ -559,7 +559,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+ (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count123
 \scratchdimen=\dimen128
@@ -573,24 +573,24 @@ LaTeX Font Info:    ... okay on input line 87.
 \makeMPintoPDFobject=\count128
 \everyMPtoPDFconversion=\toks27
 )
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 138.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 139.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 138.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 139.
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
 [] []\OT1/ptm/m/n/10 Reprezentace v kla-sickym ko-zovy je S-
  []
 
 
-Underfull \hbox (badness 3849) in paragraph at lines 140--143
+Underfull \hbox (badness 3849) in paragraph at lines 141--144
 \OT1/ptm/m/n/10 a O'Neil (to si mys-lim je jakoby hlavn[]
  []
 
-[1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+[1{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
@@ -614,19 +614,19 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  3169 strings out of 493921
- 41491 string characters out of 3144882
+ 41603 string characters out of 3144876
  116663 words of memory out of 3000000
  6449 multiletter control sequences out of 15000+200000
  36677 words of font info for 67 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 27i,8n,24p,742b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,863b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files (x86)/MiKTeX 2.
 9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on article.pdf (2 pages, 69057 bytes).
+Output written on article.pdf (2 pages, 75203 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
