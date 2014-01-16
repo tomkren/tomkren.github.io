@@ -1,0 +1,305 @@
+
+\documentclass[conference]{IEEEtran}
+%\usepackage{stmaryrd}
+\usepackage{amsfonts}
+
+
+%\usepackage{graphicx,times,psfig,amsmath} % Add all your packages here
+%\usepackage{hyperref}
+\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{qtree}
+\usepackage{xspace}
+
+\usepackage[ampersand]{easylist}
+
+\newenvironment{lizt}
+{\begin{easylist}[itemize]}
+{\end{easylist}}
+
+
+
+\newcommand{\Lets}{Let us\xspace}
+\newcommand{\lets}{let us\xspace}
+\newcommand{\lterm}{$\lambda$-term\xspace}
+\newcommand{\lterms}{$\lambda$-terms\xspace}
+\newcommand{\lhead}{$\lambda$-head\xspace}
+\newcommand{\lheads}{$\lambda$-heads\xspace}
+\newcommand{\la}{\leftarrow\xspace}
+\newcommand{\Lp}  {\Lambda^{\prime}\xspace}
+\newcommand{\tur}[3]{#1\vdash{}#2:#3}
+\newcommand{\turst}[3]{$#1\vdash{}#2:#3$\xspace}
+\newcommand{\GMS}{\turst{\Gamma}{M}{\sigma}}
+\newcommand{\atTree}{@-tree\xspace}
+\newcommand{\setDots}[2]{ \lbrace #1 , \dots , #2 \rbrace}
+\newcommand{\lh}[1]{\lambda #1}
+\newcommand{\sexprTree}{sexpr-tree\xspace}
+\newcommand{\SexprTree}{Sexpr-tree\xspace}
+\newcommand{\then}{\Rightarrow\xspace}
+\newcommand{\lamb}[2]{( \lambda \, #1 \, . \, #2 )}
+\newcommand{\lam}[2]{\lambda \, #1 \, . \, #2}
+\newcommand{\ST}{\mathop{\mathrm{ST}}}
+\newcommand{\FV}{\mathop{\mathrm{FV}}}
+\newcommand{\Scomb }{\mathbf{S}}
+\newcommand{\Kcomb }{\mathbf{K}}
+\newcommand{\Icomb }{\mathbf{I}}
+\newcommand{\bbarr}{\twoheadrightarrow_\beta}
+\newcommand{\barr}{\rightarrow_\beta}
+\newcommand{\beq}{=_\beta}
+\newcommand{\eearr}{\twoheadrightarrow_\eta}
+\newcommand{\earr}{\rightarrow_\eta}
+\newcommand{\eeq}{=_\eta}
+\newcommand{\bearr}{\rightarrow_{\beta\eta}}
+\newcommand{\bbeearr}{\twoheadrightarrow_{\beta\eta}}
+\newcommand{\beeq}{=_{\beta\eta}}
+\newcommand{\etar}{\twoheadrightarrow_\eta}
+\newcommand{\ered}{$\eta$-reduction\xspace}
+\newcommand{\bnf}{$\beta$-\textit{nf}\xspace}
+\newcommand{\enf}{$\eta$-\textit{nf}\xspace}
+\newcommand{\eenf}{$\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\beenf}{$\beta\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\benf}{$\beta\eta$-\textit{nf}\xspace}
+\newcommand{\bredex}{$\beta$-redex\xspace} 
+\newcommand{\lnf}{\textit{lnf}\xspace}
+\newcommand{\Ae}{\mathop{\mathrm{\AE}}}
+\newcommand{\Bcomb }{\mathbf{B}}   
+\newcommand{\BBcomb }{\mathbf{B*}}
+\newcommand{\Ccomb }{\mathbf{C}}   
+\newcommand{\CCcomb }{\mathbf{C'}}
+\newcommand{\SScomb }{\mathbf{S'}}
+\newcommand{\ar}{\rightarrow\xspace}
+\newcommand{\T}{\mathbb{T}\xspace}
+\newcommand{\Real}{\mathbb{R}}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
+
+\IEEEoverridecommandlockouts    % to create the author's affliation portion
+
+\textwidth 178mm    % <------ These are the adjustments we made 10/18/2005
+\textheight 239mm   % You may or may not need to adjust these numbers again
+\oddsidemargin -7mm
+\evensidemargin -7mm
+\topmargin -6mm
+\columnsep 5mm
+
+\begin{document}
+
+
+% paper title: Must keep \ \\ \LARGE\bf in it to leave enough margin.
+\title{\ \\ \LARGE\bf 
+Utilization of Reductions and Abstraction Elimination in Typed Genetic Programming}
+
+\author{Tom\'{a}\v{s} K\v{r}en \and Roman Neruda}
+
+
+\maketitle
+
+\begin{abstract}
+Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from use of reductions (beta and eta) and how to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and compare several crossover approaches including novel approach to crossover operator based both on reductions and abstraction elimination. The design goal of this operator is to turn the disadvantage of abstraction elimination  - possibly quadratic increase of program size - into a virtue; our approach leads to more crossover points. At the same time, utilization of reductions provides offspring of small sizes.
+\end{abstract}
+% no key words
+
+\section{Introduction}
+\PARstart{D}{odělat} úvod (...) aaa bbb ccc aaa bbb ccc 
+aaa bbb ccc aaa bbb ccc aaa bbb ccc aaa bbb ccc aaa bbb ccc aaa bbb ccc 
+aaa bbb ccc aaa bbb ccc aaa bbb ccc aaa bbb ccc.
+
+Jak to celý pojmout?
+
+Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. Motivace pro práci s lambda termama je, že za nima košatá teorie, která například popisuje redukce lambda termů (ty zajišťujou jak zmenšení samotných stromu, tak to, že prohledávací prostor se zmenší, díky tomu, že se různé stromy redukují na ten samej).
+
+Jak se vypořádat s proměnejma a lambdama? (aka jak křížit)
+
+Po vygenerování převod do kombinátorů pomocí eliminace abstrakcí (tak jak se to dělá v diplomce). To ale působí v něčem neohrabaně, když to porovnáme s generovánim přímo v kombinatorech, když vezmeme v potaz to že eliminace abstrakcí má za důsledek až kvadratickej nárůst stromu - čili to co sme nahnali na redukcích stratíme eliminací. 
+
+Jedince držíme jako redukovane malinké-kompaktní-a-elegantní lambda termy. Ve chvíly kdy křížíme provedeme na obou rodičích eliminaci abstrakcí (která ubere proměny a lambdy a namísto toho tam dá kombinátory S,K,I případně i další při fikanějších eliminacích), tím nám sice narostou, ale my z toho máme jedine radost, protože tím se nám zvýšil počet míst ke křížení (což se ukazuje jako dobráv věc, viz s-expr reprezentace vs @-tree reprezentace lambda termů). Po skřížení se vložený kombinátory nahradí odpovídajícim lambda termem (tzn např všude kde je K dám (x y . x) atd) výslednej term zredukuju a dostávam zase malinké-kompaktní-a-elegantní dítě.
+Nevýhoda toho zahrnout do článku i tohle je v tom, že k tomu nemám ještě žádný pokusy - ale k tomu zbytku mám upřímě v zato taky dost ubohý pokysy, takže toho bych se asi nebál. Většinu potřebnýho kodu bych k tomu ale měl už mít víceméně hotovou, takže pokud by se to na něčem nezaseklo, tak myslim že je realný udělat i pokus do toho dvacátýho. Zvlášť přitažlivý mi tohle křížení příde i kvůli tomu, že v přírodě se taky rozbalujou a zabaloujou chromozomi při meioze/mitoze.
+
+
+\section{Related work}
+\label{related}
+
+Vzit asi dost stejny jako při minulym članku, vyzvednout 
+kombinátoři a barendrechta.
+
+\section{Preliminaries}
+\label{preliminaries}
+
+Definice lambda kalkulu tentokrát bez nutnosti do toho extra podrobně zavádět typy.
+
+Redukce 
+
+Eliminaci abstrakcí
+
+---
+
+\begin{lizt}
+& Jak reprezentovat stromy programu pro GP?
+  && Reprezentace v klasickym kozovy je S-expression.
+  && Nebo mužem používat kombinátory jako Briggs a O’Neil (to si 
+     myslim je jakoby hlavní konkurence, vuči který by to chtělo 
+     obhájit)
+& Lambda termy a jejich awesomeness
+& Povídaní o redukcích
+& Povídání o lnf
+\end{lizt}
+
+
+
+
+
+že lnf je přirozený rozšíření s-exprešnů do lambda kalkulu
+
+vlastnosti termů v lnf 
+
+proč je eta redukovat (eta redukcí lnf dostanem beta-eta-nf a že nemusíme beta redukovat 
+pač se to tim nerozbyje)
+
+Generování
+
+Generování gramatikou
+
+Gramatika pro lnf
+
+Inhabitation trees jako intuitivní model takovýhodle lnf generování
+
+Problémy s proměnýma a jak je řešit.
+
+Křížit lambda termy i s proměnejma a abstrakcema, problémy řešit když nastanou (pomluvit 
+a odsoudit)
+
+Zmenšit prostor termů (tim že někerý nejsme schopný vygenerovat) s kterým operujeme tak 
+aby křížení už nebyl problém (to dělá Yu - v těle lambda fce dovoluje jen použití 
+proměnných z její hlavy)
+
+Převod hned po vygenerování
+
+Převod až při křížení
+
+eliminace abstrakcí
+
+skřížim
+
+vložený kombinátory nahradim odpovídajícím termem
+
+celý to redukuju
+
+
+\section{Our approach}
+\label{approach}
+
+\subsection{Introduction}
+
+
+
+\subsection{Algorithm}
+
+\section{Experiments}
+\label{experiments}
+
+
+
+
+\section{Conclusions}
+
+Dodělat závěr (...)
+
+
+\begin{thebibliography}{22}
+
+\bibitem{koza92}
+  TODO. Todo,
+  \emph{Dát sem místo toho ten bibtex}.
+  MIT Press, Cambridge, MA,
+  2014. 
+
+\bibitem{koza92}
+  John R. Koza,
+  \emph{Genetic Programming: On the Programming of Computers by Means of Natural Selection}.
+  MIT Press, Cambridge, MA,
+  1992. 
+
+\bibitem{koza05}
+  Koza, J.R., Keane, M., Streeter, M., Mydlowec, W.,Yu, J., Lanza, G. 
+  \emph{Genetic Programming IV: Routine Human-Competitive Machine Intelligence.} 
+  Springer, 2005. ISBN 978-0-387-26417-2 
+
+\bibitem{fg}
+ Riccardo Poli, William B. Langdon, Nicholas F. McPhee
+ \emph{A Field Guide to Genetic Programming}.
+ Lulu Enterprises, UK Ltd, 2008.
+
+\bibitem{yu01}
+  T. Yu. 
+  \emph{Hierachical processing for evolving recursive and modular 
+        programs using higher order functions and lambda abstractions}. 
+  Genetic Programming and Evolvable Machines,
+  2(4):345–380, December 2001. ISSN 1389-2576.
+
+
+\bibitem{montana95}
+D. J. Montana. 
+\emph{Strongly typed genetic programming.} 
+Evolutionary Computation, 3(2): 199–230, 1995.
+%URL \url{ http://vishnu.bbn.com/papers/stgp.pdf }. nefacha
+
+\bibitem{haynes96}
+T. D. Haynes, D. A. Schoenefeld, and R. L. Wainwright. 
+\emph{Type inheritance in strongly typed genetic programming.} 
+In P. J. Angeline and K. E. Kinnear, Jr., editors, Advances
+in Genetic Programming 2, chapter 18, pages 359–376.
+MIT Press, Cambridge, MA, USA, 1996. ISBN 0-262-01158-1. 
+%URL \url{http://www.mcs.utulsa.edu/~rogerw/papers/Haynes-hier.pdf}.
+
+\bibitem{olsson94}
+J. R. Olsson. 
+\emph{Inductive functional programming using incremental program 
+transformation and Execution of logic programs by 
+iterative-deepening A* SLD-tree search.} 
+Dr scient thesis, University of Oslo, Norway, 1994.
+
+\bibitem{kes}
+Forrest Briggs, Melissa O’Neill.
+\emph{Functional Genetic Programming and Exhaustive
+Program Search with Combinator Expressions.}
+International Journal of Knowledge-based and Intelligent Engineering Systems,
+Volume 12 Issue 1, Pages 47-68, January 2008. 
+
+
+\bibitem{barendregt84}
+H. P. Barendregt,
+\emph{The Lambda Calculus: its Syntax and Semantics}, 
+revised ed., North-Holland, 1984.
+
+\bibitem{barendregt92}
+H. Barendregt , S. Abramsky , D. M. Gabbay , T. S. E. Maibaum.
+\emph{Lambda Calculi with Types.} 
+Handbook of Logic in Computer Science, 1992. 
+
+\bibitem{barendregt10}
+
+  Henk Barendregt, Wil Dekkers, Richard Statman,
+  \emph{Lambda Calculus With Types}.
+  Cambridge University Press,
+  2010. 
+  %URL \url{http://www.cs.ru.nl/~henk/book.pdf}.
+
+\bibitem{jones87}
+Simon Peyton Jones. 
+\emph{The Implementation of Functional Programming Languages}. 
+Prentice Hall, 1987.
+
+
+\bibitem{AIAMA}
+	Stuart J. Russell, Peter Norvig,
+	\emph{Artificial Intelligence: A Modern Approach}.
+	Pearson Education,
+	2003. 
+
+
+\end{thebibliography}
+
+% that's all folks
+\end{document}
