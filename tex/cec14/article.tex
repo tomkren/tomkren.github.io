@@ -579,12 +579,247 @@ representation (coming directly from inductive definition of \lterms).
 \section{Experiments}
 \label{experiments}
 
+We made tree experiments comparing performance of standard 
+\textit{ramped half-and-half strategy} with our
+\textit{geometric strategy} (with default parameter $q=0.75$). 
+Each experiment consisted of 50 independent runs 
+of GP algorithm. Each run had maximally 51 generations and population size
+was 500 individuals.
+In those experiments we analyze the ability of the system to produce 
+a correct solution, computational cost estimates and average size 
+of an individual throughout generations. 
+For the first two metrics we use the popular measurement  
+methods within GP field --- the \textit{performance curves}
+described in \cite{koza92} --- $P(M,i)$ (cumulative probability of success) 
+and $I(M,i,z)$ (the total number of individuals that must be processed 
+to yield a correct solution with probability $z =99\%$).
 
+\subsection{Simple symbolic regression}
+\textit{Simple Symbolic Regression} is a problem described
+in \cite{koza92}. Objective of this problem is to 
+find a function $f(x)$ that fits a sample
+of twenty given points. The target function is 
+function $f_{t}(x) = x^4 + x^3 + x^2 + x$.  
+Desired type of generated programs $\tau$ and 
+building blocks context $\Gamma$ are following.
+\begin{align*}
+\tau = \Real \ar &\Real\\
+\Gamma = \{
+  (+)  &: \Real \ar \Real \ar \Real    ,
+  (-)   : \Real \ar \Real \ar \Real    ,
+  (*)   : \Real \ar \Real \ar \Real    ,
+  rdiv  : \Real \ar \Real \ar \Real    ,\\
+  sin  &: \Real \ar \Real              ,
+  cos   : \Real \ar \Real              ,
+  exp   : \Real \ar \Real              , 
+  rlog  : \Real \ar \Real              \}
+\end{align*}
+where
+\noindent
+\begin{minipage}{.5\linewidth}
+\begin{align*}
+rdiv(p,q) &= \begin{cases} 1 &\mbox{if } q = 0 \\
+p/q & \mbox{otherwise } \end{cases}  
+\end{align*}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+\begin{align*}
+rlog(x) &= \begin{cases} 0 &\mbox{if } x = 0 \\
+log(\vert x\vert) & \mbox{otherwise}. \end{cases}
+\end{align*}
+\end{minipage}
 
+\begin{figure}[h!]
+  \caption{Performance curves for Simple symbolic regression.}
+  \centering
+    \includegraphics[scale=0.135]{imgs/SSR_FINAL.png}
+\end{figure}
+Fitness function is computed as follows.
+$$ fitness(f) =  \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert   $$
+where $(x_i,y_i)$ are 20 data samples from $[-1,1]$, such that $y_i = f_t(x_i)$.
+An individual $f$ such that $\vert f(x_i)-y_i \vert < 0.01 $ for all data samples is 
+considered as a correct individual.
+
+Standard \textit{ramped half-and-half strategy} scored 17/50 (34\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 23 with 192,000 individuals to be processed.
+The average individual size for generation 50 was 76.
+The experiment took 46 minutes.
+Our \textit{geometric strategy} scored 21/50 (42\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 29 with 150,000 individuals to be processed.
+The average individual size for generation 50 was 47.
+The experiment took 26 minutes.
+Figure~1 shows the progress of those metrics throughout generations.
+So for the \textit{Simple symbolic regression}
+our geometric strategy is slightly more successful then 
+ramped half-and-half strategy in all observed metrics.
+
+\subsection{Artificial ant}
+\textit{Artificial Ant} is another problem described
+in \cite{koza92}. Objective of this problem is to 
+find a control program for an artificial ant so
+that it can find all food located on "Santa Fe" trail.
+The Santa Fe trail lies on toroidal square grid.
+The ant is in the upper left corner, facing right.
+The ant is able to move forward, turn left, and sense if a food 
+piece is ahead of him.
+
+\begin{align*}
+\tau = An&tAction\\
+\Gamma = \{~~
+  l    &: AntAction                              ,
+  r    : AntAction                               ,
+  m    : AntAction                               ,\\
+  ifa  &: AntAction \ar AntAction \ar AntAction  ,\\
+  p2   &: AntAction \ar AntAction \ar AntAction  ,\\
+  p3   &: AntAction \ar AntAction \ar AntAction \ar AntAction  \}
+\end{align*}
+
+Action $l$ turns the ant left. 
+Action $r$ turns the ant right.
+Action $m$ moves the ant forward.
+Action $ifa~x~y$ (if-food-ahead) performs action $x$ 
+if a food piece is ahead of the ant,
+otherwise it performs action $y$.
+Action $p2~x~y$ first performs action $x$ and after it action $y$.
+Action $p3~x~y~z$ first performs action $x$, 
+after that action $y$ and finally $z$.
+Actions $l, r$ and $m$ each take one time step to execute.
+Ants action is performed over and over again until it reaches predefined
+maximal number of steps. 
+
+\begin{figure}[h!]
+  \caption{Performance curves for Artificial ant problem.}
+  \centering
+    \includegraphics[scale=0.135]{imgs/ANT_FINAL.png}
+\end{figure}
+
+Fitness value is equal to number of eaten food pieces.
+An individual such that eats all 89 pieces of food is 
+considered as a correct solution.
+This limit is set to be 600 time steps\footnote{
+In \cite{koza92} this limit is said to be 400 time steps.
+But there is also mentioned following solution, 
+which is described as correct solution:
+\texttt{(ifa m (p3 l (p2 (ifa m r) (p2 r (p2 l r)))(p2 (ifa m l) m)))}.
+This program needs 545
+time steps; if it is given only 400 time steps, then it eats only 79 pieces
+of food. Thus we use 600 time steps. 
+}.
+
+Standard \textit{ramped half-and-half strategy} scored 7/50 (14\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 28 with 449,500 individuals to be processed.
+The average individual size for generation 50 was circa 400.
+The experiment took 265 minutes.
+Our \textit{geometric strategy} scored 19/50 (38\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 10 with 115,500 individuals to be processed.
+The average individual size for generation 50 was circa 90.
+The experiment took 107 minutes.
+This is a big improvement in all watched factors.
+Figure~2 shows it in greater detail.
+
+\subsection{Even parity problem}
+
+Previous two problems were instances of standard GP, i.e. their building symbols
+obeyed the closure requirement. This third experiment will break the closure requirement, thus ideal for testing typed GP techniques. 
+The even-parity function is a boolean function taking as inputs $N$
+boolean values and returning \textit{True} if an even number of inputs 
+are \textit{True}. For odd number it returns \textit{False}.
+This problem has been used by many researchers
+as a benchmark for GP. We compare our results with that obtained by Yu in \cite{yu01},
+where is presented approach to evolve recursive and modular programs
+by use of higher-order functions and $\lambda$-abstractions.
+We use very similar set of \textit{building symbols} as in \cite{yu01}. 
+\begin{align*}
+\tau = [Boo&l] \ar Bool\\
+\Gamma = \{
+  and   &: Bool \ar Bool \ar Bool                              ,
+  or    : Bool \ar Bool \ar Bool                              ,\\
+  nand  &: Bool \ar Bool \ar Bool                              ,
+  nor    : Bool \ar Bool \ar Bool                              ,\\
+  foldr &: (Bool \ar Bool \ar Bool) \ar Bool \ar [Bool] \ar Bool ,\\
+  head' &: [Bool] \ar Bool                                   ,
+  tail' : [Bool] \ar [Bool]                              \}
+\end{align*}
+\begin{figure}[h!]
+  \caption{Performance curves for Even parity problem.}
+  \centering
+    \includegraphics[scale=0.135]{imgs/EP_FINAL.png}
+\end{figure}
+
+The type $[Bool]$ stands for \textit{list of $Bool$s} and for purpose of
+this problem is considered atomic.
+Unlike in \cite{yu01}, we use specific instance of polymorphic 
+function \texttt{foldr}. 
+And modifications of functions \texttt{head} 
+(returning the first element of the list) 
+and \texttt{tail} (returning the list without the first element) are used; 
+making them total by returning default value \textit{False}
+and \texttt{[]}, respectively.
+We use the same fitness function as in \cite{yu01}. 
+The fitness function examines the individual by giving
+it all possible boolean lists of length 2 and 3.
+
+Standard \textit{ramped half-and-half strategy} scored 9/50 (18\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 17 with 333,000 individuals to be processed.
+The average individual size for generation 50 was 39.
+The experiment took 28 minutes.
+Our \textit{geometric strategy} scored 32/50 (64\%) success rate. 
+Minimal $I(M,i,z)$ was in generation 0 with 28,000 individuals to be processed.
+The average individual size for generation 50 was circa 100.
+The experiment took 33 minutes.
+Figure~3 shows it in greater detail.
+Once again this is a big improvement against standard method. 
+One may get the impression that geometric strategy suffers from bloat here,
+but considering that it performs significantly better and
+that term size around 100 is similar as for the previous two problems, 
+it seems to us that ramped half-and-half maybe has difficulties with 
+constructing more complex terms, and therefore is "staying small".
+Another remarkable observation is that 4 times out of 50 (8\% of all runs) 
+the 100\% correct solution was present in the generation 0. This is pretty good
+result for uninformed search. However, our results are less successful 
+then those presented in \cite{yu01} (with slightly different set of 
+building symbols); they scored 40/50 (80\%) success rate and $I(M,i,z)$ of 
+17,500 in generation 4. But by observation of typical solution which is often
+some modification of \texttt{foldr xor False inputList} one sees that important task
+for GP here is to create \texttt{xor} function. This is advantage for the more specialized term representation used in \cite{yu01} 
+(restricting use of outer variables). 
+The difference in crossover operators may also be involved in the difference, 
+but such analysis is beyond the scope of this paper. Finally, our result at least outperforms other results mentioned in \cite{yu01}: \textit{Generic genetic programming} 
+scored 17/60 (28\%); min $I(M,i,z) = 220,000$. \textit{GP with ADFs} 
+scored 10/29 (34\%); min $I(M,i,z) = 1,440,000$.
 
 \section{Conclusions}
+\label{conclusions}
 
-Dodělat závěr (...)
+In this work, we have proposed a generalization of genetic programming 
+for simply typed lambda calculus. The main focus of this paper is on individual generation algorithms. 
+The main idea is to explore the spectrum of available approaches bounded on one end by the traditional
+ramped half-and-half strategy, while the second bound represents an exhaustive systematic search. 
+Thus, three population initialization methods have been designed, 
+depending on different search strategies. 
+The first strategy corresponds to the above mentioned traditional genetic programming initialization,  
+the second one corresponds to exhaustive search, and the third one 
+represents a novel geometric strategy which outperforms standard genetic 
+programming in success rate, resource consumption and average individual size 
+on the presented experiments. 
+
+%\red{ [větu dvě o experimentech]}
+
+The relevance of these algorithms does not effect only initialization, but it can be used during mutation
+operator in a straightforward way. 
+%Other performance enhancements based on theory of lambda calculus are 
+%proposed and supported by experiments, including abstraction 
+%elimination that enables us to utilize
+%a simple tree-swapping crossover.
+
+Our future research will focus on exploring other possible search strategies positioned in the middle ground 
+identified in this paper. Since the search strategy can be easily described by a rather simple filtration algorithm, it might be
+interesting to allow the typed GP system to evolve the search strategy it 
+utilizes in a kind of meta-evolution way. 
+
+%\red{ [ještě něco navíc nebo podrobněji, říct poly že neni ale že se na něm pracuje a de hezky zandat do již systemu] }
+
+
 
 
 \begin{thebibliography}{22}
