@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 JAN 2014 22:20
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  16 JAN 2014 17:34
 entering extended mode
 **article.tex
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
@@ -93,76 +93,10 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \@IEEEtmpitemindent=\dimen112
 \c@biography=\count90
 \@IEEEtranrubishbin=\box26
-) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks15
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
-Package: amsmath 2013/01/14 v2.14 AMS math features
-\@mathmargin=\skip46
-
-For additional information on amsmath, use the `?' option.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
-Package: amstext 2000/06/29 v2.01
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
-File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks16
-\ex@=\dimen113
-))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
-Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen114
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
-Package: amsopn 1999/12/14 v2.01 operator names
-)
-\inf@bad=\count91
-LaTeX Info: Redefining \frac on input line 210.
-\uproot@=\count92
-\leftroot@=\count93
-LaTeX Info: Redefining \overline on input line 306.
-\classnum@=\count94
-\DOTSCASE@=\count95
-LaTeX Info: Redefining \ldots on input line 378.
-LaTeX Info: Redefining \dots on input line 381.
-LaTeX Info: Redefining \cdots on input line 466.
-\Mathstrutbox@=\box27
-\strutbox@=\box28
-\big@size=\dimen115
-LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
-\macc@depth=\count96
-\c@MaxMatrixCols=\count97
-\dotsspace@=\muskip10
-\c@parentequation=\count98
-\dspbrk@lvl=\count99
-\tag@help=\toks17
-\row@=\count100
-\column@=\count101
-\maxfields@=\count102
-\andhelp@=\toks18
-\eqnshift@=\dimen116
-\alignsep@=\dimen117
-\tagshift@=\dimen118
-\tagwidth@=\dimen119
-\totwidth@=\dimen120
-\lineht@=\dimen121
-\@envbody=\toks19
-\multlinegap=\skip47
-\multlinetaggap=\skip48
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2665.
-LaTeX Info: Redefining \] on input line 2666.
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks21
-\inpenc@posthook=\toks22
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -376,16 +310,92 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\qtree\qtree.sty
-Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
-Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\pict2e.sty
-Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\pict2e.cfg"
-File: pict2e.cfg 2005/12/29 v1.0 MiKTeX 'pict2e' configuration
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks17
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-Package pict2e Info: Driver file: pdftex.def on input line 119.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip46
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks18
+\ex@=\dimen113
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen114
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count91
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count92
+\leftroot@=\count93
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count94
+\DOTSCASE@=\count95
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen115
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count96
+\c@MaxMatrixCols=\count97
+\dotsspace@=\muskip10
+\c@parentequation=\count98
+\dspbrk@lvl=\count99
+\tag@help=\toks19
+\row@=\count100
+\column@=\count101
+\maxfields@=\count102
+\andhelp@=\toks20
+\eqnshift@=\dimen116
+\alignsep@=\dimen117
+\tagshift@=\dimen118
+\tagwidth@=\dimen119
+\totwidth@=\dimen120
+\lineht@=\dimen121
+\@envbody=\toks21
+\multlinegap=\skip47
+\multlinetaggap=\skip48
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
@@ -397,203 +407,124 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count103
-)
-Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
-
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\p2e-pdftex.def
-File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
-Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-)
-\pIIe@GRAPH=\toks23
-\@arclen=\dimen122
-\@arcrad=\dimen123
-\@tempdimd=\dimen124
-)
-\c@treecount=\count104
-\c@branchcount=\count105
-\parentbox=\box29
-\treebox=\box30
-\treeboxone=\box31
-\treeboxtwo=\box32
-\treeboxthree=\box33
-\treeboxfour=\box34
-\treeboxfive=\box35
-\treeboxsix=\box36
-\treeboxseven=\box37
-\treeboxeight=\box38
-\treeboxnine=\box39
-\treeboxten=\box40
-\treeboxeleven=\box41
-\treeboxtwelve=\box42
-\treeboxthirteen=\box43
-\treeboxfourteen=\box44
-\treeboxfifteen=\box45
-\treeboxsixteen=\box46
-\treeboxseventeen=\box47
-\treeboxeighteen=\box48
-\treeboxnineteen=\box49
-\treeboxtwenty=\box50
-\treeoffsetone=\skip49
-\treeoffsettwo=\skip50
-\treeoffsetthree=\skip51
-\treeoffsetfour=\skip52
-\treeoffsetfive=\skip53
-\treeoffsetsix=\skip54
-\treeoffsetseven=\skip55
-\treeoffseteight=\skip56
-\treeoffsetnine=\skip57
-\treeoffsetten=\skip58
-\treeoffseteleven=\skip59
-\treeoffsettwelve=\skip60
-\treeoffsetthirteen=\skip61
-\treeoffsetfourteen=\skip62
-\treeoffsetfifteen=\skip63
-\treeoffsetsixteen=\skip64
-\treeoffsetseventeen=\skip65
-\treeoffseteighteen=\skip66
-\treeoffsetnineteen=\skip67
-\treeoffsettwenty=\skip68
-\treeshiftone=\skip69
-\treeshifttwo=\skip70
-\treeshiftthree=\skip71
-\treeshiftfour=\skip72
-\treeshiftfive=\skip73
-\treeshiftsix=\skip74
-\treeshiftseven=\skip75
-\treeshifteight=\skip76
-\treeshiftnine=\skip77
-\treeshiftten=\skip78
-\treeshifteleven=\skip79
-\treeshifttwelve=\skip80
-\treeshiftthirteen=\skip81
-\treeshiftfourteen=\skip82
-\treeshiftfifteen=\skip83
-\treeshiftsixteen=\skip84
-\treeshiftseventeen=\skip85
-\treeshifteighteen=\skip86
-\treeshiftnineteen=\skip87
-\treeshifttwenty=\skip88
-\treewidthone=\skip89
-\treewidthtwo=\skip90
-\treewidththree=\skip91
-\treewidthfour=\skip92
-\treewidthfive=\skip93
-\treewidthsix=\skip94
-\treewidthseven=\skip95
-\treewidtheight=\skip96
-\treewidthnine=\skip97
-\treewidthten=\skip98
-\treewidtheleven=\skip99
-\treewidthtwelve=\skip100
-\treewidththirteen=\skip101
-\treewidthfourteen=\skip102
-\treewidthfifteen=\skip103
-\treewidthsixteen=\skip104
-\treewidthseventeen=\skip105
-\treewidtheighteen=\skip106
-\treewidthnineteen=\skip107
-\treewidthtwenty=\skip108
-\daughteroffsetone=\skip109
-\daughteroffsettwo=\skip110
-\daughteroffsetthree=\skip111
-\daughteroffsetfour=\skip112
-\branchwidthone=\skip113
-\branchwidthtwo=\skip114
-\branchwidththree=\skip115
-\branchwidthfour=\skip116
-\parentoffset=\skip117
-\treeoffset=\skip118
-\daughteroffset=\skip119
-\branchwidth=\skip120
-\parentwidth=\skip121
-\treewidth=\skip122
-\qta=\toks24
-\qtb=\toks25
-\nbranches=\count106
-\qroofx=\count107
-\qroofy=\count108
-\@qrscratchbox=\box51
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
-Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+))
+\Gin@req@height=\dimen122
+\Gin@req@width=\dimen123
 )
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
 Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
-\el@CounterTotal=\count109
-\el@Scratch=\count110
-\el@ControlCounter=\count111
-\el@CounterLevel=\count112
-\c@List1=\count113
-\c@List2=\count114
-\c@List3=\count115
-\c@List4=\count116
-\c@List5=\count117
-\c@List6=\count118
-\c@List7=\count119
-\c@List8=\count120
-\c@List9=\count121
-\c@List10=\count122
-\el@ProgressiveDimension=\dimen125
-\el@CounterBox=\box52
-\el@ControlBox=\box53
-\el@TotalMargin=\dimen126
-\el@LeftMove=\dimen127
+\el@CounterTotal=\count104
+\el@Scratch=\count105
+\el@ControlCounter=\count106
+\el@CounterLevel=\count107
+\c@List1=\count108
+\c@List2=\count109
+\c@List3=\count110
+\c@List4=\count111
+\c@List5=\count112
+\c@List6=\count113
+\c@List7=\count114
+\c@List8=\count115
+\c@List9=\count116
+\c@List10=\count117
+\el@ProgressiveDimension=\dimen124
+\el@CounterBox=\box29
+\el@ControlBox=\box30
+\el@TotalMargin=\dimen125
+\el@LeftMove=\dimen126
 )
-** ATTENTION: Overriding command lockouts (line 78).
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\dvipsnam.def"
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\c@definition=\count118
+
+** ATTENTION: Overriding command lockouts (line 109).
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux
 
 LaTeX Warning: Label `koza92' multiply defined.
 
 )
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
  (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count123
-\scratchdimen=\dimen128
-\scratchbox=\box54
-\nofMPsegments=\count124
-\nofMParguments=\count125
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count126
-\MPscratchDim=\dimen129
-\MPnumerator=\count127
-\makeMPintoPDFobject=\count128
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count119
+\scratchdimen=\dimen127
+\scratchbox=\box31
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen128
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks25
 )
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 139.
 
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
-File: omsptm.fd 
+LaTeX Warning: Citation `koza03' on page 1 undefined on input line 143.
+
+
+LaTeX Warning: Reference `conclusions' on page 1 undefined on input line 155.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 161.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 139.
+LaTeX Font Info:    Try loading font information for U+msb on input line 161.
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
-[] []\OT1/ptm/m/n/10 Reprezentace v kla-sickym ko-zovy je S-
- []
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 165.
 
 
-Underfull \hbox (badness 3849) in paragraph at lines 141--144
-\OT1/ptm/m/n/10 a O'Neil (to si mys-lim je jakoby hlavn[]
- []
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+
+LaTeX Warning: Citation `binard2008genetic' on page 1 undefined on input line 1
+87.
 
 [1{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 230.
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omspcr.fd"
+File: omspcr.fd 
+)
+LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 230.
+
+Underfull \hbox (badness 1838) in paragraph at lines 225--239
+$\OML/cmm/m/it/10 M$\OT1/pcr/m/n/10 ;\OMS/cmsy/m/n/10 g\OT1/ptm/m/n/10 . In oth
+er words, the func-tion ap-pli-ca-tion cor-re-
+ []
+
+
+LaTeX Warning: Citation `AIMA' on page 2 undefined on input line 339.
+
+[2] [3]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -605,30 +536,41 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[2
+[4] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
 
-] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3169 strings out of 493921
- 41603 string characters out of 3144876
- 116663 words of memory out of 3000000
- 6449 multiletter control sequences out of 15000+200000
- 36677 words of font info for 67 fonts, out of 3000000 for 9000
+ 3366 strings out of 493921
+ 45156 string characters out of 3144876
+ 118895 words of memory out of 3000000
+ 6612 multiletter control sequences out of 15000+200000
+ 45761 words of font info for 93 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 27i,8n,24p,863b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,13n,24p,601b,308s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on article.pdf (2 pages, 75203 bytes).
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/
+utmbi8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on article.pdf (4 pages, 190024 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
