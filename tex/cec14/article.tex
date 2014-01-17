@@ -204,9 +204,8 @@ described by Barendregt in~\cite{barendregt10}.
 \label{preliminaries}
 
 In this section, several notions necessary to build a typed GP based on lambda calculus are introduced. 
-First, \lets 
-describe a programming language, 
-in which the GP algorithm generates individual programs --- the so called \lterms.  
+First, \lets describe a programming language, 
+in which the GP algorithm generates individual programs --- the so called \lterms.\\
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -221,6 +220,7 @@ x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
 \textit{~~~~($\lambda$-abstraction)} 
 \end{align*}
 \end{definition}
+~\\
 
 \textit{Function application} and 
 \textit{$\lambda$-abstraction} are concepts
@@ -239,7 +239,7 @@ and $\lam{x_1 x_2 \dots x_n }{M}$ for $\lamb{x_1}{\lamb{x_2}{\dots\lamb{x_n}{M}\
 
 A \lterm as described above
 corresponds to a program expression with no type information
-included. Now we will describe \textit{types} (or \textit{type terms}).
+included. Now we will describe \textit{types} (or \textit{type terms}).\\
 
 \begin{definition}
 Let $A$ be set of {\it atomic type names}. 
@@ -249,6 +249,7 @@ Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
 \sigma,\tau \in \T &\then ( \sigma \ar  \tau ) \in \T 
 \end{align*}
 \end{definition}
+~\\
 
 Type $\sigma \ar \tau$ is type for functions taking as input
 something of a type $\sigma$ and returning 
@@ -256,10 +257,12 @@ as output something of a type $\tau$.
 $\tau_1 \ar \tau_2 \ar \dots \ar \tau_n$ is an abbreviation for 
 $\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$.
 The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by
-combining the previously defined \textit{\lterms} and \textit{types} together. 
+combining the previously defined \textit{\lterms} and \textit{types} together. \\
 
 
-\begin{definition}\begin{enumerate}
+\begin{definition}~
+
+\begin{enumerate}
  \item 	Let $\Lambda$ be set of {\it \lterms}. 
 	Let $\mathbb{T}$ be set of {\it types}.       
 	A {\it statement} $M : \sigma$ is a pair 
@@ -275,12 +278,13 @@ combining the previously defined \textit{\lterms} and \textit{types} together.
  is set of declarations with distinct variables as subjects.
 \end{enumerate}
 \end{definition}
+%~\\
 
 Context is a basic type theoretic concept suitable as a typed alternative
 for terminal and function set in standard GP. 
 Notation $\Gamma,x:\sigma $ denotes $ \Gamma\cup\{(x:\sigma)\}$ 
 such that $\Gamma$ does not contain any declaration with $x$ as subject.
-We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.
+We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.\\
 
 \begin{definition}
 A statement $M\colon\sigma$ is \textit{derivable from}
@@ -295,11 +299,11 @@ x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
 &~\then~ \tur{\Gamma}{\lamb{x}{M}}{\sigma \ar \tau} 
 \end{align*}
 \end{definition}
+~\\
 
 Our goal in term generation is to produce terms $M$
 for a given pair $\ul{\tau}{\Gamma}$
-such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
-
+such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.\\
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -319,6 +323,7 @@ x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
 \textit{~~~~($\lambda$-abstraction)} 
 \end{align*}
 \end{definition}
+~\\
 
 \textit{Unfinished leaf} $\ul{\tau}{\Gamma}$ 
 stands for yet not specified \lterm of the type $\tau$ 
@@ -471,19 +476,18 @@ is generated, then the initial unfinished term $\ul{\tau}{\Gamma}$
 is inserted to the queue, search strategy $S$
 again initializes its internal state and the process continues.
 
-\Lets now discuss three such search strategies.
+\Lets now discuss three such search strategies.\\
 
-
-
-\subsubsection{Systematic strategy}
-
+%\subsubsection{Systematic strategy}
+\textit{Systematic strategy}:~~ 
 If we use trivial strategy that returns all the inputs, 
 then the algorithm systematically generates 
 first $n$ smallest lambda terms in their
-\textit{long normal form}.
+\textit{long normal form}.\\
 
-\subsubsection{Ramped half-and-half strategy}
-is generalization of the standard ramped half-and-half method described 
+%\subsubsection{Ramped half-and-half strategy}
+\textit{Ramped half-and-half strategy}:~~
+This is generalization of the standard ramped half-and-half method described 
 in \cite{koza92}. If applied to context satisfying closure requirement
 (all constants/variables are of the same type, all functions are operations
 on this type), it will behave in the same way as the standard method.
@@ -517,10 +521,10 @@ In other cases of $depth$ it depends on value of $isFull$.
 If $isFull = true$, then the subset to select from is 
 set of all \textit{non-terminals} of the input set.
 If $isFull = false$, then the subset to select from is 
-the whole input set.
+the whole input set.\\
 
-\subsubsection{Geometric strategy}
-
+%\subsubsection{Geometric strategy}
+\textit{Geometric strategy}:~~
 We can see those two previous strategies as two extremes on the spectrum of 
 possible strategies. 
 \textit{Systematic strategy} filters no successor state thus performing
@@ -607,14 +611,15 @@ building blocks context $\Gamma$ are following.
 \Gamma = \{
   (+)  &: \Real \ar \Real \ar \Real    ,
   (-)   : \Real \ar \Real \ar \Real    ,
-  (*)   : \Real \ar \Real \ar \Real    ,
-  rdiv  : \Real \ar \Real \ar \Real    ,\\
-  sin  &: \Real \ar \Real              ,
-  cos   : \Real \ar \Real              ,
-  exp   : \Real \ar \Real              , 
+  (*)   : \Real \ar \Real \ar \Real    ,\\
+  rdiv &: \Real \ar \Real \ar \Real    ,
+  sin   : \Real \ar \Real              ,
+  cos   : \Real \ar \Real              ,\\
+  exp  &: \Real \ar \Real              , 
   rlog  : \Real \ar \Real              \}
 \end{align*}
 where
+
 \noindent
 \begin{minipage}{.5\linewidth}
 \begin{align*}
@@ -622,6 +627,7 @@ rdiv(p,q) &= \begin{cases} 1 &\mbox{if } q = 0 \\
 p/q & \mbox{otherwise } \end{cases}  
 \end{align*}
 \end{minipage}%
+
 \begin{minipage}{.5\linewidth}
 \begin{align*}
 rlog(x) &= \begin{cases} 0 &\mbox{if } x = 0 \\
@@ -632,7 +638,7 @@ log(\vert x\vert) & \mbox{otherwise}. \end{cases}
 \begin{figure}[h!]
   \caption{Performance curves for Simple symbolic regression.}
   \centering
-    \includegraphics[scale=0.135]{imgs/SSR_FINAL.png}
+    \includegraphics[scale=0.1]{imgs/SSR_FINAL.png}
 \end{figure}
 Fitness function is computed as follows.
 $$ fitness(f) =  \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert   $$
@@ -664,14 +670,14 @@ The ant is able to move forward, turn left, and sense if a food
 piece is ahead of him.
 
 \begin{align*}
-\tau = An&tAction\\
+\tau = An&tAct\\
 \Gamma = \{~~
-  l    &: AntAction                              ,
-  r    : AntAction                               ,
-  m    : AntAction                               ,\\
-  ifa  &: AntAction \ar AntAction \ar AntAction  ,\\
-  p2   &: AntAction \ar AntAction \ar AntAction  ,\\
-  p3   &: AntAction \ar AntAction \ar AntAction \ar AntAction  \}
+  l    &: AntAct                              ,
+  r    : AntAct                               ,
+  m    : AntAct                               ,\\
+  ifa  &: AntAct \ar AntAct \ar AntAct  ,\\
+  p2   &: AntAct \ar AntAct \ar AntAct  ,\\
+  p3   &: AntAct \ar AntAct \ar AntAct \ar AntAct  \}
 \end{align*}
 
 Action $l$ turns the ant left. 
@@ -690,7 +696,7 @@ maximal number of steps.
 \begin{figure}[h!]
   \caption{Performance curves for Artificial ant problem.}
   \centering
-    \includegraphics[scale=0.135]{imgs/ANT_FINAL.png}
+    \includegraphics[scale=0.1]{imgs/ANT_FINAL.png}
 \end{figure}
 
 Fitness value is equal to number of eaten food pieces.
@@ -743,7 +749,7 @@ We use very similar set of \textit{building symbols} as in \cite{yu01}.
 \begin{figure}[h!]
   \caption{Performance curves for Even parity problem.}
   \centering
-    \includegraphics[scale=0.135]{imgs/EP_FINAL.png}
+    \includegraphics[scale=0.1]{imgs/EP_FINAL.png}
 \end{figure}
 
 The type $[Bool]$ stands for \textit{list of $Bool$s} and for purpose of
@@ -819,102 +825,12 @@ utilizes in a kind of meta-evolution way.
 
 %\red{ [ještě něco navíc nebo podrobněji, říct poly že neni ale že se na něm pracuje a de hezky zandat do již systemu] }
 
+%\nocite{*}
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,evogp}
 
 
-
-\begin{thebibliography}{22}
-
-\bibitem{koza92}
-  TODO. Todo,
-  \emph{Dát sem místo toho ten bibtex}.
-  MIT Press, Cambridge, MA,
-  2014. 
-
-\bibitem{koza92}
-  John R. Koza,
-  \emph{Genetic Programming: On the Programming of Computers by Means of Natural Selection}.
-  MIT Press, Cambridge, MA,
-  1992. 
-
-\bibitem{koza05}
-  Koza, J.R., Keane, M., Streeter, M., Mydlowec, W.,Yu, J., Lanza, G. 
-  \emph{Genetic Programming IV: Routine Human-Competitive Machine Intelligence.} 
-  Springer, 2005. ISBN 978-0-387-26417-2 
-
-\bibitem{fg}
- Riccardo Poli, William B. Langdon, Nicholas F. McPhee
- \emph{A Field Guide to Genetic Programming}.
- Lulu Enterprises, UK Ltd, 2008.
-
-\bibitem{yu01}
-  T. Yu. 
-  \emph{Hierachical processing for evolving recursive and modular 
-        programs using higher order functions and lambda abstractions}. 
-  Genetic Programming and Evolvable Machines,
-  2(4):345–380, December 2001. ISSN 1389-2576.
-
-
-\bibitem{montana95}
-D. J. Montana. 
-\emph{Strongly typed genetic programming.} 
-Evolutionary Computation, 3(2): 199–230, 1995.
-%URL \url{ http://vishnu.bbn.com/papers/stgp.pdf }. nefacha
-
-\bibitem{haynes96}
-T. D. Haynes, D. A. Schoenefeld, and R. L. Wainwright. 
-\emph{Type inheritance in strongly typed genetic programming.} 
-In P. J. Angeline and K. E. Kinnear, Jr., editors, Advances
-in Genetic Programming 2, chapter 18, pages 359–376.
-MIT Press, Cambridge, MA, USA, 1996. ISBN 0-262-01158-1. 
-%URL \url{http://www.mcs.utulsa.edu/~rogerw/papers/Haynes-hier.pdf}.
-
-\bibitem{olsson94}
-J. R. Olsson. 
-\emph{Inductive functional programming using incremental program 
-transformation and Execution of logic programs by 
-iterative-deepening A* SLD-tree search.} 
-Dr scient thesis, University of Oslo, Norway, 1994.
-
-\bibitem{kes}
-Forrest Briggs, Melissa O’Neill.
-\emph{Functional Genetic Programming and Exhaustive
-Program Search with Combinator Expressions.}
-International Journal of Knowledge-based and Intelligent Engineering Systems,
-Volume 12 Issue 1, Pages 47-68, January 2008. 
-
-
-\bibitem{barendregt84}
-H. P. Barendregt,
-\emph{The Lambda Calculus: its Syntax and Semantics}, 
-revised ed., North-Holland, 1984.
-
-\bibitem{barendregt92}
-H. Barendregt , S. Abramsky , D. M. Gabbay , T. S. E. Maibaum.
-\emph{Lambda Calculi with Types.} 
-Handbook of Logic in Computer Science, 1992. 
-
-\bibitem{barendregt10}
-
-  Henk Barendregt, Wil Dekkers, Richard Statman,
-  \emph{Lambda Calculus With Types}.
-  Cambridge University Press,
-  2010. 
-  %URL \url{http://www.cs.ru.nl/~henk/book.pdf}.
-
-\bibitem{jones87}
-Simon Peyton Jones. 
-\emph{The Implementation of Functional Programming Languages}. 
-Prentice Hall, 1987.
-
-
-\bibitem{AIAMA}
-	Stuart J. Russell, Peter Norvig,
-	\emph{Artificial Intelligence: A Modern Approach}.
-	Pearson Education,
-	2003. 
-
-
-\end{thebibliography}
 
 % that's all folks
 \end{document}
