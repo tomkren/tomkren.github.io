@@ -1,0 +1,246 @@
+Total time: 7000.7574205s
+
+(ifa (p3 m m r) (p3 l (p3 m l (ifa m r)) r),89.0,Just 3)
+
+(ifa (ifa (ifa m (ifa m (ifa r (p3 l m (ifa m (ifa r (p3 m m (ifa m (ifa (p3 (p3
+ l m m) r m) (p3 m m (ifa (p2 m (p3 l m (ifa m r))) (ifa (p2 m (ifa m r)) (p3 l
+m (ifa m r)))))))))))))) r) (p3 m m (ifa m (p3 r m (ifa (p3 (ifa (ifa (ifa m (if
+a (p3 r l (p3 r m (ifa (ifa m (ifa (p3 l r (ifa m r)) r)) (ifa m r)))) r)) m) (i
+fa m r)) m (ifa m r)) l)))),75.0,Nothing)
+
+(ifa m (ifa (ifa (p3 (ifa (ifa m (ifa m (p3 (ifa (ifa m l) (ifa m (p3 r (ifa (p3
+ r (ifa r m) l) m) l))) m m))) l) (ifa (p2 r (p2 l m)) (p2 m (ifa m r))) m) l) (
+ifa m (ifa m (ifa l (p3 r (ifa m l) (p3 l (ifa m r) m)))))),89.0,Just 21)
+
+(p2 m (p3 (p2 m (p3 (ifa m r) m m)) m (ifa (ifa (ifa m r) (ifa (p2 m (p3 (p2 (if
+a l l) (p2 m (ifa (ifa (ifa m (ifa (ifa (p2 m (ifa m r)) (ifa (ifa m r) r)) l))
+l) (p3 (ifa (p2 (ifa (ifa m l) l) (p2 m (ifa m r))) m) (ifa l l) (ifa (ifa m l)
+r))))) m m)) r)) l)),73.0,Nothing)
+
+(p3 l (ifa m r) (p3 m r (ifa (p2 (ifa m r) (ifa m (p3 (p2 m m) (ifa m r) (ifa m
+l)))) l)),89.0,Just 12)
+
+(p2 m (ifa m (p3 l m (ifa (p2 m (p3 (ifa (ifa (ifa m (p2 (ifa (ifa m (ifa m (p3
+l (p3 l m m) r))) m) (ifa (ifa (ifa m r) (ifa m r)) r))) (p3 (p2 m (p3 l m (ifa
+(ifa m r) m))) m (ifa (ifa m r) (p3 l m (ifa m r))))) m) m (ifa (ifa m (p2 (p2 m
+ (ifa (ifa m (p2 m m)) (p3 l m (ifa (ifa (ifa (ifa m r) r) r) r)))) m)) (ifa m r
+)))) r))),74.0,Nothing)
+
+(p3 m r (p3 (ifa (p2 (ifa m l) m) l) l (ifa m r)),89.0,Just 9)
+
+(ifa (ifa m (ifa m (p3 m (p3 (p3 (ifa (p3 r m (ifa l (p3 r m m))) (p3 r m m)) l
+m) (p2 (ifa (ifa m (ifa (p3 r m m) r)) (p3 r m m)) l) m) m))) (p3 (ifa m (p3 r m
+ m)) (ifa (p3 (ifa (ifa m r) (ifa (p3 r m m) (p3 r m m))) l m) l) m),70.0,Nothin
+g)
+
+(ifa m (p3 r (p2 m (ifa (p2 (ifa m r) (p3 (ifa (p2 (ifa m m) m) r) m l)) l)) m),
+68.0,Nothing)
+
+(ifa (p2 m (ifa m r)) (ifa m (ifa (ifa (ifa m (p2 r m)) (ifa m (ifa (p3 (ifa (if
+a (ifa l (ifa m r)) (p2 m m)) (p2 l m)) m (p2 l (p2 l m))) (p3 r m (p2 m (ifa l
+(ifa (p3 (ifa m (p3 r l (p2 l m))) (p2 l (p2 m (ifa m r))) l) (ifa (ifa l (p3 r
+m (ifa (ifa l (p2 l m)) (ifa m (p2 (p2 l m) m))))) (p2 l (ifa m (p3 m (p3 r m m)
+ l))))))))))) (p3 r m (ifa l (p2 l (ifa l (p3 r m (ifa l (p2 l m))))))))),66.0,N
+othing)
+
+(p2 (p3 m (ifa m (ifa m l)) m) (ifa (p2 m (p3 r (ifa (ifa (p2 m m) l) l) m)) r),
+74.0,Nothing)
+
+(ifa (ifa (ifa m (ifa (ifa (ifa (ifa m l) r) (p2 (ifa m r) (ifa (p3 (p3 (p2 (ifa
+ m l) l) m (p2 (p3 m m (ifa m r)) (ifa (ifa m r) r))) m (ifa (p3 (p2 (ifa m m) (
+ifa (p3 (ifa m l) (ifa m r) (ifa m m)) r)) m (ifa m (p3 (p2 (ifa m m) (ifa m l))
+ m (ifa m (ifa (ifa m r) r))))) r)) l))) (p2 (ifa m m) (p3 (p2 (ifa m m) (p2 (if
+a m m) (ifa m l))) m (ifa m r))))) (p2 m (p3 (p2 (p3 (p2 (p3 (p2 (p2 m (ifa (ifa
+ (p3 (p3 m (p3 (ifa m r) m m) (p2 m l)) m (ifa m r)) l) r)) (ifa m (ifa m (ifa m
+ r)))) (ifa (ifa m m) m) (ifa (ifa m (p2 (ifa m m) (ifa m l))) r)) (ifa m l)) m
+m) (ifa m l)) m (ifa (p3 (p2 (p3 (ifa m m) m (p2 m l)) (ifa m l)) m (ifa (p2 m (
+ifa (ifa m (p3 (ifa (p3 (ifa m r) m (ifa m r)) l) m (ifa (ifa m (p2 (ifa m m) (i
+fa m l))) r))) (ifa m m))) r)) r)))) (p2 (ifa m m) (p3 (p2 (ifa m m) (ifa m l))
+m (ifa (p3 (p2 (ifa m m) (ifa m l)) m (ifa (p3 r (p3 (p2 (p3 (ifa m (ifa (p2 m (
+ifa m l)) l)) m (ifa m r)) (ifa (p3 m (p2 m m) (p2 m l)) r)) m (p3 (ifa m l) m (
+ifa m r))) l) r)) r))),75.0,Nothing)
+
+(p3 (p2 m m) (ifa (ifa m (p3 r l (ifa m (p3 (p2 m (p3 (p3 (ifa m l) m (ifa m r))
+ m (ifa (ifa (ifa m (p3 (p3 r (p2 m l) (ifa m l)) m m)) (p3 (ifa m r) (p3 (p2 m
+l) m (ifa (ifa (ifa m l) r) (p2 m l))) m)) m))) r (p3 (ifa m l) m (p3 (p3 (ifa m
+ l) m (ifa m r)) m (ifa m r))))))) r) (p2 m (ifa (p3 (ifa (ifa m (p3 (p3 (ifa m
+l) m (ifa m r)) m (ifa (ifa m r) r))) r) m (ifa (p3 r l (ifa (p3 (p3 m m (ifa (i
+fa m r) m)) (ifa m m) m) (p3 (p2 m l) m (ifa m r)))) r)) l)),69.0,Nothing)
+
+(ifa (ifa r r) (p3 l m (ifa (ifa r (p3 l m r)) (p3 l (ifa m r) r))),89.0,Just 9)
+
+(p3 (ifa m r) (ifa m (p3 r (ifa m (ifa m l)) m)) l,89.0,Just 10)
+
+(ifa (p3 m (ifa m l) m) (p3 r m (ifa l (ifa (ifa m (ifa (p3 m m (ifa (p3 m (ifa
+(p2 (p2 l m) m) (ifa l (ifa (ifa m (ifa l (ifa l (p2 l m)))) (p2 l m)))) m) (ifa
+ m (p2 m (ifa m (p3 (p2 l m) m (p2 l m))))))) (p3 (ifa l (ifa (p3 (ifa m (p2 l m
+)) (p2 (ifa m m) m) r) (p3 r m (ifa (ifa (p3 m m (ifa m l)) (ifa l (p2 l m))) (p
+2 l m))))) m (ifa (ifa l (p2 l m)) (p2 l m))))) (p2 l m)))),77.0,Nothing)
+
+(p3 l (ifa m r) (p3 r (p2 l (p2 m r)) (ifa (p2 m (p2 (ifa (ifa m r) (ifa (ifa (p
+2 m m) l) (p3 l m (ifa m r)))) (p2 m m))) l)),82.0,Nothing)
+
+(ifa m (p2 r (p3 m (ifa (p3 r (ifa (p2 (ifa m (ifa (ifa m r) (p3 (ifa (ifa (ifa
+(p2 r m) l) l) (ifa m r)) m (ifa m (ifa (ifa (ifa m l) r) (ifa (ifa m r) l))))))
+ r) (p3 (ifa (ifa (ifa (ifa (ifa m l) (p3 m l (p2 m r))) l) l) (ifa m r)) m (ifa
+ m (ifa (ifa m r) l)))) m) (p3 m m (ifa (ifa m (ifa (ifa (p2 (ifa m (ifa (ifa (p
+3 (ifa m r) (p3 (p2 r m) r m) l) r) (ifa (ifa m (p2 l m)) l))) r) (ifa (ifa (ifa
+ m (p2 r m)) l) (ifa m (ifa (ifa (p3 l m m) l) (ifa m r))))) l)) l))) m)),63.0,N
+othing)
+
+(ifa m (p3 (p3 r (ifa m l) l) (ifa (p2 (ifa m l) m) r) m),89.0,Just 12)
+
+(p3 (ifa m (p3 r m (p2 (ifa (ifa (p2 (ifa (ifa (p2 m m) (p2 m m)) l) m) (ifa (p2
+ (p2 (ifa m (p2 (p3 (p2 r (ifa m m)) m (p2 (ifa (ifa m (p3 (ifa m m) m m)) l) m)
+) m)) m) m) r)) l) m))) l (p2 m (ifa (ifa m (p3 r m (p2 (ifa (ifa m (p2 (p2 (p2
+(p2 (ifa m l) m) m) (ifa (p3 (ifa m (ifa (p2 m (ifa m l)) (p2 (p2 (ifa m l) m) m
+))) m (p2 m m)) r)) m)) l) (ifa m r)))) r)),85.0,Nothing)
+
+(ifa m (ifa m (p3 r (ifa m l) (ifa m (ifa m (p3 l (ifa m r) m))))),89.0,Just 14)
+
+(p3 (ifa r (ifa (ifa m m) (p2 r m))) (ifa (p3 m (p3 (ifa (ifa (ifa m m) (ifa (if
+a (p3 m (ifa (p3 (ifa m l) m r) (ifa (ifa m (ifa m l)) m)) (p3 (ifa m (p3 (ifa r
+ l) m m)) m l)) r) (p2 r m))) (p2 r (p3 (ifa r (ifa (ifa r (ifa (ifa (ifa (ifa m
+ l) r) l) l)) (p2 r m))) (ifa (p3 m (ifa (ifa m m) l) (ifa m (ifa r (ifa m l))))
+ l) m))) m m) (p2 m (ifa m (p3 (ifa m (p3 (p3 (ifa r (ifa (ifa r (ifa (ifa m m)
+(p2 r m))) (p2 r m))) (p3 m (p3 (p3 l m l) m m) (p2 m m)) m) m r)) m r)))) l) m,
+75.0,Nothing)
+
+(ifa (ifa m (p3 (ifa m (ifa m (ifa (ifa m (ifa (p3 l (ifa (p3 m r m) r) m) (ifa
+m (p3 m r m)))) (ifa m (ifa (ifa (ifa m (p3 r (p3 l m (ifa m (p3 m r m))) l)) (p
+3 l m (ifa m (p3 (p3 m m (ifa m r)) (ifa (ifa m (p3 m r m)) r) m)))) (ifa m (p3
+l m (p3 m (ifa (p3 m r m) r) m)))))))) (ifa m (p3 m r m)) l)) (ifa m (p3 l m (p3
+ m (ifa (ifa m (p3 l m (ifa m (ifa m (p3 m m (p3 l m (ifa m (p3 m r m)))))))) r)
+ (ifa (ifa m (ifa m (p3 l m (p3 (ifa m m) r (p3 m r m))))) (p3 l m (ifa m (p3 m
+r m))))))),65.0,Nothing)
+
+(ifa (p2 (ifa m r) m) (p3 l m (p2 (p2 (ifa (p3 (ifa m (p2 (ifa m r) (p2 m r))) m
+ (ifa m (p2 (ifa m (ifa (ifa m (p2 m r)) r)) r))) r) m) m)),69.0,Nothing)
+
+(ifa m (p3 (p3 l (ifa (ifa m (p3 m (p3 m (ifa m r) (p2 r (p2 (ifa m l) m))) (ifa
+ (ifa m l) l))) r) l) r (p2 r (p2 (ifa m l) m))),89.0,Just 23)
+
+(ifa m (ifa (ifa r l) (ifa m (p3 r (ifa (p3 m m (ifa m (p3 (ifa (p3 (ifa r (ifa
+m l)) (ifa (ifa m l) l) m) (p3 (ifa r (p2 r m)) (ifa m l) (p3 (ifa r (p2 r m)) (
+ifa (ifa m (ifa r (p2 r m))) l) m))) m l))) (ifa (p3 (p3 r (ifa (p2 m m) (p3 r (
+ifa r (p3 (ifa r (p2 r m)) (ifa (ifa m l) l) m)) m)) m) l l) l)) m))),72.0,Nothi
+ng)
+
+(ifa (p3 m (p3 m (ifa (p3 m (ifa m (p3 m (ifa (ifa (p2 l (p2 l (p3 m (ifa m r) m
+))) (p3 m (p3 r (p3 m m r) m) (p3 m (ifa (ifa (ifa m l) l) r) (ifa (ifa m (p3 l
+m r)) l)))) r) (ifa (ifa m (p3 (ifa m (p3 l m r)) r (p2 (p2 m r) (ifa (ifa m m)
+(p3 m (ifa (p3 l m r) (ifa m r)) (p3 m (ifa (ifa m (ifa m r)) (ifa m r)) (ifa (i
+fa m r) m))))))) l))) (ifa m (ifa m (p2 l (p3 m (ifa m r) m))))) (p2 l (p3 m (if
+a (p3 m (p3 (ifa m (ifa m l)) (p2 (ifa (ifa m l) l) (p3 m (ifa m r) (p2 m (ifa m
+ l)))) m) (p3 m (ifa (ifa (p3 m (ifa m r) m) l) (ifa m r)) (ifa l (ifa m r)))) l
+) m))) (ifa m (ifa m (p3 (ifa m r) m r)))) (ifa (ifa m l) l)) (p2 l (p3 m (ifa m
+ r) m)),76.0,Nothing)
+
+(p2 (ifa (ifa (p2 (ifa m (ifa m (ifa r (p2 l (p2 (p2 m (p2 (p2 r l) (ifa m (p2 (
+ifa m (ifa (p3 m l m) l)) m)))) m))))) m) (ifa (ifa r (ifa m l)) (p2 m (p2 (ifa
+r (p3 l m r)) m)))) l) (p3 m (p2 l (ifa m (ifa m r))) r),89.0,Just 15)
+
+(p2 (p2 (p2 (ifa (ifa (p2 m (ifa (ifa m l) r)) r) (ifa m (ifa m r))) m) (ifa (p2
+ (p2 (p2 (ifa (p2 (ifa (ifa (ifa (p2 m (ifa (p2 (ifa m r) m) r)) l) r) (ifa (ifa
+ (ifa m r) m) r)) m) (ifa m (p2 m (p2 m (ifa m l))))) m) (ifa (p2 (ifa (ifa (p2
+m (ifa (ifa (ifa (p2 m m) l) l) r)) r) (ifa m r)) m) l)) m) l)) m,74.0,Nothing)
+
+(p3 (p3 (ifa m r) m (ifa r (ifa r m))) (ifa (ifa (p2 m (ifa m r)) (ifa (p3 (p3 (
+ifa m r) m (ifa (p2 m (p3 m m (ifa l l))) (ifa m (ifa l l)))) (ifa (ifa m r) l)
+m) r)) l) m,70.0,Nothing)
+
+(p3 m r (p3 (ifa m l) l (ifa (p3 (ifa (ifa (ifa (p2 (ifa (ifa m (ifa m (ifa (p2
+m m) r))) r) r) l) (p3 m r (ifa m (ifa (ifa m (p3 (p3 r (p3 l (ifa (ifa (ifa m (
+ifa m l)) r) (ifa m r)) (ifa m l)) l) (ifa m l) m)) (p2 (p2 r m) (p2 (ifa (p3 r
+(p3 m r m) m) l) m)))))) (p3 m r (ifa m (ifa m l)))) (ifa m l) m) r)),89.0,Just
+50)
+
+(ifa m (p3 (p3 r m l) (p3 m (p3 m (ifa m (p3 r m l)) m) m) (p3 m (p3 (p2 m (ifa
+(ifa m (p3 m (p3 (ifa m (ifa (ifa m r) (p3 r m l))) m l) m)) r)) m (ifa (p3 m (i
+fa m l) m) (p3 (p3 m (p2 m l) m) m m))) (ifa (ifa m (p3 (p3 m (ifa m (p3 r m l))
+ (p3 r m l)) m (ifa m (p3 m (p3 (ifa (p3 m (p3 m m m) (ifa m (p3 r m l))) r) m m
+) l)))) (p3 r m l)))),62.0,Nothing)
+
+(ifa (ifa m (ifa m (p3 m l (p3 (ifa m l) (p3 m m r) m)))) (p2 (p3 (p3 r (ifa (p3
+ m (p2 m (ifa m (p3 r (ifa r l) m))) (p3 m l (p3 r (p3 m (p2 l r) (ifa (ifa m l)
+ l)) m))) (ifa m l)) m) (p3 m (ifa m l) (p2 m m)) m) (ifa m r)),67.0,Nothing)
+
+(p3 (p3 (ifa (ifa (ifa (ifa m l) l) (ifa (ifa (ifa (ifa (ifa m r) (ifa m r)) (if
+a m r)) (ifa m r)) l)) (ifa m r)) (p3 (p3 (ifa (ifa (p3 m (ifa m l) m) (ifa (ifa
+ (p3 m (ifa (p2 r (ifa m r)) r) m) (ifa m l)) l)) (ifa m r)) m m) (ifa (ifa m r)
+ l) m) m) (ifa (ifa m m) l) m,71.0,Nothing)
+
+(p2 (p3 m (p2 (ifa (p2 (p3 m (p2 (ifa m l) m) m) (ifa (ifa (ifa m (ifa (ifa r l)
+ (ifa (ifa m m) r))) (ifa (ifa r m) r)) r)) l) m) m) (ifa (ifa m (ifa (p2 (ifa m
+ m) m) l)) r),74.0,Nothing)
+
+(ifa (p2 (ifa m r) (ifa (ifa m m) (p3 (ifa (p3 r (ifa (p2 (ifa m r) (p2 (ifa m r
+) (ifa (p2 (p2 (ifa (ifa (p2 m r) m) l) (p2 (p2 m m) (p2 m m))) (ifa r l)) (p2 (
+p2 m m) l)))) l) m) r) (p2 (p2 m (p2 (p2 (p2 m m) l) (ifa (p3 r (p2 (p2 m m) l)
+m) (ifa m (ifa m r))))) (p2 (p2 m m) l)) m))) (ifa (p2 (ifa l r) (p2 (ifa (p3 (p
+3 m (p3 r (p2 (p2 (p2 m m) l) l) m) r) (p3 m r m) m) r) (ifa r l))) (p3 r (p2 (p
+2 m m) l) m)),66.0,Nothing)
+
+(p3 m r (ifa m (ifa r (p3 r r (ifa m r)))),89.0,Just 5)
+
+(ifa m (p3 (ifa m l) (p2 m (ifa (p2 m (p2 m (ifa (ifa (ifa (p3 (ifa m (p2 m (ifa
+ (ifa m r) (ifa m l)))) (p3 (ifa m (ifa r (p2 m (ifa m m)))) (p2 m (ifa m (ifa (
+p3 m l m) r))) m) m) (ifa m r)) m) r))) (ifa (ifa m (p3 (p2 m (ifa m r)) (ifa (i
+fa m l) r) m)) r))) m),79.0,Nothing)
+
+(ifa r (p3 l m (p3 l (ifa (ifa (ifa (p3 m (ifa m m) m) r) (ifa m (p3 m m (ifa m
+(p3 m (ifa (p3 m (p3 (ifa m (p3 r m m)) m m) l) (p3 l (p3 m (ifa (ifa m (p3 m r
+m)) m) m) r)) l))))) r) r)),88.0,Nothing)
+
+(p3 (ifa m (ifa l (ifa l r))) (ifa (ifa m r) (p2 r (p2 (ifa m l) m))) l,89.0,Jus
+t 8)
+
+(p3 m (ifa (p3 m (p2 l m) (ifa (ifa (p3 m (p2 l m) (ifa (ifa (ifa (ifa (p2 l m)
+r) (ifa m (ifa (ifa m m) (ifa r r)))) r) r)) (p2 (ifa (ifa (ifa (p3 r (ifa (ifa
+m (p2 m m)) l) m) l) (ifa (p2 l m) l)) r) m)) r)) (p2 l m)) (ifa (ifa (ifa (p3 (
+ifa m m) r (p2 l m)) (ifa m (p2 (ifa (ifa (ifa (p3 l r m) r) (ifa m (ifa (ifa m
+(ifa (ifa m (ifa l l)) (ifa r m))) l))) l) (ifa m m)))) m) r),72.0,Nothing)
+
+(ifa (p2 m (p3 (ifa r r) m (ifa m (ifa r l)))) (ifa (p3 l m (p2 r m)) (p3 (p3 l
+m (ifa m r)) m m)),66.0,Nothing)
+
+(ifa (ifa (ifa (ifa m (p3 m m (ifa m l))) (ifa m (p3 r m l))) (p3 r m l)) (ifa m
+ (ifa (ifa (ifa m (ifa m (ifa m (ifa m r)))) (p3 r (ifa (p3 m m (ifa m m)) l) (p
+3 m m (ifa m (ifa m l))))) (ifa m (p3 m m (ifa m (p3 r m (ifa (p3 m m (ifa m (if
+a m (ifa m r)))) l))))))),75.0,Nothing)
+
+(ifa (ifa m (ifa m (p2 m (p2 (p3 l m (p3 l m (ifa m (ifa m (ifa r m))))) m)))) (
+ifa m (ifa m (ifa m (p2 r (p2 (p3 m m (ifa (ifa m (p3 l m (p3 m r m))) (ifa (p2
+(p3 l m (p3 m m (ifa m (ifa (p2 (p3 m r m) m) (ifa r (p3 l m (p3 m r m))))))) m)
+ (ifa (ifa m (p3 l m (p3 m r m))) (p3 l m (p3 m r m)))))) l))))),63.0,Nothing)
+
+(p3 (p3 m r (ifa m l)) l (ifa (p3 (ifa m r) (p3 m r (ifa m l)) (p3 (p3 m r (ifa
+m l)) l (ifa (p3 m r (p3 (p3 m r (ifa (ifa r l) l)) l (p3 m r (ifa (ifa m l) r))
+)) r))) r),89.0,Just 13)
+
+(p3 m m (p3 (p3 (p2 (p2 (ifa (p3 m (ifa m l) (ifa m m)) l) m) (ifa (ifa m (ifa (
+p3 r (ifa (p3 m m l) l) m) (p3 r (p3 m (ifa (ifa m (ifa m (p3 l m r))) (ifa m (i
+fa m (p3 l m r)))) l) m))) r)) m (p3 (ifa m (p3 r (p3 m m l) m)) r (ifa (p3 l m
+r) l))) r (ifa (p3 (p3 m (ifa m (p3 m r (ifa m l))) l) (ifa (p2 (ifa m l) (p3 m
+(p3 (p3 m (ifa (p3 m (ifa m l) (p2 m (ifa m (ifa m l)))) l) (p3 r (p3 m (ifa m (
+ifa m l)) l) m)) r m) (ifa m l))) (ifa r (p3 (ifa m (ifa (ifa m (p3 r (ifa m l)
+m)) (p3 m r (ifa m l)))) r (ifa (p3 l m r) (ifa m l))))) m) l)),67.0,Nothing)
+
+(ifa (p3 m (ifa (ifa (ifa (p3 m r (ifa m l)) (p3 (ifa (p3 m m r) l) m m)) (p3 (p
+3 (p3 m (p3 (p3 r m l) m m) m) m m) m m)) (p3 (p3 (p3 r m (ifa (ifa m l) (p3 (p3
+ r (p3 m r (p3 m m r)) l) m m))) m m) m m)) m) (p3 (ifa (p3 (p3 r m l) m m) (p3
+(ifa (p3 r m l) (p3 (ifa m (p3 (p3 r m l) m m)) m m)) m m)) m m),67.0,Nothing)
+
+(p3 m r (ifa (p3 (p3 m (ifa (ifa m (ifa (p2 m (ifa m (ifa m l))) (p3 (p2 m (ifa
+(p3 m r (ifa m l)) (p3 m m r))) r (ifa (p3 m l (ifa m l)) (p3 m m r))))) (p3 m l
+ (p3 m m r))) m) (ifa m (ifa (p3 (ifa (p2 m (p2 (ifa l m) r)) (ifa m l)) l (p3 (
+ifa (p3 (ifa m l) m r) (ifa (p2 m (ifa m (ifa m l))) (p3 m (ifa m (p3 (ifa m l)
+m l)) m))) m l)) l)) l) l),62.0,Nothing)
+
+(p3 m m (p2 (p2 (ifa (ifa (p2 m (p2 m (ifa m r))) m) l) m) (ifa (p2 (ifa (p2 m (
+ifa (ifa (p2 m (ifa (ifa (ifa m (ifa (ifa m m) m)) r) r)) m) r)) m) (ifa (ifa m
+(p3 l m r)) r)) r)),71.0,Nothing)
+
+(p2 (p2 m (ifa m r)) (ifa m (p3 m m (p2 (p2 m (p3 m m (p2 (ifa (ifa m (p3 m m (p
+2 (ifa (ifa m l) l) (ifa (ifa m (ifa m l)) r)))) r) (ifa m l)))) (ifa m l)))),67
+.0,Nothing)
