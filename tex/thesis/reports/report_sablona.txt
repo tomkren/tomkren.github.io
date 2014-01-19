@@ -1,0 +1,38 @@
+
+  "???name"                                        
+  method 
+  cttp_saveBest = ?
+
+
+?/50 = ?%
+
+// cummulativ p of success
+Global.performanceCurves= 
+?
+
+// comp effort
+JSON.stringify(graf2) = 
+?
+
+nej = ?,?
+
+Total time: ?
+
+//termsizes
+JSON.stringify(graf3) = ?
+
+
+
+//best of run fitnesses :
+StatsHax.get().bestOfRun 
+=
+?
+= StatsHax.get().bestOfRun.join('\n') =
+?
+
+//StatsHax
+JSON.stringify(StatsHax.get()) =
+?
+
+//bests codes:
+?

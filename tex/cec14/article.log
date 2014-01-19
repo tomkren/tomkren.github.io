@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  17 JAN 2014 17:39
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  19 JAN 2014 22:43
 entering extended mode
 **article.tex
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
@@ -566,72 +566,75 @@ Underfull \hbox (badness 10000) in paragraph at lines 504--525
  []
 
 [3]
-Overfull \hbox (17.35484pt too wide) in paragraph at lines 620--620
+Overfull \hbox (17.35484pt too wide) in paragraph at lines 627--627
 [] 
  []
 
 
-Overfull \hbox (7.4861pt too wide) in paragraph at lines 628--628
+Overfull \hbox (7.4861pt too wide) in paragraph at lines 635--635
 [] 
  []
 
 
-Overfull \hbox (14.83153pt too wide) in paragraph at lines 635--635
+Overfull \hbox (14.83153pt too wide) in paragraph at lines 642--642
 [] 
  []
 
-<imgs/SSR_FINAL.png, id=27, 2520.41624pt x 811.53188pt>
-File: imgs/SSR_FINAL.png Graphic file (type png)
+<imgs/cec/SSR.PNG, id=27, 1731.46875pt x 1492.8272pt>
+File: imgs/cec/SSR.PNG Graphic file (type png)
+ <use imgs/cec/SSR.PNG>
+Package pdftex.def Info: imgs/cec/SSR.PNG used on input line 648.
+(pdftex.def)             Requested size: 259.7091pt x 223.91441pt.
 
-<use imgs/SSR_FINAL.png>
-Package pdftex.def Info: imgs/SSR_FINAL.png used on input line 641.
-(pdftex.def)             Requested size: 252.05638pt x 81.15793pt.
-
-Overfull \hbox (5.94005pt too wide) in paragraph at lines 641--642
+Overfull \hbox (13.59277pt too wide) in paragraph at lines 648--649
  [][] 
  []
 
 
-Underfull \hbox (badness 1708) in paragraph at lines 649--661
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 1708) in paragraph at lines 658--670
 []\OT1/ptm/m/n/10 Standard \OT1/ptm/m/it/10 ramped half-and-half strat-egy \OT1
 /ptm/m/n/10 scored 17/50
  []
 
-[4 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/SSR_FINAL.png>]
-<imgs/ANT_FINAL.png, id=32, 2520.41624pt x 768.62157pt>
-File: imgs/ANT_FINAL.png Graphic file (type png)
+[4] <imgs/cec/ANT.PNG, id=32, 1720.92938pt x 1413.78188pt>
+File: imgs/cec/ANT.PNG Graphic file (type png)
 
-<use imgs/ANT_FINAL.png>
-Package pdftex.def Info: imgs/ANT_FINAL.png used on input line 699.
-(pdftex.def)             Requested size: 252.05638pt x 76.86665pt.
+<use imgs/cec/ANT.PNG>
+Package pdftex.def Info: imgs/cec/ANT.PNG used on input line 708.
+(pdftex.def)             Requested size: 258.12827pt x 212.05814pt.
 
-Overfull \hbox (5.94005pt too wide) in paragraph at lines 699--700
+Overfull \hbox (12.01193pt too wide) in paragraph at lines 708--709
  [][] 
  []
 
 
-Underfull \hbox (badness 2635) in paragraph at lines 713--713
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 2635) in paragraph at lines 722--722
 [][][]\OT1/ptm/m/n/8 In [[]] this limit is said to be 400 time steps. But there
  is
  []
 
+[5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/SSR.PNG> <C:/wamp/www/tomk
+ren.github.io/tex/cec14/imgs/cec/ANT.PNG>]
+<imgs/cec/EP.PNG, id=36, 1700.60344pt x 1387.43344pt>
+File: imgs/cec/EP.PNG Graphic file (type png)
+ <use imgs/cec/EP.PNG>
+Package pdftex.def Info: imgs/cec/EP.PNG used on input line 819.
+(pdftex.def)             Requested size: 255.07951pt x 208.10603pt.
 
-Overfull \hbox (22.95259pt too wide) in paragraph at lines 748--748
-[] 
- []
-
-<imgs/EP_FINAL.png, id=33, 2520.41624pt x 794.2172pt>
-File: imgs/EP_FINAL.png Graphic file (type png)
- <use imgs/EP_FINAL.png>
-Package pdftex.def Info: imgs/EP_FINAL.png used on input line 752.
-(pdftex.def)             Requested size: 252.05638pt x 79.42636pt.
-
-Overfull \hbox (5.94005pt too wide) in paragraph at lines 752--753
+Overfull \hbox (8.96318pt too wide) in paragraph at lines 819--820
  [][] 
  []
 
-[5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/ANT_FINAL.png> <C:/wamp/www/to
-mkren.github.io/tex/cec14/imgs/EP_FINAL.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/EP.PNG>]
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
@@ -651,36 +654,38 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[6] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
+[7
+
+] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
- 3390 strings out of 493921
- 45669 string characters out of 3144876
+ 3393 strings out of 493921
+ 45657 string characters out of 3144876
  118852 words of memory out of 3000000
- 6628 multiletter control sequences out of 15000+200000
- 45169 words of font info for 94 fonts, out of 3000000 for 9000
+ 6630 multiletter control sequences out of 15000+200000
+ 46893 words of font info for 96 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  27i,16n,24p,601b,308s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x
-86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/uc
-rr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on article.pdf (6 pages, 531562 bytes).
+{C:/Program Files (x86
+)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr
+8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on article.pdf (7 pages, 604855 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
