@@ -1,4 +1,3 @@
-
 \documentclass[conference]{IEEEtran}
 
 %\usepackage{stmaryrd}
@@ -122,8 +121,7 @@
 \title{\ \\ \LARGE\bf 
 Generating Lambda Term Individuals in Typed Genetic Programming Using Forgetful A*}
 
-\author{Tom\'{a}\v{s} K\v{r}en \and Roman Neruda}
-
+\author{Tom\'{a}\v{s} K\v{r}en\thanks{Tomáš Křen (tomkren@gmail.cz) is with Charles Univetsity in Prague, Faculty of Mathematics and Physics; Department of Theoretical Computer Science and Mathematical Logic.} \and Roman Neruda\thanks{Roman Neruda (roman@cs.cas.cz) is with Institute of Computer Science, Academy of Sciences of the Czech Republic and has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002}}
 
 \maketitle
 
@@ -136,18 +134,11 @@ Three such initialization methods are proposed
 depending on different search strategies. 
 The first strategy corresponds to standard ramped half-and-half initialization, 
 the second one corresponds to exhaustive systematic search, and the third one 
-represents a novel geometric strategy. 
-Three well-known benchmark experiments (simple symbolic regression,
-artificial ant problem and even parity problem)
-support that the geometric strategy outperforms
+represents a novel geometric strategy.
+Experiments on three well known benchmark problems show
+that the geometric strategy outperforms
 the standard generating method in success rate, best fitness value,
-time consumption and average individual size. 
-Despite the fact that the presented system is designed for typed genetic 
-programming, when given standard genetic programming problem satisfying
-standard closure requirement it produces simple S-expressions and
-the novel geometric strategy outperforms the standard system. 
-This claim is supported by that first two experiments both satisfying 
-the closure requirement.
+time consumption and average individual size.
 The fact that a search strategy can be easily described by a rather simple filtration algorithm opens opportunity to easy exploration of more 
 population initialization methods, possibly in a kind of meta-evolution way.
 \end{abstract}
@@ -192,7 +183,7 @@ utilizing typed GP with combinators \cite{kes}.
 The difference between approach presented in this work
 and our approach is that in this work terms are generated
 straight from \textit{library} of combinators and no lambda abstractions
-are used. They are using more general polymorphic type system then us
+are used. They are using more general polymorphic type system than us
 -- the Hindley–Milner type system. They also discuss the 
 properties of exhaustive enumeration of terms and compare it with GP search.  
 They also present interesting concept of \textit{Generalized
@@ -350,7 +341,7 @@ build from symbols of $\Gamma$.
 
 \subsection{Introduction}
 
-Our approach to \lterm gerating is based on technique 
+Our approach to \lterm generating is based on technique 
 briefly described in \cite{barendregt10}, which generates
 well-typed \lterms in their long normal form. 
 We use this technique to perform systematic exhaustive enumeration
@@ -383,7 +374,7 @@ and returns a subset of this input. This subset is added to the priority queue
 to be further explored. In this way the search space may be reduced as 
 the filtration function may \textit{forget} some successors.
 If the queue becomes empty before the desired number of \lterms
-is generated, then the initial statete is inserted to the queue
+is generated, then the initial state is inserted to the queue
 and the process continues. For the standard A* this would be meaningless,
 but since our A* is forgetful this kind of restart makes sense.
 
@@ -419,7 +410,7 @@ quite usual to have $x$ such that $x : \tau \in \Gamma$.
 Since the true value of $\vert\ul{\tau}{\Gamma}\vert$ depends only on
 $\tau$ and \textit{types} in $\Gamma$ (the \textit{signature}), 
 no matter how many variables/constants of
-each type there are, it is should by pretty effective to compute this
+each type there are, it should by pretty effective to compute this
 value precisely and store them for later. 
 %This topic has other interesting 
 %subtopics (such as surprisingly small 
@@ -589,7 +580,7 @@ and no bound variables. After the initial population is generated,  it is transf
 by abstraction elimination. Another possible transformation taking place
 after initialization is $\eta$-normalization shortening 
 rather long long normal form into $\beta\eta$-normal form.  
-Another performence enhancing transformation is use of "applicative" tree 
+Another performance enhancing transformation is use of "applicative" tree 
 representation (coming directly from inductive definition of \lterms). 
 
 
@@ -597,7 +588,7 @@ representation (coming directly from inductive definition of \lterms).
 \section{Experiments}
 \label{experiments}
 
-We made tree experiments comparing performance of standard 
+We made three experiments comparing performance of standard 
 \textit{ramped half-and-half strategy} with our
 \textit{geometric strategy} (with default parameter $q=0.75$). 
 Each experiment consisted of 50 independent runs 
@@ -619,15 +610,24 @@ Graphs showing mean values of the fitness of the best individual and
 the average size of an individual throughout generations
 contain error bars representing the standard error of the mean (SEM).
 
-\red{Přestože je naše generujicí metoda navržena obecně pro typovanou verzi,
-tak pracuje dobře i pro problémy standardního GP splňující closure podmínku.
-Pro taklovéto problémy strategie generuje standardní S-výrazy. Proto jsou
-první dva ze tří experimentů právě takového charakteru. Dalším důvodem pro volbu 
-takovýchto problémů je fakt, že výsledky pokusů výrazně ovlivňuje použitý křížící 
-operátor. Návrh obecného křížícího operatoru pro GP v symply typed lc je otevřený problém. Protože křížící operátor použitý v našem systému je poměrně komplikovaný
-a tím pádem beyond the scope of this paper, ale pro problémy splnující
-clousure podmínku se chová přesně stejně jako standardní křížící operator,
-tak se to zdá jako další důvod proč 2/3 experimentů udělat na closed problémech.}
+Despite the fact that the presented system is designed
+for typed genetic programming it works well for
+standard GP problems satisfying the closure requirement. For such problems our approach 
+generates standard S-expressions only. 
+Another reason for including standard GP
+benchmarks in our experiments is that fact that
+the results are seriously affected by a crossover 
+operator. Design of a good crossover for typed GP
+remains an open problem. 
+Our crossover is quite complicated and beyond
+the scope of this paper, but for problems satisfying
+the closure requirement it behaves exactly the same
+as the standard GP crossover. 
+Three well known benchmark problems
+(Simple symbolic regression, Artificial ant and
+Even parity problem) were chosen for our experiments.
+First two satisfy the closure requirement, 
+whereas the third one does not.
 
 \subsection{Simple symbolic regression}
 \textit{Simple Symbolic Regression} is a problem described
@@ -712,7 +712,7 @@ Minimal $I(M,i,z)$ was in generation 29 with 150,000 individuals to be processed
 The average individual size for generation 50 was 44.1.
 The experiment took 26 minutes.
 So for the \textit{Simple symbolic regression}
-our geometric strategy is slightly more successful then 
+our geometric strategy is slightly more successful than 
 ramped half-and-half strategy in these observed metrics.
 
 
@@ -889,15 +889,20 @@ The experiment took 33 minutes.
 
 Once again this is a big improvement against standard method. 
 
-One may get the impression that geometric strategy suffers from bloat here,
-but considering that it performs significantly better and
-that term size around 100 is similar as for the previous two problems, 
+One may get the impression that geometric strategy 
+suffers from bloat here, but as is stated in \cite{fg}: 
+\textit{"We should not equate growth with bloat
+and we should define bloat as program growth without 
+(significant) return in terms of fitness."}
+Considering that it performs significantly better and
+that term size around 75 is similar as for the previous two problems, 
 it seems to us that ramped half-and-half maybe has difficulties with 
 constructing more complex terms, and therefore is "staying small".
+
 Another remarkable observation is that 4 times out of 50 (8\% of all runs) 
 the 100\% correct solution was present in the generation 0. This is pretty good
 result for uninformed search. However, our results are less successful 
-then those presented in \cite{yu01} (with slightly different set of 
+than those presented in \cite{yu01} (with slightly different set of 
 building symbols); they scored 40/50 (80\%) success rate and $I(M,i,z)$ of 
 17,500 in generation 4. But by observation of typical solution which is often
 some modification of \texttt{foldr xor False inputList} one sees that important 
@@ -926,6 +931,13 @@ on the presented experiments.
 
 %\red{ [větu dvě o experimentech]}
 
+Experiments on three well 
+known benchmark problems show
+that the geometric strategy outperforms
+the standard ramped half-and-half 
+generating method in success rate, best fitness value,
+time consumption and average individual size.
+
 The relevance of these algorithms does not effect only initialization, but it can be used during mutation
 operator in a straightforward way. 
 %Other performance enhancements based on theory of lambda calculus are 
@@ -938,7 +950,7 @@ identified in this paper. Since the search strategy can be easily described by a
 interesting to allow the typed GP system to evolve the search strategy it 
 utilizes in a kind of meta-evolution way. 
 
-\red{Ještě nějak rozšířit.}
+%\red{Ještě nějak rozšířit.}
 
 %\red{ [ještě něco navíc nebo podrobněji, říct poly že neni ale že se na něm pracuje a de hezky zandat do již systemu] }
 
