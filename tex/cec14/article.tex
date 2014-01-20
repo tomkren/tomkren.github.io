@@ -128,14 +128,28 @@ Generating Lambda Term Individuals in Typed Genetic Programming Using Forgetful 
 \maketitle
 
 \begin{abstract}
+Tree based genetic programming traditionally uses simple S-expressions to represent programs, however more expressive representations can exhibit better results and are well suited for typed genetic programming. One of such representations is lambda calculus.
 In this paper, a generalization of genetic programming 
-for simply typed lambda calculus is presented. We propose three population 
-initialization methods depending on different search strategies. 
+for simply typed lambda calculus is presented. We mainly focus on
+population initialization methods. 
+Three such initialization methods are proposed 
+depending on different search strategies. 
 The first strategy corresponds to standard ramped half-and-half initialization, 
 the second one corresponds to exhaustive systematic search, and the third one 
-represents a novel geometric strategy. Three well-known benchmark experiments
+represents a novel geometric strategy. 
+Three well-known benchmark experiments (simple symbolic regression,
+artificial ant problem and even parity problem)
 support that the geometric strategy outperforms
-the standard generating method in success rate, time consumption and average individual size. 
+the standard generating method in success rate, best fitness value,
+time consumption and average individual size. 
+Despite the fact that the presented system is designed for typed genetic 
+programming, when given standard genetic programming problem satisfying
+standard closure requirement it produces simple S-expressions and
+the novel geometric strategy outperforms the standard system. 
+This claim is supported by that first two experiments both satisfying 
+the closure requirement.
+The fact that a search strategy can be easily described by a rather simple filtration algorithm opens opportunity to easy exploration of more 
+population initialization methods, possibly in a kind of meta-evolution way.
 \end{abstract}
 % no key words
 
@@ -157,10 +171,10 @@ The rest of the paper is organized as follows: The next section briefly discusse
 \section{Related work}
 \label{related}
 
-In \cite{yu01} Yu presents a GP system utilizing
+Yu presents a GP system utilizing
 polymorphic higher-order functions\footnote{Higher-order 
 function is a function taking another function as 
-input parameter.} and lambda abstractions.
+input parameter.} and lambda abstractions  \cite{yu01}.
 Important point of interest in this work is use of
 \texttt{foldr} function as a tool for \textit{implicit recursion},
 i.e. recursion without explicit recursive calls. 
@@ -173,8 +187,8 @@ comes different crossover operation. We focus more on term generating process;
 their term generation is performed in a similar way as the standard one, 
 whereas our term generation also tries to utilize techniques of systematic enumeration. 
 
-In \cite{kes} Briggs and O’Neill present technique 
-utilizing typed GP with combinators.
+Briggs and O’Neill present technique 
+utilizing typed GP with combinators \cite{kes}.
 The difference between approach presented in this work
 and our approach is that in this work terms are generated
 straight from \textit{library} of combinators and no lambda abstractions
@@ -184,8 +198,8 @@ properties of exhaustive enumeration of terms and compare it with GP search.
 They also present interesting concept of \textit{Generalized
 genetic operator} based on term generation. 
 
-In \cite{binard2008genetic} by Binard and Felty even 
-stronger type system (\textit{System F}) is used.  
+Binard and Felty use even 
+stronger type system (\textit{System F}) \cite{binard2008genetic}.  
 But with increasing power of the type system comes increasing difficulty of term generation.
 For this reason evolution in this work takes interesting and nonstandard shape 
 (fitness is associated with \textit{genes} which are evolved together with \textit{species}
@@ -197,7 +211,7 @@ In contrast with above mentioned works our approach uses very simple type system
 (simply typed lambda calculus) and concentrates on process of generation  
 able to generate all possible well-typed normalized lambda terms. In order to do
 so we use technique based on \textit{inhabitation machines} 
-described by Barendregt in~\cite{barendregt10}.    
+described by Barendregt \cite{barendregt10}.    
 
 
 \section{Preliminaries}
@@ -605,6 +619,16 @@ Graphs showing mean values of the fitness of the best individual and
 the average size of an individual throughout generations
 contain error bars representing the standard error of the mean (SEM).
 
+\red{Přestože je naše generujicí metoda navržena obecně pro typovanou verzi,
+tak pracuje dobře i pro problémy standardního GP splňující closure podmínku.
+Pro taklovéto problémy strategie generuje standardní S-výrazy. Proto jsou
+první dva ze tří experimentů právě takového charakteru. Dalším důvodem pro volbu 
+takovýchto problémů je fakt, že výsledky pokusů výrazně ovlivňuje použitý křížící 
+operátor. Návrh obecného křížícího operatoru pro GP v symply typed lc je otevřený problém. Protože křížící operátor použitý v našem systému je poměrně komplikovaný
+a tím pádem beyond the scope of this paper, ale pro problémy splnující
+clousure podmínku se chová přesně stejně jako standardní křížící operator,
+tak se to zdá jako další důvod proč 2/3 experimentů udělat na closed problémech.}
+
 \subsection{Simple symbolic regression}
 \textit{Simple Symbolic Regression} is a problem described
 in \cite{koza92}. Objective of this problem is to 
@@ -642,12 +666,6 @@ log(\vert x\vert) & \mbox{otherwise}. \end{cases}
 \end{align*}
 \end{minipage}
 
-\begin{figure}[h!]
-  \caption{Graphs for Simple symbolic regression.}
-  \centering
-    \includegraphics[scale=0.15]{imgs/cec/SSR.PNG}
-\end{figure}
-
 ~\\Fitness function is computed as follows.
 
 $$ fitness(f) =  \frac{1}{1+ \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert }  $$
@@ -655,18 +673,49 @@ where $(x_i,y_i)$ are 20 data samples from $[-1,1]$, such that $y_i = f_t(x_i)$.
 An individual $f$ such that $\vert f(x_i)-y_i \vert < 0.01 $ for all data samples is 
 considered as a correct individual.
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.14]{imgs/cec/SSR.PNG}
+  \caption{Graphs for Simple symbolic regression.}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{|l|cc|}
+\hline
+& Ramped half-and-half & Geometric \\
+\hline
+Mean & 0.7999030182 & 0.8174067512 \\
+SD	 & 0.1521369287	& 0.1826109800 \\
+SEM	 & 0.0215154108	& 0.0258250925 \\
+N	 & 50 & 50  \\
+\hline
+t-value & 0.5207 & $\alpha = 0.05$\\
+p-value & 0.6038 & \textbf{Not statistically significant.}\\
+\hline
+\end{tabular}
+\caption{Statistical analysis - Simple symbolic regression.}
+\end{table}
+
+~\\
+
+Figure~1 shows results of this experiment. 
+Table~I summarizes statistical analysis
+of the fitness values of the best individuals of the run.  
+By conventional criteria, this difference is considered to be not statistically significant.
 Standard \textit{ramped half-and-half strategy} scored 17/50 (34\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 23 with 192,000 individuals to be processed.
-The average individual size for generation 50 was 76.
+The average individual size for generation 50 was 68.8.
 The experiment took 46 minutes.
 Our \textit{geometric strategy} scored 21/50 (42\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 29 with 150,000 individuals to be processed.
-The average individual size for generation 50 was 47.
+The average individual size for generation 50 was 44.1.
 The experiment took 26 minutes.
-Figure~1 shows the progress of those metrics throughout generations.
 So for the \textit{Simple symbolic regression}
 our geometric strategy is slightly more successful then 
-ramped half-and-half strategy in all observed metrics.
+ramped half-and-half strategy in these observed metrics.
+
+
 
 \subsection{Artificial ant}
 \textit{Artificial Ant} is another problem described
@@ -702,12 +751,6 @@ Actions $l, r$ and $m$ each take one time step to execute.
 Ants action is performed over and over again until it reaches predefined
 maximal number of steps. 
 
-\begin{figure}[h!]
-  \caption{Graphs for Artificial ant problem.}
-  \centering
-    \includegraphics[scale=0.15]{imgs/cec/ANT.PNG}
-\end{figure}
-
 Fitness value is equal to number of eaten food pieces.
 An individual such that eats all 89 pieces of food is 
 considered as a correct solution.
@@ -721,24 +764,11 @@ time steps; if it is given only 400 time steps, then it eats only 79 pieces
 of food. Thus we use 600 time steps. 
 }.
 
-\begin{table}[t]
-\centering
-\begin{tabular}{|l|cc|}
-\hline
-& Ramped half-and-half & Geometric \\
-\hline
-Mean & 0.7999030182 & 0.8174067512 \\
-SD	 & 0.1521369287	& 0.1826109800 \\
-SEM	 & 0.0215154108	& 0.0258250925 \\
-N	 & 50 & 50  \\
-\hline
-t-value & 0.5207 & \\
-p-value & 0.6038 & \\
-\hline
-\end{tabular}
-\caption{Statistical analysis of Simple symbolic regression.
-By conventional criteria, this difference is considered to be not statistically significant.}
-\end{table}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.14]{imgs/cec/ANT.PNG}
+  \caption{Graphs for Artificial ant problem.}
+\end{figure}
 
 \begin{table}[t]
 \centering
@@ -751,53 +781,43 @@ SD	 & 12.33 & 8.77  \\
 SEM	 & 1.74	 & 1.24  \\
 N	 & 50    & 50    \\
 \hline
-t-value &  6.3479           & \\
-p-value &  less than 0.0001 &  \\
+t-value &  6.3479           & $\alpha = 0.05$\\
+p-value &  \textless 0.0001 &  \textbf{Extremely statistically significant.}\\
 \hline
 \end{tabular}
-\caption{Statistical analysis of Artificial ant problem.
- By conventional criteria, this difference is considered to be extremely statistically significant. }
+\caption{Statistical analysis - Artificial ant problem.}
 \end{table}
 
-\begin{table}[t]
-\centering
-\begin{tabular}{|l|cc|}
-\hline
-& Ramped half-and-half & Geometric \\
-\hline
-Mean & 0.895000	& 0.930000 \\
-SD	 & 0.075170	& 0.078490 \\
-SEM	 & 0.010631	& 0.011100 \\
-N	 & 50    & 50    \\
-\hline
-t-value &  2.2772 & \\
-p-value &  0.0250 &  \\
-\hline
-\end{tabular}
-\caption{Statistical analysis of Even parity problem. 
-By conventional criteria, this difference is considered to be statistically significant.}
-\end{table}
+
+Figure~2 shows results of this experiment. 
+Table~II summarizes statistical analysis
+of the fitness values of the best individuals of the run.  
+According to this analysis our strategy performed better;
+by conventional criteria, this difference is considered to be extremely statistically significant.
 
 Standard \textit{ramped half-and-half strategy} scored 7/50 (14\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 28 with 449,500 individuals to be processed.
-The average individual size for generation 50 was circa 400.
+The average individual size for generation 50 was 279.5.
 The experiment took 265 minutes.
+
 Our \textit{geometric strategy} scored 19/50 (38\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 10 with 115,500 individuals to be processed.
-The average individual size for generation 50 was circa 90.
+The average individual size for generation 50 was 94.1.
 The experiment took 107 minutes.
+
 This is a big improvement in all watched factors.
-Figure~2 shows it in greater detail.
 
 \subsection{Even parity problem}
 
-Previous two problems were instances of standard GP, i.e. their building symbols
-obeyed the closure requirement. This third experiment will break the closure requirement, thus ideal for testing typed GP techniques. 
+Previous two problems were instances of standard GP, i.e. their building 
+symbols obeyed the closure requirement. This third experiment will 
+break the closure requirement, thus ideal for testing typed GP techniques. 
 The even-parity function is a boolean function taking as inputs $N$
 boolean values and returning \textit{True} if an even number of inputs 
 are \textit{True}. For odd number it returns \textit{False}.
 This problem has been used by many researchers
-as a benchmark for GP. We compare our results with that obtained by Yu in \cite{yu01},
+as a benchmark for GP. We compare our results with 
+that obtained by Yu in \cite{yu01},
 where is presented approach to evolve recursive and modular programs
 by use of higher-order functions and $\lambda$-abstractions.
 We use very similar set of \textit{building symbols} as in \cite{yu01}. 
@@ -813,11 +833,6 @@ We use very similar set of \textit{building symbols} as in \cite{yu01}.
   head' &: [Bool] \ar Bool                                   ,\\
   tail' &: [Bool] \ar [Bool]                              \}
 \end{align*}
-\begin{figure}[h!]
-  \caption{Graphs for Even parity problem.}
-  \centering
-    \includegraphics[scale=0.15]{imgs/cec/EP.PNG}
-\end{figure}
 
 The type $[Bool]$ stands for \textit{list of $Bool$s} and for purpose of
 this problem is considered atomic.
@@ -832,16 +847,48 @@ We use the same fitness function as in \cite{yu01}.
 The fitness function examines the individual by giving
 it all possible boolean lists of length 2 and 3.
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.14]{imgs/cec/EP.PNG}
+  \caption{Graphs for Even parity problem.}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{|l|cc|}
+\hline
+& Ramped half-and-half & Geometric \\
+\hline
+Mean & 0.895000	& 0.930000 \\
+SD	 & 0.075170	& 0.078490 \\
+SEM	 & 0.010631	& 0.011100 \\
+N	 & 50    & 50    \\
+\hline
+t-value &  2.2772 & $\alpha = 0.05$\\
+p-value &  0.0250 &  \textbf{Statistically significant.}\\
+\hline
+\end{tabular}
+\caption{Statistical analysis - Even parity problem.}
+\end{table}
+
+Figure~3 shows results of this experiment. 
+Table~III summarizes statistical analysis
+of the fitness values of the best individuals of the run.  
+According to this analysis our strategy performed better;
+by conventional criteria, this difference is considered to be 
+statistically significant.
+
 Standard \textit{ramped half-and-half strategy} scored 9/50 (18\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 17 with 333,000 individuals to be processed.
-The average individual size for generation 50 was 39.
+The average individual size for generation 50 was 47.7.
 The experiment took 28 minutes.
 Our \textit{geometric strategy} scored 32/50 (64\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 0 with 28,000 individuals to be processed.
-The average individual size for generation 50 was circa 100.
+The average individual size for generation 50 was 74.3.
 The experiment took 33 minutes.
-Figure~3 shows it in greater detail.
+
 Once again this is a big improvement against standard method. 
+
 One may get the impression that geometric strategy suffers from bloat here,
 but considering that it performs significantly better and
 that term size around 100 is similar as for the previous two problems, 
@@ -853,8 +900,9 @@ result for uninformed search. However, our results are less successful
 then those presented in \cite{yu01} (with slightly different set of 
 building symbols); they scored 40/50 (80\%) success rate and $I(M,i,z)$ of 
 17,500 in generation 4. But by observation of typical solution which is often
-some modification of \texttt{foldr xor False inputList} one sees that important task
-for GP here is to create \texttt{xor} function. This is advantage for the more specialized term representation used in \cite{yu01} 
+some modification of \texttt{foldr xor False inputList} one sees that important 
+task for GP here is to create \texttt{xor} function. This is advantage for the 
+more specialized term representation used in \cite{yu01} 
 (restricting use of outer variables). 
 The difference in crossover operators may also be involved in the difference, 
 but such analysis is beyond the scope of this paper. Finally, our result at least outperforms other results mentioned in \cite{yu01}: \textit{Generic genetic programming} 
@@ -889,6 +937,8 @@ Our future research will focus on exploring other possible search strategies pos
 identified in this paper. Since the search strategy can be easily described by a rather simple filtration algorithm, it might be
 interesting to allow the typed GP system to evolve the search strategy it 
 utilizes in a kind of meta-evolution way. 
+
+\red{Ještě nějak rozšířit.}
 
 %\red{ [ještě něco navíc nebo podrobněji, říct poly že neni ale že se na něm pracuje a de hezky zandat do již systemu] }
 
