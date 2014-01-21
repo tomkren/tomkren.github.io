@@ -18,14 +18,19 @@ importScripts(
  'solver.js',
  'solvers/GP.js',
  'solvers/ACO.js',
+ 'solvers/PSO.js',
  'problem-opts.js',
- 'problems/TSP/TSPutils.js'
+ 'problems/TSP/TSPutils.js',
+ 'problems/Real/Real.js'
 );
 
 var log = function (logStr) {
-  send('log', logStr); 
+  send('consoleLog', logStr); 
 };
 
+var guiLog = function (logStr) {
+  send('log', logStr); 
+};
 
 
 function send (subject, content) {
@@ -43,7 +48,7 @@ self.addEventListener('message', function(e) {
   var opts = evalOptsStr( msg.optsStr );
 
   var communicator = {
-    log: log, 
+    log: guiLog, 
     sendStats: function (stats) {
       send('stats', stats);
     },

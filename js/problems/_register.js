@@ -1,6 +1,6 @@
 var ProblemRegister = [
+  'TSP.js',
+  'RB.js',
   'SSR.js',
-  'TSP.js'
-  //'ant.js',
-  //'SSR_old.js'
+
 ];

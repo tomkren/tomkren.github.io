@@ -7,9 +7,16 @@ var PSO = (function () {
       omega: 1,
       phi_p: 1,
       phi_g: 1,
-      b_lo:  [-1],
-      b_up:  [ 1]
+      b_lo:  -1,
+      b_up:  1
     }, PSOopts);
+
+    if(_.isNumber(PSOopts.b_lo)) {
+      PSOopts.b_lo = Utils.replicate(PSOopts.n, PSOopts.b_lo);
+    }
+    if(_.isNumber(PSOopts.b_up)) {
+      PSOopts.b_up = Utils.replicate(PSOopts.n, PSOopts.b_up);
+    }
 
     function mkParticle () {
       var n = PSOopts.n;
@@ -77,7 +84,7 @@ var PSO = (function () {
     }
 
     var Operators = {
-      generatePop : {
+      movePopOperator : {
         in : function (opts) {
           return opts.popSize;
         },
@@ -92,7 +99,7 @@ var PSO = (function () {
       return {
         globalBest: {
           x: null,
-          fitVal: 0
+          fitVal: Number.MAX_VALUE
         }
       };
     }
@@ -121,7 +128,7 @@ var PSO = (function () {
       },
       onEvalIndivUpdate: function (indiv, fitVal) {
 
-        if (indiv.term.p_fitVal < fitVal) {
+        if (indiv.term.p_fitVal > fitVal) { //minimize
       
           var indiv_new = _.clone(indiv);
           indiv_new.term.p = indiv.term.x;
@@ -135,7 +142,7 @@ var PSO = (function () {
     };
 
     function updateRunKnowledge (runKnowledge, evaledPop, _opts) {
-      if (evaledPop.best.fitVal > runKnowledge.globalBest.fitVal) {
+      if (evaledPop.best.fitVal < runKnowledge.globalBest.fitVal) { //minimize
         return {
           globalBest: {
             x:      evaledPop.best.indiv.term.x,
@@ -166,9 +173,17 @@ var PSO = (function () {
       commOpts: commOpts,
       ctx: ctx,
 
-      Operators: Operators
+      Operators: Operators,
+
+      //for testing, could be private
+      mkParticle:   mkParticle,
+      moveParticle: moveParticle
     };
   }
+
+  //function mkFiness_minimization (realBenchmark) {
+  //  return 
+  //}
 
   return {
     mkSolver : mkSolver

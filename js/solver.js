@@ -90,14 +90,15 @@ var Solver = (function () {
     return function (pop) {
       return evalPop_core( evalPopOpts.mkIndivArr(pop), 
                            evalPopOpts.mkIndivFitness(opts),
-                           evalPopOpts.onEvalIndivUpdate );
+                           evalPopOpts.onEvalIndivUpdate,
+                           opts.minimization );
     }
   }
 
-  function evalPop_core (indivArr, indivFitness, onEvalIndivUpdate) {
+  function evalPop_core (indivArr, indivFitness, onEvalIndivUpdate, minimization) {
 
     var terminate = false;
-    var best      = {fitVal: 0};
+    var best      = {fitVal: (minimization ? Number.MAX_VALUE : 0) }  ;
     var popDist   = mkDist(_.map(indivArr, function (indiv) {
       
       var fitResult = indivFitness(indiv);
@@ -124,10 +125,14 @@ var Solver = (function () {
 
       fitResult.indiv = indiv;
 
-      best = updateBest(best, fitResult);
+      best = updateBest(best, fitResult, minimization);
 
       return [indiv,fitResult.fitVal];
     }));
+
+    //log(best);
+    //log(popDist.bestVal(true) );
+    //log('---');
 
     var evaledPop = {
       popDist:   popDist,
@@ -164,9 +169,9 @@ var Solver = (function () {
       run:        run,
       gen:        gen,
       terminate:  evaledPop.terminate,
-      best:       popDist.bestVal(),
+      best:       opts.minimization ? popDist.worstVal() : popDist.bestVal(),
       avg:        popDist.avgVal(),
-      worst:      popDist.worstVal(),
+      worst:      opts.minimization ? popDist.bestVal() : popDist.worstVal(),
       bestSize:   solver.commOpts.size(bestTerm),  //    <-----------
       avgSize:    avgTermSize,
       maxSize:    maxTermSize,

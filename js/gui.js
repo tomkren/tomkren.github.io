@@ -147,7 +147,7 @@ function mkGUI (containerId) {
 
   var $editorContainer = $('<div>').append([$editorButts, $elRyba, $editor]);
 
-  var sTabsNames = ['mxr','editor','results','stats','log'];
+  var sTabsNames = ['editor','mxr','results','stats','log'];
   var sTabs = mkTabs(sTabsNames);
 
   var $clearButt = mkAButt('clear','remove',false,false,true);
@@ -310,7 +310,7 @@ function mkGUI (containerId) {
   function resize () {
     var newHeight = window.innerHeight-106;
     $log   .css('height', (newHeight-30)+'px');
-    $editor.css('height', (newHeight)+'px');
+    $editor.css('height', (newHeight-2)+'px');
     $graphContainer.css('height',(newHeight-20)+'px');
     var $bars = Phenotype.get$bars();
     if ($bars) {
@@ -373,6 +373,7 @@ function mkGUI (containerId) {
       var content = msg.content;
       switch (msg.subject) {
         case 'log'     : guiLog(content); break;
+        case 'consoleLog': log(content); break;
         case 'stats'   : 
           var stats = content;
           graphs.handleStats(stats);

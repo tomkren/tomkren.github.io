@@ -4,9 +4,16 @@ var App = {
 
 // TODO : postupně všecko z tohoto souboru přendat do tohodle namespacu
 var Utils = {
-  uniformRand : function (a, b) {
+  uniformRand: function (a, b) {
     return (b-a)*Math.random()+a;
-  }
+  },
+  replicate: function (n, x) {
+    var ret = [];
+    for (var i=0; i<n; i++) {
+      ret[i] = x;
+    }
+    return ret;
+  } 
 };
 
 function evalOptsStr (optsStr) {
@@ -121,11 +128,11 @@ var partition = function(mustBeTrue,array){
            notSatisfy : notSatisfy };
 };
 
-function updateBest( oldRes , newRes ){
+function updateBest (oldRes , newRes, minimization) {
   if( oldRes.fitVal < newRes.fitVal ){
-    return newRes;
+    return (minimization ? oldRes : newRes) ;
   }
-  return oldRes;
+  return (minimization ? newRes : oldRes) ;
 }
 
 function mkDist( distArr ){
