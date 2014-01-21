@@ -169,6 +169,8 @@ var TSPutils = (function () {
     return graph;
   }
 
+  //TODO !!!!!!!!!!!! udelany prasacky jak sviň, lepší aby se tady jen tisklo co příde z 
+  // preprocesu
   function drawStyledEdges (ctx, coords, pxPos, graph) {
     var keys = _.keys(coords);
     var len  = keys.length;
@@ -179,9 +181,12 @@ var TSPutils = (function () {
       for (var j = i+1; j<len; j++) {
         var I = keys[i];
         var J = keys[j];
-        var x = graph[I][J];
-        if (x < min) {min = x;}
-        if (x > max) {max = x;}
+
+        if (graph[I] !== undefined && graph[I][J] !== undefined){
+          var x = graph[I][J];
+          if (x < min) {min = x;}
+          if (x > max) {max = x;}
+        }
       }
     }
 
@@ -200,17 +205,20 @@ var TSPutils = (function () {
         var I = keys[i];
         var J = keys[j];
 
+        if (graph[I] !== undefined && graph[I][J] !== undefined) {
 
-        var x = Math.round( 250 * ( 1-normalize(graph[I][J]) ) ) ;
+          var x = Math.round( 250 * ( 1-normalize(graph[I][J]) ) ) ;
 
-        var colorStr = 'rgb('+x+','+x+','+x+')';
+          var colorStr = 'rgb('+x+','+x+','+x+')';
 
-        edgeArr.push({ 
-          colorStr: colorStr, 
-          tau: graph[I][J],
-          iPos: pxPos(coords[I]),
-          jPos: pxPos(coords[J]) 
-        });
+          edgeArr.push({ 
+            colorStr: colorStr, 
+            tau: graph[I][J],
+            iPos: pxPos(coords[I]),
+            jPos: pxPos(coords[J]) 
+          });
+
+        }
                 
       }
     }
@@ -218,6 +226,7 @@ var TSPutils = (function () {
     edgeArr = _.sortBy( edgeArr, function (x) {
       return x.tau;
     });
+
 
     for (var k = 0; k<edgeArr.length; k++) {
       var e = edgeArr[k];

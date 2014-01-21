@@ -37,6 +37,44 @@ opts = {
     this.fitness   = this.solver.antProblem.fitness;
     this.operators = [[this.solver.Operators.generatePop, 1.0]];
 
+
+    var maxEdges = 500;
+
+    //TODO: drawStyledEdges v TSPutils udělany prasacky jak sviň, předělat !
+    // tady to odešle spíš než objekt pole a tam se to už je vytiskne, dvaktrat se to zbytečně třídí
+    this.preprocessRK = function (tauGraph) {
+
+      var arr = [];
+
+      for (var i in tauGraph) {
+        for (var j in tauGraph[i]) {
+          arr.push({i:i, j:j, tau:tauGraph[i][j]});
+        }
+      }
+
+      arr = _.sortBy(arr, function (o) {
+        return o.tau;
+      });
+
+      maxEdges = maxEdges || arr.length;
+      var from = arr.length - maxEdges;
+      from = from >=0 ? from : 0;
+
+      var ret = {};
+
+      for (var k = from; k<arr.length; k++) {
+        var o = arr[k];
+        if (ret[o.i] === undefined) {
+          ret[o.i] = {};
+        }
+        ret[o.i][o.j] = o.tau;
+      }
+
+      log(ret);
+
+      return ret;
+    };
+
     var h = 320;
 
     this.phenotype = {

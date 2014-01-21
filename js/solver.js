@@ -177,7 +177,7 @@ var Solver = (function () {
       maxSize:    maxTermSize,
       minSize:    minTermSize,
       best_jsStr: solver.commOpts.indivStr(bestIndiv), //    <-----------
-      runKnowledge: runKnowledge
+      runKnowledge: opts.preprocessRK ?  opts.preprocessRK(runKnowledge) : runKnowledge
     });
 
     var logOpts = opts.logOpts; 
