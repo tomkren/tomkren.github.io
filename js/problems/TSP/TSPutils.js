@@ -16,6 +16,7 @@ var TSPutils = (function () {
     }
 
     return {
+      method   : tspOpts.method,
       from     : tspOpts.from,
       fitness  : mkTSPFitness(tsp, tspOpts.Q),
       heur     : mkTspHeur(tsp),

@@ -3,9 +3,7 @@ var ACO = (function () {
   var defaultAntOpts = {
     rho          : 0.15 ,
     alpha        : 1.2  ,
-    beta         : 1.2  ,
-    antsPerRound : 100  ,
-    numRounds    : 10   ,
+    beta         : 1.2   
   };
 
   function selectSucc (from, path, tau, succsFun, heur, antOpts) {
@@ -84,7 +82,7 @@ var ACO = (function () {
     }
 
 
-    function updateRunKnowledge (runKnowledge, evaledPop, opts) {
+    function update_AS (runKnowledge, evaledPop) {
       //TODO !!!
       
       var antOpts = antProblem.opts;
@@ -124,6 +122,14 @@ var ACO = (function () {
       });
 
       return newTau;
+    }
+
+    function updateRunKnowledge (runKnowledge, evaledPop, opts) {
+      switch (antProblem.method) {
+        case 'AS'   : return update_AS(runKnowledge, evaledPop); 
+        case 'MMAS' : throw 'TODO';
+        default     : throw 'ACO.updateRunKnowledge : unsupported method';
+      } 
     }
 
     var evalPopOpts = {

@@ -15,23 +15,28 @@ opts = {
   numGens: 201,
   popSize: 10,
 
-  saveBest : true,
+  saveBest : !true,
   
   statsOpts: StatsOpts.default,
   logOpts  : LogOpts.default,
 
   init: function () {
     
-    var data = TSPutils.tsp225; //Ulysses22; //16; //.EU4,
+    var data = TSPutils.tsp225; //TSPutils.Ulysses22; //16; //.EU4,
 
     this.solver = ACO.mkSolver(
       TSPutils.mkTspProblem({
+        method: 'AS',
         Q: data.optVal,//6792.12,
         initTauVal: 1,
         from: '1', // 'Praha'
         data: data, 
         //dists: TSPutils.EU4_dists,
-      }, ACO.defaultAntOpts)
+      },{
+        rho  : 0.15 ,
+        alpha: 1.2  ,
+        beta : 1.2   
+      })
     );
 
     this.fitness   = this.solver.antProblem.fitness;
@@ -69,8 +74,6 @@ opts = {
         }
         ret[o.i][o.j] = o.tau;
       }
-
-      log(ret);
 
       return ret;
     };
