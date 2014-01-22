@@ -377,7 +377,7 @@ function mkGUI (containerId) {
         case 'stats'   : 
           var stats = content;
           graphs.handleStats(stats);
-          Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best, stats.runKnowledge);
+          Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best, stats.runKnowledge, opts);
           resize();
           break;
         case 'result' : 

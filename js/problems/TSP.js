@@ -15,29 +15,33 @@ opts = {
   numGens: 201,
   popSize: 10,
 
-  saveBest : !true,
+  saveBest : true,
   
-  statsOpts: StatsOpts.default,
+  //statsOpts: StatsOpts.default,
   logOpts  : LogOpts.default,
 
   init: function () {
     
-    var data = TSPutils.tsp225; //TSPutils.Ulysses22; //16; //.EU4,
+    var data = TSPutils.tsp225; //TSPutils.tsp225; //TSPutils.Ulysses22; //16; //.EU4,
 
     this.solver = ACO.mkSolver(
       TSPutils.mkTspProblem({
-        method: 'AS',
-        Q: data.optVal,//6792.12,
-        initTauVal: 1,
+        method: 'MMAS',
+        Q: 1, //data.optVal,//6792.12,
+        initTauVal: 0.001,
         from: '1', // 'Praha'
         data: data, 
         //dists: TSPutils.EU4_dists,
       },{
         rho  : 0.15 ,
-        alpha: 1.2  ,
-        beta : 1.2   
+        alpha: 1  ,
+        beta : 5  ,
+        maxTau: 0.03,
+        minTau: 0.0001
       })
     );
+
+    this.greenBar = data.optVal;
 
     this.fitness   = this.solver.antProblem.fitness;
     this.operators = [[this.solver.Operators.generatePop, 1.0]];
@@ -118,8 +122,25 @@ opts = {
           tauGraph: runKnowledge
         });
 
-      },  
+      },
+
+
+
     };
+  },
+
+  statsOpts: {
+    drawStep: 1,
+    graphs: {
+      fitness: {
+        //yMax: 1.0,
+        vars: {
+          best:  { color: 'green', avg: true, minmax: true }, 
+          avg:   { color: 'blue',  avg: true, minmax: true },
+          worst: { color: 'red',   avg: true, minmax: true }
+        }
+      }
+    }
   },
 
 }

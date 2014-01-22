@@ -1,7 +1,7 @@
 var $ = function (x){}
 
 importScripts(
- 'libs/underscore-1.5.1.js',
+ 'libs/underscore-1.5.2.js',
  'libs/peg-0.7.0.js',
  'libs/wu-0.1.8.js', 
  'libs/geo.js',

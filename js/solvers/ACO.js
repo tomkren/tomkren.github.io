@@ -40,12 +40,14 @@ var ACO = (function () {
 
   function mkPath (antProblem, tau) {
 
+    //log(tau);
+
     var succsFun = antProblem.succsFun;     
     var heur     = antProblem.heur; 
     var antOpts  = antProblem.opts;   
 
     var isGoal = antProblem.isGoal;   
-    var next   = antProblem.from;
+    var next   = _.sample(_.keys(tau)); //antProblem.from;
     var path   = [];
 
     while( !isGoal(path) && next !== null ){
@@ -97,7 +99,7 @@ var ACO = (function () {
       // vypařování
       for (i in oldTau) {
         if (newTau[i] === undefined) {newTau[i] = {};}
-        for (j in oldTau) {
+        for (j in oldTau[i]) {
           newTau[i][j] = oldTau[i][j] * (1-rho); 
         }
       }
@@ -124,11 +126,55 @@ var ACO = (function () {
       return newTau;
     }
 
+    function update_MMAS (runKnowledge, evaledPop) {
+      //TODO !!!
+      
+      var antOpts = antProblem.opts;
+      var rho     = antOpts.rho; 
+
+      var maxTau  = antOpts.maxTau;
+      var minTau  = antOpts.minTau;
+
+      function checkTau (tau) {
+        if (tau < minTau) {return minTau;}
+        if (tau > maxTau) {return maxTau;}
+        return tau;
+      }
+      
+      var oldTau = runKnowledge;
+      var newTau = {};
+
+      var i,j;
+
+      for (i in oldTau) {
+        if (newTau[i] === undefined) {newTau[i] = {};}
+        for (j in oldTau[i]) {
+          newTau[i][j] = checkTau( oldTau[i][j] * (1-rho) ); 
+        }
+      }
+
+
+      var bestPath   = evaledPop.best.indiv.term;
+      var bestFitVal = evaledPop.best.fitVal;
+      var pathLen    = bestPath.length;
+
+      for (var s = 0; s < pathLen-1; s++) {
+
+        i = bestPath[s];
+        j = bestPath[s+1];
+                                                                // TODO : (!!!)
+        newTau[i][j] = checkTau( newTau[i][j] + bestFitVal );   // viz otázky z update_AS
+      }      
+
+      return newTau;
+    }
+
+
     function updateRunKnowledge (runKnowledge, evaledPop, opts) {
       switch (antProblem.method) {
-        case 'AS'   : return update_AS(runKnowledge, evaledPop); 
-        case 'MMAS' : throw 'TODO';
-        default     : throw 'ACO.updateRunKnowledge : unsupported method';
+        case 'AS'   : return update_AS  (runKnowledge, evaledPop); 
+        case 'MMAS' : return update_MMAS(runKnowledge, evaledPop);
+        default     : throw 'ACO.updateRunKnowledge : unsupported aco method';
       } 
     }
 
