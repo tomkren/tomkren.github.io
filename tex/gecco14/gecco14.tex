@@ -1,0 +1,356 @@
+\documentclass{sig-alternate}
+
+\usepackage[utf8]{inputenc}
+\usepackage{xspace}
+
+\newtheorem{definition}{Definition}
+
+\newenvironment{lizt}
+{\begin{easylist}[itemize]}
+{\end{easylist}}
+
+\newcommand{\Lets}{Let us\xspace}
+\newcommand{\lets}{let us\xspace}
+\newcommand{\lterm}{$\lambda$-term\xspace}
+\newcommand{\lterms}{$\lambda$-terms\xspace}
+\newcommand{\lhead}{$\lambda$-head\xspace}
+\newcommand{\lheads}{$\lambda$-heads\xspace}
+\newcommand{\la}{\leftarrow\xspace}
+\newcommand{\Lp}  {\Lambda^{\prime}\xspace}
+\newcommand{\tur}[3]{#1\vdash{}#2 \colon #3}
+\newcommand{\turst}[3]{$#1\vdash{}#2:#3$\xspace}
+\newcommand{\GMS}{\turst{\Gamma}{M}{\sigma}}
+\newcommand{\atTree}{@-tree\xspace}
+\newcommand{\setDots}[2]{ \lbrace #1 , \dots , #2 \rbrace}
+\newcommand{\lh}[1]{\lambda #1}
+\newcommand{\sexprTree}{sexpr-tree\xspace}
+\newcommand{\SexprTree}{Sexpr-tree\xspace}
+\newcommand{\then}{\Rightarrow\xspace}
+\newcommand{\lamb}[2]{( \lambda \, #1 \, . \, #2 )}
+\newcommand{\lam}[2]{\lambda \, #1 \, . \, #2}
+\newcommand{\ST}{\mathop{\mathrm{ST}}}
+\newcommand{\FV}{\mathop{\mathrm{FV}}}
+\newcommand{\Scomb }{\mathbf{S}}
+\newcommand{\Kcomb }{\mathbf{K}}
+\newcommand{\Icomb }{\mathbf{I}}
+\newcommand{\bbarr}{\twoheadrightarrow_\beta}
+\newcommand{\barr}{\rightarrow_\beta}
+\newcommand{\beq}{=_\beta}
+\newcommand{\eearr}{\twoheadrightarrow_\eta}
+\newcommand{\earr}{\rightarrow_\eta}
+\newcommand{\eeq}{=_\eta}
+\newcommand{\bearr}{\rightarrow_{\beta\eta}}
+\newcommand{\bbeearr}{\twoheadrightarrow_{\beta\eta}}
+\newcommand{\beeq}{=_{\beta\eta}}
+\newcommand{\etar}{\twoheadrightarrow_\eta}
+\newcommand{\ered}{$\eta$-reduction\xspace}
+\newcommand{\bnf}{$\beta$-\textit{nf}\xspace}
+\newcommand{\enf}{$\eta$-\textit{nf}\xspace}
+\newcommand{\eenf}{$\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\beenf}{$\beta\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\benf}{$\beta\eta$-\textit{nf}\xspace}
+\newcommand{\bredex}{$\beta$-redex\xspace} 
+\newcommand{\lnf}{\textit{lnf}\xspace}
+\newcommand{\Ae}{\mathop{\mathrm{\AE}}}
+\newcommand{\Bcomb }{\mathbf{B}}   
+\newcommand{\BBcomb }{\mathbf{B*}}
+\newcommand{\Ccomb }{\mathbf{C}}   
+\newcommand{\CCcomb }{\mathbf{C'}}
+\newcommand{\SScomb }{\mathbf{S'}}
+\newcommand{\ar}{\rightarrow\xspace}
+\newcommand{\T}{\mathbb{T}\xspace}
+\newcommand{\C}{\mathbb{C}\xspace}
+\newcommand{\Real}{\mathbb{R}}
+
+\newenvironment{todo}
+{~\\ {\color{red}\textbf{TODO}}
+  \begin{easylist}[itemize]}
+{ \end{easylist}}
+
+\newcommand{\Lpr}{\Lambda^\prime}
+\newcommand{\ul}[2]{\langle #1 ; #2 \rangle}
+\newcommand{\ro}[1]{{\color{blue} #1}}
+\newcommand{\tom}[1]{{\color{ForestGreen} #1}}
+\newcommand{\red}[1]{{\color{red} #1}}
+
+
+
+
+\begin{document}
+
+\conferenceinfo{GECCO'14,} {July 12-16, 2014, Vancouver, BC, Canada.}
+\CopyrightYear{2014}
+\crdata{TBA}
+\clubpenalty=10000
+\widowpenalty = 10000
+
+\title{Utilization of Reductions and Abstraction Elimination in Typed Genetic Programming}
+
+\numberofauthors{2} 
+
+\author{
+% 1st. author
+\alignauthor
+Tom\'{a}\v{s} K\v{r}en\\
+  \affaddr{Faculty of Mathematics and Physics}\\
+  \affaddr{Charles University in Prague}\\
+  \affaddr{Malostransk\'e n\'am\v{e}st\'\i~25, 11000,}\\
+  \affaddr{Prague, Czech Republic}\\
+  \email{tomkren@gmail.com}
+% 2nd. author
+\alignauthor
+Roman Neruda\\
+  \affaddr{Institute of Computer Science}\\
+  \affaddr{Academy of Sciences of the Czech Republic}\\
+  \affaddr{Pod Vod\'arenskou v\v{e}\v{z}\'\i~2, 18207,}\\
+  \affaddr{Prague, Czech Republic}\\
+  \email{roman@cs.cas.cz}
+}
+
+%\date{24 January 2014}
+
+\maketitle
+\begin{abstract}
+Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from use of reductions (beta and eta) and how to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and compare several crossover approaches including novel approach to crossover operator based both on reductions and abstraction elimination. The design goal of this operator is to turn the disadvantage of abstraction elimination  - possibly quadratic increase of program size - into a virtue; our approach leads to more crossover points. At the same time, utilization of reductions provides offspring of small sizes.
+\end{abstract}
+
+% A category with the (minimum) three required fields
+\category{H.4}{TODO}{Miscellaneous}
+%A category including the fourth, optional field follows...
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{TODO}
+
+\keywords{TODO, ToDo, todo}
+
+\section{Introduction}
+
+Genetic programming (GP) represents an efficient method for automatic generating of programs by means of evolutionary techniques~\cite{koza92,koza03}. Early attempts to enhance the GP approach with the concept of types include the seminal work~\cite{montana95} where the ideas from Ada programming language were used to define a so-called strongly typed GP.   
+Use of types naturally opens door to enriching S-expressions,
+the traditional GP representation of individuals, with concepts from
+lambda calculus, which is simple yet powerful functional mathematical and programming 
+language extensively used in type theory. Such attempts has shown to be 
+successful \cite{yu01}. 
+
+The key issue in the lambda calculus approach to enrich GP with types is the method of individual generation. During the expansion phase the set of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used.  
+These two search methods in fact represent boundaries between which we will try to position our parameterized solution that allows us to take advantage of both strategies. This design goal also differentiate our approach from 
+the three state of the art proposals for typed GP known to us that are discussed in the following section. 
+Our proposed \emph{geometrical search strategy} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.
+
+The rest of the paper is organized as follows: The next section briefly discusses related work in the field of typed GP, while section~\ref{preliminaries} introduces necessary notions. Main original results about search strategies in individual generating are described in section~\ref{approach}. Section~\ref{experiments} presents results of our method on three well-known tasks, and the paper is concluded by section~\ref{conclusions}.
+
+
+\section{Related work}
+\label{related}
+
+Yu presents a GP system utilizing
+polymorphic higher-order functions\footnote{Higher-order 
+function is a function taking another function as 
+input parameter.} and lambda abstractions  \cite{yu01}.
+Important point of interest in this work is use of
+\texttt{foldr} function as a tool for \textit{implicit recursion},
+i.e. recursion without explicit recursive calls. 
+The terminal set for constructing lambda abstraction subtrees 
+is limited to use only constants and variables of that particular
+lambda abstraction, i.e., outer variables are not allowed to be used
+as terminals in this work. This is significant difference from our approach 
+since we permit all well-typed normalized \lterms. From this difference also
+comes different crossover operation. We focus more on term generating process; 
+their term generation is performed in a similar way as the standard one, 
+whereas our term generation also tries to utilize techniques of systematic enumeration. 
+
+Briggs and O’Neill present technique 
+utilizing typed GP with combinators \cite{kes}.
+The difference between approach presented in this work
+and our approach is that in this work terms are generated
+straight from \textit{library} of combinators and no lambda abstractions
+are used. They are using more general polymorphic type system than us
+-- the Hindley–Milner type system. They also discuss the 
+properties of exhaustive enumeration of terms and compare it with GP search.  
+They also present interesting concept of \textit{Generalized
+genetic operator} based on term generation. 
+
+Binard and Felty use even 
+stronger type system (\textit{System F}) \cite{binard2008genetic}.  
+But with increasing power of the type system comes increasing difficulty of term generation.
+For this reason evolution in this work takes interesting and nonstandard shape 
+(fitness is associated with \textit{genes} which are evolved together with \textit{species}
+which together participate in creation of individuals).
+This differs from our approach, which tries to be generalization of
+the standard GP\cite{koza92}.
+
+In contrast with above mentioned works our approach uses very simple type system 
+(simply typed lambda calculus) and concentrates on process of generation  
+able to generate all possible well-typed normalized lambda terms. In order to do
+so we use technique based on \textit{inhabitation machines} 
+described by Barendregt \cite{barendregt10}.    
+
+
+
+\section{Preliminaries}
+\label{preliminaries}
+
+In this section, several notions necessary to build a typed GP based on lambda calculus are introduced. 
+First, \lets describe a programming language, 
+in which the GP algorithm generates individual programs --- the so called \lterms.
+
+\begin{definition}
+Let $V$ be infinite countable set of {\it 
+variable names}. Let $C$ be set of {\it constant names}, 
+$V \cap C = \emptyset$.	 	
+Then $\Lambda$ is set of {\it \lterms} defined inductively as follows.	
+\begin{align*}
+x   \in V \cup C  &\then x     \in \Lambda \\
+M,N \in \Lambda   &\then (M~N) \in \Lambda 
+\textit{~~~~~~(Function application)} \\
+x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
+\textit{~~~~($\lambda$-abstraction)} 
+\end{align*}
+\end{definition}
+
+
+\textit{Function application} and 
+\textit{$\lambda$-abstraction} are concepts
+well known from common programming languages. 
+For example in JavaScript 
+$(M~N)$ translates to expression \texttt{$M$($N$)} and
+$\lamb{x}{M}$ translates to expression \texttt{function($x$)\{return $M$;\}}.
+In other words, the function application 
+corresponds to the act of supplying a function 
+with an argument, and
+the $\lambda$-abstraction is equivalent to 
+\textit{anonymous function}\footnote{Apart from JavaScript, anonymous functions are common e.g. in Python and Ruby, 
+they were recently introduced to C++, and they are expected to be supported in Java 8.}.
+
+For better readability, 
+$M_1~M_2~M_3~\dots~M_n$ is an abbreviation for
+$(\dots((M_1~M_2)~M_3)~\dots~M_n)$
+and $\lam{x_1 x_2 \dots x_n }{M}$ for 
+$\lamb{x_1}{\lamb{x_2}{\dots\lamb{x_n}{M}\dots}}$.
+
+A \lterm as described above
+corresponds to a program expression with no type information
+included. Now we will describe \textit{types} (or \textit{type terms}).
+
+\begin{definition}
+Let $A$ be set of {\it atomic type names}. 
+Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
+\begin{align*}
+\alpha      \in A  &\then   \alpha \in \T \\
+\sigma,\tau \in \T &\then ( \sigma \ar  \tau ) \in \T 
+\end{align*}
+\end{definition}
+
+
+Type $\sigma \ar \tau$ is type for functions taking as input
+something of a type $\sigma$ and returning 
+as output something of a type $\tau$. 
+$\tau_1 \ar \tau_2 \ar \dots \ar \tau_n$ is an abbreviation for 
+$\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$.
+The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by
+combining the previously defined \textit{\lterms} and \textit{types} together.
+
+\begin{definition}~
+
+\begin{enumerate}
+ \item 	Let $\Lambda$ be set of {\it \lterms}. 
+	Let $\mathbb{T}$ be set of {\it types}.       
+	A {\it statement} $M : \sigma$ is a pair 
+	$(M,\sigma) \in \Lambda \times \mathbb{T}$.
+	Statement $M : \sigma$ is vocalized as 
+	{\it "$M$ has type $\sigma$"}.
+	The term $M$ is called the {\it subject} of the 
+	statement $M : \sigma$.
+ \item A \textit{declaration} is a statement 
+ $x : \sigma$ where $x \in V \cup C$.
+  
+ \item A \textit{context} 
+ is set of declarations with distinct variables as subjects.
+\end{enumerate}
+\end{definition}
+%~\\
+
+Context is a basic type theoretic concept suitable as a typed alternative
+for terminal and function set in standard GP. 
+Notation $\Gamma,x:\sigma $ denotes $ \Gamma\cup\{(x:\sigma)\}$ 
+such that $\Gamma$ does not contain any declaration with $x$ as subject.
+We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.
+
+\begin{definition}
+A statement $M\colon\sigma$ is \textit{derivable from}
+a context $\Gamma$ (notation 
+\mbox{$\Gamma\vdash{}M\colon\sigma$}) 
+if it can be produced by the following rules.
+\begin{align*}
+x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
+\tur{\Gamma}{M}{\sigma \ar \tau}~,~\tur{\Gamma}{N}{\sigma} 
+&~\then~ \tur{\Gamma}{(M~N)}{\tau}\\  
+\tur{\Gamma,x:\sigma}{M}{\tau}
+&~\then~ \tur{\Gamma}{\lamb{x}{M}}{\sigma \ar \tau} 
+\end{align*}
+\end{definition}
+
+Our goal in term generation is to produce terms $M$
+for a given pair $\ul{\tau}{\Gamma}$
+such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
+
+\begin{definition}
+Let $V$ be infinite countable set of {\it 
+variable names}. Let $C$ be set of {\it constant names}, 
+$V \cap C = \emptyset$.	
+Let $\T$ be set of types.
+Let $\C$ be set of all contexts on ($V \cup C$, $\T$).
+Then $\Lpr$ is set of 
+\textit{unfinished  \lterms} defined inductively as follows.	
+\begin{align*}
+\tau \in \T , \Gamma \in \C &\then \ul{\tau}{\Gamma} \in \Lpr
+\textit{~~~~~~~~(Unfinished leaf)}\\
+x   \in V \cup C  &\then x     \in \Lpr \\
+M,N \in \Lpr   &\then (M~N) \in \Lpr 
+\textit{~~~~~~(Function application)} \\
+x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
+\textit{~~~~($\lambda$-abstraction)} 
+\end{align*}
+\end{definition}
+
+\textit{Unfinished leaf} $\ul{\tau}{\Gamma}$ 
+stands for yet not specified \lterm of the type $\tau$ 
+build from symbols of $\Gamma$.
+
+
+\section{Our approach}
+\label{approach}
+
+\section{Experiments}
+\label{experiments}
+
+\section{Conclusions}
+\label{conclusions}
+
+
+%ACKNOWLEDGMENTS are optional
+\section{Acknowledgments}
+This section is optional; it is a location for you
+to acknowledge grants, funding, editing assistance and
+what have you.  In the present case, for example, the
+authors would like to thank Gerald Murray of ACM for
+his help in codifying this \textit{Author's Guide}
+and the \textbf{.cls} and \textbf{.tex} files that it describes.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{evogp}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+
+
+% That's all folks!
+\end{document}
