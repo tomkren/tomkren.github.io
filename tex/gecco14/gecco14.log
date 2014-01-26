@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  25 JAN 2014 23:45
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  26 JAN 2014 14:45
 entering extended mode
 **gecco14.tex
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
@@ -437,128 +437,261 @@ Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \el@TotalMargin=\dimen124
 \el@LeftMove=\dimen125
 )
-\c@definition=\count123
-\c@proposition=\count124
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\qtree\qtree.sty
+Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
+Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\pict2e.sty
+Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\pict2e.cfg"
+File: pict2e.cfg 2005/12/29 v1.0 MiKTeX 'pict2e' configuration
+)
+Package pict2e Info: Driver file: pdftex.def on input line 119.
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
+
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\p2e-pdftex.def
+File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks38
+\@arclen=\dimen126
+\@arcrad=\dimen127
+\@tempdimd=\dimen128
+)
+\c@treecount=\count123
+\c@branchcount=\count124
+\parentbox=\box32
+\treebox=\box33
+\treeboxone=\box34
+\treeboxtwo=\box35
+\treeboxthree=\box36
+\treeboxfour=\box37
+\treeboxfive=\box38
+\treeboxsix=\box39
+\treeboxseven=\box40
+\treeboxeight=\box41
+\treeboxnine=\box42
+\treeboxten=\box43
+\treeboxeleven=\box44
+\treeboxtwelve=\box45
+\treeboxthirteen=\box46
+\treeboxfourteen=\box47
+\treeboxfifteen=\box48
+\treeboxsixteen=\box49
+\treeboxseventeen=\box50
+\treeboxeighteen=\box51
+\treeboxnineteen=\box52
+\treeboxtwenty=\box53
+\treeoffsetone=\skip44
+\treeoffsettwo=\skip45
+\treeoffsetthree=\skip46
+\treeoffsetfour=\skip47
+\treeoffsetfive=\skip48
+\treeoffsetsix=\skip49
+\treeoffsetseven=\skip50
+\treeoffseteight=\skip51
+\treeoffsetnine=\skip52
+\treeoffsetten=\skip53
+\treeoffseteleven=\skip54
+\treeoffsettwelve=\skip55
+\treeoffsetthirteen=\skip56
+\treeoffsetfourteen=\skip57
+\treeoffsetfifteen=\skip58
+\treeoffsetsixteen=\skip59
+\treeoffsetseventeen=\skip60
+\treeoffseteighteen=\skip61
+\treeoffsetnineteen=\skip62
+\treeoffsettwenty=\skip63
+\treeshiftone=\skip64
+\treeshifttwo=\skip65
+\treeshiftthree=\skip66
+\treeshiftfour=\skip67
+\treeshiftfive=\skip68
+\treeshiftsix=\skip69
+\treeshiftseven=\skip70
+\treeshifteight=\skip71
+\treeshiftnine=\skip72
+\treeshiftten=\skip73
+\treeshifteleven=\skip74
+\treeshifttwelve=\skip75
+\treeshiftthirteen=\skip76
+\treeshiftfourteen=\skip77
+\treeshiftfifteen=\skip78
+\treeshiftsixteen=\skip79
+\treeshiftseventeen=\skip80
+\treeshifteighteen=\skip81
+\treeshiftnineteen=\skip82
+\treeshifttwenty=\skip83
+\treewidthone=\skip84
+\treewidthtwo=\skip85
+\treewidththree=\skip86
+\treewidthfour=\skip87
+\treewidthfive=\skip88
+\treewidthsix=\skip89
+\treewidthseven=\skip90
+\treewidtheight=\skip91
+\treewidthnine=\skip92
+\treewidthten=\skip93
+\treewidtheleven=\skip94
+\treewidthtwelve=\skip95
+\treewidththirteen=\skip96
+\treewidthfourteen=\skip97
+\treewidthfifteen=\skip98
+\treewidthsixteen=\skip99
+\treewidthseventeen=\skip100
+\treewidtheighteen=\skip101
+\treewidthnineteen=\skip102
+\treewidthtwenty=\skip103
+\daughteroffsetone=\skip104
+\daughteroffsettwo=\skip105
+\daughteroffsetthree=\skip106
+\daughteroffsetfour=\skip107
+\branchwidthone=\skip108
+\branchwidthtwo=\skip109
+\branchwidththree=\skip110
+\branchwidthfour=\skip111
+\parentoffset=\skip112
+\treeoffset=\skip113
+\daughteroffset=\skip114
+\branchwidth=\skip115
+\parentwidth=\skip116
+\treewidth=\skip117
+\qta=\toks39
+\qtb=\toks40
+\nbranches=\count125
+\qroofx=\count126
+\qroofy=\count127
+\@qrscratchbox=\box54
+)
+\c@definition=\count128
+\c@proposition=\count129
 
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
 
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count125
-\scratchdimen=\dimen126
-\scratchbox=\box32
-\nofMPsegments=\count126
-\nofMParguments=\count127
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count128
-\MPscratchDim=\dimen127
-\MPnumerator=\count129
-\makeMPintoPDFobject=\count130
-\everyMPtoPDFconversion=\toks39
+\scratchcounter=\count130
+\scratchdimen=\dimen129
+\scratchbox=\box55
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks41
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen130
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks42
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 116.
+LaTeX Font Info:    Try loading font information for U+msa on input line 120.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 116.
+LaTeX Font Info:    Try loading font information for U+msb on input line 120.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 116.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 120.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (2.7148pt too wide) in paragraph at lines 134--135
+Overfull \hbox (2.7148pt too wide) in paragraph at lines 138--139
 \T1/aer/m/n/9 síly neº maj kla-sický S-výrazy, tak máme v záse dv¥ p°irozený
  []
 
 
-Overfull \hbox (22.90327pt too wide) in paragraph at lines 134--135
+Overfull \hbox (22.90327pt too wide) in paragraph at lines 138--139
 \T1/aer/m/n/9 morfních) kom-biná-torech od za-£átku (a vy-h-nout se tak prom¥ne
 jm
  []
 
 
-Overfull \hbox (11.21315pt too wide) in paragraph at lines 141--143
+Overfull \hbox (11.21315pt too wide) in paragraph at lines 145--147
 \T1/aer/m/n/9 elegantní lambda termy. Ve chvíly kdy k°íºíme provedeme
  []
 
 
-Overfull \hbox (12.3283pt too wide) in paragraph at lines 141--143
+Overfull \hbox (12.3283pt too wide) in paragraph at lines 145--147
 \T1/aer/m/n/9 na obou rodi£ích elim-i-naci ab-strakcí (která ubere prom¥ny
  []
 
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 148.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 152.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\omsaer.fd"
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 148.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
  [1{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-Overfull \hbox (8.69pt too wide) in paragraph at lines 158--160
+Overfull \hbox (8.69pt too wide) in paragraph at lines 162--164
 [] []\T1/aer/m/n/9 pro£ je eta re-duko-vat (eta re-dukcí lnf dostanem
  []
 
 
-Overfull \hbox (16.3999pt too wide) in paragraph at lines 163--164
+Overfull \hbox (16.3999pt too wide) in paragraph at lines 167--168
 [] []\T1/aer/m/n/9 (?) In-hab-i-ta-tion trees jako in-tu-itivní model takovýho-
 
  []
 
 
-Overfull \hbox (8.19269pt too wide) in paragraph at lines 165--167
+Overfull \hbox (8.19269pt too wide) in paragraph at lines 169--171
 [] []\T1/aer/m/n/9 K°íºit lambda termy i s prom¥ne-jma a ab-strakcema,
  []
 
 
-Overfull \hbox (14.99632pt too wide) in paragraph at lines 167--171
+Overfull \hbox (14.99632pt too wide) in paragraph at lines 171--175
 [] []\T1/aer/m/n/9 Zmen²it pros-tor termu (tim ºe n¥k-erý ne-jsme schopný
  []
 
 
-Overfull \hbox (6.78206pt too wide) in paragraph at lines 175--176
+Overfull \hbox (6.78206pt too wide) in paragraph at lines 179--180
 [] []\T1/aer/m/n/9 vloºený kom-biná-tory nahradim odpoví-da-jícím
  []
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 206.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 210.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ) [2]
-Overfull \hbox (1.73572pt too wide) in paragraph at lines 289--292
+Overfull \hbox (1.73572pt too wide) in paragraph at lines 293--296
 []\T1/aer/m/n/9 In or-der to per-form com-pu-ta-tion there must be some mech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--292
+Underfull \hbox (badness 10000) in paragraph at lines 293--296
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--317
+Underfull \hbox (badness 10000) in paragraph at lines 318--321
 
  []
 
 
-Overfull \hbox (9.94731pt too wide) in paragraph at lines 354--356
+Overfull \hbox (9.94731pt too wide) in paragraph at lines 358--360
 []\T1/aer/m/n/9 Relation $\OMS/cmsy/m/n/9 ![] \OT1/cmr/m/n/9 = \OMS/cmsy/m/n/9 
 ![] [ ![]$\T1/aer/m/n/9 . (Re-la-tion $\OML/cmm/m/it/9 R \OT1/cmr/m/n/9 = \OMS/
 cmsy/m/n/9 f \OT1/cmr/m/n/9 (\OML/cmm/m/it/9 a; b\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n
@@ -566,70 +699,309 @@ cmsy/m/n/9 f \OT1/cmr/m/n/9 (\OML/cmm/m/it/9 a; b\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--379
+Underfull \hbox (badness 10000) in paragraph at lines 381--383
 
  []
 
 
-Overfull \hbox (1.06596pt too wide) in paragraph at lines 437--441
+Overfull \hbox (1.06596pt too wide) in paragraph at lines 441--445
 []\T1/aer/m/it/9 A state-ment $\OML/cmm/m/it/9 M [] [] $ \T1/aer/m/it/9 is der
 iv-able from a con-
  []
 
 [3]
-Overfull \hbox (2.02396pt too wide) in paragraph at lines 483--487
+Overfull \hbox (2.02396pt too wide) in paragraph at lines 487--491
 []\T1/aer/m/it/9 If $\OML/cmm/m/it/9 M$ \T1/aer/m/it/9 has a $\OML/cmm/m/it/9 
 $\T1/aer/m/it/9 -nf, then it also has a unique
  []
 
 
-Overfull \hbox (84.71948pt too wide) in paragraph at lines 522--522
-[] 
+Underfull \hbox (badness 10000) in paragraph at lines 547--553
+
  []
 
 
-Overfull \hbox (78.41377pt too wide) detected at line 531
-\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 [] \OMS/cmsy/m/n/9 ! [] ! \OML/cmm/m/it/9 [] 
-\OMS/cmsy/m/n/9 ! \OML/cmm/m/it/9 ; \OT1/cmr/m/n/9  ) \OMS/cmsy/m/n/9 7[][]! \
-OT1/cmr/m/n/9 ( []\OML/cmm/m/it/9  []x[] [] []  []x[] []: []\OT1/cmr/m/n/9 (\O
-ML/cmm/m/it/9 \OT1/cmr/m/n/9 ;  \OML/cmm/m/it/9 ; x[] \OT1/cmr/m/n/9 : \OML/cm
-m/m/it/9 []; [] ; x[] \OT1/cmr/m/n/9 : \OML/cmm/m/it/9 []\OT1/cmr/m/n/9 ) [])
- [] [] [] [][]\OML/cmm/m/it/9 n > \OT1/cmr/m/n/9 0
+LaTeX Warning: Command \AE invalid in math mode on input line 562.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 574.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 579
+.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 577--580
+
  []
 
-(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl) [4]
-(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux) ) 
+
+LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 581
+.
+
+
+Overfull \hbox (14.28848pt too wide) in paragraph at lines 591--591
+[][]\secfnt T¥LO £LÁNKU, JAKOBY OUR AP-PROACH[] 
+ []
+
+
+Overfull \hbox (2.66269pt too wide) in paragraph at lines 615--615
+[]\T1/aer/m/n/9 Hlavním té-matem £lánku je op-erá-tor k°íºení. Jeho hlavním
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 625--630
+
+ []
+
+
+Underfull \vbox (badness 4303) has occurred while \output is active []
+
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 659--662
+
+ []
+
+
+LaTeX Warning: Citation `barendregt84' on page \thepage  undefined on input lin
+e 678.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 692--694
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 701--702
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 730--733
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 734--736
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 739--744
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 760--765
+
+ []
+
+
+LaTeX Warning: Reference `GPxover' on page \thepage  undefined on input line 76
+8.
+
+
+Overfull \hbox (15.25266pt too wide) in paragraph at lines 766--769
+\T1/aer/m/n/9 swap-ping ran-domly se-lected sub-trees in each par-ent S-express
+ion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 770--771
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 772--774
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 775--778
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 783--785
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 789--790
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 848--849
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 850--853
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 855--860
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 863--868
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 869--871
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 872--875
+
+ []
+
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl [6]) [7
+
+]
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3173 strings out of 493921
- 36644 string characters out of 3144876
- 105819 words of memory out of 3000000
- 6387 multiletter control sequences out of 15000+200000
- 63555 words of font info for 82 fonts, out of 3000000 for 9000
+ 3561 strings out of 493921
+ 41900 string characters out of 3144876
+ 121751 words of memory out of 3000000
+ 6754 multiletter control sequences out of 15000+200000
+ 65312 words of font info for 85 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 41i,13n,28p,863b,252s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86
-)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmsy9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmti9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-tt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/
-msam10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbo
-ls/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8
-a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gecco14.pdf (4 pages, 233632 bytes).
+ 41i,13n,28p,863b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmti9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/h
+elvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utm
+b8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on gecco14.pdf (7 pages, 269369 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
+ 107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

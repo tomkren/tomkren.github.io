@@ -3,6 +3,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{xspace}
 \usepackage[ampersand]{easylist}
+\usepackage{color}
+\usepackage{qtree}
+%\usepackage{graphicx}
 
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
@@ -65,6 +68,7 @@
 \newcommand{\C}{\mathbb{C}\xspace}
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\gar}{\longmapsto}
+
 
 \newenvironment{todo}
 {~\\ {\color{red}\textbf{TODO}}
@@ -494,6 +498,8 @@ $L$ such that $L \twoheadrightarrow_{\eta} B$.
 
 \subsection{Grammar producing \lterms in \lnf}
 
+\red{možná dát do těla, v preliminarýs by mohlo stačit def lnf}
+
 In \cite{barendregt10} is shown term generating grammar with 
 following rules (our notation is used, but we will not 
 highlighted terminals anymore).
@@ -511,7 +517,7 @@ highlighted terminals anymore).
 \begin{align*}
 ( \alpha , \Gamma )  
 &\gar
-(~f~( \rho_1 , \Gamma )~\dots~( \rho_m , \Gamma )~)
+(~f~( \rho_1 , \Gamma )~\dots~( \rho_m , \Gamma )~)\\
 & \textbf{if } \alpha \in A,
 (f : \rho_1 \ar \dots \ar \rho_m \ar \alpha) \in \Gamma
 \\ 
@@ -522,20 +528,387 @@ highlighted terminals anymore).
 \end{align*}
 
 The second rule can be replaced by more effective one.
-\[ 
+$
 ( \tau_1 \ar \dots \ar \tau_n \ar \alpha , \Gamma )  
-\gar
+\gar \\
 (~\lambda~x_1~\dots~x_n~.~
 ( \alpha ; \Gamma , x_1:\tau_1 , \dots , x_n:\tau_n  )~)
 ~~~~ \textbf{if } n > 0
-\] 
+$
 
 This rule packs consecutive uses of the second rule into one use.
 This is valid since the use of the second rule is deterministic;
 it is used if and only if the non-terminal's type is not atomic.
 
-\section{Our approach}
+\subsection{Abstraction elimination}
+\label{toSKI}
+%... Conversion to SKI combinators
+
+\textit{Abstraction elimination} is a process of transforming 
+an arbitrary \lterm into \lterm that contains no lambda abstractions
+and no bound variables.
+The newly produced \lterm may contain function applications, 
+free symbols from former \lterm and some new symbols standing for 
+combinators $\Scomb$, $\Kcomb$ and $\Icomb$. \\
+
+Those combinators are defined as:
+\begin{align*}
+\Scomb &= \lam{f\,g\,x}{f\,x\,(g\,x)} \\
+\Kcomb &= \lam{x\,y}{x} \\
+\Icomb &= \lam{x}{x} 
+\end{align*}
+
+
+\Lets describe transformation $\Ae$ performing this 
+process.
+\begin{align*}
+\Ae[x]           &= x &\\[0.4em]
+\Ae[\,(M\,N)\,]  &= (\Ae[M]\;\;\Ae[N]) &\\[0.4em]
+\Ae[\lam{x}{x}]  &= \Icomb &\\
+\Ae[\lam{x}{M}]  &= (\Kcomb~\Ae[M]) &\textbf{if } x \not\in \FV(M)\\
+\Ae[\lam{x}{\lamb{y}{M}}] &= \Ae[\lam{x}{\Ae[\lam{y}{M}]}]  
+&\textbf{if } x \in \FV(M)\\
+\Ae[\lam{x}{(M\,N)}] &= (\Scomb~\Ae[\lam{x}{M}]~\Ae[\lam{x}{N}])  
+&\textbf{if } x \in \FV(M) \\
+& &\vee~ x \in \FV(N)\\
+\end{align*}
+
+
+This is simple version of this process. More optimized version,
+in the means of the size of resulting term and its performance
+is following one, presented in \cite{jones87}.\\
+
+As is stated in \cite{jones87},
+the biggest disadvantage of this technique is that the translated
+term is often much larger than in its lambda form --- the size of
+the translated term can be proportional to the
+square of the size of the original term. 
+
+But the advantage is also tempting --- no need to deal with variables
+and lambda heads.
+
+
+\section{\red{Tělo článku, jakoby Our approach} }
 \label{approach}
+
+\subsection{Introduction}
+\red{
+(Tématem je utilization redukcí a eliminace abstrakcí.)
+
+Nejprve si ukážerme jak využít eta redukci při konstrukci 
+počáteční populace.
+
+Hlavním tématem článku je operátor křížení.
+Jeho hlavním problémem je výskyt proměnných v individualt trees.
+To jak to můžem řešit je několik možností:
+
+- Vůbec nepoužívat lambda abstrakce, (asi v tomdle seznamu vubec neuvádět,
+  ale tohle přesunout někam hodně na začátek, tuhle kapitolu už začít s tim
+  že chceme navrhnout co nejlepší reprezentaci programů jakožto jedinců pro GP 
+  tak že involvuje lambda abstrakce)
+  generovat už rovnou kombinatorový termy (dělá Briggs).
+  [Argumenty] proč má smysl zabejvat se programama s lam abstrakcema
+  a ne čístě jen v kombinátorech (pak přesunout možná někam jinam) -
+  Možná to podat takle, "zdá se že použití kombinátorů má řadu výhod (
+  vymenovat naKY co jmenuje briggs), ale konzistentní prozkoumání 
+  obecnýho řešení lambdovýho chgarakteru určitě stojí taky za zkoužku,
+  což podporují nasledující argumenty":
+  (a) úspornost - abstrakce eliminací produkuje 
+  termy až kvadraticky větší než je původní 
+  term. Dá se očekávat, že i při přímém generování je použití kombinátorů 
+  míň úsporný (proměná se může bez velký námahy objevit v hluboko vnořeném
+  podtermu velmi jednoduše, zatímco pomocí kombinátorů se její hodnota musí do
+  takto vnořeného podtermu složitě dopravit). 
+  (b) použití kombů vyžaduje silnější typovej sytém - 
+  kombinátory musej bejt polymorfní a přidáváme je do stavební sady,
+  lambdy v pohodě běžej na simply typed lc. 
+  (c) použití proměnných je typické pro lidi, proto by se mohlo sát že
+  i programy generovaný systémem kterej s proměnejma počitá budou o něco 
+  "lidštější"
+  
+  
+- Použít omezenější strukturu která nepovoluje všechny možné lambda termy 
+  (vyfootnoutit nebo někam vejš říct, že všma možnejma termama myslíme i
+  redukovaný termy)
+ 
+}
+
+\subsection{Benefits of generating \lterms in \lnf}
+\label{benefits}
+
+By generating \lterms in \textit{lnf} we avoid generating 
+\lterms $M$,$N$ such that $M \not= N$, but $M =_{\beta\eta} N$.
+In other words, we avoid generating two programs with different 
+source codes, but performing the same computation.
+
+Every \lterm $M$ such that \GMS has its unique \lnf $L$, 
+for which $L =_{\beta\eta} M$.
+Therefore the computation performed by \lterm $M$ 
+is not omitted, because it is the same computation
+as the computation performed by \lterm $L$. \\
+
+Generating \lterms in \lnf is even better than generating 
+\lterms in \bnf. Since \lnf is the same thing as \beenf,
+every \lterm in \lnf is also in \bnf. 
+
+This comes straight from the definition of \beenf, 
+but one can also see it from observing method for generating
+terms in \bnf. As is shown in \cite{barendregt10}, 
+this method is obtained simply by replacing  
+the first grammar rule by slightly modified rule,
+resulting in the following grammar.
+\begin{align*}
+( \pi , \Gamma )  
+&\gar
+(~f~( \rho_1 , \Gamma )~\dots~( \rho_m , \Gamma )~)\\
+& \textbf{if } (f : \rho_1 \ar \dots \ar \rho_m \ar \pi) \in \Gamma
+\\ 
+( \sigma \rightarrow \tau , \Gamma )  
+&\gar
+(~\lambda~x~.~( \tau ; \Gamma,x:\sigma )~)
+&   
+\end{align*}
+
+The difference lies in that $f$'s type is no longer needed to be fully expanded
+($\pi \in \T$ instead of $\alpha \in A$). This makes the grammar less deterministic,
+resulting in a bigger search space. The new rule is generalization of the old one,
+thus all terms in \lnf will be generated, along with many new terms in \bnf that 
+are not in \lnf. 
+    
+By generating \lterms in \lnf we avoid generating 
+\lterms $M$,$N$ such that $M \not= N$ and $M =_{\eta} N$; 
+but by generating in \bnf we do not avoid it.\\
+
+
+The disadvantage of the \lnf, as the name suggests, is that it is long.
+Terms in \lnf are said to be \textit{fully $\eta$-expanded} \cite{barendregt10}. 
+Relevant property of $\eta$-reduction is that it always shortens the term
+that is being reduced be it. And conversely, $\eta$-expansion prolongs.
+$$\lamb{x}{(M~x)} \eArrow M \textbf{ ~~~~if } x \not\in FV(M) $$
+
+Now we show that for every \lterm $M$ 
+every sequence of $\eta$-reductions is finite and
+leads to unique \enf $N$.
+
+\begin{enumerate}
+ \item Every application of \ered shortens the term.
+       Since every term has finite size, this process must 
+       end at some point. Thus every \lterm has \enf.
+ \item Since \ered is \textit{Church–Rosser}, \enf is unique (see \cite{barendregt84}). 
+\end{enumerate}
+
+So we can take every generated \lterm $M$ in 
+\lnf and transform it to shorter term in \enf. 
+The question is whether it remains in \bnf, thus being in \benf.
+The answer is yes; it can be proven by showing that no 
+new \bredex is created by \ered.  
+
+\begin{proposition}
+Let $P$ be in \bnf and $P \eArrow Q$. Then $Q$ is in \bnf.    
+\end{proposition}
+\begin{proof}
+
+For better clarity \lets show the \ered and \bredex using trees.\\
+\ered: \\
+
+\Tree [.$\lh{x}$ [.@ $M$ $x$ ] ] 
+~~~~$\eArrow$~~~~
+$M$ 
+
+And \bredex:
+
+\Tree [.@ [.$\lh{x}$ $M$ ] $N$ ] \\
+
+\Lets assume that $P \eArrow Q$ creates a new \bredex $B$ in $Q$.
+
+Since \ered only destroys and never creates \textit{function applications} (i.e. @),
+the root @ of $B$ must be present in $P$.  
+But since $P$ contains no \bredex, the left subterm $L$ of this root @
+is not $\lambda$-abstraction.
+Only possible way for $L$ to be changed by $\eArrow$ into 
+a $\lambda$-abstraction is that $L$ is the reduced subterm (so that
+$L$ is changed for its subterm).
+But that is in contradiction with $P$ not containing any \bredex,
+because it would cause $L$ be a $\lambda$-abstraction.
+
+\end{proof}
+
+Notable property of \lnf and \benf is that there is \textit{bijection} 
+(i.e. one-to-one correspondence) of 
+the set of simply typed \lterms in \lnf and 
+the set of simply typed \lterms in \benf.
+
+\begin{proposition}
+
+Reduction to \enf is bijection between  
+the set of simply typed \lterms in \lnf and 
+the set of simply typed \lterms in \benf.
+\end{proposition}
+\begin{proof}
+
+Since reduction to \enf always leads to an unique term, it is a function.
+In previous proposition is shown that \ered of \lnf
+leads to a term in \benf.\\
+
+In order to show that a function is bijection it is sufficient to show that it is
+both \textit{injection} and \textit{surjection}.\\
+
+Suppose it is not injection.
+
+So there must be $M_1,M_2$ in \lnf such that $M_1 \not= M_2$
+and $N$ in \benf such that $M_1 \etar N$, $M_2 \etar N$.
+Therefore $M_1 =_\eta M_2$, 
+so $M_1 =_{\beta\eta^{-1}} M_2$.
+This contradicts with $M_1,M_2$ being distinct \lnf{}s.\\
+
+Every $M$ in \bnf has a \lnf $N$ such that 
+$N \twoheadrightarrow_{\eta} M$ (proposition from \ref{lnf}).
+Term $M$ in \benf is in \bnf, thus it has desired \lnf $N$
+which reduces to it. 
+
+Therefore it is surjection. 
+\end{proof}
+
+Suppose we have systematic (i.e. gradually generating all terms, 
+but no term twice) method for generating terms in \lnf,
+we may transform it to systematic method for generating terms in \benf
+by simply reducing each generated term to its \enf.  
+
+\subsection{Crossover}
+
+Design goal behind our approach to crossover operation is
+to try to generalize standard tree swapping crossover.
+This is not because of dislike of more specialized crossovers;
+it comes from systematic approach for exploring the domain of
+typed functional GP --- thus I would like to start with the most common one.\\
+
+The crossover operation in standard GP is performed 
+by swapping randomly selected subtrees in each parent 
+S-expression (see \ref{GPxover}).
+
+For typed lambda terms two difficulties arise: Types and variables.\\
+
+We will show how to crossover \textit{typed \lterm trees} in both 
+\atTree and \sexprTree notation.\\
+
+As in standard GP our crossover will be performed by swapping
+two subtrees. But now with constraint that both subtrees have
+the same type. This is discussed in grater detail in \ref{typed-swapping}.\\
+
+Variables bring more difficulties then types do.
+This problem arises from variables that are free in subterms corresponding 
+to swapped subtrees. 
+
+Following example illustrates the problem. \Lets have these two
+parent trees with selected nodes in bold.\\
+
+\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ [.\textbf{g} $x_2$ c ] ] $x_1$ ] ]
+\Tree [.$\lh{x_1}$ [.h $x_1$ $\mathbf{x_1}$ ] ]
+
+~\\The swap of subtrees results in following trees:\\
+
+\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ $\mathbf{x_1}$ ] $x_1$ ] ]
+\Tree [.$\lh{x_1}$ [.h $x_1$ [.\textbf{g} $\mathbf{x_2}$ \textbf{c} ] ] ]
+ 
+~\\The problem is that variable $x_2$ in second tree
+is not bound by any $\lambda$-head and since
+it is not element of $\Gamma$, the second tree is not well-typed \lterm.  
+
+% - This is only one example of a problem caused by swapping subtrees with variables,
+% - Resolve problems with free variables or avoid variables completely. 
+
+
+%In \ref{repairing-method} is presented more detailed discussion of problems with
+%variables and method which repairs such "broken" terms. 
+
+First approach tried at this problem was to repair the broken term,
+but since this method is not currently implemented we will describe it
+in just a few words. If the moved free variable ends in the scope 
+where is defined variable with the same name and type, then it
+is OK. If it is not this case, we may rename this variable to some 
+other variable "visible" in its new scope if such a variable has the same 
+type. If there is no such a suitable variable we may generate new value 
+to replace the variable by term generating method. 
+
+As you can see, this is not much elegant solution. 
+
+But we can avoid dealing with this problem by avoiding use of variables.
+This can be achieved by process called abstraction elimination.
+ 
+
+
+
+
+\subsubsection{Typed subtree swapping}
+\label{typed-swapping}
+
+First thing to do in standard subtree swapping is to select random node
+in the first parent. 
+
+We modify this procedure so that we allow
+selection only of those nodes with such a type that there exists  
+a node in the second parent with the same type.
+
+Standard subtree swapping crossover as a first thing selects 
+whether the selected node will be inner node (usually with probability 
+$p_{ip} = 90\%$) or leaf node (with probability 10\%).
+
+We are in a more complicated situation, because one of those 
+sets may be empty, because of allowing only nodes with possible "partner"
+in the second parent. Thus we do this step only if both sets are
+nonempty. 
+
+After selecting a node in the first parent we select node in the
+second parent such that type of that node must by the same as the type 
+of the first node. Again, this may eliminate the "90-10" step of
+first deciding whether the selected node will be internal node 
+or leaf node.
+
+When both nodes are selected we may swap the trees. \\
+
+If the abstraction elimination was performed, then 
+since the trees are of the same type and there are no variables to be 
+moved from their scope, the offspring trees are well typed.\\
+
+
+Both \sexprTree and \atTree are able to be crossed by this 
+mechanism. But \atTree has more possibilities then \atTree.
+This comes from the fact that every subtree of the \sexprTree
+corresponds to a subtree of \atTree, but there are subtrees
+of \atTree that do not correspond to a subtree of a \sexprTree.\\
+
+Following example should clarify this.
+
+\Tree[.@	
+   [.@ \textbf{f} x ]
+   [.y ]  		 			
+]
+\Tree[.\textbf{f} x y ]~\\
+
+In \atTree, \textbf{f} is leaf thus subtree, 
+whereas in \sexprTree it is internal node thus not a subtree.\\ 
+
+Another nice property of \sexprTree{}s with no lambdas 
+is that they are the same representation as S-expressions
+used by standard GP.\\
+
+Again, similarly as for standard version, 
+a maximum permissible depth $D_{created}$ 
+for offspring individuals is defined (e.g. $D_{created} = 17$).
+If one of the offspring has greater depth than this limit, then 
+this offspring is replaced by the first parent in the result of 
+the crossover operator. If both offspring exceeds this limit, than 
+both are replaced by both parents.  
+
+For \atTree the $D_{created}$ must be larger since
+\atTree (without lambdas) is a binary tree. This 
+enlargement is approximately proportionate to average number of 
+function arguments. We use generous $D_{created} = 17\times3$. 
+
+\subsection{Unpacking crossover}
+
+
+
 
 \section{Experiments}
 \label{experiments}
