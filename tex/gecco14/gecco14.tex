@@ -2,8 +2,11 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{xspace}
+\usepackage[ampersand]{easylist}
 
 \newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
 
 \newenvironment{lizt}
 {\begin{easylist}[itemize]}
@@ -61,6 +64,7 @@
 \newcommand{\T}{\mathbb{T}\xspace}
 \newcommand{\C}{\mathbb{C}\xspace}
 \newcommand{\Real}{\mathbb{R}}
+\newcommand{\gar}{\longmapsto}
 
 \newenvironment{todo}
 {~\\ {\color{red}\textbf{TODO}}
@@ -122,6 +126,57 @@ Lambda calculus representation of programs offers a more expressive alternative 
 \terms{TODO}
 
 \keywords{TODO, ToDo, todo}
+
+\section{Plán boje}
+
+\subsection{Jak to celý pojmout?}
+
+Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. Motivace pro práci s lambda termama je, že za nima košatá teorie, která například popisuje redukce lambda termů (ty zajišťujou jak zmenšení samotných stromu, tak to, že prohledávací prostor se zmenší, díky tomu, že se různé stromy redukují na ten samej).
+
+Jak se vypořádat s proměnejma a lambdama? (aka jak křížit)
+
+\begin{itemize}
+\item Po vy generování převod do kombinátorů pomocí eliminace abstrakcí (tak jak se to dělá v diplomce). To ale působí v něčem neohrabaně, když to porovnáme s generovánim přímo v kombinatorech, když vezmeme v potaz to že eliminace abstrakcí má za důsledek až kvadratickej nárůst stromu - čili to co sme nahnali na redukcích stratíme eliminací. 
+
+\item Jedince držíme jako redukovane malinké-kompaktní-a-elegantní lambda termy. Ve chvíly kdy křížíme provedeme na obou rodičích eliminaci abstrakcí (která ubere proměny a lambdy a namísto toho tam dá kombinátory S,K,I případně i další při fikanějších eliminacích), tím nám sice narostou, ale my z toho máme jedine radost, protože tím se nám zvýšil počet míst ke křížení (což se ukazuje jako dobráv věc, viz s-expr reprezentace vs @-tree reprezentace lambda termů). Po skřížení se vložený kombinátory nahradí odpovídajícim lambda termem (tzn např všude kde je K dám (\ x y . x) atd) výslednej term zredukuju a dostávam zase malinké-kompaktní-a-elegantní dítě.
+Nevýhoda toho zahrnout do článku i tohle je v tom, že k tomu nemám ještě žádný pokusy - ale k tomu zbytku mám upřímě v zato taky dost ubohý pokysy, takže toho bych se asi nebál. Většinu potřebnýho kodu bych k tomu ale měl už mít víceméně hotovou, takže pokud by se to na něčem nezaseklo, tak myslim že je realný udělat i pokus do toho dvacátýho. Zvlášť přitažlivý mi tohle křížení příde i kvůli tomu, že v přírodě se taky rozbalujou a zabaloujou chromozomi při meioze/mitoze.
+\end{itemize}
+
+\subsection{Osnova}
+
+\begin{lizt}
+& Jak reprezentovat stromy programu pro GP?
+  && Reprezentace v klasickym kozovy je S-expression.
+  && Nebo mužem používat kombinátory jako 
+     Briggs a O’Neil (to si myslim je jakoby 
+     hlavní konkurence, vuči který by to chtělo obhájit)
+  && Lambda termy a jejich awesomeness
+& \textbf{Povídaní o redukcích}
+& Povídání o lnf
+  && že lnf je přirozený rozšíření s-exprešnu do lambda 
+     kalkulu vlastnosti termu v lnf 
+     &&& proč je eta redukovat (eta redukcí lnf dostanem 
+         beta-eta-nf a že nemusíme beta redukovat pač se to tim nerozbyje)
+& Generování
+  && Generování gramatikou
+  && Gramatika pro lnf
+  && (?) Inhabitation trees jako intuitivní model takovýhodle lnf generování
+& Problémy s proměnýma a jak je řešit.
+  && Křížit lambda termy i s proměnejma a abstrakcema, 
+     problémy řešit když nastanou (pomluvit a odsoudit)
+  && Zmenšit prostor termu (tim že někerý nejsme schopný 
+     vygenerovat) s kterým operujeme tak aby křížení už 
+     nebyl problém (to dělá Yu - v těle lambda fce dovoluje 
+     jen použití proměnných z její hlavy)
+  && Převod hned po vygenerování
+  && Převod až při křížení
+     &&& eliminace abstrakcí
+     &&& skřížim
+     &&& vložený kombinátory nahradim odpovídajícím termem
+     &&& celý to redukuju
+ & Pokusy (?!)
+ & Závěr
+\end{lizt}
 
 \section{Introduction}
 
@@ -228,6 +283,108 @@ $(\dots((M_1~M_2)~M_3)~\dots~M_n)$
 and $\lam{x_1 x_2 \dots x_n }{M}$ for 
 $\lamb{x_1}{\lamb{x_2}{\dots\lamb{x_n}{M}\dots}}$.
 
+
+\subsection{$\beta$-reduction}
+
+In order to perform computation there must be some
+mechanism for term evaluation. In $\lambda$-calculus there
+is $\beta$-reduction for this reason.\\
+
+\newcommand{\bRedex}{$\beta$-redex\xspace}
+\newcommand{\bRedexes}{$\beta$-redexes\xspace}
+\newcommand{\bArrow}{\rightarrow_\beta\xspace}
+\newcommand{\eArrow}{\rightarrow_\eta\xspace}
+\newcommand{\eeArrow}{\rightarrow_{\eta^{-1}}\xspace}
+
+A term of a form $\lamb{x}{M}N$ is called \textit{\bRedex}.
+A \bRedex can be $\beta$-reduced to term $M[x:=N]$. 
+This fact is written as \textit{relation} $\bArrow$ 
+of those two terms:
+\begin{equation} \label{eq:bRed}
+\lamb{x}{M}N \bArrow M[x:=N]
+\end{equation}
+It is also possible to reduce \textit{subterm \bRedexes} 
+which can be formally stated as:
+\begin{align*}
+P \bArrow Q &\then (R~P)      \bArrow (R~Q) \\
+P \bArrow Q &\then (P~R)      \bArrow (Q~R) \\
+P \bArrow Q &\then \lam{x}{P} \bArrow \lam{x}{Q}  
+\end{align*}
+
+In other words, $\beta$-reduction is the process 
+of insertion of arguments supplied to a function into 
+its body. \\
+
+Another useful relations are $\bbarr$ and $\beq$ defined as follows. 
+
+\begin{enumerate}
+ \item \begin{enumerate}
+ 	\item $M \bbarr M$
+ 	\item $M \barr N \then M \bbarr N$
+ 	\item $M \bbarr N , N \bbarr L \then M \bbarr L$ 	
+ \end{enumerate}
+ \item \begin{enumerate}
+ 	\item $M \bbarr N \then M \beq N$
+ 	\item $M \beq N \then N \beq M$
+ 	\item $M \beq N , N \beq L \then M \beq L$
+ \end{enumerate}
+
+\end{enumerate}
+
+We read those relations as follows.
+\begin{enumerate}
+ 	\item $M \bbarr N$ --- "$M$ $\beta$-reduces to $N$."  
+ 	\item $M \barr N$  --- "$M$ $\beta$-reduces to $N$
+ 	      in one step."
+ 	\item $M \beq N$ --- "$M$ is $\beta$-convertible to $N$."	
+ \end{enumerate}
+
+
+
+\subsection{$\eta$-reduction}
+
+Similarly as for $\beta$-reduction we can define $\eta$-reduction 
+except that instead of \ref{eq:bRed} we use:  
+
+$$\lamb{x}{(M~x)} \eArrow M \textbf{ ~~~~if } x \not\in FV(M) $$~
+
+Analogically, a term of a form $\lamb{x}{(M~x)}$ is called 
+\textit{$\eta$-redex}.
+
+Relation $\bearr\;=\;\barr \cup \earr$. 
+(Relation $R = \{\;(a,b)\;|\;a\;R\;b\;\}$.)
+
+Similarly as for $\bbarr$ and $\beq$ we can define relations 
+$\eearr$, $\eeq$,$\bbeearr$ and $\beeq$.
+
+
+\subsection{$\eta^{-1}$-reduction}
+
+$\eta^{-1}$-reduction (also called $\eta$-expansion) is 
+the reduction converse to $\eta$-reduction.
+Again it may be obtained by replacing \ref{eq:bRed}, now with:  
+
+$$M \eeArrow \lamb{x}{(M~x)} \textbf{ ~~~~if } x \not\in FV(M) $$
+
+
+
+
+\subsection{Normal forms}
+
+~\begin{easylist}[enumerate]
+& A \lterm is a \textit{$\beta$-normal form} (\bnf) 
+if it does not have a $\beta$-redex as subterm.
+& A \lterm M \textit{has} a \bnf if $M \beq N$
+and $N$ is a \bnf.\\
+\end{easylist}
+A normal form may be thought of as a result of a term evaluation. 
+
+Similarly we can define \enf and \benf.
+
+
+
+\subsection{Types etc}
+
 A \lterm as described above
 corresponds to a program expression with no type information
 included. Now we will describe \textit{types} (or \textit{type terms}).
@@ -290,33 +447,92 @@ x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
 \end{align*}
 \end{definition}
 
+Přeformulovat aby se to hodilo do tohodle kontextu....
 Our goal in term generation is to produce terms $M$
 for a given pair $\ul{\tau}{\Gamma}$
 such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
 
+
+\subsection{Long normal form}
+\label{lnf}
+
+%v barendrechtovi je to v definici lnf
+%$\lam{x_1 \dots x_n}{f~M_1~\dots~M_n}$ místo $M_m$ 
+%ale to musí bejt určitě překlep...
+
 \begin{definition}
-Let $V$ be infinite countable set of {\it 
-variable names}. Let $C$ be set of {\it constant names}, 
-$V \cap C = \emptyset$.	
-Let $\T$ be set of types.
-Let $\C$ be set of all contexts on ($V \cup C$, $\T$).
-Then $\Lpr$ is set of 
-\textit{unfinished  \lterms} defined inductively as follows.	
+Let \GMS where 
+$\sigma = \tau_1 \ar \dots \ar \tau_n \ar \alpha, n \geq 0$.
+	\begin{enumerate}
+	  \item	
+		Then $M$ is in \textit{long normal form} (\lnf) if following 
+		conditions are satisfied.
+		\begin{enumerate}
+		 \item $M$ is term of the form $\lam{x_1 \dots x_n}{f~M_1~\dots~M_m}$\\
+		  (specially for $n = 0$, $M$ is term of the form $f$).
+		 \item Each $M_i$ is in \lnf.
+		\end{enumerate}	
+	  \item 
+	    $M$ has a \lnf if $M =_{\beta\eta} N$ and $N$ is in \lnf.
+	\end{enumerate}
+\end{definition}~
+
+As is shown in \cite{barendregt10}, \lnf has following nice properties.
+
+\begin{proposition}
+If $M$ has a \bnf, 
+%which according to Theorem 2B.4 is always the case, 
+then it also has a unique \lnf, 
+which is also its unique \beenf.
+\end{proposition}
+
+\begin{proposition}
+Every $B$ in \bnf has a \lnf 
+$L$ such that $L \twoheadrightarrow_{\eta} B$.
+\end{proposition}
+
+
+\subsection{Grammar producing \lterms in \lnf}
+
+In \cite{barendregt10} is shown term generating grammar with 
+following rules (our notation is used, but we will not 
+highlighted terminals anymore).
+
+%\footnote{
+%I was using term generating grammars for term generation
+%on my own before I encountered with \cite{barendregt10},
+%where i happily discovered that Barendregt is using
+%almost identical notation. 
+%But his \lnf grammar was more clever then my grammar
+%that was using grammar rules corresponding to the three basic
+%inference rules. 
+%}
+
 \begin{align*}
-\tau \in \T , \Gamma \in \C &\then \ul{\tau}{\Gamma} \in \Lpr
-\textit{~~~~~~~~(Unfinished leaf)}\\
-x   \in V \cup C  &\then x     \in \Lpr \\
-M,N \in \Lpr   &\then (M~N) \in \Lpr 
-\textit{~~~~~~(Function application)} \\
-x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
-\textit{~~~~($\lambda$-abstraction)} 
+( \alpha , \Gamma )  
+&\gar
+(~f~( \rho_1 , \Gamma )~\dots~( \rho_m , \Gamma )~)
+& \textbf{if } \alpha \in A,
+(f : \rho_1 \ar \dots \ar \rho_m \ar \alpha) \in \Gamma
+\\ 
+( \sigma \rightarrow \tau , \Gamma )  
+&\gar
+(~\lambda~x~.~( \tau ; \Gamma,x:\sigma )~)
+&   
 \end{align*}
-\end{definition}
 
-\textit{Unfinished leaf} $\ul{\tau}{\Gamma}$ 
-stands for yet not specified \lterm of the type $\tau$ 
-build from symbols of $\Gamma$.
+The second rule can be replaced by more effective one.
+\[ 
+( \tau_1 \ar \dots \ar \tau_n \ar \alpha , \Gamma )  
+\gar
+(~\lambda~x_1~\dots~x_n~.~
+( \alpha ; \Gamma , x_1:\tau_1 , \dots , x_n:\tau_n  )~)
+~~~~ \textbf{if } n > 0
+\] 
 
+This rule packs consecutive uses of the second rule into one use.
+This is valid since the use of the second rule is deterministic;
+it is used if and only if the non-terminal's type is not atomic.
 
 \section{Our approach}
 \label{approach}

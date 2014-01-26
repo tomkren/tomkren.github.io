@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.7.15)  24 JAN 2014 15:50
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  25 JAN 2014 23:33
 entering extended mode
 **article.tex
 (C:\wamp\www\tomkren.github.io\tex\cec14b\article.tex
@@ -411,7 +411,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen122
 \Gin@req@width=\dimen123
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\easylist\easylist.sty"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
 Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \el@CounterTotal=\count104
 \el@Scratch=\count105
@@ -461,7 +461,7 @@ LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count119
 \scratchdimen=\dimen127
@@ -489,7 +489,7 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 170.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+) [1{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
@@ -670,7 +670,7 @@ Before submitting the final camera ready copy, remember to:
 [8] (C:\wamp\www\tomkren.github.io\tex\cec14b\article.aux) ) 
 Here is how much of TeX's memory you used:
  3410 strings out of 493921
- 45922 string characters out of 3144882
+ 45970 string characters out of 3144876
  117852 words of memory out of 3000000
  6643 multiletter control sequences out of 15000+200000
  48000 words of font info for 97 fonts, out of 3000000 for 9000
