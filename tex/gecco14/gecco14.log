@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  27 JAN 2014 01:46
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  27 JAN 2014 02:25
 entering extended mode
 **gecco14.tex
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
@@ -615,43 +615,45 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 120.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (9.6358pt too wide) in paragraph at lines 185--185
-\T1/aer/m/n/9 maj kla-sický S-výrazy, tak máme v záse dv¥ p°irozený moºnosti
+Overfull \hbox (6.35178pt too wide) in paragraph at lines 196--196
+\T1/aer/m/n/9 gen-er-al-iz-ing S-expressions into trees of bet-ter ex-pres-sive
+ power
  []
 
 
-Overfull \hbox (3.60748pt too wide) in paragraph at lines 185--185
-\T1/aer/m/n/9 biná-torech od za-£átku (a vy-h-nout se tak prom¥nejm a lambda
+Overfull \hbox (2.7148pt too wide) in paragraph at lines 196--196
+\T1/aer/m/n/9 síly neº maj kla-sický S-výrazy, tak máme v záse dv¥ p°irozený
  []
 
 
-Overfull \hbox (2.68741pt too wide) in paragraph at lines 185--185
+Overfull \hbox (22.90327pt too wide) in paragraph at lines 196--196
+\T1/aer/m/n/9 morfních) kom-biná-torech od za-£átku (a vy-h-nout se tak prom¥ne
+jm
+ []
+
+
+Overfull \hbox (2.68741pt too wide) in paragraph at lines 196--196
 \T1/aer/m/n/9 ko²atá teorie, která nap°ík-lad popisuje re-dukce lambda term·
  []
 
 
-Overfull \hbox (2.54172pt too wide) in paragraph at lines 185--185
+Overfull \hbox (2.54172pt too wide) in paragraph at lines 196--196
 \T1/aer/m/n/9 prohledá-vací pros-tor se zmen²í, díky tomu, ºe se r·zné stromy
  []
 
 
-Overfull \hbox (4.33635pt too wide) in paragraph at lines 185--185
+Overfull \hbox (4.33635pt too wide) in paragraph at lines 196--196
 \T1/aer/m/n/9 mální formy. ) (ALT2: Dost pod-statný os-pravedl-n¥ní lambda
  []
 
 
-Overfull \hbox (16.75638pt too wide) in paragraph at lines 185--185
+Overfull \hbox (16.75638pt too wide) in paragraph at lines 196--196
 \T1/aer/m/n/9 (prom¥ná se m·ºe bez velký námahy ob-je-vit v hluboko vno°eném
  []
 
 
-Overfull \hbox (12.90471pt too wide) in paragraph at lines 185--185
+Overfull \hbox (12.90471pt too wide) in paragraph at lines 196--196
 \T1/aer/m/n/9 mohlo sát ºe i pro-gramy gen-erovaný sys-témem kterej s prom¥ne-
- []
-
-
-Overfull \hbox (5.77461pt too wide) in paragraph at lines 191--192
-[]\T1/aer/m/n/9 ve shrnutí pa-peru °íct, ºe jeho t¥lo je tvo°eno dv¥ma £ástma,
  []
 
 
@@ -661,31 +663,35 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
+Overfull \hbox (5.77461pt too wide) in paragraph at lines 202--203
+[]\T1/aer/m/n/9 ve shrnutí pa-peru °íct, ºe jeho t¥lo je tvo°eno dv¥ma £ástma,
+ []
 
-LaTeX Warning: Reference `approach' on page \thepage  undefined on input line 1
-93.
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 216.
+LaTeX Warning: Reference `approach' on page \thepage  undefined on input line 2
+04.
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 227.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (1.73572pt too wide) in paragraph at lines 299--302
+Overfull \hbox (1.73572pt too wide) in paragraph at lines 310--313
 []\T1/aer/m/n/9 In or-der to per-form com-pu-ta-tion there must be some mech-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--302
+Underfull \hbox (badness 10000) in paragraph at lines 310--313
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--327
+Underfull \hbox (badness 10000) in paragraph at lines 335--338
 
  []
 
 [2]
-Overfull \hbox (9.94731pt too wide) in paragraph at lines 364--366
+Overfull \hbox (9.94731pt too wide) in paragraph at lines 375--377
 []\T1/aer/m/n/9 Relation $\OMS/cmsy/m/n/9 ![] \OT1/cmr/m/n/9 = \OMS/cmsy/m/n/9 
 ![] [ ![]$\T1/aer/m/n/9 . (Re-la-tion $\OML/cmm/m/it/9 R \OT1/cmr/m/n/9 = \OMS/
 cmsy/m/n/9 f \OT1/cmr/m/n/9 (\OML/cmm/m/it/9 a; b\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n
@@ -693,281 +699,287 @@ cmsy/m/n/9 f \OT1/cmr/m/n/9 (\OML/cmm/m/it/9 a; b\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--389
+Underfull \hbox (badness 10000) in paragraph at lines 398--400
 
  []
 
 
-Overfull \hbox (1.06596pt too wide) in paragraph at lines 447--451
+Overfull \hbox (1.06596pt too wide) in paragraph at lines 458--462
 []\T1/aer/m/it/9 A state-ment $\OML/cmm/m/it/9 M [] [] $ \T1/aer/m/it/9 is der
 iv-able from a con-
  []
 
 
-Overfull \hbox (2.02396pt too wide) in paragraph at lines 493--497
+Overfull \hbox (2.02396pt too wide) in paragraph at lines 504--508
 []\T1/aer/m/it/9 If $\OML/cmm/m/it/9 M$ \T1/aer/m/it/9 has a $\OML/cmm/m/it/9 
 $\T1/aer/m/it/9 -nf, then it also has a unique
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 506--512
+Underfull \hbox (badness 10000) in paragraph at lines 517--523
 
  []
 
 
-LaTeX Warning: Command \AE invalid in math mode on input line 521.
+LaTeX Warning: Command \AE invalid in math mode on input line 532.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 
-LaTeX Warning: Command \AE invalid in math mode on input line 537.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 Missing character: There is no Æ in font cmr9!
 Missing character: There is no Æ in font cmr9!
 
-LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 542
-.
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--543
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
 
- []
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
 
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 548.
+
+Missing character: There is no Æ in font cmr9!
+Missing character: There is no Æ in font cmr9!
 [3]
 
-LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 545
+LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 553
 .
 
 
-Overfull \hbox (10.69998pt too wide) in paragraph at lines 555--555
+Underfull \hbox (badness 10000) in paragraph at lines 551--554
+
+ []
+
+
+LaTeX Warning: Citation `jones87' on page \thepage  undefined on input line 556
+.
+
+
+Overfull \hbox (10.69998pt too wide) in paragraph at lines 566--566
 []\secfnt TERM GEN-ER-AT-ING AND RE-DUC-TIONS 
  []
 
 
-Overfull \hbox (4.20053pt too wide) in paragraph at lines 615--616
+Overfull \hbox (4.20053pt too wide) in paragraph at lines 626--627
 \T1/aer/m/n/9 nap°ík-lad pouºít kla-sickou raped half-and half strate-gii. Foot
 -
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 626--631
+Underfull \hbox (badness 10000) in paragraph at lines 637--642
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--663
+Underfull \hbox (badness 10000) in paragraph at lines 671--674
 
  []
 
 
 LaTeX Warning: Citation `barendregt84' on page \thepage  undefined on input lin
-e 679.
+e 690.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--695
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 702--703
+Underfull \hbox (badness 10000) in paragraph at lines 704--706
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 731--734
+Underfull \hbox (badness 10000) in paragraph at lines 713--714
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 735--737
+Underfull \hbox (badness 10000) in paragraph at lines 742--745
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 740--745
+Underfull \hbox (badness 10000) in paragraph at lines 746--748
 
  []
 
 
-Overfull \hbox (4.13866pt too wide) in paragraph at lines 794--794
+Underfull \hbox (badness 10000) in paragraph at lines 751--756
+
+ []
+
+
+Overfull \hbox (4.13866pt too wide) in paragraph at lines 805--805
 \T1/aer/m/n/9 padn¥ ji nahra-dit nov¥ vy-gen-erovaným ter-mem poºadovaného
  []
 
 
-Overfull \hbox (1.57349pt too wide) in paragraph at lines 794--794
+Overfull \hbox (1.57349pt too wide) in paragraph at lines 805--805
 \T1/aer/m/n/9 p°evést do kom-bi-na-torové podoby po-mocí elmin ab-str. Tento
  []
 
 
-Overfull \hbox (4.34431pt too wide) in paragraph at lines 794--794
+Overfull \hbox (4.34431pt too wide) in paragraph at lines 805--805
 \T1/aer/m/n/9 chom nahradili S,K,I za odpoví-da-jící termy a re-dukovlaito,tak
  []
 
 
-Overfull \hbox (3.77837pt too wide) in paragraph at lines 796--796
+Overfull \hbox (3.77837pt too wide) in paragraph at lines 807--807
 []\secfnt Pokra£ujou zkop£enosti z théze aº dokonce 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 800--805
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 811--816
 
  []
 
 
-Overfull \hbox (17.81758pt too wide) in paragraph at lines 808--811
+Overfull \hbox (17.81758pt too wide) in paragraph at lines 819--822
 \T1/aer/m/n/9 swap-ping ran-domly se-lected sub-trees in each par-ent S-express
 ion. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 812--813
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 817--820
+Underfull \hbox (badness 10000) in paragraph at lines 823--824
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 825--827
+Underfull \hbox (badness 10000) in paragraph at lines 828--831
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 833--834
+Underfull \hbox (badness 10000) in paragraph at lines 836--838
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 891--892
+Underfull \hbox (badness 10000) in paragraph at lines 844--845
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 893--896
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 902--903
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 898--903
+Underfull \hbox (badness 10000) in paragraph at lines 904--907
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 906--911
+Underfull \hbox (badness 10000) in paragraph at lines 909--914
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 912--914
+Underfull \hbox (badness 10000) in paragraph at lines 917--922
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 915--918
+Underfull \hbox (badness 10000) in paragraph at lines 923--925
 
  []
 
-(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl [6]) [7
+
+Underfull \hbox (badness 10000) in paragraph at lines 926--929
+
+ []
+
+[6] (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl) [7
 
 ]
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
@@ -978,7 +990,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  3543 strings out of 493921
  41596 string characters out of 3144876
- 118964 words of memory out of 3000000
+ 119964 words of memory out of 3000000
  6739 multiletter control sequences out of 15000+200000
  65312 words of font info for 85 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1003,7 +1015,7 @@ e1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/h
 elvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utm
 b8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gecco14.pdf (7 pages, 269547 bytes).
+Output written on gecco14.pdf (7 pages, 269909 bytes).
 PDF statistics:
  107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

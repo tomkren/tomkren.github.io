@@ -139,8 +139,19 @@ Use of types naturally opens door to enriching S-expressions,
 the traditional GP representation of individuals, with concepts from
 lambda calculus, which is simple yet powerful functional, mathematical and programming language extensively used in type theory. Such attempts has shown to be successful \cite{yu01}. 
 
+%Other ...
 \red{ 
-Reprezentace v klasickym kozovy je S-expression.
+
+
+%Reprezentace v klasickym kozovy je S-expression.
+
+The individual representation used in standard GP is S-expression. 
+Basically there are two general approaches of generalizing S-expressions
+into trees of better expressive power suitable for typed GP with higher 
+order functions: We can enrich the method with the polymorphic combinators \cite{kes}
+or we can enrich the method with the lambda abstractions and local variables
+\cite{yu01}.  
+
 Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. 
 
 Zdá se že použití kombinátorů má řadu výhod (vymenovat nnějaký co jmenuje briggs), 
