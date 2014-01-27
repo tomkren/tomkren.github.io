@@ -1,4 +1,4 @@
-tex/*.log
+tex/gecco14_b/gecco14.log
 
 ## generic files to ignore
 *~
