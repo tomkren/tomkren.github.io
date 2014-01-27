@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  27 JAN 2014 01:44
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  27 JAN 2014 01:46
 entering extended mode
 **gecco14.tex
-(C:\wamp\www\tomkren.github.io\tex\gecco14_b\gecco14.tex
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\wamp\www\tomkren.github.io\tex\gecco14_b\sig-alternate.cls
+(C:\wamp\www\tomkren.github.io\tex\gecco14\sig-alternate.cls
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
@@ -573,7 +573,7 @@ Package color Info: Driver file: pdftex.def on input line 130.
 \c@definition=\count128
 \c@proposition=\count129
 
-(C:\wamp\www\tomkren.github.io\tex\gecco14_b\gecco14.aux)
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
@@ -967,17 +967,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 915--918
 
  []
 
-(C:\wamp\www\tomkren.github.io\tex\gecco14_b\gecco14.bbl [6]) [7
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl [6]) [7
 
 ]
-(C:\wamp\www\tomkren.github.io\tex\gecco14_b\gecco14.aux)
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
  3543 strings out of 493921
- 41618 string characters out of 3144876
+ 41596 string characters out of 3144876
  118964 words of memory out of 3000000
  6739 multiletter control sequences out of 15000+200000
  65312 words of font info for 85 fonts, out of 3000000 for 9000

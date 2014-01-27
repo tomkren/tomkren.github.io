@@ -568,8 +568,8 @@ This strategy also plays nicely with the idea that
 ~\\
 Furthermore, our system utilizes generalization of the standard 
 tree-swapping crossover operator. Since it is beyond the scope of this 
-paper we mention it only briefly. Two main concerns with swapping typed subtrees 
-are types and free variables. Well-typed offspring is obtained 
+paper we mention it only briefly. Two main concerns with swapping typed 
+subtrees are types and free variables. Well-typed offspring is obtained 
 by swapping only subtrees of the same type. Only subtrees with 
 corresponding counterpart in the second parent are randomly chosen from.
 More interesting problem lies in free variables, which may cause trouble
@@ -579,11 +579,20 @@ that transforms an arbitrary \lterm into \lterm that contains no lambda abstract
 and no bound variables. After the initial population is generated,  it is transformed
 by abstraction elimination. Another possible transformation taking place
 after initialization is $\eta$-normalization shortening 
-rather long long normal form into $\beta\eta$-normal form.  
-Another performance enhancing transformation is use of "applicative" tree 
-representation (coming directly from inductive definition of \lterms). 
+rather long long normal form into shorter $\beta\eta$-normal form.  
+Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation.
 
-
+A remarkable benefit of parameterizing the generating method 
+by a search strategy taking the form of a simple filtration function
+is that such a function can be expressed by functional language in a very 
+economical way. Take for instance a search strategy that behaves same
+as the \textit{geometric} except that when it comes to 
+situation where all the elements are filtered out it
+acts as the \textit{ramped half-and-half}. 
+Such \textit{strategy composition}
+is easily describable as a higher order function. Thus comes 
+to mind the possibility of using our system to come up with new
+search strategies on its own.
 
 \section{Experiments}
 \label{experiments}
@@ -640,13 +649,13 @@ building blocks context $\Gamma$ are following.
 \begin{align*}
 \tau = \Real \ar &\Real\\
 \Gamma = \{
-  (+)  &: \Real \ar \Real \ar \Real    ,
-  (-)   : \Real \ar \Real \ar \Real    ,
-  (*)   : \Real \ar \Real \ar \Real    ,\\
-  rdiv &: \Real \ar \Real \ar \Real    ,
-  sin   : \Real \ar \Real              ,
-  cos   : \Real \ar \Real              ,\\
-  exp  &: \Real \ar \Real              , 
+  (+)  &: \Real \ar \Real \ar \Real    ,~ 
+  (-)   : \Real \ar \Real \ar \Real    ,~\\
+  (*)  &: \Real \ar \Real \ar \Real    ,~ 
+  rdiv  : \Real \ar \Real \ar \Real    ,~\\
+  sin  &: \Real \ar \Real              ,~ 
+  cos   : \Real \ar \Real              ,~\\
+  exp  &: \Real \ar \Real              ,~ 
   rlog  : \Real \ar \Real              \}
 \end{align*}
 where
@@ -666,17 +675,19 @@ log(\vert x\vert) & \mbox{otherwise}. \end{cases}
 \end{align*}
 \end{minipage}
 
-~\\Fitness function is computed as follows.
+~\\
+
+Fitness function is computed as follows.
 
 $$ fitness(f) =  \frac{1}{1+ \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert }  $$
 where $(x_i,y_i)$ are 20 data samples from $[-1,1]$, such that $y_i = f_t(x_i)$.
 An individual $f$ such that $\vert f(x_i)-y_i \vert < 0.01 $ for all data samples is 
-considered as a correct individual.
+considered as a correct individual.\\
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[scale=0.14]{imgs/cec/SSR.PNG}
   \caption{Graphs for Simple symbolic regression.}
+  \includegraphics[scale=0.241]{imgs/cec/SSRb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -697,11 +708,10 @@ p-value & 0.6038 & \textbf{Not statistically significant.}\\
 \caption{Statistical analysis - Simple symbolic regression.}
 \end{table}
 
-~\\
-
 Figure~1 shows results of this experiment. 
 Table~I summarizes statistical analysis
-of the fitness values of the best individuals of the run.  
+of the fitness values of the best individuals of the run 
+(\textit{p-value} $ = 0.6038$).  
 By conventional criteria, this difference is considered to be not statistically significant.
 Standard \textit{ramped half-and-half strategy} scored 17/50 (34\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 23 with 192,000 individuals to be processed.
@@ -726,9 +736,8 @@ The Santa Fe trail lies on toroidal square grid.
 The ant is in the upper left corner, facing right.
 The ant is able to move forward, turn left, and sense if a food 
 piece is ahead of him.
-
 \begin{align*}
-\tau = An&tAct\\
+\tau~ = An&tAct\\
 \Gamma = \{~~
   l    &: AntAct                              ,
   r    : AntAct                               ,
@@ -738,19 +747,15 @@ piece is ahead of him.
   p3   &: AntAct \ar AntAct \ar AntAct \ar AntAct  \}
 \end{align*}
 
-Action $l$ turns the ant left. 
-Action $r$ turns the ant right.
+Actions $l$ and $r$ turn the ant left and right, respectively. 
 Action $m$ moves the ant forward.
-Action $ifa~x~y$ (if-food-ahead) performs action $x$ 
-if a food piece is ahead of the ant,
+Action $ifa~x~y$ \mbox{(\textit{if-food-ahead})} 
+performs action $x$ if a food piece is ahead of the ant,
 otherwise it performs action $y$.
-Action $p2~x~y$ first performs action $x$ and after it action $y$.
-Action $p3~x~y~z$ first performs action $x$, 
-after that action $y$ and finally $z$.
+Actions $p2$ and $p3$ perform two and three consecutive actions, respectively.
 Actions $l, r$ and $m$ each take one time step to execute.
 Ants action is performed over and over again until it reaches predefined
 maximal number of steps. 
-
 Fitness value is equal to number of eaten food pieces.
 An individual such that eats all 89 pieces of food is 
 considered as a correct solution.
@@ -766,8 +771,8 @@ of food. Thus we use 600 time steps.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[scale=0.14]{imgs/cec/ANT.PNG}
   \caption{Graphs for Artificial ant problem.}
+  \includegraphics[scale=0.26]{imgs/cec/ANTb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -791,20 +796,18 @@ p-value &  \textless 0.0001 &  \textbf{Extremely statistically significant.}\\
 
 Figure~2 shows results of this experiment. 
 Table~II summarizes statistical analysis
-of the fitness values of the best individuals of the run.  
+of the fitness values of the best individuals of the run 
+(\textit{p-value} $ < 0.0001$).  
 According to this analysis our strategy performed better;
 by conventional criteria, this difference is considered to be extremely statistically significant.
-
 Standard \textit{ramped half-and-half strategy} scored 7/50 (14\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 28 with 449,500 individuals to be processed.
 The average individual size for generation 50 was 279.5.
 The experiment took 265 minutes.
-
 Our \textit{geometric strategy} scored 19/50 (38\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 10 with 115,500 individuals to be processed.
 The average individual size for generation 50 was 94.1.
 The experiment took 107 minutes.
-
 This is a big improvement in all watched factors.
 
 \subsection{Even parity problem}
@@ -849,8 +852,8 @@ it all possible boolean lists of length 2 and 3.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[scale=0.14]{imgs/cec/EP.PNG}
   \caption{Graphs for Even parity problem.}
+  \includegraphics[scale=0.26]{imgs/cec/EPb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -873,7 +876,8 @@ p-value &  0.0250 &  \textbf{Statistically significant.}\\
 
 Figure~3 shows results of this experiment. 
 Table~III summarizes statistical analysis
-of the fitness values of the best individuals of the run.  
+of the fitness values of the best individuals of the run 
+(\textit{p-value} $ = 0.0250$).  
 According to this analysis our strategy performed better;
 by conventional criteria, this difference is considered to be 
 statistically significant.
