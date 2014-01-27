@@ -142,6 +142,7 @@ lambda calculus, which is simple yet powerful functional, mathematical and progr
 %Other ...
 \red{ 
 
+Todele asi šoupnout do related work.
 
 %Reprezentace v klasickym kozovy je S-expression.
 
@@ -154,7 +155,7 @@ or we can enrich the method with the lambda abstractions and local variables
 
 Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. 
 
-Zdá se že použití kombinátorů má řadu výhod (vymenovat nnějaký co jmenuje briggs), 
+Zdá se že použití kombinátorů má řadu výhod (vymenovat nějaký co jmenuje briggs), 
 ale konzistentní prozkoumání obecnýho řešení lambdovýho charakteru určitě stojí 
 taky za zkoužku, což podporují nasledující argumenty:
 
@@ -530,11 +531,8 @@ Those combinators are defined as:
 
 
 \Lets describe transformation $\Ae$ performing this 
-process.\footnote{In our implementation we must also deal with types, because 
-our individuals are annotated with types. But since this process
-is fairly straightforward but cumbersome to describe, we will 
-skip explaining it here. Reader interested in seeing it can see 
-the source code of our implementation. }
+process.
+%\footnote{In our implementation we must also deal with types, because our individuals are annotated with types. But since this process is fairly straightforward but cumbersome to describe, we will skip explaining it here. Reader interested in seeing it can see the source code of our implementation. }
 \begin{align*}
 \Ae[x]           &= x &\\[0.4em]
 \Ae[\,(M\,N)\,]  &= (\Ae[M]\;\;\Ae[N]) &\\[0.4em]
@@ -562,18 +560,17 @@ square of the size of the original term.
 But the advantage is also tempting --- no need to deal with variables
 and lambda heads.
 
+\red{tady je to v původnim kontextu, odebrat slova co se tam nehodí}
 
 \section{Term generating and reductions}
 
-\red{
-V této sekci prodiskutujeme generování termův lnf, kteroužto můžeme chápat jako
-příme zobecnění S-expressions do lambda termů. Povíme si jaký vztah takové termy mají
-k beta a eta redukci, jaká je jejich výhoda a jak je lze jednoduše převést
-do úspornější beta eta nf. 
-}
-
-
-
+This section is focused on the individual generating method producing
+terms in their long normal form, which can be understood as a straight 
+generalization of S-expressions into lambda calculus. 
+We discuss the relation between terms in \lnf with beta and eta reductions,
+the advantages of such representation and we also show how to easily 
+transform such terms into short \benf.
+   
 \subsection{Grammar producing \lterms in \lnf}
 
 In \cite{barendregt10} is shown term generating grammar with 
@@ -610,12 +607,15 @@ This rule packs consecutive uses of the second rule into one use.
 This is valid since the use of the second rule is deterministic;
 it is used if and only if the non-terminal's type is not atomic.
 
-\red{řict že lnf je přirozený rozšíření s-exprešnu do lambda 
-kalkulu: pokud vezmeme gama že splnuje closure podmínku, bude 
-se používat jen pravidlo jedna, one can see that f stands for 
-root node and (ty závorky) for direct subtrees. For context containing 
-at least one higer ord function we get special kind of root node containing
-lambda head with one direct subtree standing for body of 
+Long normal form is a generalization of S-expressions into lambda calculus:
+Let $\Gamma$ be a context satisfying the closure requirement, then only
+the first rule will be applicable. 
+$(\alpha, \Gamma)$ rewrites to $(~f~( \alpha, \Gamma )~\dots~( \alpha, \Gamma )~)$.
+One can see that $f$ stands for 
+the root node and that each $( \rho_i , \Gamma )$ will produce a direct subtree. 
+
+\red{
+For context containing at least one higher order function we get special kind of root node containing lambda head with one direct subtree standing for body of 
 the lambda function, v tomto tele se navíc mohou objevit proměnné 
 definované v této hlavě (asi doplnit obrázkama).
 
@@ -723,7 +723,6 @@ a $\lambda$-abstraction is that $L$ is the reduced subterm (so that
 $L$ is changed for its subterm).
 But that is in contradiction with $P$ not containing any \bredex,
 because it would cause $L$ be a $\lambda$-abstraction.
-
 \end{proof}
 
 Notable property of \lnf and \benf is that there is \textit{bijection} 
@@ -770,22 +769,82 @@ by simply reducing each generated term to its \enf.
 
 \section{Crossover operator}
 
-\red{Hlavní problém: proměnné - pokud se odtržený podterm obsahuje volnou proměnnou, taková proměná může ve svém novém umístění porušit well typednost vzniklého termu - ať už z důvodu toho že tam není vubec definována, nebo tam sice je, ale má jiný typ.  
 
-Metody jak zacházet s lambdama:
+The design goal behind our approach to the crossover operation is
+to try to generalize the standard tree swapping crossover.
 
-- použít méně obecnou reprezentaci, takovym
-  příkladem je Yu, která nepovoluje vnější proměný uvnitř
-  lambda abstrakcí a další restrikce. Touto cestou nechceme jít,
-  myslime si že stojí za to udělat takovou reprezentaci, která nepřeskočí
-  normální formu žádného well-typed termu.
 
-- křížit tak jako by se nic nedělo a problémy řešit až když nastanou:
-  tzn buď přejmenovat promenou na takovou, která v daném kontextu má správný typ nebo ji nahradit, případně ji nahradit nově vygenerovaným termem požadovaného typu. 
-  Takový přístup se nam taky nelíbí, dá se očekávat že takové kolize budou častý, při nemožnosti vhodně přejmenovat proměnnou navíc do křížení přibívá
-  prvek mutace. K takovému řešení se zdá dobé přistoupit až ve chvíli, kdy nezbejvá jiná čistčí možnost.
+The crossover operation in standard GP is performed 
+by swapping randomly selected subtrees in each parent 
+S-expression.
+For typed lambda terms two difficulties arise: Types and variables.
 
-Pro vyřešení problémů s proměnými se dá použít elegantní řešení: zbavit se proměných. Toho jde docílit použitím algoritmu eliminace abstrakcí, který převede term na ekvivalentní term který neobsahuje žádné proměné a lamb abstrakce, zato obsahuje navíc kombinátory (v nejjdednoduší verzi S,K a I), které zastanou puvodní roli proměnných. We idetified two methods using this approach:
+As in standard GP our crossover will be performed by swapping
+two subtrees. But now with constraint that both subtrees have
+the same type. 
+
+Variables bring more difficulties then types do.
+This problem arises from variables that are free in subterms corresponding 
+to swapped subtrees. 
+
+Following example illustrates the problem. \Lets have these two
+parent trees with selected nodes in bold.\\
+
+\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ [.\textbf{g} $x_2$ c ] ] $x_1$ ] ]
+\Tree [.$\lh{x_1}$ [.h $x_1$ $\mathbf{x_1}$ ] ]
+
+~\\The swap of subtrees results in following trees:\\
+
+\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ $\mathbf{x_1}$ ] $x_1$ ] ]
+\Tree [.$\lh{x_1}$ [.h $x_1$ [.\textbf{g} $\mathbf{x_2}$ \textbf{c} ] ] ]
+ 
+~\\The problem is that variable $x_2$ in second tree
+is not bound by any $\lambda$-head and since
+it is not element of $\Gamma$, the second tree is not well-typed \lterm.  
+
+Generally speaking, the variable problem is caused by that the local variable is not defined in the new place or the variable is defined in the new place, but has
+some another type.
+
+Let us list some possible approaches to solving this problem:
+
+%Už přeloženo: 
+%Hlavní problém: proměnné - pokud se odtržený podterm obsahuje volnou proměnnou, taková proměná může ve svém novém umístění porušit well typednost vzniklého termu - ať už z důvodu toho že tam není vubec definována, nebo tam sice je, ale má jiný typ.  
+%Metody jak zacházet s lambdama:
+%- použít méně obecnou reprezentaci, takovym příkladem je Yu, která nepovoluje vnější proměný uvnitř lambda abstrakcí a další restrikce. Touto cestou nechceme jít, myslime si že stojí za to udělat takovou reprezentaci, která nepřeskočí normální formu žádného well-typed termu.
+%- křížit tak jako by se nic nedělo a problémy řešit až když nastanou: tzn buď přejmenovat promenou na takovou, která v daném kontextu má správný typ nebo ji nahradit, případně ji nahradit nově vygenerovaným termem požadovaného typu. Takový přístup se nam taky nelíbí, dá se očekávat že takové kolize budou častý, při nemožnosti vhodně přejmenovat proměnnou navíc do křížení přibívá prvek mutace. K takovému řešení se zdá dobé přistoupit až ve chvíli, kdy nezbejvá jiná čistčí možnost.
+%Pro vyřešení problémů s proměnými se dá použít elegantní řešení: zbavit se proměných. Toho jde docílit použitím algoritmu eliminace abstrakcí, který převede term na ekvivalentní term který neobsahuje žádné proměné a lamb abstrakce, zato obsahuje navíc kombinátory (v nejjdednoduší verzi S,K a I), které zastanou puvodní roli proměnných. We idetified two methods using this approach:
+
+One option is to choose a less general representation of lambda terms.
+Such approach is successfully used in \cite{yu01} where the 
+terminal set for constructing lambda abstraction subtrees 
+is limited to use only constants and variables of that particular
+lambda abstraction and an appropriate variable naming convention is
+used in order to prevent troubles with variables.
+We choose not to follow such approach because we do not want to
+lose the opportunity to represent every possible well-typed 
+term in its normal form.
+
+Another option is to overlook the variable problems and to correct the
+defects when they occur. Such correction can be performed by 
+renaming the problematic variable to some another variable defined in that place 
+or, if there is no suitable candidate, to replace its occurrence with 
+a newly generated term of required type. This approach seems to us as a very
+unwieldy one -- there are clearly problems for which such collisions would
+occur very often and when there is no suitable rename candidate the 
+generation of new term brings the unnecessary element of a mutation.
+Such solution seems to be useful only as a last resort.
+
+There is an elegant way to overcome the problem with variables by getting rid of them.
+This is possible thanks to the abstraction elimination algorithm described above.
+It turns a \lterm into a \lterm that contains no lambda abstractions
+and no variables, instead, it contains additional function symbols standing for 
+polymorphic combinators (i.e. $\Scomb$, $\Kcomb$ and $\Icomb$ 
+in the simple case of the algorithm). 
+
+We identified two methods using this approach:
+
+\red{
+
 
 - Na konci generovací fáze všechny vygenerované termy převést do kombinatorové
   podoby pomocí elmin abstr. Tento přístup můžeme chápat jako kompromis (najit lepší slovo, hibrid...) mezi lambda reprezentací a komb reprezentací. Nastává však otázka zda má pak smysl generovat termy v lc, když je pak stejně převedeme. (Výhodou je, že
@@ -804,77 +863,17 @@ za odpovídající termy a redukovlaito,tak že nevygenerujeme dvakrát různej 
 
 }
 
-\subsection{Pokračujou zkopčenosti z théze až dokonce }
+\subsection{Poznámky k uvodu ke křížení}
+\red{
+POZNAMKY:
 
-\red{todle se dá dát asi na začátek crossover operation spíš, nebo nevim}
+CO S @-stromama řešit je explicitně tady, případně někde jinde? Pro generování nemá reprezentace vliv, ta má vliv až vpři křížení, kde at-tree zajišťuje víc míst. We will show how to crossover \textit{typed \lterm trees} in both \atTree and \sexprTree notation.
 
-Design goal behind our approach to crossover operation is
-to try to generalize standard tree swapping crossover.
-This is not because of dislike of more specialized crossovers;
-it comes from systematic approach for exploring the domain of
-typed functional GP --- thus I would like to start with the most common one.\\
-
-\red{to furt platí, protože na s-výrazy se eta redukce ani abstr elim nevztahuje}
-
-The crossover operation in standard GP is performed 
-by swapping randomly selected subtrees in each parent 
-S-expression.
-
-For typed lambda terms two difficulties arise: Types and variables.\\
+to o tom že chem zobecnit tu standardní furt platí, protože na s-výrazy se eta redukce ani abstr elim nevztahuje, někde to zmínit že se to na ně nevztahuje
+}
 
 
-\red{CO S @-stromama řešit je explicitně tady, případně někde jinde? Pro generování nemá reprezentace vliv, ta má vliv až vpři křížení, kde at-tree zajišťuje víc míst. We will show how to crossover \textit{typed \lterm trees} in both \atTree and \sexprTree notation.}
-
-As in standard GP our crossover will be performed by swapping
-two subtrees. But now with constraint that both subtrees have
-the same type. This is discussed in grater detail in \ref{typed-swapping}.\\
-
-Variables bring more difficulties then types do.
-This problem arises from variables that are free in subterms corresponding 
-to swapped subtrees. 
-
-Following example illustrates the problem. \Lets have these two
-parent trees with selected nodes in bold.\\
-
-
-
-\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ [.\textbf{g} $x_2$ c ] ] $x_1$ ] ]
-\Tree [.$\lh{x_1}$ [.h $x_1$ $\mathbf{x_1}$ ] ]
-
-~\\The swap of subtrees results in following trees:\\
-
-\Tree [.$\lh{x_1}$ [.f [.$\lh{x_2}$ $\mathbf{x_1}$ ] $x_1$ ] ]
-\Tree [.$\lh{x_1}$ [.h $x_1$ [.\textbf{g} $\mathbf{x_2}$ \textbf{c} ] ] ]
- 
-~\\The problem is that variable $x_2$ in second tree
-is not bound by any $\lambda$-head and since
-it is not element of $\Gamma$, the second tree is not well-typed \lterm.  
-
-% - This is only one example of a problem caused by swapping subtrees with variables,
-% - Resolve problems with free variables or avoid variables completely. 
-
-
-%In \ref{repairing-method} is presented more detailed discussion of problems with
-%variables and method which repairs such "broken" terms. 
-
-First approach tried at this problem was to repair the broken term,
-but since this method is not currently implemented we will describe it
-in just a few words. If the moved free variable ends in the scope 
-where is defined variable with the same name and type, then it
-is OK. If it is not this case, we may rename this variable to some 
-other variable "visible" in its new scope if such a variable has the same 
-type. If there is no such a suitable variable we may generate new value 
-to replace the variable by term generating method. 
-
-As you can see, this is not much elegant solution. 
-
-But we can avoid dealing with this problem by avoiding use of variables.
-This can be achieved by process called abstraction elimination.
- 
-
-
-
-\subsubsection{Typed subtree swapping}
+\subsection{Typed subtree swapping in greater detail}
 \label{typed-swapping}
 
 First thing to do in standard subtree swapping is to select random node
@@ -941,6 +940,10 @@ enlargement is approximately proportionate to average number of
 function arguments. We use generous $D_{created} = 17\times3$. 
 
 
+
+
+
+
 \section{Experiments}
 \label{experiments}
 
@@ -950,7 +953,8 @@ function arguments. We use generous $D_{created} = 17\times3$.
 TODO
 
 \red{mimojiné zmínit, že v budouznu bysme chtěli porovnat kombinátory 
-s tou naší nějak extenzivně (což by bylo hezký už ted ale nestíhá se to..)}
+s tou naší nějak extenzivně, ikdyž možná to tam vubec nepsat
+(což by bylo hezký už ted ale nestíhá se to..)}
 
 
 %ACKNOWLEDGMENTS are optional

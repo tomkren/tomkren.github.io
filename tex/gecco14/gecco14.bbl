@@ -36,10 +36,11 @@ D.~Montana.
 \newblock Strongly typed genetic programming.
 \newblock {\em Evolutionary computation}, 3(2):199--230, 1995.
 
-\bibitem{fg}
-R.~Poli, W.~B. Langdon, and N.~F. McPhee.
-\newblock {\em A Field Guide to Genetic Programming}.
-\newblock Lulu Enterprises, UK Ltd, 2008.
+\bibitem{jones87}
+S.~L. Peyton~Jones.
+\newblock {\em The Implementation of Functional Programming Languages
+  (Prentice-Hall International Series in Computer Science)}.
+\newblock Prentice-Hall, Inc., Upper Saddle River, NJ, USA, 1987.
 
 \bibitem{yu01}
 T.~Yu.
