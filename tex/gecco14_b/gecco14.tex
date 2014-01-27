@@ -138,56 +138,63 @@ Use of types naturally opens door to enriching S-expressions,
 the traditional GP representation of individuals, with concepts from
 lambda calculus, which is simple yet powerful functional, mathematical and programming language extensively used in type theory. Such attempts has shown to be successful \cite{yu01}. 
 
-~\\
+\red{ 
+Reprezentace v klasickym kozovy je S-expression.
+Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. 
 
-\begin{lizt}
-& Jak reprezentovat stromy programu pro GP?
-  && Reprezentace v klasickym kozovy je S-expression.
-  && Nebo mužem používat kombinátory jako 
-     Briggs a O’Neil (to si myslim je jakoby 
-     hlavní konkurence, vuči který by to chtělo obhájit)
-  && Lambda termy a jejich awesomeness
-\end{lizt}
+Zdá se že použití kombinátorů má řadu výhod (vymenovat nnějaký co jmenuje briggs), 
+ale konzistentní prozkoumání obecnýho řešení lambdovýho charakteru určitě stojí 
+taky za zkoužku, což podporují nasledující argumenty:
 
-~\\
+  (a) motivace pro práci s lambda termama je, že za nima košatá teorie, 
+      která například popisuje redukce lambda termů (ty zajišťujou jak 
+      zmenšení samotných stromu, tak to, že prohledávací prostor se zmenší, 
+      díky tomu, že se různé stromy redukují na ten samej).
+      (ALT znění: 
+      pohovořit o tom, že normální formy zmenšujou prohledávaný prostor, 
+      protže stačí brát v potaz třídy ekvivalence a ne zamotný termy 
+      - reprezentanti těchto tříd ekvivalence jsou pak právě normální formy. )
+      (ALT2: 
+      Dost podstatný ospravedlnění lambda reprezentace je fakt, 
+      že redukce (beta, eta) šlapou právě jen při tom, když máme lambdy.)
 
-\red{
-Pokud chceme dělat GP nad stromama větší vyjadřovací síly než maj klasický S-výrazy, tak máme v záse dvě přirozený možnosti pro obecný řešení: buď to dělat celý v (polymorfních) kombinátorech od začátku (a vyhnout se tak proměnejm a lambda abstrakcím), nebo to skusit v lambda kalkulu a nejak se vypořádat s proměnejma a lambdama. Motivace pro práci s lambda termama je, že za nima košatá teorie, která například popisuje redukce lambda termů (ty zajišťujou jak zmenšení samotných stromu, tak to, že prohledávací prostor se zmenší, díky tomu, že se různé stromy redukují na ten samej).
+  (b) úspornost - abstrakce eliminací produkuje 
+      termy až kvadraticky větší než je původní 
+      term. Dá se očekávat, že i při přímém generování je použití kombinátorů 
+      míň úsporný (proměná se může bez velký námahy objevit v hluboko vnořeném
+      podtermu velmi jednoduše, zatímco pomocí kombinátorů se její hodnota musí do
+      takto vnořeného podtermu složitě dopravit). 
 
-Jak se vypořádat s proměnejma a lambdama? (aka jak křížit)
+  (c) použití kombů vyžaduje silnější typovej sytém - 
+      kombinátory musej bejt polymorfní a přidáváme je do stavební sady,
+      lambdy v pohodě běžej na simply typed lc. 
 
-\begin{itemize}
-\item Po vy generování převod do kombinátorů pomocí eliminace abstrakcí (tak jak se to dělá v diplomce). To ale působí v něčem neohrabaně, když to porovnáme s generovánim přímo v kombinatorech, když vezmeme v potaz to že eliminace abstrakcí má za důsledek až kvadratickej nárůst stromu - čili to co sme nahnali na redukcích stratíme eliminací. 
+  (d) použití proměnných je typické pro lidi, proto by se mohlo sát že
+      i programy generovaný systémem kterej s proměnejma počitá budou o něco 
+      "lidštější"
 
-\item Jedince držíme jako redukovane malinké-kompaktní-a-elegantní lambda termy. Ve chvíly kdy křížíme provedeme na obou rodičích eliminaci abstrakcí (která ubere proměny a lambdy a namísto toho tam dá kombinátory S,K,I případně i další při fikanějších eliminacích), tím nám sice narostou, ale my z toho máme jedine radost, protože tím se nám zvýšil počet míst ke křížení (což se ukazuje jako dobráv věc, viz s-expr reprezentace vs @-tree reprezentace lambda termů). Po skřížení se vložený kombinátory nahradí odpovídajícim lambda termem (tzn např všude kde je K dám (\ x y . x) atd) výslednej term zredukuju a dostávam zase malinké-kompaktní-a-elegantní dítě.
-Nevýhoda toho zahrnout do článku i tohle je v tom, že k tomu nemám ještě žádný pokusy - ale k tomu zbytku mám upřímě v zato taky dost ubohý pokysy, takže toho bych se asi nebál. Většinu potřebnýho kodu bych k tomu ale měl už mít víceméně hotovou, takže pokud by se to na něčem nezaseklo, tak myslim že je realný udělat i pokus do toho dvacátýho. Zvlášť přitažlivý mi tohle křížení příde i kvůli tomu, že v přírodě se taky rozbalujou a zabaloujou chromozomi při meioze/mitoze.
-\end{itemize}
+
+
+Since abstr-elim a redukce neinvolvujou moc typově rilejtlý problémy, je ok celou věc demostrovat na jednoduchém typovém systému jakám je simply typed lc. Pro more soffisticated type systems would be situation similar.
+
+Hlavním problémem lambda reprezentac proti kombinátorový je 
+jak se vypořádat s problémy zpusobenými použitím 
+localních proměných (aka jak křížit).
+
 }
 
 %\nehodi{The key issue in the lambda calculus approach to enrich GP with types is the method of individual generation. During the expansion phase the set of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used. These two search methods in fact represent boundaries between which we will try to position our parameterized solution that allows us to take advantage of both strategies. This design goal also differentiate our approach from the three state of the art proposals for typed GP known to us that are discussed in the following section. Our proposed \emph{geometrical search strategy} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.}
 
+\red{ve shrnutí paperu říct, že jeho tělo je tvořeno dvěma částma,
+první se zabejvá generovánim a jeho vztahem k redukcím, druhá řeší křížení
+s velkym důrazem na vyřešení problémů s lokálníma proměnejma.}
+
 The rest of the paper is organized as follows: The next section briefly discusses related work in the field of typed GP, while section~\ref{preliminaries} introduces necessary notions. Main original results about search strategies in individual generating are described in section~\ref{approach}. Section~\ref{experiments} presents results of our method on three well-known tasks, and the paper is concluded by section~\ref{conclusions}.
 
-\subsection{Randombits}
+\subsection{\red{Randombits}}
 \red{
 
-- někam zduraznit že přínos toho článku je taky v tom že zpřístupňuje pojmy z teorie typovaného lc komunitě typovaného GP.. 
-
-~\\- pohovořit o tom, že normální formy zmenšujou prohledávaný prostor, protže stačí brát v potaz třídy ekvivalence a ne zamotný termy - reprezentanti těchto tříd ekvivalence jsou pak právě normální formy. 
-
-~\\- Dost podstatný ospravedlnění lambda reprezentace je fakt, že redukce (beta, eta) šlapou právě jen při tom, když máme lambdy.
-
-~\\- nekam se může dát - since abstr-elim a redukce neinvolvujou moc typově rilejtlý problémy, je ok celou věc demostrovat na jednoduchém typovém systému jakám je simply typed lc. Pro more soffisticated type systems would be situation similar.
-
-~\\- (promaklejší formulaci na velkym kompu zabednena) Komb jak je představuje Briggs a spol jsou husty, přinašej výhody jako 
-jednoduchost atd. ale je husty taky to skusit druhou metodou a to je lambdy pač tyhle argumenty:
-
-~\\- stručnější
-
-~\\- do defaultu vyžadujou jednoduší typovej system 
-(SKI musej bejt polymorfní)
-
-~\\- lidštější
+- někam poznamenat že přínos toho článku je taky v tom že zpřístupňuje pojmy z teorie typovaného lc komunitě typovaného GP.. 
 
 
 }
@@ -196,6 +203,9 @@ jednoduchost atd. ale je husty taky to skusit druhou metodou a to je lambdy pač
 
 \section{Related work}
 \label{related}
+
+\red{TODO zatim jen zkopčený z minula, opravit podle novýho kontextu,
+možná přesunout velkou obhajobu z úvodu sem..}
 
 Yu presents a GP system utilizing
 polymorphic higher-order functions\footnote{Higher-order 
@@ -543,21 +553,24 @@ and lambda heads.
 
 \section{Term generating and reductions}
 
-\begin{lizt}
-& Povídání o lnf
-  && že lnf je přirozený rozšíření s-exprešnu do lambda 
-     kalkulu vlastnosti termu v lnf 
-     &&& proč je eta redukovat (eta redukcí lnf dostanem 
-         beta-eta-nf a že nemusíme beta redukovat pač se to tim 
-         nerozbyje)
-\end{lizt}
+\red{
+V této sekci prodiskutujeme generování termův lnf, kteroužto můžeme chápat jako
+příme zobecnění S-expressions do lambda termů. Povíme si jaký vztah takové termy mají
+k beta a eta redukci, jaká je jejich výhoda a jak je lze jednoduše převést
+do úspornější beta eta nf. 
+}
+
 
 
 \subsection{Grammar producing \lterms in \lnf}
 
 In \cite{barendregt10} is shown term generating grammar with 
-following rules (our notation is used, but we will not 
-highlighted terminals anymore).
+following rules.
+
+\red{předělat ten zápis, víc to okecat, říct že to je jakoby gramatika, 
+formálně 2-level-gramatika do footnoty, pač má nekonečně neterminálu  
+i terminálů. že neterminaly jsou dvojice (typ, kontext) a že terminaly jsou
+symboly kterejma se zapisujou lambda termy}
 
 \begin{align*}
 ( \alpha , \Gamma )  
@@ -584,6 +597,22 @@ $
 This rule packs consecutive uses of the second rule into one use.
 This is valid since the use of the second rule is deterministic;
 it is used if and only if the non-terminal's type is not atomic.
+
+\red{řict že lnf je přirozený rozšíření s-exprešnu do lambda 
+kalkulu: pokud vezmeme gama že splnuje closure podmínku, bude 
+se používat jen pravidlo jedna, one can see that f stands for 
+root node and (ty závorky) for direct subtrees. For context containing 
+at least one higer ord function we get special kind of root node containing
+lambda head with one direct subtree standing for body of 
+the lambda function, v tomto tele se navíc mohou objevit proměnné 
+definované v této hlavě (asi doplnit obrázkama).
+
+Diskuze toho jakou přesnou strategií je nejvhodnější generovat
+termy v lnf je beyond the scope of this paper, mužeme například použít
+klasickou raped half-and half strategii. Footnotenout kraťoučkou
+zmínku o gemetrický. 
+}
+
 
 \subsection{Benefits of generating \lterms in \lnf}
 \label{benefits}
@@ -731,11 +760,11 @@ by simply reducing each generated term to its \enf.
 
 \red{Hlavní problém: proměnné - pokud se odtržený podterm obsahuje volnou proměnnou, taková proměná může ve svém novém umístění porušit well typednost vzniklého termu - ať už z důvodu toho že tam není vubec definována, nebo tam sice je, ale má jiný typ.  
 
-Další metody jak zacházet s lambdama:
+Metody jak zacházet s lambdama:
 
 - použít méně obecnou reprezentaci, takovym
   příkladem je Yu, která nepovoluje vnější proměný uvnitř
-  lambda abstrakcí a další restrikce. Touto cestou také nechceme jít,
+  lambda abstrakcí a další restrikce. Touto cestou nechceme jít,
   myslime si že stojí za to udělat takovou reprezentaci, která nepřeskočí
   normální formu žádného well-typed termu.
 
@@ -744,23 +773,28 @@ Další metody jak zacházet s lambdama:
   Takový přístup se nam taky nelíbí, dá se očekávat že takové kolize budou častý, při nemožnosti vhodně přejmenovat proměnnou navíc do křížení přibívá
   prvek mutace. K takovému řešení se zdá dobé přistoupit až ve chvíli, kdy nezbejvá jiná čistčí možnost.
 
-Pro vyřešení problémů s proměnými se dá použít elegantní řešení: zbavit se proměných. Toho jde docílit použitím algoritmu eliminace abstrakcí, který převede term na ekvivalentní term který neobsahuje žádné proměné a lamb abstrakce, zato obsahuje navíc kombinátory (v nejjdednoduší verzi S,K a I)
-které zastanou puvodní roli proměnných. We idetified two methods using this approach:
+Pro vyřešení problémů s proměnými se dá použít elegantní řešení: zbavit se proměných. Toho jde docílit použitím algoritmu eliminace abstrakcí, který převede term na ekvivalentní term který neobsahuje žádné proměné a lamb abstrakce, zato obsahuje navíc kombinátory (v nejjdednoduší verzi S,K a I), které zastanou puvodní roli proměnných. We idetified two methods using this approach:
 
 - Na konci generovací fáze všechny vygenerované termy převést do kombinatorové
-  podoby pomocí elmin abstr. Tento přístup můžeme chápat jako kompromis (najit lepší slovo, hibrid...) mezi lambda reprezentací a komb reprezentací. Nastává však otázka zda má pak smysl generovat termy v lc, když je pak stejně převedeme. Převod má totiž až kvadratický nárůst velikosti a dá se očekávat, že termy jsou při přímém generování v komb metodě generovany usporněji.
+  podoby pomocí elmin abstr. Tento přístup můžeme chápat jako kompromis (najit lepší slovo, hibrid...) mezi lambda reprezentací a komb reprezentací. Nastává však otázka zda má pak smysl generovat termy v lc, když je pak stejně převedeme. (Výhodou je, že
+při generování v kombinátorech nemáme zajištěno že (pokud bychom nahradili S,K,I 
+za odpovídající termy a redukovlaito,tak že nevygenerujeme dvakrát různej term co se redukuje do toho samýho - což je ale takova divná výhoda kerou bych asi ani nepsal nebo nevim) Převod má totiž až kvadratický nárůst velikosti a dá se očekávat, že termy jsou při přímém generování v komb metodě generovany usporněji (čili to co sme nahnali na redukcích stratíme eliminací).
 
 - Jedince držet po celou dobu v be-nf (té nejúspornější co se týče 
-  beta,eta-redukcí) a pouze při křížení je převést na kombinátorovou formu
+  beta,eta-redukcí) a pouze při křížení oba rodiče převést na kombinátorovou formu
   eliminací abstrakcí. Po zkřížení je zase uvést do be-nf neobsahující přidané kombinátory tak, že jejich výskyty nahradíme jejich definicemi 
   (e.g. K nahradime termem (\ x y . x) ) a tento term redukujeme 
-  do beta eta nf. Takový přístup využívá dříve nelibou vlastnost eliminace totiž kvadratický narust velikosti ku svému prospěchu, zde totiž k tomuto nárůstu dochází pouze dočasně a tím zvyšuje počet křížících bodů, což se ukazuje jako výhoda (citovat Yu kde při použití @-reprezentace místo s-výrazů dosahuje lepších výsledků). Díky redukcím jsou pak výsledné termy zase nejmenčí co v dáné "třídě ekvivalence" mohou být. Nevýhodou je, že 
-  takový operace žerou nějakej čas. Je však otázkou, do jaké míry je takový overhead (kouknout co toslovo znamena:D) podstatný, jelikož na druhou stranu 
-  z keeping trees small přichází že to bude celý rychlejší a je otazka zda bude takový overhead podstatný v porovnání s overheadem pro výhodnocení termu, který je typicky nejdražší. 
+  do beta eta nf. Takový přístup využívá dříve nelibou vlastnost eliminace totiž kvadratický narust velikosti ku svému prospěchu, zde totiž k tomuto nárůstu dochází pouze dočasně a tím zvyšuje počet křížících bodů, což se ukazuje jako výhoda (citovat Yu kde při použití @-reprezentace místo s-výrazů dosahuje lepších výsledků). Díky redukcím jsou pak výsledné termy zase nejmenčí co v dáné "třídě ekvivalence" mohou být. Nevýhodou je, že takový operace žerou nějakej čas. Je však otázkou, do jaké míry je takový overhead (kouknout co toslovo znamena:D) podstatný, jelikož na druhou stranu 
+  z keeping trees small přichází že to bude celý rychlejší a je otazka zda bude takový overhead podstatný v porovnání s overheadem pro výhodnocení termu, který je typicky nejdražší. Zvlášť přitažlivý mi tohle křížení příde i kvůli tomu, že v přírodě se taky rozbalujou a zabaloujou chromozomi při meioze/mitoze.
+  
+  
+%(ALTernativní znění ze začátku: Jedince držíme jako redukovane malinké-kompaktní-a-elegantní lambda termy. Ve chvíly kdy křížíme provedeme na obou rodičích eliminaci abstrakcí (která ubere proměný a lambdy a namísto toho tam dá kombinátory S,K,I případně i další při fikanějších eliminacích), tím nám sice narostou, ale my z toho máme jedine radost, protože tím se nám zvýšil počet míst ke křížení (což se ukazuje jako dobráv věc, viz s-expr reprezentace vs @-tree reprezentace lambda termů). Po skřížení se vložený kombinátory nahradí odpovídajícim lambda termem (tzn např všude kde je K dám (\ x y . x) atd) výslednej term zredukuju a dostávam zase malinké-kompaktní-a-elegantní dítě.Nevýhoda toho zahrnout do článku i tohle je v tom, že k tomu nemám ještě žádný pokusy - ale k tomu zbytku mám upřímě v zato taky dost ubohý pokysy, takže toho bych se asi nebál. Většinu potřebnýho kodu bych k tomu ale měl už mít víceméně hotovou, takže pokud by se to na něčem nezaseklo, tak myslim že je realný udělat i pokus do toho dvacátýho.)
 
 }
 
-\subsection{Pokračujou zkopčenosti z théze}
+\subsection{Pokračujou zkopčenosti z théze až dokonce }
+
+\red{todle se dá dát asi na začátek crossover operation spíš, nebo nevim}
 
 Design goal behind our approach to crossover operation is
 to try to generalize standard tree swapping crossover.
@@ -768,17 +802,16 @@ This is not because of dislike of more specialized crossovers;
 it comes from systematic approach for exploring the domain of
 typed functional GP --- thus I would like to start with the most common one.\\
 
-%In the future, after finding sufficiently nice generalization of the standard tree %swapping crossover I plan to move my attention to more 
-%specialized crossovers, like the one presented in \cite{yu01}.  \\
+\red{to furt platí, protože na s-výrazy se eta redukce ani abstr elim nevztahuje}
 
 The crossover operation in standard GP is performed 
 by swapping randomly selected subtrees in each parent 
-S-expression (see \ref{GPxover}).
+S-expression.
 
 For typed lambda terms two difficulties arise: Types and variables.\\
 
-We will show how to crossover \textit{typed \lterm trees} in both 
-\atTree and \sexprTree notation.\\
+
+\red{CO S @-stromama řešit je explicitně tady, případně někde jinde? Pro generování nemá reprezentace vliv, ta má vliv až vpři křížení, kde at-tree zajišťuje víc míst. We will show how to crossover \textit{typed \lterm trees} in both \atTree and \sexprTree notation.}
 
 As in standard GP our crossover will be performed by swapping
 two subtrees. But now with constraint that both subtrees have
@@ -829,7 +862,7 @@ This can be achieved by process called abstraction elimination.
 
 
 
-\subsection{Typed subtree swapping}
+\subsubsection{Typed subtree swapping}
 \label{typed-swapping}
 
 First thing to do in standard subtree swapping is to select random node
@@ -902,6 +935,11 @@ function arguments. We use generous $D_{created} = 17\times3$.
 \section{Conclusions}
 \label{conclusions}
 
+TODO
+
+\red{mimojiné zmínit, že v budouznu bysme chtěli porovnat kombinátory 
+s tou naší nějak extenzivně (což by bylo hezký už ted ale nestíhá se to..)}
+
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
@@ -912,41 +950,40 @@ authors would like to thank Gerald Murray of ACM for
 his help in codifying this \textit{Author's Guide}
 and the \textbf{.cls} and \textbf{.tex} files that it describes.
 
-\section{Osnova}
-
-\begin{lizt}
-& Jak reprezentovat stromy programu pro GP?
-  && Reprezentace v klasickym kozovy je S-expression.
-  && Nebo mužem používat kombinátory jako 
-     Briggs a O’Neil (to si myslim je jakoby 
-     hlavní konkurence, vuči který by to chtělo obhájit)
-  && Lambda termy a jejich awesomeness
-& \textbf{Povídaní o redukcích}
-& Povídání o lnf
-  && že lnf je přirozený rozšíření s-exprešnu do lambda 
-     kalkulu vlastnosti termu v lnf 
-     &&& proč je eta redukovat (eta redukcí lnf dostanem 
-         beta-eta-nf a že nemusíme beta redukovat pač se to tim nerozbyje)
-& Generování
-  && Generování gramatikou
-  && Gramatika pro lnf
-  && (?) Inhabitation trees jako intuitivní model takovýhodle lnf generování
-& Problémy s proměnýma a jak je řešit.
-  && Křížit lambda termy i s proměnejma a abstrakcema, 
-     problémy řešit když nastanou (pomluvit a odsoudit)
-  && Zmenšit prostor termu (tim že někerý nejsme schopný 
-     vygenerovat) s kterým operujeme tak aby křížení už 
-     nebyl problém (to dělá Yu - v těle lambda fce dovoluje 
-     jen použití proměnných z její hlavy)
-  && Převod hned po vygenerování
-  && Převod až při křížení
-     &&& eliminace abstrakcí
-     &&& skřížim
-     &&& vložený kombinátory nahradim odpovídajícím termem
-     &&& celý to redukuju
- & Pokusy (?!)
- & Závěr
-\end{lizt}
+%\section{Osnova}
+%\begin{lizt}
+%& Jak reprezentovat stromy programu pro GP?
+%  && Reprezentace v klasickym kozovy je S-expression.
+%  && Nebo mužem používat kombinátory jako 
+%     Briggs a O’Neil (to si myslim je jakoby 
+%     hlavní konkurence, vuči který by to chtělo obhájit)
+%  && Lambda termy a jejich awesomeness
+%& \textbf{Povídaní o redukcích}
+%& Povídání o lnf
+%  && že lnf je přirozený rozšíření s-exprešnu do lambda 
+%     kalkulu vlastnosti termu v lnf 
+%     &&& proč je eta redukovat (eta redukcí lnf dostanem 
+%         beta-eta-nf a že nemusíme beta redukovat pač se to tim nerozbyje)
+%& Generování
+%  && Generování gramatikou
+%  && Gramatika pro lnf
+%  && (?) Inhabitation trees jako intuitivní model takovýhodle lnf generování
+%& Problémy s proměnýma a jak je řešit.
+%  && Křížit lambda termy i s proměnejma a abstrakcema, 
+%     problémy řešit když nastanou (pomluvit a odsoudit)
+%  && Zmenšit prostor termu (tim že někerý nejsme schopný 
+%     vygenerovat) s kterým operujeme tak aby křížení už 
+%     nebyl problém (to dělá Yu - v těle lambda fce dovoluje 
+%     jen použití proměnných z její hlavy)
+%  && Převod hned po vygenerování
+%  && Převod až při křížení
+%     &&& eliminace abstrakcí
+%     &&& skřížim
+%     &&& vložený kombinátory nahradim odpovídajícím termem
+%     &&& celý to redukuju
+% & Pokusy (?!)
+% & Závěr
+%\end{lizt}
 
 
 %

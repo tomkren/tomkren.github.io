@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  26 JAN 2014 14:45
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  26 JAN 2014 21:54
 entering extended mode
 **gecco14.tex
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
@@ -847,119 +847,116 @@ Overfull \hbox (14.28848pt too wide) in paragraph at lines 591--591
  []
 
 
-Overfull \hbox (2.66269pt too wide) in paragraph at lines 615--615
+Overfull \hbox (2.66269pt too wide) in paragraph at lines 634--634
 []\T1/aer/m/n/9 Hlavním té-matem £lánku je op-erá-tor k°íºení. Jeho hlavním
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 625--630
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 644--649
 
  []
 
 
-Underfull \vbox (badness 4303) has occurred while \output is active []
-
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 659--662
+Underfull \hbox (badness 10000) in paragraph at lines 678--681
 
  []
 
 
 LaTeX Warning: Citation `barendregt84' on page \thepage  undefined on input lin
-e 678.
+e 697.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 692--694
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 701--702
+Underfull \hbox (badness 10000) in paragraph at lines 711--713
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 730--733
+Underfull \hbox (badness 10000) in paragraph at lines 720--721
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--736
+Underfull \hbox (badness 10000) in paragraph at lines 749--752
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 739--744
+Underfull \hbox (badness 10000) in paragraph at lines 753--755
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 760--765
+Underfull \hbox (badness 10000) in paragraph at lines 758--763
 
  []
 
 
-LaTeX Warning: Reference `GPxover' on page \thepage  undefined on input line 76
-8.
+Underfull \hbox (badness 10000) in paragraph at lines 779--784
+
+ []
 
 
-Overfull \hbox (15.25266pt too wide) in paragraph at lines 766--769
+LaTeX Warning: Reference `GPxover' on page \thepage  undefined on input line 78
+7.
+
+
+Overfull \hbox (15.25266pt too wide) in paragraph at lines 785--788
 \T1/aer/m/n/9 swap-ping ran-domly se-lected sub-trees in each par-ent S-express
 ion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--771
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 772--774
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 775--778
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 783--785
-
- []
-
-[5]
 Underfull \hbox (badness 10000) in paragraph at lines 789--790
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 848--849
+Underfull \hbox (badness 10000) in paragraph at lines 791--793
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 794--797
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 850--853
+Underfull \hbox (badness 10000) in paragraph at lines 802--804
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 855--860
+Underfull \hbox (badness 10000) in paragraph at lines 808--809
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 863--868
+Underfull \hbox (badness 10000) in paragraph at lines 867--868
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 869--871
+Underfull \hbox (badness 10000) in paragraph at lines 869--872
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 872--875
+Underfull \hbox (badness 10000) in paragraph at lines 874--879
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 882--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 888--890
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 891--894
 
  []
 
@@ -974,7 +971,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  3561 strings out of 493921
  41900 string characters out of 3144876
- 121751 words of memory out of 3000000
+ 118751 words of memory out of 3000000
  6754 multiletter control sequences out of 15000+200000
  65312 words of font info for 85 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -999,7 +996,7 @@ e1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/h
 elvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utm
 b8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gecco14.pdf (7 pages, 269369 bytes).
+Output written on gecco14.pdf (7 pages, 270646 bytes).
 PDF statistics:
  107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
