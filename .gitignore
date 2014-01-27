@@ -1,11 +1,10 @@
-tex/gecco14_b/gecco14.log
-
 ## generic files to ignore
 *~
 *.lock
 *.DS_Store
 *.swp
 *.out
+*.log
 
 js/node/config.json
 
