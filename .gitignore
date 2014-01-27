@@ -4,7 +4,6 @@
 *.DS_Store
 *.swp
 *.out
-*.log
 
 js/node/config.json
 
