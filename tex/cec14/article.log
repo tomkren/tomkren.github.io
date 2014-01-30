@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  25 JAN 2014 23:33
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  29 JAN 2014 14:15
 entering extended mode
 **article.tex
-(C:\wamp\www\tomkren.github.io\tex\cec14b\article.tex
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\wamp\www\tomkren.github.io\tex\cec14b\IEEEtran.cls
+(C:\wamp\www\tomkren.github.io\tex\cec14\IEEEtran.cls
 Document Class: IEEEtran 2002/08/13 revision V1.6 by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- The source comments contain changelog notes.
@@ -447,7 +447,7 @@ File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 \c@definition=\count118
 
 ** ATTENTION: Overriding command lockouts (line 108).
-(C:\wamp\www\tomkren.github.io\tex\cec14b\article.aux)
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
@@ -601,7 +601,7 @@ LaTeX Warning: Text page 5 contains only floats.
 Overfull \vbox (7.0041pt too high) has occurred while \output is active []
 
 
-[5 <C:/wamp/www/tomkren.github.io/tex/cec14b/imgs/cec/SSRb.PNG>]
+[5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/SSRb.PNG>]
 Underfull \hbox (badness 2635) in paragraph at lines 770--770
 [][][]\OT1/ptm/m/n/8 In [[]] this limit is said to be 400 time steps. But there
  is
@@ -634,7 +634,7 @@ LaTeX Warning: Text page 6 contains only floats.
 
 Underfull \vbox (badness 1242) has occurred while \output is active []
 
- [6 <C:/wamp/www/tomkren.github.io/tex/cec14b/imgs/cec/ANTb.PNG>]
+ [6 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/ANTb.PNG>]
 <imgs/cec/EPb.PNG, id=39, 937.25156pt x 2444.38219pt>
 File: imgs/cec/EPb.PNG Graphic file (type png)
  <use imgs/cec/EPb.PNG>
@@ -647,8 +647,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: Text page 7 contains only floats.
 
-[7 <C:/wamp/www/tomkren.github.io/tex/cec14b/imgs/cec/EPb.PNG>]
-(C:\wamp\www\tomkren.github.io\tex\cec14b\article.bbl
+[7 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/EPb.PNG>]
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
@@ -667,33 +667,33 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[8] (C:\wamp\www\tomkren.github.io\tex\cec14b\article.aux) ) 
+[8] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
  3410 strings out of 493921
- 45970 string characters out of 3144876
+ 45959 string characters out of 3144876
  117852 words of memory out of 3000000
  6643 multiletter control sequences out of 15000+200000
  48000 words of font info for 97 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  27i,16n,24p,601b,308s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (
-x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
-symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/u
-crr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+{C:/Program Files (x
+86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/s
+ymbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/uc
+rr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
 Output written on article.pdf (8 pages, 579037 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)

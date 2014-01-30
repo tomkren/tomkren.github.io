@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{barendregt84}
+H.~Barendregt.
+\newblock {\em The Lambda Calculus: its Syntax and Semantics, revised ed.}
+\newblock North-Holland, 1984.
 
 \bibitem{barendregt10}
 H.~Barendregt, W.~Dekkers, and R.~Statman.
@@ -31,6 +36,11 @@ J.~R. Koza.
   Intelligence}.
 \newblock Kluwer Academic Publishers, Norwell, MA, USA, 2003.
 
+\bibitem{luke2002perfect}
+S.~Luke and L.~Panait.
+\newblock Is the perfect the enemy of the good?
+\newblock In {\em GECCO}, pages 820--828, 2002.
+
 \bibitem{montana95}
 D.~Montana.
 \newblock Strongly typed genetic programming.
@@ -42,11 +52,23 @@ S.~L. Peyton~Jones.
   (Prentice-Hall International Series in Computer Science)}.
 \newblock Prentice-Hall, Inc., Upper Saddle River, NJ, USA, 1987.
 
+\bibitem{nasecec}
+X.~X-AUTHORS-BLINDED.
+\newblock Generating lambda term individuals in typed genetic programming using
+  forgetful a*.
+\newblock In {\em Proceedings of the Congress on Evolutionary Computation
+  2014}. IEEE Computer Press, SUBMITTED.
+
 \bibitem{yu01}
 T.~Yu.
 \newblock Hierarchical processing for evolving recursive and modular programs
   using higher-order functions and lambda abstraction.
 \newblock {\em Genetic Programming and Evolvable Machines}, 2(4):345--380,
   2001.
+
+\bibitem{yu1998polygp}
+T.~Yu and C.~Clack.
+\newblock Polygp: A polymorphic genetic programming system in haskell.
+\newblock {\em Genetic Programming}, 98, 1998.
 
 \end{thebibliography}
