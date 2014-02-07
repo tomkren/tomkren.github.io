@@ -41,12 +41,13 @@
 $(function () {
 
   brot = mkFractal('canwass',{
-    fun      : isIn,
-    paleta   : palettes.wiki,
-    numIter  : 50, 
-    deltaIter: 10,
-    plusButt : 'plus',
-    minusButt: 'minus'
+    fun        : isIn,
+    pointArtFun: brotPointArt,
+    paleta     : palettes.wiki,
+    numIter    : 50, 
+    deltaIter  : 10,
+    plusButt   : 'plus',
+    minusButt  : 'minus'
   }).draw();
 
   $paletteSel = $('#paletteSelect');
@@ -69,6 +70,14 @@ $(function () {
   $paletteSel.change(changePalette);
 
 });
+
+function drawLine (ctx, col, from, to) {
+  ctx.strokeStyle = col;
+  ctx.beginPath();
+  ctx.moveTo(from[0],from[1]);
+  ctx.lineTo(to[0],to[1]);
+  ctx.stroke();    
+}
 
 var mkPaleta = function (p) {
   var len = p.length;
@@ -206,13 +215,42 @@ function isIn (xy,numIter) {
   return i == numIter ? {in:true} : {in:false, iter:i};
 }
 
+function brotPointArt (ctx, ctxPoint, xy, numIter, deConvert) {
 
+  var endCtxPoint = deConvert(xy[0]+0.25, xy[1]+0.25);
+
+  var start = ctxPoint;
+  var cil;
+
+  var c = xy[0], d = xy[1];
+  var a = c, b = d;
+  var a2 = a*a, b2 = b*b;
+  var a_, b_;
+  for (var i=0; i<numIter; i++) {
+    a_ = a2-b2 + c;
+    b_ = 2*a*b + d;
+    
+    cil = deConvert(a_,b_);
+
+    drawLine(ctx, 'pink', start, cil );
+
+    start = cil;
+
+    a = a_;
+    b = b_;
+
+    a2 = a*a; 
+    b2 = b*b;
+  }
+
+}
 
 function mkFractal (canvasId, opts) {
 
-  var fractalFun = opts.fun       || isIn;
-  var numIter    = opts.numIter   || 50;
-  var deltaIter  = opts.deltaIter || 0;
+  var fractalFun = opts.fun         || isIn;
+  var pointArtFun= opts.pointArtFun || function(){};
+  var numIter    = opts.numIter     || 50;
+  var deltaIter  = opts.deltaIter   || 0;
 
   var self, zoom, cX, cY, left, right, top, bottom, p, q;
   
@@ -333,9 +371,6 @@ function mkFractal (canvasId, opts) {
   });
   
 
-
-
-
   function init () {
     left   = cX - (1/zoom);
     right  = cX + (1/zoom);
@@ -404,17 +439,18 @@ function mkFractal (canvasId, opts) {
   }
 
   function drawOther () {
-    drawLine('red',[xSize/2-3,ySize/2],[xSize/2+3,ySize/2]);
-    drawLine('red',[xSize/2,ySize/2-3],[xSize/2,ySize/2+3]);
+
+    var xMiddle = xSize/2;
+    var yMiddle = ySize/2;
+
+    drawLine(ctx,'red',[xMiddle-3,yMiddle],[xMiddle+3,yMiddle]);
+    drawLine(ctx,'red',[xMiddle,yMiddle-3],[xMiddle,yMiddle+3]);
+
+    var middlePoint = convert(xMiddle, yMiddle);
+    pointArtFun(ctx, [xMiddle, yMiddle], middlePoint, numIter, deConvert);
   }
 
-  function drawLine (col,from,to) {
-    ctx.strokeStyle = col;
-    ctx.beginPath();
-    ctx.moveTo(from[0],from[1]);
-    ctx.lineTo(to[0],to[1]);
-    ctx.stroke();    
-  }
+
 
   function changePalette (p) {
     paleta = p;
@@ -431,9 +467,6 @@ function mkFractal (canvasId, opts) {
 
   return self;
 }
-
-
-
 
 
 function randIxs(xSize,ySize, fun) {
