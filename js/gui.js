@@ -351,6 +351,9 @@ function mkGUI (containerId) {
       guiLog('\n'+repeat('-',80)+'\n');
     }
 
+    //var
+    hax_bests = [];
+
     var optsStr = ses.getValue();
     var opts = evalOptsStr(optsStr);
 
@@ -379,6 +382,11 @@ function mkGUI (containerId) {
           graphs.handleStats(stats);
           Phenotype.update(pheno, $phenoUpdateEl, stats.best_jsStr, stats.best, stats.runKnowledge, opts);
           resize();
+
+          var hax_obj = JSON.parse(stats.best_json);
+          hax_obj.fitVal = stats.best;
+          hax_bests.push(hax_obj);
+
           break;
         case 'result' : 
           $startButt.toggleClass('btn-success btn-danger');

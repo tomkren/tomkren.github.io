@@ -177,6 +177,7 @@ var Solver = (function () {
       maxSize:    maxTermSize,
       minSize:    minTermSize,
       best_jsStr: solver.commOpts.indivStr(bestIndiv), //    <-----------
+      best_json:  JSON.stringify(bestIndiv),
       runKnowledge: opts.preprocessRK ?  opts.preprocessRK(runKnowledge) : runKnowledge
     });
 
