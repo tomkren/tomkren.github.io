@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<title>demo1</title>
+
+
+<script src="js/libs/jquery-1.10.2.js"></script>
+<script src="js/libs/underscore-1.5.2.js"></script>
+<script src="js/libs/d3.v3.min.js"></script>
+
+<link  href="js/treeInspector/css.css" rel="stylesheet">
+<script src="js/treeInspector/treeInspector.js"></script>
+<script src="js/treeInspector/testData.js"></script>
+
+
+<script>
+$(function () {
+  
+  var visibleHeight = $(window).height();
+  var boxHeight = (visibleHeight-150) / 4 ;
+
+  function mkOpts (i, treeObj) {
+    return {
+      tree: JSON.parse(JSON.stringify(treeObj)),
+      div: '#box'+i,
+      margin: {top: 10, right: 0, bottom: 10, left: 50},
+      width:  960,
+      height: boxHeight,
+    };
+  }
+
+  hax_bests = _.sortBy(hax_bests, function(o){ return -o.fitVal; });
+
+  function haxTree (i) {
+    return TreeInspector.transformTree(hax_bests[i].term);
+  }
+
+  TreeInspector.mk(mkOpts(1, haxTree(0) ));
+  TreeInspector.mk(mkOpts(2, haxTree(1) ));
+  TreeInspector.mk(mkOpts(3, haxTree(2) ));
+  TreeInspector.mk(mkOpts(4, haxTree(3) ));
+
+
+
+});
+
+
+
+</script>
+
+
+<body>
+  
+  Táta:  <div class="box" id="box1"></div>
+  Máma:  <div class="box" id="box2"></div>
+  Syn:   <div class="box" id="box3"></div>
+  Dcera: <div class="box" id="box4"></div>
+
+<script>
+
+
+
+
+
+</script>
