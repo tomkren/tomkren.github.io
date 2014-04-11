@@ -16,6 +16,12 @@
 {\begin{easylist}[itemize]}
 {\end{easylist}}
 
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\def\sharedaffiliation{\end{tabular}\newline\begin{tabular}{c}}
+
+\def\wu{\superscript{*}}
+\def\wg{\superscript{\dag}}
+
 \newcommand{\Lets}{Let us\xspace}
 \newcommand{\lets}{let us\xspace}
 \newcommand{\lterm}{$\lambda$-term\xspace}
@@ -122,11 +128,31 @@
 %    \email{roman@cs.cas.cz}
 %  }
 
+\numberofauthors{2}
+\author{
+  \alignauthor \ Tom\'{a}\v{s} K\v{r}en\wu\wg\\
+  \email{tomkren@gmail.com}
+  %
+  \alignauthor \ Roman Neruda\wu\\
+  \email{roman@cs.cas.cz}
+  %
+  \sharedaffiliation
+  \begin{tabular}{ccc}
+    \affaddr{{\wu}Institute of Computer Science{\ }}      & & \affaddr{{\wg}Faculty of Mathematics and Physics{\ }} \\
+    \affaddr{Academy of Sciences of the Czech Republic}   & & \affaddr{Charles University in Prague} \\
+    \affaddr{Pod Vod\'arenskou v\v{e}\v{z}\'\i~2, 18207,} & & \affaddr{Malostransk\'e n\'am\v{e}st\'\i~25, 11000,} \\
+    \affaddr{Prague, Czech Republic}                      & & \affaddr{Prague, Czech Republic} \\
+  \end{tabular}
+}
+
+
+
 %\date{24 January 2014}
 
 \maketitle
 \begin{abstract}
-Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from the use of reductions (beta and eta) and a way to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and propose several crossover approaches, two of which are based on abstraction elimination and compared using the even parity benchmark problem. 
+Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from the use of reductions (beta and eta) and a way to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and propose several crossover approaches, two of which are based on abstraction elimination and compared using the even parity benchmark problem.
+\red{Přidat víc o kříženích tak aby davál insight to the project.}
 %including novel approach to crossover operator based both on reductions and abstraction elimination. 
 %The design goal of this operator is to turn the disadvantage of abstraction elimination  - possibly quadratic increase of program size - into a virtue; our approach leads to more crossover points. At the same time, utilization of reductions provides offspring of small sizes.
 \end{abstract}
@@ -157,6 +183,8 @@ the difficulties caused by the presence of variables in program trees.
 
 In our system we use simply typed lambda calculus. Since abstraction elimination and reductions do not involve many type related issues it seems to us as a sufficient choice of type system. Techniques described here would be analogous for a more sophisticated type system and can be directly applied to such systems as the Hindley–Milner type system.
 
+
+\red{Zdůraznit že main contribution of this paper je popis crossover operations který [rekapitulovat dobrý vlastnosti našeho křížení z 2ky (a dalších sekcí), tj že to nezjednodušuje na méně obecnou notaci a přesto to zůstává efektivní i v problémech kde to zjednodušení hraje do karet tý metodě.]}
 
 %\red{Možná někam poznamenat že přínos toho článku je taky v tom že zpřístupňuje pojmy z teorie typovaného lc komunitě typovaného GP esli to neni blbý..}
 
@@ -192,6 +220,8 @@ able to generate all possible well-typed normalized lambda terms. In order to do
 
 \section{Preliminaries}
 \label{preliminaries}
+
+\red{Buď přidat neformální komentář a/nebo odebrat nadbytečný věci.}
 
 In this section, several notions necessary to build a typed GP based on lambda calculus are introduced. 
 First, \lets describe a programming language, 
@@ -544,6 +574,9 @@ By generating \lterms in \textit{lnf} we avoid generating
 \lterms $M$,$N$ such that $M \not= N$, but $M =_{\beta\eta} N$.
 In other words, we avoid generating two programs with different 
 source codes, but performing the same computation.
+\red{Zde potřeba doplnit vysvětlení, že to řeší jen čast tohoto
+fenomenu}
+
 
 Every \lterm $M$ such that \GMS has its unique \lnf $L$, 
 for which $L =_{\beta\eta} M$.
@@ -1010,7 +1043,10 @@ light on the promising intersection of lambda calculus and genetic programming.
 
 
 %ACKNOWLEDGMENTS are optional
-%\section{Acknowledgments}
+\section{Acknowledgments}
+
+Tomáš Křen has been partially supported by the project GA ČR P202/10/1333 and by the SVV project number 260~104. Roman Roman Neruda has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002.
+
 %This section is optional; it is a location for you to acknowledge grants, funding, editing assistance and what have you.  In the present case, for example, the authors would like to thank Gerald Murray of ACM for his help in codifying this \textit{Author's Guide} and the \textbf{.cls} and \textbf{.tex} files that it describes.
 
 %\section{Osnova}
