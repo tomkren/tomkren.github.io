@@ -152,10 +152,18 @@ lambda calculus, which is simple yet powerful functional mathematical and progra
 language extensively used in type theory. Such attempts has shown to be 
 successful \cite{yu01}. 
 
-The key issue in the lambda calculus approach to enrich GP with types is the method of individual generation. During the expansion phase the set of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used.  
+%The key issue in the lambda calculus approach to enrich GP with types is the method of individual generation. 
+\red{In this paper we present a tree generating method suitable both for the standard GP\cite{koza92} and  typed GP over lambda calculus. We chose to describe the algorithm in the means of the typed lambda calculus since the standard S-expression representation can be understood as a special case of this representation. However, for evaluation of our approach we focus more on problems from standard GP. We chose this evaluation approach because the result of the GP system depends profoundly on the crossover operation, which remains an open problem for the typed GP over lambda calculus.
+  }
+
+During the expansion phase \red{of the term generating procedure} the \red{space} 
+%set 
+of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used.  
 These two search methods in fact represent boundaries between which we will try to position our parameterized solution that allows us to take advantage of both strategies. This design goal also differentiate our approach from 
 the three state of the art proposals for typed GP known to us that are discussed in the following section. 
-Our proposed \emph{geometrical search strategy} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.
+Our proposed \emph{geometric
+%al 
+search strategy} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.
 
 The rest of the paper is organized as follows: The next section briefly discusses related work in the field of typed GP, while section~\ref{preliminaries} introduces necessary notions. Main original results about search strategies in individual generating are described in section~\ref{approach}. Section~\ref{experiments} presents results of our method on three well-known tasks, and the paper is concluded by section~\ref{conclusions}.
 
