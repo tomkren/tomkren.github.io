@@ -46,6 +46,11 @@ R.~Poli, W.~B. Langdon, and N.~F. McPhee, \emph{A Field Guide to Genetic
   Programming}.\hskip 1em plus 0.5em minus 0.4em\relax Lulu Enterprises, UK
   Ltd, 2008.
 
+\bibitem{moraglio2010}
+A.~Moraglio, ``One-point geometric crossover,'' in \emph{Parallel Problem
+  Solving from Nature, PPSN XI}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Springer Berlin Heidelberg, 2010, pp. 83--93.
+
 \bibitem{kes}
 \BIBentryALTinterwordspacing
 F.~Briggs and M.~O'Neill, ``Functional genetic programming and exhaustive

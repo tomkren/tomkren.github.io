@@ -37,6 +37,7 @@
 {\end{easylist}}
 
 
+
 \newcommand{\Lets}{Let us\xspace}
 \newcommand{\lets}{let us\xspace}
 \newcommand{\lterm}{$\lambda$-term\xspace}
@@ -117,56 +118,29 @@
 
 
 % paper title: Must keep \ \\ \LARGE\bf in it to leave enough margin.
-\title{Generating Lambda Term Individuals in Typed Genetic Programming Using Forgetful A*}
+\title{\ \\ \LARGE\bf 
+Generating Lambda Term Individuals in Typed Genetic Programming Using Forgetful A*}
 
-\author{%
-Tom\'{a}\v{s} K\v{r}en$^{*\dag}$\\
-tomkren@{}gmail.com\\
-~\\
-$^{*}$Charles University\\ Faculty  of  Mathematics  and  Physics\\
- Malostransk\'e n\'am\v{e}st\'\i \ 25, Prague\\
-Czech Republic
-\and
-Roman Neruda$^{\dag}$\\
-roman@{}cs.cas.cz\\
-~\\
-$^{\dag}$Institute of Computer Science\\Academy of Sciences of the Czech Republic\\
-Pod Vod\'arenskou v\v{e}\v{z}\'\i \ 2, Prague\\
-Czech Republic
-}
-
-
-
+\author{Tom\'{a}\v{s} K\v{r}en\thanks{Tomáš Křen (tomkren@gmail.cz) is with Charles Univetsity in Prague, Faculty of Mathematics and Physics; Department of Theoretical Computer Science and Mathematical Logic \red{and with TODO} and has been partially supported by the project GA ČR P202/10/1333 and by the SVV project number 260~104.} \and Roman Neruda\thanks{Roman Neruda (roman@cs.cas.cz) is with Institute of Computer Science, Academy of Sciences of the Czech Republic and has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002.}}
 
 \maketitle
 
-%\begin{abstract}
-%Tree based genetic programming traditionally uses simple S-expressions to represent programs, however more expressive representations can exhibit better results and are well suited for typed genetic programming. One of such representations is lambda calculus.
-%In this paper, a generalization of genetic programming 
-%for simply typed lambda calculus is presented. We mainly focus on
-%population initialization methods. 
-%Three such initialization methods are proposed 
-%depending on different search strategies. 
-%The first strategy corresponds to standard ramped half-and-half initialization, 
-%the second one corresponds to exhaustive systematic search, and the third one 
-%represents a novel geometric strategy.
-%Experiments on three well known benchmark problems show
-%that the geometric strategy outperforms
-%the standard generating method in success rate, best fitness value,
-%time consumption and average individual size.
-%The fact that a search strategy can be easily described by a rather simple filtration algorithm opens opportunity to easy exploration of more 
-%population initialization methods, possibly in a kind of meta-evolution way.
-%\end{abstract}
-
 \begin{abstract}
-Tree based genetic programming (GP) traditionally uses simple S-expressions to represent programs, however more expressive representations, such as lambda calculus, can exhibit better results while being better suited for typed GP.
-In this paper we present population initialization methods within a framework of GP over simply typed lambda calculus that can be also used in the standard GP approach.
-Initializations can be parameterized by different search strategies, leading to wide spectrum of methods corresponding to standard ramped half-and-half initialization on one hand, or exhaustive systematic search on the other.
-A novel geometric strategy is proposed that ballances those two approaches.
-Experiments on well known benchmark problems show
+Tree based genetic programming traditionally uses simple S-expressions to represent programs, however more expressive representations can exhibit better results and are well suited for typed genetic programming. One of such representations is lambda calculus.
+In this paper, a generalization of genetic programming 
+for simply typed lambda calculus is presented. We mainly focus on
+population initialization methods. 
+Three such initialization methods are proposed 
+depending on different search strategies. 
+The first strategy corresponds to standard ramped half-and-half initialization, 
+the second one corresponds to exhaustive systematic search, and the third one 
+represents a novel geometric strategy.
+Experiments on three well known benchmark problems show
 that the geometric strategy outperforms
 the standard generating method in success rate, best fitness value,
 time consumption and average individual size.
+The fact that a search strategy can be easily described by a rather simple filtration algorithm opens opportunity to easy exploration of more 
+population initialization methods, possibly in a kind of meta-evolution way.
 \end{abstract}
 % no key words
 
@@ -179,14 +153,17 @@ language extensively used in type theory. Such attempts has shown to be
 successful \cite{yu01}. 
 
 %The key issue in the lambda calculus approach to enrich GP with types is the method of individual generation. 
-In this paper we present a tree generating method suitable both for the standard GP\cite{koza92} and  typed GP over lambda calculus. We chose to describe the algorithm in the means of the typed lambda calculus since the standard S-expression representation can be understood as a special case of this representation. However, for evaluation of our approach we focus more on problems from standard GP. We chose this evaluation approach because the result of the GP system depends profoundly on the crossover operation, which remains an open problem for the typed GP over lambda calculus.
+\red{In this paper we present a tree generating method suitable both for the standard GP\cite{koza92} and  typed GP over lambda calculus. We chose to describe the algorithm in the means of the typed lambda calculus since the standard S-expression representation can be understood as a special case of this representation. However, for evaluation of our approach we focus more on problems from standard GP. We chose this evaluation approach because the result of the GP system depends profoundly on the crossover operation, which remains an open problem for the typed GP over lambda calculus.
+  }
 
-During the expansion phase of the term generating procedure the space of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used.  
+During the expansion phase \red{of the term generating procedure} the \red{space} 
+%set 
+of unfinished terms can be browsed with respect to various search strategies. Our approach to this problem aims to utilize the full arsenal given by the simply typed lambda calculus. Thus, the natural idea is to employ an exhaustive systematic search. On the other hand, if we were to mimic the standard GP approach, a quite arbitrary yet common and successful ramped half-and-half generating heuristic~\cite{fg} should probably be used.  
 These two search methods in fact represent boundaries between which we will try to position our parameterized solution that allows us to take advantage of both strategies. This design goal also differentiate our approach from 
 the three state of the art proposals for typed GP known to us that are discussed in the following section. 
 Our proposed \emph{geometric
 %al 
-search strategy}\footnote{Not to be confused with geometric  crossover introduced by \cite{moraglio2010}.} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.
+search strategy} described in this paper is such a successful hybrid mixture of random and systematic exhaustive search. Experiments show that it is also very efficient dealing with one of the traditional GP scarecrows - the bloat problem.
 
 The rest of the paper is organized as follows: The next section briefly discusses related work in the field of typed GP, while section~\ref{preliminaries} introduces necessary notions. Main original results about search strategies in individual generating are described in section~\ref{approach}. Section~\ref{experiments} presents results of our method on three well-known tasks, and the paper is concluded by section~\ref{conclusions}.
 
@@ -195,7 +172,8 @@ The rest of the paper is organized as follows: The next section briefly discusse
 
 Yu presents a GP system utilizing
 polymorphic higher-order functions\footnote{Higher-order 
-function takes another function as an input parameter.} and lambda abstractions  \cite{yu01}.
+function is a function taking another function as 
+input parameter.} and lambda abstractions  \cite{yu01}.
 Important point of interest in this work is use of
 \texttt{foldr} function as a tool for \textit{implicit recursion},
 i.e. recursion without explicit recursive calls. 
@@ -240,9 +218,7 @@ described by Barendregt \cite{barendregt10}.
 
 In this section, several notions necessary to build a typed GP based on lambda calculus are introduced. 
 First, \lets describe a programming language, 
-in which the GP algorithm generates individual programs --- the so called \lterms.
-
-\vfill
+in which the GP algorithm generates individual programs --- the so called \lterms.\\
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -257,13 +233,11 @@ x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
 \textit{~~~~($\lambda$-abstraction)} 
 \end{align*}
 \end{definition}
-
-\vfill
+~\\
 
 \textit{Function application} and 
 \textit{$\lambda$-abstraction} are concepts
 well known from common programming languages. 
-
 For example in JavaScript 
 $(M~N)$ translates to expression \texttt{$M$($N$)} and
 $\lamb{x}{M}$ translates to expression \texttt{function($x$)\{return $M$;\}}.
@@ -278,9 +252,7 @@ and $\lam{x_1 x_2 \dots x_n }{M}$ for $\lamb{x_1}{\lamb{x_2}{\dots\lamb{x_n}{M}\
 
 A \lterm as described above
 corresponds to a program expression with no type information
-included. Now we will describe \textit{types} (or \textit{type terms}).
-
-\vfill
+included. Now we will describe \textit{types} (or \textit{type terms}).\\
 
 \begin{definition}
 Let $A$ be set of {\it atomic type names}. 
@@ -290,8 +262,7 @@ Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
 \sigma,\tau \in \T &\then ( \sigma \ar  \tau ) \in \T 
 \end{align*}
 \end{definition}
-
-\vfill
+~\\
 
 Type $\sigma \ar \tau$ is type for functions taking as input
 something of a type $\sigma$ and returning 
@@ -299,9 +270,8 @@ as output something of a type $\tau$.
 $\tau_1 \ar \tau_2 \ar \dots \ar \tau_n$ is an abbreviation for 
 $\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$.
 The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by
-combining the previously defined \textit{\lterms} and \textit{types} together. 
+combining the previously defined \textit{\lterms} and \textit{types} together. \\
 
-\vfill
 
 \begin{definition}~
 
@@ -323,16 +293,11 @@ combining the previously defined \textit{\lterms} and \textit{types} together.
 \end{definition}
 %~\\
 
-\vfill
-
-
 Context is a basic type theoretic concept suitable as a typed alternative
 for terminal and function set in standard GP. 
 Notation $\Gamma,x:\sigma $ denotes $ \Gamma\cup\{(x:\sigma)\}$ 
 such that $\Gamma$ does not contain any declaration with $x$ as subject.
-We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.
-
-\vfill
+We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.\\
 
 \begin{definition}
 A statement $M\colon\sigma$ is \textit{derivable from}
@@ -347,14 +312,11 @@ x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
 &~\then~ \tur{\Gamma}{\lamb{x}{M}}{\sigma \ar \tau} 
 \end{align*}
 \end{definition}
-
-\vfill
+~\\
 
 Our goal in term generation is to produce terms $M$
 for a given pair $\ul{\tau}{\Gamma}$
-such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
-
-\vfill
+such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.\\
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -374,8 +336,7 @@ x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
 \textit{~~~~($\lambda$-abstraction)} 
 \end{align*}
 \end{definition}
-
-\vfill
+~\\
 
 \textit{Unfinished leaf} $\ul{\tau}{\Gamma}$ 
 stands for yet not specified \lterm of the type $\tau$ 
@@ -387,8 +348,6 @@ build from symbols of $\Gamma$.
 \label{approach}
 
 \subsection{Introduction}
-
-\red{na vhodna mista podotknout, jak to je v std GP}
 
 Our approach to \lterm generating is based on technique 
 briefly described in \cite{barendregt10}, which generates
@@ -530,18 +489,14 @@ is generated, then the initial unfinished term $\ul{\tau}{\Gamma}$
 is inserted to the queue, search strategy $S$
 again initializes its internal state and the process continues.
 
-\Lets now discuss three such search strategies.
-
-\vfill
+\Lets now discuss three such search strategies.\\
 
 %\subsubsection{Systematic strategy}
 \textit{Systematic strategy}:~~ 
 If we use trivial strategy that returns all the inputs, 
 then the algorithm systematically generates 
 first $n$ smallest lambda terms in their
-\textit{long normal form}.
-
-\vfill
+\textit{long normal form}.\\
 
 %\subsubsection{Ramped half-and-half strategy}
 \textit{Ramped half-and-half strategy}:~~
@@ -579,9 +534,7 @@ In other cases of $depth$ it depends on value of $isFull$.
 If $isFull = true$, then the subset to select from is 
 set of all \textit{non-terminals} of the input set.
 If $isFull = false$, then the subset to select from is 
-the whole input set.
-
-\vfill
+the whole input set.\\
 
 %\subsubsection{Geometric strategy}
 \textit{Geometric strategy}:~~
@@ -620,7 +573,7 @@ stand for less important local parts (e.g. constants).
 This strategy also plays nicely with the idea that 
 "too big trees should be killed".
 
-
+~\\
 Furthermore, our system utilizes generalization of the standard 
 tree-swapping crossover operator. Since it is beyond the scope of this 
 paper we mention it only briefly. Two main concerns with swapping typed 
@@ -651,8 +604,6 @@ search strategies on its own.
 
 \section{Experiments}
 \label{experiments}
-
-\red{tabulka parametru dle kozy, ale nejaka opatrna :-)}
 
 We made three experiments comparing performance of standard 
 \textit{ramped half-and-half strategy} with our
@@ -718,35 +669,33 @@ building blocks context $\Gamma$ are following.
 where
 
 \noindent
-\begin{minipage}{.9\linewidth}
+\begin{minipage}{.5\linewidth}
 \begin{align*}
 rdiv(p,q) &= \begin{cases} 1 &\mbox{if } q = 0 \\
 p/q & \mbox{otherwise } \end{cases}  
 \end{align*}
 \end{minipage}%
 
-\begin{minipage}{.9\linewidth}
+\begin{minipage}{.5\linewidth}
 \begin{align*}
 rlog(x) &= \begin{cases} 0 &\mbox{if } x = 0 \\
 log(\vert x\vert) & \mbox{otherwise}. \end{cases}
 \end{align*}
 \end{minipage}
 
-\vfill
+~\\
 
 Fitness function is computed as follows.
 
 $$ fitness(f) =  \frac{1}{1+ \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert }  $$
 where $(x_i,y_i)$ are 20 data samples from $[-1,1]$, such that $y_i = f_t(x_i)$.
 An individual $f$ such that $\vert f(x_i)-y_i \vert < 0.01 $ for all data samples is 
-considered as a correct individual.
+considered as a correct individual.\\
 
-\vfill
-
-\begin{figure}[!ht]
+\begin{figure}[h!]
   \centering
   \caption{Graphs for Simple symbolic regression.}
-  \includegraphics[scale=0.2]{imgs/cec/SSRb.PNG}
+  \includegraphics[scale=0.241]{imgs/cec/SSRb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -820,16 +769,18 @@ An individual such that eats all 89 pieces of food is
 considered as a correct solution.
 This limit is set to be 600 time steps\footnote{
 In \cite{koza92} this limit is said to be 400 time steps.
-But there is also mentioned one solution, which is described as correct solution. This program needs 545 time steps; if it is given only 400 time steps, then it eats only 79 pieces of food. 
-%But there is also mentioned following solution, which is described as correct solution: \texttt{(ifa m (p3 l (p2 (ifa m r) (p2 r (p2 l r)))(p2 (ifa m l) m)))}.
-%This program needs 545 time steps; if it is given only 400 time steps, then it eats only 79 pieces of food. 
-Thus we use 600 time steps. 
+But there is also mentioned following solution, 
+which is described as correct solution:
+\texttt{(ifa m (p3 l (p2 (ifa m r) (p2 r (p2 l r)))(p2 (ifa m l) m)))}.
+This program needs 545
+time steps; if it is given only 400 time steps, then it eats only 79 pieces
+of food. Thus we use 600 time steps. 
 }.
 
-\begin{figure}[!ht]
+\begin{figure}[h!]
   \centering
   \caption{Graphs for Artificial ant problem.}
-  \includegraphics[scale=0.2]{imgs/cec/ANTb.PNG}
+  \includegraphics[scale=0.26]{imgs/cec/ANTb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -844,7 +795,7 @@ SEM	 & 1.74	 & 1.24  \\
 N	 & 50    & 50    \\
 \hline
 t-value &  6.3479           & $\alpha = 0.05$\\
-p-value &  \textless 0.0001 &  \textbf{Extremely statist. significant.}\\
+p-value &  \textless 0.0001 &  \textbf{Extremely statistically significant.}\\
 \hline
 \end{tabular}
 \caption{Statistical analysis - Artificial ant problem.}
@@ -907,10 +858,10 @@ We use the same fitness function as in \cite{yu01}.
 The fitness function examines the individual by giving
 it all possible boolean lists of length 2 and 3.
 
-\begin{figure}[!ht]
+\begin{figure}[h!]
   \centering
   \caption{Graphs for Even parity problem.}
-  \includegraphics[scale=0.2]{imgs/cec/EPb.PNG}
+  \includegraphics[scale=0.26]{imgs/cec/EPb.PNG}
 \end{figure}
 
 \begin{table}[t]
@@ -1010,9 +961,6 @@ Our future research will focus on exploring other possible search strategies pos
 identified in this paper. Since the search strategy can be easily described by a rather simple filtration algorithm, it might be
 interesting to allow the typed GP system to evolve the search strategy it 
 utilizes in a kind of meta-evolution way. 
-
-\subsection*{Acknowledgements}
-Tomáš Křen has been partially supported by the project GA ČR P202/10/1333 and by the SVV project number 260~104. Roman Neruda has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002.
 
 %\red{Ještě nějak rozšířit.}
 

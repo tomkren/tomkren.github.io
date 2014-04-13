@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  11 APR 2014 14:19
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  13 APR 2014 06:42
 entering extended mode
 **gecco14.tex
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
@@ -574,18 +574,18 @@ Package color Info: Driver file: pdftex.def on input line 130.
 \c@proposition=\count129
 
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
 
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -601,363 +601,56 @@ LaTeX Font Info:    ... okay on input line 99.
 \makeMPintoPDFobject=\count135
 \everyMPtoPDFconversion=\toks42
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 152.
+LaTeX Font Info:    Try loading font information for U+msa on input line 173.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 152.
+LaTeX Font Info:    Try loading font information for U+msb on input line 173.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 152.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 173.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 152.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 173.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\omsaer.fd"
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 173.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 227.
 
-Overfull \hbox (14.63182pt too wide) in paragraph at lines 187--188
-[]\T1/aer/m/n/9 Zd·raznit ºe main con-tri-bu-tion of this pa-per je popis cross
-over
- []
-
-
-Overfull \hbox (6.91893pt too wide) in paragraph at lines 187--188
-\T1/aer/m/n/9 op-er-a-tions který [reka-pit-ulo-vat do-brý vlast-nosti na²eho k
-°íºení
- []
-
-LaTeX Font Info:    Try loading font information for T1+aett on input line 208.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ) [1{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
-]
-Overfull \hbox (12.65372pt too wide) in paragraph at lines 258--263
-\T1/aer/m/n/9 bre-vi-a-tion for $\OT1/cmr/m/n/9 ([] ((\OML/cmm/m/it/9 M[] []M[]
-\OT1/cmr/m/n/9 ) []\OML/cmm/m/it/9 M[]\OT1/cmr/m/n/9 ) [] []  []\OML/cmm/m/it/9
- M[]\OT1/cmr/m/n/9 )$\T1/aer/m/n/9 , and $\OML/cmm/m/it/9  x[]x[] [] x[] : M$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--270
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 286--289
-
- []
-
-
-Overfull \hbox (9.94731pt too wide) in paragraph at lines 321--325
-[]\T1/aer/m/n/9 Relation $\OMS/cmsy/m/n/9 ![] \OT1/cmr/m/n/9 = \OMS/cmsy/m/n/9 
-![] [ ![]$\T1/aer/m/n/9 . (Re-la-tion $\OML/cmm/m/it/9 R \OT1/cmr/m/n/9 = \OMS/
-cmsy/m/n/9 f \OT1/cmr/m/n/9 (\OML/cmm/m/it/9 a; b\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n
-/9 j \OML/cmm/m/it/9 a R b \OMS/cmsy/m/n/9 g$\T1/aer/m/n/9 .)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 321--325
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 338--340
-
- []
-
-[2]
-Overfull \hbox (1.06596pt too wide) in paragraph at lines 398--402
-[]\T1/aer/m/it/9 A state-ment $\OML/cmm/m/it/9 M [] [] $ \T1/aer/m/it/9 is der
-iv-able from a con-
- []
-
-
-Overfull \hbox (2.02396pt too wide) in paragraph at lines 442--446
-[]\T1/aer/m/it/9 If $\OML/cmm/m/it/9 M$ \T1/aer/m/it/9 has a $\OML/cmm/m/it/9 
-$\T1/aer/m/it/9 -nf, then it also has a unique
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 455--461
-
- []
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 470.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-
-LaTeX Warning: Command \AE invalid in math mode on input line 483.
-
-Missing character: There is no Æ in font cmr9!
-Missing character: There is no Æ in font cmr9!
-
-Overfull \hbox (3.27399pt too wide) in paragraph at lines 491--493
-\T1/aer/m/n/9 pro-cess. More op-ti-mized ver-sion (used in our \T1/aer/m/it/9 h
-y-brid \T1/aer/m/n/9 crossover
- []
-
-
-Overfull \hbox (10.69998pt too wide) in paragraph at lines 494--494
-[]\secfnt TERM GEN-ER-AT-ING AND RE-DUC-TIONS 
- []
-
-
-Overfull \hbox (2.72502pt too wide) in paragraph at lines 497--503
-[]\T1/aer/m/n/9 This sec-tion is fo-cused on the in-di-vid-ual gen-er-at-ing me
-thod
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 528--531
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 532--538
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 581--586
-
- []
-
-
-Underfull \vbox (badness 2469) has occurred while \output is active []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 612--615
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 645--653
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 679--682
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 683--685
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 688--693
-
- []
-
-
-Overfull \hbox (17.81758pt too wide) in paragraph at lines 713--717
-\T1/aer/m/n/9 swap-ping ran-domly se-lected sub-trees in each par-ent S-express
-ion.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 724--726
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 730--731
-
- []
-
-[5]
-Overfull \hbox (11.14919pt too wide) in paragraph at lines 830--831
-[]\T1/aer/m/n/9 The first thing to do in a stan-dard sub-tree swap-ping crossov
-er
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 847--848
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 849--852
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 854--859
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 862--867
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 868--871
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 872--875
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 889--890
-
- []
-
-[6] <grafy/EP.PNG, id=40, 902.6222pt x 2444.38219pt>
+] [2] [3] [4] [5]
+<grafy/EP.PNG, id=37, 902.6222pt x 2444.38219pt>
 File: grafy/EP.PNG Graphic file (type png)
  <use grafy/EP.PNG>
-Package pdftex.def Info: grafy/EP.PNG used on input line 950.
-(pdftex.def)             Requested size: 226.564pt x 613.55574pt.
+Package pdftex.def Info: grafy/EP.PNG used on input line 964.
+(pdftex.def)             Requested size: 180.52124pt x 488.86778pt.
+ [6]
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl [7 <C:/wamp/www/tomkren.
+github.io/tex/gecco14/grafy/EP.PNG>]) [8
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 969--970
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1009--1010
-
- []
-
-
-LaTeX Warning: Text page \thepage  contains only floats.
-
-
-Underfull \vbox (badness 2065) has occurred while \output is active []
-
- [7 <C:/wamp/www/tomkren.github.io/tex/gecco14/grafy/EP.PNG>]
-(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl) [8]
+]
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux) ) 
 Here is how much of TeX's memory you used:
- 3577 strings out of 493921
- 42085 string characters out of 3144876
- 119095 words of memory out of 3000000
- 6768 multiletter control sequences out of 15000+200000
- 64176 words of font info for 84 fonts, out of 3000000 for 9000
+ 3579 strings out of 493921
+ 42105 string characters out of 3144876
+ 119444 words of memory out of 3000000
+ 6770 multiletter control sequences out of 15000+200000
+ 67532 words of font info for 86 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 41i,20n,28p,1211b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,16n,28p,1155b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86
 )/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
@@ -979,7 +672,7 @@ fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/P
 rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program File
 s (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gecco14.pdf (8 pages, 394492 bytes).
+Output written on gecco14.pdf (8 pages, 395947 bytes).
 PDF statistics:
  111 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

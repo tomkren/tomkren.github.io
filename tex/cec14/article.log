@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  11 APR 2014 14:19
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  13 APR 2014 07:10
 entering extended mode
 **article.tex
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
@@ -446,20 +446,20 @@ File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 \c@definition=\count118
 
-** ATTENTION: Overriding command lockouts (line 108).
+** ATTENTION: Overriding command lockouts (line 107).
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
 
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -475,16 +475,17 @@ LaTeX Font Info:    ... okay on input line 117.
 \makeMPintoPDFobject=\count124
 \everyMPtoPDFconversion=\toks25
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 126.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 141.
+LaTeX Font Info:    Try loading font information for U+msa on input line 141.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 126.
+LaTeX Font Info:    Try loading font information for U+msb on input line 141.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 178.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 200.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
@@ -493,159 +494,42 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 219--222
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 269.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 243.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omspcr.fd"
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 243.
-
-Underfull \hbox (badness 1838) in paragraph at lines 238--252
-$\OML/cmm/m/it/10 M$\OT1/pcr/m/n/10 ;\OMS/cmsy/m/n/10 g\OT1/ptm/m/n/10 . In oth
-er words, the func-tion ap-pli-ca-tion cor-re-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 253--256
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 265--266
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--274
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--301
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 315--316
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--320
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 339--340
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 492--493
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 495--500
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 517--538
-
- []
-
-[4]
-Overfull \hbox (7.4861pt too wide) in paragraph at lines 676--676
-[] 
- []
-
-
-Overfull \hbox (14.83153pt too wide) in paragraph at lines 683--683
-[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 686--687
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 690--694
-
- []
-
-<imgs/cec/SSRb.PNG, id=30, 911.65594pt x 2681.51813pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 269.
+ [2] [3]
+[4] <imgs/cec/SSRb.PNG, id=30, 911.65594pt x 2681.51813pt>
 File: imgs/cec/SSRb.PNG Graphic file (type png)
- <use imgs/cec/SSRb.PNG>
-Package pdftex.def Info: imgs/cec/SSRb.PNG used on input line 698.
-(pdftex.def)             Requested size: 219.70609pt x 646.23709pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Text page 5 contains only floats.
-
-
-Overfull \vbox (7.0041pt too high) has occurred while \output is active []
-
-
-[5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/SSRb.PNG>]
-Underfull \hbox (badness 2635) in paragraph at lines 778--778
-[][][]\OT1/ptm/m/n/8 In [[]] this limit is said to be 400 time steps. But there
- is
- []
-
-<imgs/cec/ANTb.PNG, id=35, 827.34094pt x 2418.78656pt>
+<use imgs/cec/SSRb.PNG>
+Package pdftex.def Info: imgs/cec/SSRb.PNG used on input line 749.
+(pdftex.def)             Requested size: 182.32796pt x 536.29413pt.
+ [5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/SSRb.PNG>] <imgs/cec/ANTb
+.PNG, id=35, 827.34094pt x 2418.78656pt>
 File: imgs/cec/ANTb.PNG Graphic file (type png)
- <use imgs/cec/ANTb.PNG>
-Package pdftex.def Info: imgs/cec/ANTb.PNG used on input line 783.
-(pdftex.def)             Requested size: 215.10356pt x 628.86969pt.
 
+<use imgs/cec/ANTb.PNG>
+Package pdftex.def Info: imgs/cec/ANTb.PNG used on input line 832.
+(pdftex.def)             Requested size: 165.46526pt x 483.74875pt.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 847.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 798.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omlptm.fd"
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 798.
-
-Overfull \hbox (2.08159pt too wide) in paragraph at lines 788--801
- [][] 
- []
-
-
-LaTeX Warning: Text page 6 contains only floats.
-
-
-Underfull \vbox (badness 1242) has occurred while \output is active []
-
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 847.
  [6 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/ANTb.PNG>]
 <imgs/cec/EPb.PNG, id=39, 937.25156pt x 2444.38219pt>
 File: imgs/cec/EPb.PNG Graphic file (type png)
  <use imgs/cec/EPb.PNG>
-Package pdftex.def Info: imgs/cec/EPb.PNG used on input line 864.
-(pdftex.def)             Requested size: 243.67966pt x 635.52438pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Text page 7 contains only floats.
+Package pdftex.def Info: imgs/cec/EPb.PNG used on input line 913.
+(pdftex.def)             Requested size: 187.44699pt x 488.86778pt.
 
 [7 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/EPb.PNG>]
 (C:\wamp\www\tomkren.github.io\tex\cec14\article.bbl
@@ -669,13 +553,13 @@ Before submitting the final camera ready copy, remember to:
 
 [8] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
- 3410 strings out of 493921
- 45959 string characters out of 3144876
- 117852 words of memory out of 3000000
- 6643 multiletter control sequences out of 15000+200000
- 48000 words of font info for 97 fonts, out of 3000000 for 9000
+ 3433 strings out of 493921
+ 46313 string characters out of 3144876
+ 117856 words of memory out of 3000000
+ 6667 multiletter control sequences out of 15000+200000
+ 50291 words of font info for 107 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 27i,16n,24p,606b,308s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,16n,24p,609b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x
 86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9
@@ -694,7 +578,7 @@ rr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on article.pdf (8 pages, 579512 bytes).
+Output written on article.pdf (8 pages, 579653 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
