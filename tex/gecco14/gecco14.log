@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  13 APR 2014 06:42
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  14 APR 2014 16:56
 entering extended mode
 **gecco14.tex
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.tex
@@ -601,29 +601,29 @@ LaTeX Font Info:    ... okay on input line 120.
 \makeMPintoPDFobject=\count135
 \everyMPtoPDFconversion=\toks42
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 173.
+LaTeX Font Info:    Try loading font information for U+msa on input line 176.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 173.
+LaTeX Font Info:    Try loading font information for U+msb on input line 176.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 173.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 176.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 173.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 176.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\omsaer.fd"
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 173.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 227.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 176.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 234.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
@@ -635,19 +635,26 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 <grafy/EP.PNG, id=37, 902.6222pt x 2444.38219pt>
 File: grafy/EP.PNG Graphic file (type png)
  <use grafy/EP.PNG>
-Package pdftex.def Info: grafy/EP.PNG used on input line 964.
+Package pdftex.def Info: grafy/EP.PNG used on input line 967.
 (pdftex.def)             Requested size: 180.52124pt x 488.86778pt.
  [6]
-(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl [7 <C:/wamp/www/tomkren.
-github.io/tex/gecco14/grafy/EP.PNG>]) [8
+<crossover.png, id=41, 380.17032pt x 542.025pt>
+File: crossover.png Graphic file (type png)
+ <use crossover.png>
+Package pdftex.def Info: crossover.png used on input line 1049.
+(pdftex.def)             Requested size: 224.29854pt x 319.79198pt.
+ [7 <C:/wamp/www/tomkren.github.io/tex/gecco14/grafy/EP.PNG>]
+Underfull \vbox (badness 1803) has occurred while \output is active []
 
-]
+
+(C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.bbl) [8 <C:/wamp/www/tomkren
+.github.io/tex/gecco14/crossover.png>]
 (C:\wamp\www\tomkren.github.io\tex\gecco14\gecco14.aux) ) 
 Here is how much of TeX's memory you used:
- 3579 strings out of 493921
- 42105 string characters out of 3144876
+ 3585 strings out of 493921
+ 42193 string characters out of 3144876
  119444 words of memory out of 3000000
- 6770 multiletter control sequences out of 15000+200000
+ 6774 multiletter control sequences out of 15000+200000
  67532 words of font info for 86 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  41i,16n,28p,1155b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -672,9 +679,9 @@ fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/P
 rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program File
 s (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gecco14.pdf (8 pages, 395947 bytes).
+Output written on gecco14.pdf (8 pages, 418508 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

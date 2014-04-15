@@ -119,6 +119,9 @@ http://dx.doi.org/10.1145/2576768.2598361}
 
 \begin{document}
 
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
 %\conferenceinfo{GECCO'14,} {July 12-16, 2014, Vancouver, BC, Canada.}
 %\CopyrightYear{2014}
 %\crdata{TBA}
@@ -172,8 +175,8 @@ http://dx.doi.org/10.1145/2576768.2598361}
 
 \maketitle
 \begin{abstract}
-Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from the use of reductions (beta and eta) and a way to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and propose several crossover approaches, two of which are based on abstraction elimination and compared using the even parity benchmark problem.
-\red{Přidat víc o kříženích tak aby davál insight to the project. Možná i o tom že je to zobecnení std GP.}
+Lambda calculus representation of programs offers a more expressive alternative to traditional S-expressions. In this paper we discuss advantages of this representation coming from the use of reductions (beta and eta) and a way to overcome disadvantages caused by variables occurring in the programs by use of the abstraction elimination algorithm. We discuss the role of those reductions in the process of generating initial population and propose two novel crossover operations based on abstraction elimination capable of handling general form of typed lambda term while being a straight generalization of the standard crossover operation.  We compare their performances using the even parity benchmark problem. 
+%\red{Přidat víc o kříženích tak aby davál insight to the project. Možná i o tom že je to zobecnení std GP.}
 %including novel approach to crossover operator based both on reductions and abstraction elimination. 
 %The design goal of this operator is to turn the disadvantage of abstraction elimination  - possibly quadratic increase of program size - into a virtue; our approach leads to more crossover points. At the same time, utilization of reductions provides offspring of small sizes.
 \end{abstract}
@@ -189,7 +192,7 @@ Lambda calculus representation of programs offers a more expressive alternative 
 
 \terms{Experimentation, Languages, Theory}
 
-\keywords{genetic programming, lambda calculus}
+\keywords{genetic programming; lambda calculus}
 
 \section{Introduction}
 
@@ -197,24 +200,28 @@ Lambda calculus representation of programs offers a more expressive alternative 
 Genetic programming (GP) represents an efficient method for automatic generating of programs by means of evolutionary techniques~\cite{koza92,koza03}. Early attempts to enhance the GP approach with the concept of types include the seminal work~\cite{montana95} where the ideas from Ada programming language were used to define a so-called strongly typed GP.   
 Usage of types naturally opens door to enriching S-expressions,
 the traditional GP representation of individuals, with concepts from
-lambda calculus, which is a simple yet powerful functional, mathematical and programming language extensively used in type theory. Such attempts have shown to be successful \cite{yu01}. 
+lambda calculus, which is a simple yet powerful functional, mathematical and programming language extensively used in type theory~\cite{yu01}. 
 
 One of the motivations for using lambda calculus is that it is backed by a considerable theoretical background. From this background we can utilize several useful concepts such as reductions, normalization or abstraction elimination, and use them to enhance the standard GP algorithm. We use normalization to reduce the size of the search space of program trees and the abstraction elimination to prevent
 the difficulties caused by the presence of variables in program trees.
 
-In our system we use simply typed lambda calculus. Since abstraction elimination and reductions do not involve many type related issues it seems to us as a sufficient choice of type system. Techniques described here would be analogous for a more sophisticated type system and can be directly applied to such systems as the Hindley–Milner type system.
+In our system we use a simply typed lambda calculus. Since abstraction elimination and reductions do not involve many type related issues it seems to us as a sufficient choice of a type system. Techniques described here would be analogous for a more sophisticated type system and can be directly applied to such systems as the Hindley–Milner type system.
 
 
-In this paper we present an approach to typed GP over lambda calculus capable of operating with the full arsenal given by simply typed lambda calculus while being a direct generalization of standard GP\cite{koza92}. We discuss the advantages of generating lambda terms in their long normal form and present the novel \textit{hybrid} crossover operation. Compared to the approach to typed GP over lambda calculus  proposed by Yu\cite{yu01} it uses more general term representation which is not restricting the use of outer local variables in the body of an anonymous function. Compared to the purely combinator approach by Briggs and O’Neill\cite{kes} it has the advantage of reducing the size of the search space in the term generation phase.
+In this paper we present an approach to typed GP over lambda calculus capable of operating with the full array of notions given by a simply typed lambda calculus while being a direct generalization of standard GP~\cite{koza92}. We discuss the advantages of generating lambda terms in their long normal form and present two novel crossover operations for simply typed lambda terms. Compared to the approach to typed GP over lambda calculus  proposed by 
+Yu~\cite{yu01}, it uses more general term representation which is not restricting the use of outer local variables in the body of an anonymous function. Compared to the purely combinator approach by Briggs and 
+O’Neill~\cite{kes}, it has the advantage of reducing the size of the search space in the term generation phase.
 
 %\red{Možná někam poznamenat že přínos toho článku je taky v tom že zpřístupňuje pojmy z teorie typovaného lc komunitě typovaného GP esli to neni blbý..}
 
 
 The rest of the paper is organized as follows: The next section briefly discusses related work in the field of typed GP, while section~\ref{preliminaries} introduces necessary notions.
-The body of the paper is presented in sections \ref{generating} and \ref{crossover}; the first discusses the term generating 
+The body of the paper is presented in sections \ref{generating} and \ref{crossover}; the former discusses the term generating 
 procedure and its relations
-with reductions, the second describes several approaches to lambda term
-crossover and how they solve the variable problem. Section~\ref{experiments} examines those ideas on the even parity benchmark problem, while the paper is concluded by section~\ref{conclusions}.
+with reductions, the latter describes several approaches to lambda term
+crossover, and how they solve the variable problem. Section~\ref{experiments} examines those ideas on the even parity benchmark problem, while the paper is concluded by section~\ref{conclusions}.
+
+\vfill
 
 \section{Related work}
 \label{related}
@@ -222,18 +229,18 @@ crossover and how they solve the variable problem. Section~\ref{experiments} exa
 Yu presents a GP system utilizing
 polymorphic higher-order functions
 %\footnote{Higher-order function is a function taking another function as input parameter.} 
-and lambda abstractions  \cite{yu01}.
-An important point of interest in the work is use of
-\texttt{foldr} function as a tool for \textit{implicit recursion}, i.e. recursion without explicit recursive calls. The terminal set for constructing lambda abstraction subtrees  is limited to use only constants and variables of that particular lambda abstraction, i.e., outer variables are not allowed to be used as terminals in this work. This is a significant difference from our approach since we permit all well-typed normalized \lterms. This difference also causes the need for different crossover operators.  
+and lambda abstractions~\cite{yu01}.
+An important point of interest in the work is the use of
+\texttt{foldr} function as a tool for \textit{implicit recursion}, i.e., recursion without explicit recursive calls. The terminal set for constructing lambda abstraction subtrees  is limited to use only constants and variables of that particular lambda abstraction, i.e., outer variables are not allowed to be used as terminals in this work. This is a significant difference from our approach since we permit all well-typed normalized \lterms. This difference also causes the need for different crossover operators.  
 
 Briggs and O’Neill present a technique 
 utilizing typed GP with combinators \cite{kes}.
-The difference between approach presented in their work
-and our approach is that they generate terms in a straightforward way directly from the library of combinators, without any use of lambda abstractions. They use the Hindley–Milner type system. They also present interesting concept of \textit{Generalized genetic operator} based on term generation. The combinator based genetic algorithm has the advantage of avoiding the need of dealing with variables.
+The difference between the approach presented in their work
+and our approach is that they generate terms in a straightforward way directly from the library of combinators, without any use of lambda abstractions. They use the Hindley–Milner type system. They also present an interesting concept of \textit{Generalized genetic operator} based on term generation. The combinator based genetic algorithm has the advantage of avoiding the need of dealing with variables.
 
-Binard and Felty use even stronger type system (\textit{System F}) \cite{binard2008genetic}. But with the increasing power of the type system also comes an increasing difficulty of term generation. For this reason, the evolution in this work takes interesting and nonstandard shape (fitness is associated with \textit{genes} which are evolved together with \textit{species} which together participate in creation of individuals). This differs from our approach, which tries to be a generalization of the standard GP\cite{koza92}.
+Binard and Felty use an even stronger type system, the (\textit{System F}) \cite{binard2008genetic}. But with the increasing power of the type system also comes an increasing difficulty of term generation. For this reason, the evolution in this work takes interesting and nonstandard shape (fitness is associated with \textit{genes} which are evolved together with \textit{species} which together participate in creation of individuals). This differs from our approach which tries to be a straightforward generalization of the standard GP\cite{koza92}.
 
-In contrast with the above mentioned works, our approach uses very simple type system (simply typed lambda calculus) and concentrates on process of generation  
+In contrast to the above mentioned works, our approach uses a very simple type system (the simply typed lambda calculus) and concentrates on process of generation  
 able to generate all possible well-typed normalized lambda terms. In order to do so we use technique based on \textit{inhabitation machines} described by Barendregt\cite{barendregt10}.    
 
 \section{Preliminaries}
@@ -337,11 +344,10 @@ Analogically, a term of a form $\lamb{x}{(M~x)}$ is called
 \textit{$\eta$-redex}.
 
 Relation\footnote{Relation $R = \{\;(a,b)\;|\;a\;R\;b\;\}$.} $\bearr\;=\;\barr \cup \earr$.
-
 Similarly as for $\bbarr$ and $\beq$ we can define relations 
 $\eearr$, $\eeq$,$\bbeearr$ and $\beeq$.
 
-$\eta^{-1}$-reduction (also called $\eta$-expansion) is 
+The $\eta^{-1}$-reduction (also called $\eta$-expansion) is 
 the reduction converse to $\eta$-reduction.
 It is defined as follows.  
 $$M \eeArrow \lamb{x}{(M~x)} \textbf{ ~~~~if } x \not\in FV(M) $$
@@ -357,9 +363,9 @@ if it does not have a $\beta$-redex as subterm.
 and $N$ is a \bnf.
 \end{easylist}
 \end{definition}
+
 A normal form may be thought of as a result of a term evaluation. 
 Normalization of the term $M$ is the process of finding normal form of $M$. 
-
 Similarly we can define \enf and \benf.
 
 \subsection{Types}
@@ -782,6 +788,8 @@ polymorphic combinators (i.e. $\Scomb$, $\Kcomb$ and $\Icomb$
 in the simple case of the algorithm). When there are no variables
 we can freely swap the subtrees of the same type.
 
+We also use a little trick; if the type of the individual is a function type it is not necessary to abstract out the input variables (and to them associated lambda heads) of the function since all the individuals share them. (This is illustrated by the figure~2 bellow, where the root lambda head $\lambda x$ is still on the trees and so is the variable $x$ in the leafs.)   
+
 We identified two approaches that utilize abstraction elimination.
 
 \subsection{Hybrid crossover}
@@ -851,17 +859,12 @@ sets may be empty, because of allowing only nodes with possible "partner"
 in the second parent. Thus we do this step only if both sets are
 nonempty. 
 
-After selecting a node in the first parent we select node in the
-second parent such that the type of that node must correspond to the type of
-of the first node. Again, this may eliminate the "90-10" step of
-first deciding whether the selected node will be internal node 
-or leaf node.
+After selecting a node in the first parent we select node in the second parent such that the type of that node must correspond to the type of the first node. Again, this may eliminate the "90-10" step of first deciding whether the selected node will be internal node or leaf node.
 
 When both nodes are selected we may swap the trees.
 
 If the abstraction elimination was performed, then 
-since the trees are of the same type, and there are no variables to be 
-moved from their scope, the offspring trees are well typed.
+since the trees are of the same type, and there are no variables to be moved from their scope, the offspring trees are well typed.
 
 Both \sexprTree and \atTree are able to be crossed by this 
 mechanism. But \atTree has more possibilities than \sexprTree.
@@ -910,11 +913,11 @@ In this section we demonstrate our approach on the well-known even parity proble
 We made two experiments, in the first we have used the \textit{hybrid} crossover, while in the second we have used the \textit{unpacking} crossover. 
 
 Each experiment consisted of 50 independent runs 
-of GP algorithm. Each run had maximally 51 generations and population size
+of GP algorithm. Each run had a limit of 51 generations, and the population size
 was 500 individuals.
 In the experiments we analyze the fitness of the best individual,
 the average size of an individual,
-the ability of the system to produce a correct solution 
+the ability of the system to produce a correct solution, 
 and computational cost estimates throughout generations. 
 For the last two metrics we use the popular measurement  
 methods within the GP field --- the \textit{performance curves}
@@ -935,14 +938,14 @@ We use very similar set of \textit{building symbols} as in \cite{yu01}.
 \begin{align*}
 \tau = [Boo&l] \ar Bool\\
 \Gamma = \{
-  and   &: Bool \ar Bool \ar Bool                              ,\\
-  or    &: Bool \ar Bool \ar Bool                              ,\\
-  nand  &: Bool \ar Bool \ar Bool                              ,\\
-  nor   &: Bool \ar Bool \ar Bool                              ,\\
+  and   &: Bool \ar Bool \ar Bool    ,\\
+  or    &: Bool \ar Bool \ar Bool    ,\\
+  nand  &: Bool \ar Bool \ar Bool    ,\\
+  nor   &: Bool \ar Bool \ar Bool    ,\\
   foldr &: (Bool \ar Bool \ar Bool) \\
         &~~~\ar Bool \ar [Bool] \ar Bool ,\\
-  head' &: [Bool] \ar Bool                                   ,\\
-  tail' &: [Bool] \ar [Bool]                              \}
+  head' &: [Bool] \ar Bool ,\\
+  tail' &: [Bool] \ar [Bool]        \}
 \end{align*}
 
 The type $[Bool]$ stands for \textit{list of $Bool$s} and for purpose of
@@ -993,15 +996,15 @@ statistically significant.
 The \textit{unpacking} crossover scored 23/50 (46\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 0 with 114,000 individuals to be processed.
 The average individual size for generation 50 was 83.1.
-The experiment took 388 minutes.
+
 
 The \textit{hybrid} crossover scored 32/50 (64\%) success rate. 
 Minimal $I(M,i,z)$ was in generation 0 with 28,000 individuals to be processed.
 The average individual size for generation 50 was 74.3.
-The experiment took 33 minutes.
 
-Comparison with other results is summarized in table 2.
-
+Comparison with other results taken from literature is summarized in table 2.
+Concerning the time complexity, both experiments were run under same conditions on a fairly standard machine with 4 core 3.3 GHz processor and 4 GB RAM. The first experiment took 388 minutes while the second one took 
+33 minutes.
 
 \begin{table}[t]
 \centering
@@ -1022,24 +1025,47 @@ GP with ADFs           &1,440,000      \\
 \caption{Results comparison.}
 \end{table}
 
-\red{ukazat jedince krizeni a okomentovat}
+We have also analyzed ratio of failed crossovers due to exceeding the maximal permissible depth. Only around 0.5\% of offspring created by the unpacking crossover fail due to exceeding the limit and 0.2\% for the hybrid crossover. Thus we conclude that the case of crossover failure does not have a significant effect on the performance of the operators.
+
+%\red{ukazat jedince krizeni a okomentovat}
+
+In order to illustrate how the individuals actually look like and how the crossover works, figure~2 depicts creation of the correct solution by the hybrid crossover in one particular run of the system. 
+
+The found correct solution can be rewritten as: 
+\begin{align*}
+\lambda~x~.~&foldr~(\Scomb(\Scomb (\Kcomb~\Scomb) (\Scomb (\Kcomb (\Scomb  (\Kcomb~nor) ) ) and) ) nor )  \\
+ & (nor~(head'~x)~(head'~x))~ ~(tail'~x)\\
+ \beeq & \\
+\lambda~x~.~&foldr~(\lambda~y~z~.~nor~(and~y~z)~(nor~y~z)  )\\
+ & (nor~(head'~x)~(head'~x))~ ~(tail'~x)\\
+ \textit{Which~} & \textit{is equivalent to:}\\
+\lambda~x~.~&foldr~xor~(not~(head'~x))~ ~(tail'~x) 
+\end{align*}
+
+
+\begin{figure}[!ht]
+  \centering
+  \caption{Hybrid crossover example.}
+  \includegraphics[scale=0.59]{crossover.png} %0.251
+\end{figure}
+
 
 \section{Conclusions}
 \label{conclusions}
 
-\red{zmínit generování}
+In this paper we presented a generalization of standard GP based on simply typed lambda calculus trees. We discussed the advantages of generating lambda terms in their long normal form and presented two novel crossover operations for this system.
 
-We have presented two approaches to crossover for typed GP over lambda terms. The first one (\textit{hybrid}) transforms all generated individuals into combinator terms at the end of generation phase. The second crossover approach (\textit{unpacking}) uses the lambda term representation during the whole run, except for the temporary phases during the crossover. We have compared their relative performance on even parity problem. It shows that the first one is performing the same or better in all observed metrics. 
+The first one --- the \textit{hybrid} crossover --- transforms all generated individuals into combinator terms at the end of generation phase. The second crossover approach --- the \textit{unpacking} crossover --- uses the lambda term representation during the whole run, except for the temporary phases during the crossover. We have compared their relative performance on even parity problem; the first one is performing the same or better in all observed metrics. Since the use of the \textit{unpacking} crossover brings a significant computational overhead while its performance is the same or worse than the performance of the \textit{hybrid} crossover we conclude that 
+the \textit{hybrid} crossover is better suited for the job.
 %\red{This was surprising result for us.}
 
-According to comparison of "individuals to be processed" metric our GP approach is performing better than the GP system presented in \cite{kes} and worse than the one presented in \cite{yu01}. By observation of typical solution which is often some modification of \texttt{foldr xor False inputList} one sees that an important task for GP here is to create \texttt{xor} function. This is the advantage for the more specialized term representation used in \cite{yu01}, which 
-restricts the use of outer variables. 
-It is also fair to say, that this popular metric (in which the comparison data are available) is somehow problematic, since it is prone to have large variation across various instances of the same experiment \cite{luke2002perfect}. As is also visible from our results; both our approaches scored best in generation 0 thus the result depended only on the generation method which those two approaches shared, yet the individuals to be processed estimates are quite different.
+According to comparison of "individuals to be processed" metric our GP approach is performing better than the GP system presented in \cite{kes} and worse than the one presented in \cite{yu01}. By observation of typical solution which is often some modification of \texttt{foldr xor True inputList} one sees that an important task for GP here is to create \texttt{xor} function. This is the advantage for the more specialized term representation used in \cite{yu01}, which restricts the use of outer variables. 
 
-In the future work, we would like to support our theoretical results concerning relations of generating procedure and reductions described in this paper with substantialy extended experimental results.
+It is also fair to say, that this popular metric (in which the comparison data are available) is somehow problematic, since it is prone to have large variation across various instances of the same experiment \cite{luke2002perfect}. As is also visible from our results; both our approaches scored best in generation 0 thus the result shown in table 2 depended only on the generation method which those two approaches shared, yet the individuals to be processed estimates are quite different.
 
-In this paper we touched varied aspects of the two lambda calculus concepts -- reductions and abstraction elimination -- in the hope that it will shed some more
-light on the promising intersection of lambda calculus and genetic programming.
+In the future work, we would like to support our theoretical results concerning relations of generating procedure and reductions described in this paper with substantially extended experimental results.
+
+In this paper we touched varied aspects of the two lambda calculus concepts -- reductions and abstraction elimination -- in the hope that it will shed some more light on the promising intersection of lambda calculus and genetic programming.
 
 
 
@@ -1060,10 +1086,11 @@ light on the promising intersection of lambda calculus and genetic programming.
 %}
 
 
+
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
 
-Tomáš Křen has been partially supported by the project GA ČR P202/10/1333 and by the SVV project number 260~104. Roman Neruda has been partially supported by The Ministry of Education of the Czech Republic project COST LD 13002.
+Tom\'{a}\v{s} K\v{r}en has been partially supported by the project GA \v{C}R P202/10/1333 and by the SVV project number 260~104. Roman Neruda has been partially supported by The Ministry of Education of the Czech Republic project COST LD 13002.
 
 \bibliographystyle{abbrv}
 \bibliography{evogp}  % sigproc.bib is the name of the Bibliography in this case

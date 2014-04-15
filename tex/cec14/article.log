@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  13 APR 2014 07:10
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 APR 2014 05:43
 entering extended mode
 **article.tex
-(C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
+(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,85 +13,91 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\wamp\www\tomkren.github.io\tex\cec14\IEEEtran.cls
-Document Class: IEEEtran 2002/08/13 revision V1.6 by Michael Shell
+(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\IEEEtran.cls
+Document Class: IEEEtran 2012/11/21 V1.8c by Harald Hanche-Olsen and Anders Chr
+istensen
+-- Based on V1.7a by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
--- The source comments contain changelog notes.
+-- http://www.michaelshell.org/tex/ieeetran/
 \@IEEEtrantmpdimenA=\dimen102
 \@IEEEtrantmpdimenB=\dimen103
 \@IEEEtrantmpcountA=\count79
 \@IEEEtrantmpcountB=\count80
 \@IEEEtrantmptoksA=\toks14
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 692.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 373.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen104
 -- This is a 10 point document.
-\normalsizebaselineskip=\skip41
-\normaljot=\skip42
+\CLASSINFOnormalsizebaselineskip=\dimen105
+\CLASSINFOnormalsizeunitybaselineskip=\dimen106
+\IEEEnormaljot=\dimen107
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 990.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 990.
-\IEEEilabelindentA=\dimen104
-\IEEEilabelindentB=\dimen105
-\IEEEilabelindent=\dimen106
-\IEEEelabelindent=\dimen107
-\IEEEdlabelindent=\dimen108
-\labelindent=\dimen109
-\IEEEiednormlabelsep=\dimen110
-\IEEEiedmathlabelsep=\dimen111
-\IEEEiedtopsep=\skip43
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+\IEEEilabelindentA=\dimen108
+\IEEEilabelindentB=\dimen109
+\IEEEilabelindent=\dimen110
+\IEEEelabelindent=\dimen111
+\IEEEdlabelindent=\dimen112
+\IEEElabelindent=\dimen113
+\IEEEiednormlabelsep=\dimen114
+\IEEEiedmathlabelsep=\dimen115
+\IEEEiedtopsep=\skip41
 \c@section=\count81
 \c@subsection=\count82
 \c@subsubsection=\count83
 \c@paragraph=\count84
 \c@IEEEsubequation=\count85
-\abovecaptionskip=\skip44
-\belowcaptionskip=\skip45
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
 \c@figure=\count86
 \c@table=\count87
 \@IEEEeqnnumcols=\count88
 \@IEEEeqncolcnt=\count89
-\@IEEEtmpitemindent=\dimen112
-\c@biography=\count90
+\@IEEEtmpitemindent=\dimen116
+\c@IEEEbiography=\count90
 \@IEEEtranrubishbin=\box26
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
@@ -323,7 +329,7 @@ Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
 Package: amsmath 2013/01/14 v2.14 AMS math features
-\@mathmargin=\skip46
+\@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
@@ -332,11 +338,11 @@ Package: amstext 2000/06/29 v2.01
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks18
-\ex@=\dimen113
+\ex@=\dimen117
 ))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen114
+\pmbraise@=\dimen118
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
@@ -353,7 +359,7 @@ LaTeX Info: Redefining \dots on input line 381.
 LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box27
 \strutbox@=\box28
-\big@size=\dimen115
+\big@size=\dimen119
 LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count96
@@ -366,15 +372,15 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \column@=\count101
 \maxfields@=\count102
 \andhelp@=\toks20
-\eqnshift@=\dimen116
-\alignsep@=\dimen117
-\tagshift@=\dimen118
-\tagwidth@=\dimen119
-\totwidth@=\dimen120
-\lineht@=\dimen121
+\eqnshift@=\dimen120
+\alignsep@=\dimen121
+\tagshift@=\dimen122
+\tagwidth@=\dimen123
+\totwidth@=\dimen124
+\lineht@=\dimen125
 \@envbody=\toks21
-\multlinegap=\skip47
-\multlinetaggap=\skip48
+\multlinegap=\skip45
+\multlinetaggap=\skip46
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
@@ -408,9 +414,57 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count103
 ))
-\Gin@req@height=\dimen122
-\Gin@req@width=\dimen123
+\Gin@req@height=\dimen126
+\Gin@req@width=\dimen127
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+))
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
 Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \el@CounterTotal=\count104
@@ -427,11 +481,11 @@ Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \c@List8=\count115
 \c@List9=\count116
 \c@List10=\count117
-\el@ProgressiveDimension=\dimen124
+\el@ProgressiveDimension=\dimen128
 \el@CounterBox=\box29
 \el@ControlBox=\box30
-\el@TotalMargin=\dimen125
-\el@LeftMove=\dimen126
+\el@TotalMargin=\dimen129
+\el@LeftMove=\dimen130
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
@@ -444,49 +498,96 @@ Package color Info: Driver file: pdftex.def on input line 130.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\dvipsnam.def"
 File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
-\c@definition=\count118
-
-** ATTENTION: Overriding command lockouts (line 107).
-(C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
+(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithm2e\algorithm2e.st
+y
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count118
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+********************************************************
+Package `algorithm2e' Release 5.0 -- january 06 2013 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (cfiorio@um2.fr)
+********************************************************
+\skiptotal=\skip47
+\skiplinenumber=\skip48
+\skiprule=\skip49
+\skiphlne=\skip50
+\skiptext=\skip51
+\skiplength=\skip52
+\algomargin=\skip53
+\skipalgocfslide=\skip54
+\algowidth=\dimen131
+\inoutsize=\dimen132
+\inoutindent=\dimen133
+\interspacetitleruled=\dimen134
+\interspacealgoruled=\dimen135
+\interspacetitleboxruled=\dimen136
+\algocf@inoutbox=\box31
+\algocf@inputbox=\box32
+\AlCapSkip=\skip55
+\AlCapHSkip=\skip56
+\algoskipindent=\skip57
+\algocf@nlbox=\box33
+\algocf@hangingbox=\box34
+\algocf@untilbox=\box35
+\algocf@skipuntil=\skip58
+\algocf@capbox=\box36
+\algoheightruledefault=\skip59
+\algoheightrule=\skip60
+\algotitleheightruledefault=\skip61
+\algotitleheightrule=\skip62
+\c@algocfline=\count119
+\c@algocfproc=\count120
+\c@algocf=\count121
+\algocf@algoframe=\box37
+\algocf@algobox=\box38
+)
+\c@definition=\count122
+ (C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
 
 (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count119
-\scratchdimen=\dimen127
-\scratchbox=\box31
-\nofMPsegments=\count120
-\nofMParguments=\count121
+\scratchcounter=\count123
+\scratchdimen=\dimen137
+\scratchbox=\box39
+\nofMPsegments=\count124
+\nofMParguments=\count125
 \everyMPshowfont=\toks24
-\MPscratchCnt=\count122
-\MPscratchDim=\dimen128
-\MPnumerator=\count123
-\makeMPintoPDFobject=\count124
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen138
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
 \everyMPtoPDFconversion=\toks25
 )
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 141.
-LaTeX Font Info:    Try loading font information for U+msa on input line 141.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 139.
+LaTeX Font Info:    Try loading font information for U+msa on input line 139.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 141.
+LaTeX Font Info:    Try loading font information for U+msb on input line 139.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 200.
-
+** ATTENTION: \PARstart is deprecated (line 148). Use \IEEEPARstart instead.
+** WARNING: \IEEEPARstart is locked out when in conference mode (line 148).
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 174.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -494,45 +595,79 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 269.
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 242.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omspcr.fd"
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 269.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 242.
  [2] [3]
-[4] <imgs/cec/SSRb.PNG, id=30, 911.65594pt x 2681.51813pt>
-File: imgs/cec/SSRb.PNG Graphic file (type png)
+[4]
+Package epstopdf Info: Source file: <imgs/SSR.eps>
+(epstopdf)                    date: 2014-04-14 23:14:06
+(epstopdf)                    size: 237645 bytes
+(epstopdf)             Output file: <imgs/SSR-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-04-14 23:59:32
+(epstopdf)                    size: 179429 bytes
+(epstopdf)             Command: <epstopdf --outfile=imgs/SSR-eps-converted-to.p
+df imgs/SSR.eps>
+(epstopdf)             \includegraphics on input line 778.
+Package epstopdf Info: Output file is already uptodate.
+ <imgs/SSR-eps-converted-to.pdf, id=30, 1215.54124pt x 3575.3575pt>
+File: imgs/SSR-eps-converted-to.pdf Graphic file (type pdf)
 
-<use imgs/cec/SSRb.PNG>
-Package pdftex.def Info: imgs/cec/SSRb.PNG used on input line 749.
-(pdftex.def)             Requested size: 182.32796pt x 536.29413pt.
- [5 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/SSRb.PNG>] <imgs/cec/ANTb
-.PNG, id=35, 827.34094pt x 2418.78656pt>
-File: imgs/cec/ANTb.PNG Graphic file (type png)
+<use imgs/SSR-eps-converted-to.pdf>
+Package pdftex.def Info: imgs/SSR-eps-converted-to.pdf used on input line 778.
+(pdftex.def)             Requested size: 145.85866pt x 429.0244pt.
+ [5]
+Package epstopdf Info: Source file: <imgs/ANT.eps>
+(epstopdf)                    date: 2014-04-15 00:01:15
+(epstopdf)                    size: 211170 bytes
+(epstopdf)             Output file: <imgs/ANT-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-04-15 00:03:10
+(epstopdf)                    size: 147787 bytes
+(epstopdf)             Command: <epstopdf --outfile=imgs/ANT-eps-converted-to.p
+df imgs/ANT.eps>
+(epstopdf)             \includegraphics on input line 909.
+Package epstopdf Info: Output file is already uptodate.
 
-<use imgs/cec/ANTb.PNG>
-Package pdftex.def Info: imgs/cec/ANTb.PNG used on input line 832.
-(pdftex.def)             Requested size: 165.46526pt x 483.74875pt.
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 847.
+<imgs/ANT-eps-converted-to.pdf, id=35, 1103.12125pt x 3225.04875pt>
+File: imgs/ANT-eps-converted-to.pdf Graphic file (type pdf)
+
+<use imgs/ANT-eps-converted-to.pdf>
+Package pdftex.def Info: imgs/ANT-eps-converted-to.pdf used on input line 909.
+(pdftex.def)             Requested size: 143.4108pt x 419.27106pt.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 925.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omlptm.fd"
 File: omlptm.fd 
 )
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 847.
- [6 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/ANTb.PNG>]
-<imgs/cec/EPb.PNG, id=39, 937.25156pt x 2444.38219pt>
-File: imgs/cec/EPb.PNG Graphic file (type png)
- <use imgs/cec/EPb.PNG>
-Package pdftex.def Info: imgs/cec/EPb.PNG used on input line 913.
-(pdftex.def)             Requested size: 187.44699pt x 488.86778pt.
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <7> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 925.
+ [6 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/SSR-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <imgs/EP.eps>
+(epstopdf)                    date: 2014-04-15 00:02:02
+(epstopdf)                    size: 212400 bytes
+(epstopdf)             Output file: <imgs/EP-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-04-15 00:03:11
+(epstopdf)                    size: 147673 bytes
+(epstopdf)             Command: <epstopdf --outfile=imgs/EP-eps-converted-to.pd
+f imgs/EP.eps>
+(epstopdf)             \includegraphics on input line 990.
+Package epstopdf Info: Output file is already uptodate.
 
-[7 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/cec/EPb.PNG>]
-(C:\wamp\www\tomkren.github.io\tex\cec14\article.bbl
+<imgs/EP-eps-converted-to.pdf, id=42, 1249.66875pt x 3259.17625pt>
+File: imgs/EP-eps-converted-to.pdf Graphic file (type pdf)
+
+<use imgs/EP-eps-converted-to.pdf>
+Package pdftex.def Info: imgs/EP-eps-converted-to.pdf used on input line 990.
+(pdftex.def)             Requested size: 149.95378pt x 391.08427pt.
+ [7 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/ANT-eps-converted-to.pdf> <C
+:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/EP-eps-converted-to.pdf>] (C:\User
+s\sekol\Dropbox\MASOMRK\tom\cec14\article.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
@@ -549,38 +684,38 @@ Before submitting the final camera ready copy, remember to:
 
  2. Ensure that any PostScript and/or PDF output post-processing
  uses only Type 1 fonts and that every step in the generation
- process uses the US letter (8.5in X 11in) paper size.
+ process uses the appropriate paper size.
 
-[8] (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
+[8] (C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
- 3433 strings out of 493921
- 46313 string characters out of 3144876
- 117856 words of memory out of 3000000
- 6667 multiletter control sequences out of 15000+200000
- 50291 words of font info for 107 fonts, out of 3000000 for 9000
+ 5256 strings out of 493921
+ 74638 string characters out of 3144876
+ 173405 words of memory out of 3000000
+ 8449 multiletter control sequences out of 15000+200000
+ 50864 words of font info for 108 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 27i,16n,24p,609b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x
-86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/uc
-rr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on article.pdf (8 pages, 579653 bytes).
+ 42i,24n,29p,920b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (
+x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/u
+crr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on article.pdf (8 pages, 705482 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

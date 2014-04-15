@@ -1,0 +1,31 @@
+Our motivation was to c
+
+In this paper we present an approach to typed GP over lambda calculus capable of operating with the full arsenal given by simply typed lambda calculus while being a direct generalization of standard GP\cite{koza92}. We discuss the advantages of generating lambda terms in their long normal form and present the novel \textit{hybrid} crossover operation. Compared to the approach to typed GP over lambda calculus  proposed by Yu\cite{yu01} it uses more general term representation which is not restricting the use of outer local variables in the body of anonymous function. Compared to the purely combinator approach by Briggs and O’Neill\cite{kes} it has the advantage of reducing the size of the search space in the term generation phase. 
+
+Výhody naší xover:
+
+The terminal set for constructing lambda abstraction subtrees  is limited to use only constants and variables of that particular lambda abstraction, i.e., outer variables are not allowed to be used as terminals in this work. This is a significant difference from our approach since we permit all well-typed normalized \lterms.
+
+One option is to choose a less general representation of lambda terms.
+Such approach is successfully used in \cite{yu01} where the 
+terminal set for constructing lambda abstraction subtrees 
+is limited to use only constants and variables of that particular
+lambda abstraction, and an appropriate variable naming convention is used in order to prevent troubles with variables.
+We choose not to follow such approach because we do not want to
+lose the opportunity to represent every possible well-typed 
+term in its normal form.
+
+
+
+Briggs and O’Neill present a technique 
+utilizing typed GP with combinators \cite{kes}.
+The difference between approach presented in their work
+and our approach is that they generate terms in a straightforward way directly from the library of combinators, without any use of lambda abstractions. They use the Hindley–Milner type system. They also present interesting concept of \textit{Generalized genetic operator} based on term generation. The combinator based genetic algorithm has the advantage of avoiding the need of dealing with variables.
+
+The advantage of generating terms as \lnf lambda terms instead of generating them directly as combinator terms is that it reduces the search space, because there is more than one way to represent a \lnf lambda term as a combinator term (this can be seen considering that \lnf term $\lamb{x}{x}$ is equivalent to both $\Icomb$ and $\Scomb \Kcomb \Kcomb$), but every combinator term has only one unique \lnf form.
+
+
+... This differs from our approach, which tries to be a generalization of the standard GP\cite{koza92}.
+
+The design goal behind our approach to the crossover operation is
+to try to generalize the standard tree swapping crossover.

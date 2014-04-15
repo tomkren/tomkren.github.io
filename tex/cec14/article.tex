@@ -1,41 +1,47 @@
 \documentclass[conference]{IEEEtran}
 
-%\usepackage{stmaryrd}
-%\usepackage{amsfonts}
-%\usepackage{graphicx,times,psfig,amsmath} % Add all your packages here
-%\usepackage{hyperref}
-%\usepackage{amsmath}
-%\usepackage{amssymb}
-%\usepackage[utf8]{inputenc}
-%\usepackage{qtree}
-%\usepackage{xspace}
-%\usepackage[ampersand]{easylist}
 
-
-%\usepackage{times}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
-%\usepackage{qtree}
 \usepackage{xspace}
-
-%\usepackage{makeidx}  % allows for indexgeneration
-%\usepackage{graphicx,times,psfig,amsmath} % Add all your packages here
-%\usepackage{hyperref}
 \usepackage{amsmath}
-%\usepackage{amssymb}
+
 \usepackage{graphicx}
+\usepackage{epstopdf}
 
 \usepackage[ampersand]{easylist}
 \usepackage[usenames,dvipsnames]{color}
 
-%\usepackage{amsthm}
-\newtheorem{definition}{Definition}
 
+
+
+%\usepackage[ruled,norelsize]{algorithm2e}
+\usepackage[vlined,ruled,norelsize]{algorithm2e}
+
+
+\newcommand{\Pseudokod}[3]{
+	\begin{figure}[!t]
+	\removelatexerror
+	\begin{algorithm}[H]
+		\caption{#1}
+		\DontPrintSemicolon
+		\SetKwProg{Fn}{function}{}{}
+		\Fn{#2}{#3}
+	\end{algorithm}
+	\end{figure}
+}
+
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+
+
+\newtheorem{definition}{Definition}
 
 \newenvironment{lizt}
 {\begin{easylist}[itemize]}
 {\end{easylist}}
-
 
 \newcommand{\Lets}{Let us\xspace}
 \newcommand{\lets}{let us\xspace}
@@ -104,35 +110,27 @@
 
 \hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
 
-\IEEEoverridecommandlockouts    % to create the author's affliation portion
-
-\textwidth 178mm    % <------ These are the adjustments we made 10/18/2005
-\textheight 239mm   % You may or may not need to adjust these numbers again
-\oddsidemargin -7mm
-\evensidemargin -7mm
-\topmargin -6mm
-\columnsep 5mm
+%\IEEEoverridecommandlockouts    % to create the author's affliation portion
 
 \begin{document}
 
 
-% paper title: Must keep \ \\ \LARGE\bf in it to leave enough margin.
 \title{Generating Lambda Term Individuals in Typed Genetic Programming Using Forgetful A*}
 
-\author{%
-Tom\'{a}\v{s} K\v{r}en$^{*\dag}$\\
+\author{\IEEEauthorblockN{Tom\'{a}\v{s} K\v{r}en$^{*\dag}$}
+\IEEEauthorblockA{
 tomkren@{}gmail.com\\
-~\\
-$^{*}$Charles University\\ Faculty  of  Mathematics  and  Physics\\
- Malostransk\'e n\'am\v{e}st\'\i \ 25, Prague\\
-Czech Republic
+$^{*}$Charles University\\
+Faculty  of  Mathematics  and  Physics\\
+Malostransk\'e n\'am\v{e}st\'\i \ 25, Prague\\
+Czech Republic}
 \and
-Roman Neruda$^{\dag}$\\
-roman@{}cs.cas.cz\\
-~\\
-$^{\dag}$Institute of Computer Science\\Academy of Sciences of the Czech Republic\\
+\IEEEauthorblockN{Roman Neruda$^{\dag}$}
+\IEEEauthorblockA{roman@{}cs.cas.cz\\
+$^{\dag}$Institute of Computer Science\\
+Academy of Sciences of the Czech Republic\\
 Pod Vod\'arenskou v\v{e}\v{z}\'\i \ 2, Prague\\
-Czech Republic
+Czech Republic}
 }
 
 
@@ -140,33 +138,9 @@ Czech Republic
 
 \maketitle
 
-%\begin{abstract}
-%Tree based genetic programming traditionally uses simple S-expressions to represent programs, however more expressive representations can exhibit better results and are well suited for typed genetic programming. One of such representations is lambda calculus.
-%In this paper, a generalization of genetic programming 
-%for simply typed lambda calculus is presented. We mainly focus on
-%population initialization methods. 
-%Three such initialization methods are proposed 
-%depending on different search strategies. 
-%The first strategy corresponds to standard ramped half-and-half initialization, 
-%the second one corresponds to exhaustive systematic search, and the third one 
-%represents a novel geometric strategy.
-%Experiments on three well known benchmark problems show
-%that the geometric strategy outperforms
-%the standard generating method in success rate, best fitness value,
-%time consumption and average individual size.
-%The fact that a search strategy can be easily described by a rather simple filtration algorithm opens opportunity to easy exploration of more 
-%population initialization methods, possibly in a kind of meta-evolution way.
-%\end{abstract}
 
 \begin{abstract}
-Tree based genetic programming (GP) traditionally uses simple S-expressions to represent programs, however more expressive representations, such as lambda calculus, can exhibit better results while being better suited for typed GP.
-In this paper we present population initialization methods within a framework of GP over simply typed lambda calculus that can be also used in the standard GP approach.
-Initializations can be parameterized by different search strategies, leading to wide spectrum of methods corresponding to standard ramped half-and-half initialization on one hand, or exhaustive systematic search on the other.
-A novel geometric strategy is proposed that ballances those two approaches.
-Experiments on well known benchmark problems show
-that the geometric strategy outperforms
-the standard generating method in success rate, best fitness value,
-time consumption and average individual size.
+Tree based genetic programming (GP) traditionally uses simple S-expressions to represent programs, however more expressive representations, such as lambda calculus, can exhibit better results while being better suited for typed GP. In this paper we present population initialization methods within a framework of GP over simply typed lambda calculus that can be also used in the standard GP approach. Initializations can be parameterized by different search strategies, leading to wide spectrum of methods corresponding to standard ramped half-and-half initialization on one hand, or exhaustive systematic search on the other. A novel geometric strategy is proposed that balances those two approaches. Experiments on well known benchmark problems show that the geometric strategy outperforms the standard generating method in success rate, best fitness value, time consumption and average individual size.
 \end{abstract}
 % no key words
 
@@ -195,9 +169,10 @@ The rest of the paper is organized as follows: The next section briefly discusse
 
 Yu presents a GP system utilizing
 polymorphic higher-order functions\footnote{Higher-order 
-function takes another function as an input parameter.} and lambda abstractions  \cite{yu01}.
-Important point of interest in this work is use of
-\texttt{foldr} function as a tool for \textit{implicit recursion},
+function takes another function as an input parameter.
+} and lambda abstractions  \cite{yu01}.
+Important point of interest in this work is use of \texttt{foldr}\footnote{ \texttt{foldr f z [] $~~~$  = z\\ 
+$~~~\;$foldr f z (x:xs) = f x (foldr f z xs) }} function as a tool for \textit{implicit recursion},
 i.e. recursion without explicit recursive calls. 
 The terminal set for constructing lambda abstraction subtrees 
 is limited to use only constants and variables of that particular
@@ -242,7 +217,6 @@ In this section, several notions necessary to build a typed GP based on lambda c
 First, \lets describe a programming language, 
 in which the GP algorithm generates individual programs --- the so called \lterms.
 
-\vfill
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -250,7 +224,8 @@ variable names}. Let $C$ be set of {\it constant names},
 $V \cap C = \emptyset$.	 	
 Then $\Lambda$ is set of {\it \lterms} defined inductively as follows.	
 \begin{align*}
-x   \in V \cup C  &\then x     \in \Lambda \\
+x   \in V \cup C  &\then x     \in \Lambda 
+\textit{~~~~~~~~~~~~~(Variable or constant)}\\
 M,N \in \Lambda   &\then (M~N) \in \Lambda 
 \textit{~~~~~~(Function application)} \\
 x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
@@ -258,13 +233,11 @@ x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
 \end{align*}
 \end{definition}
 
-\vfill
-
 \textit{Function application} and 
 \textit{$\lambda$-abstraction} are concepts
 well known from common programming languages. 
 
-For example in JavaScript 
+For example in JavaScript term
 $(M~N)$ translates to expression \texttt{$M$($N$)} and
 $\lamb{x}{M}$ translates to expression \texttt{function($x$)\{return $M$;\}}.
 In other words, the function application 
@@ -280,8 +253,6 @@ A \lterm as described above
 corresponds to a program expression with no type information
 included. Now we will describe \textit{types} (or \textit{type terms}).
 
-\vfill
-
 \begin{definition}
 Let $A$ be set of {\it atomic type names}. 
 Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
@@ -291,17 +262,16 @@ Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
 \end{align*}
 \end{definition}
 
-\vfill
-
 Type $\sigma \ar \tau$ is type for functions taking as input
 something of a type $\sigma$ and returning 
 as output something of a type $\tau$. 
 $\tau_1 \ar \tau_2 \ar \dots \ar \tau_n$ is an abbreviation for 
-$\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$.
-The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by
-combining the previously defined \textit{\lterms} and \textit{types} together. 
+$\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$. Such "chain of arrows" types simulate types of functions with multiple (here $n-1$) inputs. 
+This technique is called \textit{currying}. One can grasp the trick by considering $(f~M_1~\dots~M_n)$ as shorthand for $f(M_1,\dots,M_n)$
+and by observing that functions with such types have terms of the form $\lam{x_1 x_2 \dots x_n }{M}$. 
 
-\vfill
+
+The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by combining the previously defined \textit{\lterms} and \textit{types} together. 
 
 \begin{definition}~
 
@@ -323,7 +293,6 @@ combining the previously defined \textit{\lterms} and \textit{types} together.
 \end{definition}
 %~\\
 
-\vfill
 
 
 Context is a basic type theoretic concept suitable as a typed alternative
@@ -332,7 +301,6 @@ Notation $\Gamma,x:\sigma $ denotes $ \Gamma\cup\{(x:\sigma)\}$
 such that $\Gamma$ does not contain any declaration with $x$ as subject.
 We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.
 
-\vfill
 
 \begin{definition}
 A statement $M\colon\sigma$ is \textit{derivable from}
@@ -348,13 +316,9 @@ x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
 \end{align*}
 \end{definition}
 
-\vfill
-
 Our goal in term generation is to produce terms $M$
 for a given pair $\ul{\tau}{\Gamma}$
 such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
-
-\vfill
 
 \begin{definition}
 Let $V$ be infinite countable set of {\it 
@@ -367,7 +331,8 @@ Then $\Lpr$ is set of
 \begin{align*}
 \tau \in \T , \Gamma \in \C &\then \ul{\tau}{\Gamma} \in \Lpr
 \textit{~~~~~~~~(Unfinished leaf)}\\
-x   \in V \cup C  &\then x     \in \Lpr \\
+x   \in V \cup C  &\then x     \in \Lpr
+\textit{~~~~~~~~~~~~~(Variable or constant)}\\
 M,N \in \Lpr   &\then (M~N) \in \Lpr 
 \textit{~~~~~~(Function application)} \\
 x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
@@ -375,7 +340,6 @@ x   \in V , M \in \Lpr &\then \lamb{x}{M} \in \Lpr
 \end{align*}
 \end{definition}
 
-\vfill
 
 \textit{Unfinished leaf} $\ul{\tau}{\Gamma}$ 
 stands for yet not specified \lterm of the type $\tau$ 
@@ -388,13 +352,13 @@ build from symbols of $\Gamma$.
 
 \subsection{Introduction}
 
-\red{na vhodna mista podotknout, jak to je v std GP}
+%\red{na vhodna mista podotknout, jak to je v std GP}
 
 Our approach to \lterm generating is based on technique 
 briefly described in \cite{barendregt10}, which generates
 well-typed \lterms in their long normal form. 
-We use this technique to perform systematic exhaustive enumeration
-of \lterms in their long normal form in order from smallest to largest.
+We use this technique to perform a systematic exhaustive enumeration
+of \lterms in their long normal form in order from the smallest to the largest.
 We use well known \textit{A* algorithm} \cite{AIMA} for this task.
 A* is used to search in a given state space for a goal state. 
 It finds the optimal solution (in our case the smallest term)
@@ -440,10 +404,11 @@ point somewhere between those two extremes.
 
 \subsection{Algorithm}
 
-The inputs for the term generating algorithm are following.
+Let us look on the proposed generating procedure in a grater detail sufficient as guide for implementing it.
+The inputs for the term generating algorithm are following:
 \begin{enumerate}
  \item Desired type $\tau$ of generated terms.
- \item Context $\Gamma$ representing set of building symbols.
+ \item Context $\Gamma$ representing the set of building symbols.
  \item Number $n$ of terms to be generated.
  \item Search strategy $S$. 
 \end{enumerate}
@@ -454,7 +419,7 @@ Priority of an unfinished term is given by its size\footnote{
 A* heuristic function is hidden in method of computing
 size of unfinished leafs $\ul{\tau}{\Gamma}$. Our algorithm uses
 trivial estimate $\vert\ul{\tau}{\Gamma}\vert = 1$ which is trivially admissible.
-This heuristic is not as silly as it might seem since it is
+This heuristic is not as naive as it might seem since it is
 quite usual to have $x$ such that $x : \tau \in \Gamma$.
 Since the true value of $\vert\ul{\tau}{\Gamma}\vert$ depends only on
 $\tau$ and \textit{types} in $\Gamma$ (the \textit{signature}), 
@@ -473,7 +438,7 @@ initializes its internal state (if it has one).
 At each step, the term $M$ with the smallest size
 is pulled from the queue.
 According to the number of unfinished leafs in $M$ one of
-the following actions is performed.
+the following actions is performed:
 \begin{enumerate}
  \item If the term $M$ has no unfinished leaf (i.e., it is a finished
  term satisfying \mbox{$\tur{\Gamma}{M}{\tau}$}), then it is added to the
@@ -503,21 +468,103 @@ Since the first rule results in exactly one successor it is smarter
 to combine those two rules into one resulting in that unfinished leafs
 have only atomic types. At the beginning we transform the initial type into atomic by first rule (if necessary). After that
 only second rule is applied, but if it results in creation of some unatomic 
-$\ul{\tau_i}{\Gamma}$, then first rules are applied, but during the same successor creation This step eliminates all unatomic unfinished leafs. }.
+$\ul{\tau_i}{\Gamma}$, then first rules are applied, but during the same successor creation This step eliminates all unatomic unfinished leafs. }:
 \begin{enumerate}
- \item If $L = \ul{\rho_1 \ar \dots \ar \rho_n \ar \alpha}{\Gamma}$,
+ \item \textit{Function rule:} 
+ 
+ If $L = \ul{\rho_1 \ar \dots \ar \rho_n \ar \alpha}{\Gamma}$,
  	   where $\alpha$ is atomic type and $n \geq 1$, 
        then $L$ is replaced by 
        $\lamb{x_1 \dots x_n}{\ul{\alpha}
        {\Gamma,x_1 \colon \rho_1,\dots,x_n \colon \rho_n}}$.
-       Thus this expansion results in exactly one successor.  
- \item If $L = \ul{\alpha}{\Gamma}$ where $\alpha$ is \textit{atomic} type,
-       then for each 
-       \mbox{$f : (\tau_1 \ar \dots \ar \tau_m \ar \alpha) \in \Gamma$}
+       Thus this expansion results in exactly one successor.
+       
+       In other words, a \textit{function} type is replaced by a new anonymous function, and for each of its inputs is added a fresh variable into the context of its body -- which results in possibility of using those new variables inside the body of the anonymous function. Notice that this rule is never used in problems satisfying the closure requirement.
+ \item \textit{Atomic rule:} 
+ 
+ If $L = \ul{\alpha}{\Gamma}$ where $\alpha$ is \textit{atomic} type, then for each 
+       \mbox{$f : (\tau_1 \ar \dots \ar \tau_m \ar \alpha) \in \Gamma$}, $m \geq 0$
        the unfinished leaf $L$ is replaced by 
        $(~f~\ul{\tau_1}{\Gamma}~\dots~\ul{\tau_m}{\Gamma}~)$.
        Thus this expansion results in many (possibly zero or one) successors.
+       
+       In other words, an \textit{atomic} type is replaced by a constant symbol (for $m = 0$) or function symbol (for $m>0$) from the local context. Unfinished leafs $\ul{\tau_i}{\Gamma}$ correspond to the argument subtrees yet to be generated -- precisely as in S-expression generation. Notice that for problems satisfying closure requirement only this rule is applicable; therefore standard S-expressions are generated for such a problem.   
 \end{enumerate}
+
+\textit{Algorithm 2} summarizes this key phase of generating procedure by pseudocode.
+
+\Pseudokod{Individual generating procedure.}
+{\textbf{generate}(Type $\tau$, Context $\Gamma$, Int $n$, Strategy $S$)}{	
+
+	%star je TODO
+	%isGoal je TODO
+	%heur je TODO
+	
+	$results \la$ empty set\;	
+	
+	\While{ $\vert results \vert < n$ }{ 		
+		$S.init()$\;
+		$open    \la$ empty priority queue \;
+		$start  \la \ul{\tau}{\Gamma}$\;   
+		$start$.G $\la 0$ \;
+		$start$.F $\la 1$ \;  % heur$( $start$ )
+		$open$.insert($start$)\;
+		\While{$\neg$ $open$.isEmpty() }{
+			$term \la$ $open$.popTermWithLowestF()\;
+			\eIf{ numUnfinLeafs($term$) = 0 }{
+				
+				$results$.insert($term$)\;
+							
+				\If{ $\vert results \vert = n$ }{
+					\Return $results$ \;
+				}
+			}{
+				$nexts \la $\textbf{expand}($term$)\;
+				$depth \la term$.depthOfExpandedLeaf()\; 
+				$nexts' \la S.$\textbf{filter}($nexts$, $depth$)\;			
+				\For{$next \in nexts'$ }{
+					$heur     \la $numUnfinLeafs($next$)\;
+					$next$.G $\la term.$G$ + 1$ \;
+					$next$.F $\la next.$G$ + heur$  \;
+					$open$.insert($next$)\;			
+				}
+			}
+		}
+	}
+	
+	\Return results
+}
+
+\Pseudokod{Expansion (successor) procedure.}
+{\textbf{expand}(UnfinishedTerm $term$)}{
+	$nexts \la$ empty set\;	
+	$\ul{\sigma}{\Gamma} \la $ \textit{DFS-first} unfinished leaf of $term$ \;
+	\Switch{$\sigma$}{
+	\Case{$\rho_1 \ar \dots \ar \rho_n \ar \alpha: n \geq 1, \alpha$ atomic}{
+		$t \la \lamb{x_1 \dots x_n}{\ul{\alpha}{\Gamma,x_1 : \rho_1\dots x_n :\rho_n}}$\;
+		$next \la $ replace $\ul{\sigma}{\Gamma}$ in $term$ with $t$\;  		
+		$nexts$.insert($next$)
+	}\Case{$\alpha$: $\alpha $ atomic}{
+		\For{$f : \tau_1 \ar \dots \ar \tau_m \ar \alpha \in \Gamma$, $m \geq 0$  
+		}{
+			$t \la (~f~\ul{\tau_1}{\Gamma}~\dots~\ul{\tau_m}{\Gamma}~)$\; 
+			$next \la $ replace $\ul{\sigma}{\Gamma}$ in $term$ with $t$\;  		
+			$nexts$.insert($next$)
+		}
+	}
+	\Return $nexts$
+}
+}
+
+\Pseudokod{Geometric strategy.}
+{Geometric.\textbf{filter}(UnfinTerms $nexts$, Int $depth$)}{
+	$nexts' \la$ empty set\;	
+	\For{$next \in nexts$}{
+		\textbf{with probability} $q^{depth}$ \textbf{do} $nexts'$.insert($next$) 	
+	}
+	\Return $nexts'$
+}
+
 
 Now that we have all possible successors of $M$, we are about to apply
 the \textit{search strategy} $S$. A search strategy is a procedure
@@ -529,10 +576,10 @@ If the queue becomes empty before the desired number $n$ of terms
 is generated, then the initial unfinished term $\ul{\tau}{\Gamma}$ 
 is inserted to the queue, search strategy $S$
 again initializes its internal state and the process continues.
+The whole generating procedure is summarized by \textit{Algorithm 1}.
 
 \Lets now discuss three such search strategies.
 
-\vfill
 
 %\subsubsection{Systematic strategy}
 \textit{Systematic strategy}:~~ 
@@ -541,7 +588,6 @@ then the algorithm systematically generates
 first $n$ smallest lambda terms in their
 \textit{long normal form}.
 
-\vfill
 
 %\subsubsection{Ramped half-and-half strategy}
 \textit{Ramped half-and-half strategy}:~~
@@ -581,7 +627,6 @@ set of all \textit{non-terminals} of the input set.
 If $isFull = false$, then the subset to select from is 
 the whole input set.
 
-\vfill
 
 %\subsubsection{Geometric strategy}
 \textit{Geometric strategy}:~~
@@ -603,6 +648,7 @@ same for all elements, but depends on the $depth$,
 which is defined in the same way as in previous strategy. 
 It is computed as follows.
 $$ p = q^{depth} $$
+
 This formula is motivated by idea that it is important to
 explore all possible root symbols, but as the $depth$ 
 increases it becomes less "dangerous" to omit 
@@ -618,8 +664,8 @@ with radical impact on global behavior of a program,
 whereas "leaf parts" of a program usually
 stand for less important local parts (e.g. constants).  
 This strategy also plays nicely with the idea that 
-"too big trees should be killed".
-
+"too big trees should be killed". 
+\textit{Algorithm 3} summarizes the filtration procedure performed by the geometric strategy. 
 
 Furthermore, our system utilizes generalization of the standard 
 tree-swapping crossover operator. Since it is beyond the scope of this 
@@ -635,7 +681,7 @@ and no bound variables. After the initial population is generated,  it is transf
 by abstraction elimination. Another possible transformation taking place
 after initialization is $\eta$-normalization shortening 
 rather long long normal form into shorter $\beta\eta$-normal form.  
-Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation.
+Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation. Favorable properties of applicative tree representation are also reported in \cite{yu1998polygp}. 
 
 A remarkable benefit of parameterizing the generating method 
 by a search strategy taking the form of a simple filtration function
@@ -649,14 +695,39 @@ is easily describable as a higher order function. Thus comes
 to mind the possibility of using our system to come up with new
 search strategies on its own.
 
+
+
+
+
+
+
+
+
+
 \section{Experiments}
 \label{experiments}
-
-\red{tabulka parametru dle kozy, ale nejaka opatrna :-)}
 
 We made three experiments comparing performance of standard 
 \textit{ramped half-and-half strategy} with our
 \textit{geometric strategy} (with default parameter $q=0.75$). 
+
+Despite the fact that the geometric strategy was designed for typed GP over lambda trees it works well for standard GP problems satisfying the closure requirement. Furthermore, for such problems our approach generates standard S-expressions only. Another reason for including standard GP benchmarks in our experiments is the fact that the results are seriously affected by a crossover 
+operator. Design of a good crossover for typed GP remains an open problem. Our crossover is quite complicated and beyond the scope of this paper, but for problems satisfying the closure requirement it behaves exactly the same as the standard GP crossover. 
+
+Three well known benchmark problems
+(Simple symbolic regression, Artificial ant and
+Even parity problem) were chosen for our experiments.
+First two satisfy the closure requirement, 
+whereas the third one does not.
+
+In order to ensure that the experiments are replicable we chose to use the standard GP system described in \cite{koza92}, with all the parameters set to their default values (which are sumarized in table~I), only with the following exceptions:
+
+\begin{enumerate}
+  \item In the second and third experiment the preservation of the best individual into the next generation is performed.
+  \item In the third experiment we use our crossover operation briefly mentioned above together with use of "applicative" tree representation.
+\end{enumerate}
+
+For problems satisfying closure requirement our generating method generates S-expressions. Therefore it can be directly plugged into the standard GP system.
 Each experiment consisted of 50 independent runs 
 of GP algorithm. Each run had maximally 51 generations and population size
 was 500 individuals.
@@ -676,26 +747,38 @@ Graphs showing mean values of the fitness of the best individual and
 the average size of an individual throughout generations
 contain error bars representing the standard error of the mean (SEM).
 
-Despite the fact that the presented system is designed
-for typed genetic programming it works well for
-standard GP problems satisfying the closure requirement. For such problems our approach 
-generates standard S-expressions only. 
-Another reason for including standard GP
-benchmarks in our experiments is that fact that
-the results are seriously affected by a crossover 
-operator. Design of a good crossover for typed GP
-remains an open problem. 
-Our crossover is quite complicated and beyond
-the scope of this paper, but for problems satisfying
-the closure requirement it behaves exactly the same
-as the standard GP crossover. 
-Three well known benchmark problems
-(Simple symbolic regression, Artificial ant and
-Even parity problem) were chosen for our experiments.
-First two satisfy the closure requirement, 
-whereas the third one does not.
+\begin{table}[!t]
+\caption{Standard GP parameters.}
+\centering
+\begin{tabular}{|l|c|}
+\hline
+~&~\\
+Population size             & 500\\
+Number of generations       & 51\\
+Probability of crossover    & 90\%\\
+Probability of reproduction & 10\%\\
+Probability of mutation     & 0\%\\
+Max depth (initial)         & 6\\
+Max depth (crossover)       & 17\\
+Representation              & S-expressions\\
+Crossover                   & Standard tree swapping (90-10)\\
+Selection                   & Fitness-proportionate\\
+~&~\\
+\hline
+Generating method           & Ramped half-and-half / geometric s.\\
+\hline
+\end{tabular}
+\end{table}
 
-\subsection{Simple symbolic regression}
+\subsection{Simple Symbolic Regression}
+
+\begin{figure}[!ht]
+  \centering
+  \caption{Graphs for Simple symbolic regression.}
+  \includegraphics[scale=0.12]{imgs/SSR.eps}
+\end{figure}
+
+
 \textit{Simple Symbolic Regression} is a problem described
 in \cite{koza92}. Objective of this problem is to 
 find a function $f(x)$ that fits a sample
@@ -732,8 +815,6 @@ log(\vert x\vert) & \mbox{otherwise}. \end{cases}
 \end{align*}
 \end{minipage}
 
-\vfill
-
 Fitness function is computed as follows.
 
 $$ fitness(f) =  \frac{1}{1+ \sum\limits_{i=1}^{20}{ \vert f(x_i)-y_i }\vert }  $$
@@ -741,15 +822,12 @@ where $(x_i,y_i)$ are 20 data samples from $[-1,1]$, such that $y_i = f_t(x_i)$.
 An individual $f$ such that $\vert f(x_i)-y_i \vert < 0.01 $ for all data samples is 
 considered as a correct individual.
 
-\vfill
 
-\begin{figure}[!ht]
-  \centering
-  \caption{Graphs for Simple symbolic regression.}
-  \includegraphics[scale=0.2]{imgs/cec/SSRb.PNG}
-\end{figure}
 
-\begin{table}[t]
+
+
+\begin{table}[!t]
+\caption{Statistical analysis - Simple symbolic regression.}
 \centering
 \begin{tabular}{|l|cc|}
 \hline
@@ -764,11 +842,10 @@ t-value & 0.5207 & $\alpha = 0.05$\\
 p-value & 0.6038 & \textbf{Not statistically significant.}\\
 \hline
 \end{tabular}
-\caption{Statistical analysis - Simple symbolic regression.}
 \end{table}
 
 Figure~1 shows results of this experiment. 
-Table~I summarizes statistical analysis
+Table~II summarizes statistical analysis
 of the fitness values of the best individuals of the run 
 (\textit{p-value} $ = 0.6038$).  
 By conventional criteria, this difference is considered to be not statistically significant.
@@ -786,7 +863,7 @@ ramped half-and-half strategy in these observed metrics.
 
 
 
-\subsection{Artificial ant}
+\subsection{Artificial Ant}
 \textit{Artificial Ant} is another problem described
 in \cite{koza92}. Objective of this problem is to 
 find a control program for an artificial ant so
@@ -829,10 +906,11 @@ Thus we use 600 time steps.
 \begin{figure}[!ht]
   \centering
   \caption{Graphs for Artificial ant problem.}
-  \includegraphics[scale=0.2]{imgs/cec/ANTb.PNG}
+  \includegraphics[scale=0.13]{imgs/ANT.eps}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[!t]
+\caption{Statistical analysis - Artificial ant problem.}
 \centering
 \begin{tabular}{|l|cc|}
 \hline
@@ -844,15 +922,14 @@ SEM	 & 1.74	 & 1.24  \\
 N	 & 50    & 50    \\
 \hline
 t-value &  6.3479           & $\alpha = 0.05$\\
-p-value &  \textless 0.0001 &  \textbf{Extremely statist. significant.}\\
+p-value &  \textless 0.0001 &  \textbf{Extremely stat. significant.}\\
 \hline
 \end{tabular}
-\caption{Statistical analysis - Artificial ant problem.}
 \end{table}
 
 
 Figure~2 shows results of this experiment. 
-Table~II summarizes statistical analysis
+Table~III summarizes statistical analysis
 of the fitness values of the best individuals of the run 
 (\textit{p-value} $ < 0.0001$).  
 According to this analysis our strategy performed better;
@@ -867,7 +944,7 @@ The average individual size for generation 50 was 94.1.
 The experiment took 107 minutes.
 This is a big improvement in all watched factors.
 
-\subsection{Even parity problem}
+\subsection{Even Parity Problem}
 
 Previous two problems were instances of standard GP, i.e. their building 
 symbols obeyed the closure requirement. This third experiment will 
@@ -910,10 +987,11 @@ it all possible boolean lists of length 2 and 3.
 \begin{figure}[!ht]
   \centering
   \caption{Graphs for Even parity problem.}
-  \includegraphics[scale=0.2]{imgs/cec/EPb.PNG}
+  \includegraphics[scale=0.12]{imgs/EP.eps}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[!t]
+\caption{Statistical analysis - Even parity problem.}
 \centering
 \begin{tabular}{|l|cc|}
 \hline
@@ -928,11 +1006,10 @@ t-value &  2.2772 & $\alpha = 0.05$\\
 p-value &  0.0250 &  \textbf{Statistically significant.}\\
 \hline
 \end{tabular}
-\caption{Statistical analysis - Even parity problem.}
 \end{table}
 
 Figure~3 shows results of this experiment. 
-Table~III summarizes statistical analysis
+Table~IV summarizes statistical analysis
 of the fitness values of the best individuals of the run 
 (\textit{p-value} $ = 0.0250$).  
 According to this analysis our strategy performed better;
@@ -966,7 +1043,7 @@ result for uninformed search. However, our results are less successful
 than those presented in \cite{yu01} (with slightly different set of 
 building symbols); they scored 40/50 (80\%) success rate and $I(M,i,z)$ of 
 17,500 in generation 4. But by observation of typical solution which is often
-some modification of \texttt{foldr xor False inputList} one sees that important 
+some modification of \texttt{foldr xor True inputList} one sees that important 
 task for GP here is to create \texttt{xor} function. This is advantage for the 
 more specialized term representation used in \cite{yu01} 
 (restricting use of outer variables). 
@@ -1006,17 +1083,15 @@ operator in a straightforward way.
 %elimination that enables us to utilize
 %a simple tree-swapping crossover.
 
+
 Our future research will focus on exploring other possible search strategies positioned in the middle ground 
 identified in this paper. Since the search strategy can be easily described by a rather simple filtration algorithm, it might be
 interesting to allow the typed GP system to evolve the search strategy it 
 utilizes in a kind of meta-evolution way. 
 
-\subsection*{Acknowledgements}
-Tomáš Křen has been partially supported by the project GA ČR P202/10/1333 and by the SVV project number 260~104. Roman Neruda has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002.
+\section*{Acknowledgements}
+Tom\'{a}\v{s} K\v{r}en has been partially supported by the project GA \v{C}R P202/10/1333 and by the SVV project number 260~104. Roman Neruda has been partially supported by the The Ministry of Education of the Czech Republic project COST LD 13002.
 
-%\red{Ještě nějak rozšířit.}
-
-%\red{ [ještě něco navíc nebo podrobněji, říct poly že neni ale že se na něm pracuje a de hezky zandat do již systemu] }
 
 %\nocite{*}
 

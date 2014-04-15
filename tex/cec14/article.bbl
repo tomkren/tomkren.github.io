@@ -81,4 +81,8 @@ S.~L. Peyton~Jones, \emph{The Implementation of Functional Programming
   1em plus 0.5em minus 0.4em\relax Upper Saddle River, NJ, USA: Prentice-Hall,
   Inc., 1987.
 
+\bibitem{yu1998polygp}
+T.~Yu and C.~Clack, ``Poly{GP}: A polymorphic genetic programming system in
+  haskell,'' \emph{Genetic Programming}, vol.~98, 1998.
+
 \end{thebibliography}
