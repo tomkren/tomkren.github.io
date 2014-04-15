@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 APR 2014 05:43
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 APR 2014 12:51
 entering extended mode
 **article.tex
 (C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.tex
@@ -613,14 +613,17 @@ Package epstopdf Info: Source file: <imgs/SSR.eps>
 (epstopdf)                    size: 179429 bytes
 (epstopdf)             Command: <epstopdf --outfile=imgs/SSR-eps-converted-to.p
 df imgs/SSR.eps>
-(epstopdf)             \includegraphics on input line 778.
+(epstopdf)             \includegraphics on input line 780.
 Package epstopdf Info: Output file is already uptodate.
  <imgs/SSR-eps-converted-to.pdf, id=30, 1215.54124pt x 3575.3575pt>
 File: imgs/SSR-eps-converted-to.pdf Graphic file (type pdf)
 
 <use imgs/SSR-eps-converted-to.pdf>
-Package pdftex.def Info: imgs/SSR-eps-converted-to.pdf used on input line 778.
-(pdftex.def)             Requested size: 145.85866pt x 429.0244pt.
+Package pdftex.def Info: imgs/SSR-eps-converted-to.pdf used on input line 780.
+(pdftex.def)             Requested size: 139.79358pt x 411.18475pt.
+
+Underfull \vbox (badness 1577) has occurred while \output is active []
+
  [5]
 Package epstopdf Info: Source file: <imgs/ANT.eps>
 (epstopdf)                    date: 2014-04-15 00:01:15
@@ -630,23 +633,23 @@ Package epstopdf Info: Source file: <imgs/ANT.eps>
 (epstopdf)                    size: 147787 bytes
 (epstopdf)             Command: <epstopdf --outfile=imgs/ANT-eps-converted-to.p
 df imgs/ANT.eps>
-(epstopdf)             \includegraphics on input line 909.
+(epstopdf)             \includegraphics on input line 911.
 Package epstopdf Info: Output file is already uptodate.
 
-<imgs/ANT-eps-converted-to.pdf, id=35, 1103.12125pt x 3225.04875pt>
+<imgs/ANT-eps-converted-to.pdf, id=34, 1103.12125pt x 3225.04875pt>
 File: imgs/ANT-eps-converted-to.pdf Graphic file (type pdf)
 
 <use imgs/ANT-eps-converted-to.pdf>
-Package pdftex.def Info: imgs/ANT-eps-converted-to.pdf used on input line 909.
-(pdftex.def)             Requested size: 143.4108pt x 419.27106pt.
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 925.
+Package pdftex.def Info: imgs/ANT-eps-converted-to.pdf used on input line 911.
+(pdftex.def)             Requested size: 123.54874pt x 361.203pt.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 927.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omlptm.fd"
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <7> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 925.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 927.
  [6 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/SSR-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <imgs/EP.eps>
 (epstopdf)                    date: 2014-04-15 00:02:02
@@ -656,18 +659,17 @@ Package epstopdf Info: Source file: <imgs/EP.eps>
 (epstopdf)                    size: 147673 bytes
 (epstopdf)             Command: <epstopdf --outfile=imgs/EP-eps-converted-to.pd
 f imgs/EP.eps>
-(epstopdf)             \includegraphics on input line 990.
+(epstopdf)             \includegraphics on input line 992.
 Package epstopdf Info: Output file is already uptodate.
 
 <imgs/EP-eps-converted-to.pdf, id=42, 1249.66875pt x 3259.17625pt>
 File: imgs/EP-eps-converted-to.pdf Graphic file (type pdf)
 
 <use imgs/EP-eps-converted-to.pdf>
-Package pdftex.def Info: imgs/EP-eps-converted-to.pdf used on input line 990.
-(pdftex.def)             Requested size: 149.95378pt x 391.08427pt.
- [7 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/ANT-eps-converted-to.pdf> <C
-:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/EP-eps-converted-to.pdf>] (C:\User
-s\sekol\Dropbox\MASOMRK\tom\cec14\article.bbl
+Package pdftex.def Info: imgs/EP-eps-converted-to.pdf used on input line 992.
+(pdftex.def)             Requested size: 138.70343pt x 361.74301pt.
+ [7 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/ANT-eps-converted-to.pdf>]
+(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
@@ -686,34 +688,35 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8] (C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux) ) 
+[8 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/EP-eps-converted-to.pdf>]
+(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
  5256 strings out of 493921
  74638 string characters out of 3144876
- 173405 words of memory out of 3000000
+ 172405 words of memory out of 3000000
  8449 multiletter control sequences out of 15000+200000
  50864 words of font info for 108 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  42i,24n,29p,920b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (
-x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
-symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/u
-crr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on article.pdf (8 pages, 705482 bytes).
+{C:/Program Files (x86)
+/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symb
+ols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8
+a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on article.pdf (8 pages, 705584 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
