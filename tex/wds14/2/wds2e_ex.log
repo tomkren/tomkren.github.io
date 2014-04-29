@@ -1,0 +1,142 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  29 APR 2014 09:20
+entering extended mode
+**wds2e_ex.tex
+(C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(C:\wamp\www\tomkren.github.io\tex\wds14\wds11.sty
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+
+MFF WDS galley substyle, v5.01wds <April 12, 2000>.
+(C:\wamp\www\tomkren.github.io\tex\wds14\agu11.sty
+
+ 
+ AGU11 -- August 6, 1996 Version 
+ 
+ 
+\affilnum=\count87
+\totalaffils=\count88
+\onecolwide=\dimen105
+\twocolwide=\dimen106
+\ponecolwide=\dimen107
+\ptwocolwide=\dimen108
+)
+\@fmwidth=\dimen109
+\savefmwidth=\dimen110
+\@bodywidth=\dimen111
+\twowide=\dimen112
+\saveparindent=\dimen113
+\@cprtype=\count89
+\@rhdwidth=\dimen114
+\@slugcmmntwidth=\dimen115
+\c@author=\count90
+\@temptokenb=\toks14
+\c@cureqno=\count91
+\c@plate=\count92
+\lecurrentfam=\count93
+\absinsert=\insert233
+\@temptokena=\toks15
+\@temptokenb=\toks16
+\pt@ncol=\count94
+\pt@width=\dimen116
+\ampcount=\count95
+\tabbox=\box26
+\totaltabdp=\dimen117
+\insidetablewd=\dimen118
+\finalcolcount=\count96
+\tabwidth=\dimen119
+\labnum=\count97
+\labloopnum=\count98
+\tablebox=\box27
+\tabnotecount=\count99
+\loopnotecount=\count100
+) (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\epsf\epsf.sty
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read1
+\epsfframemargin=\dimen120
+\epsfframethickness=\dimen121
+\epsfrsize=\dimen122
+\epsftmp=\dimen123
+\epsftsize=\dimen124
+\epsfxsize=\dimen125
+\epsfysize=\dimen126
+\pspoints=\dimen127
+) (C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 24.
+ [1
+
+{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Overfull \hbox (4.16348pt too wide) in paragraph at lines 116--127
+[]\OT1/cmr/m/n/10.95 To demon-strate HFA prop-er-ties, we have cho-sen two rep-
+re-sen-ta-tive ex-am-ples with favourable
+ []
+
+[2] [3] [4] (C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.aux) ) 
+Here is how much of TeX's memory you used:
+ 679 strings out of 493921
+ 7045 string characters out of 3144876
+ 62859 words of memory out of 3000000
+ 4035 multiletter control sequences out of 15000+200000
+ 9518 words of font info for 33 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 21i,6n,19p,501b,200s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on wds2e_ex.pdf (4 pages, 136073 bytes).
+PDF statistics:
+ 51 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

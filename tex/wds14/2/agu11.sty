@@ -1,0 +1,378 @@
+
+%%  agu11.sty -- August 6, 1996 version
+%
+%%  revisions by Amy Hendrickson, TeXnology Inc.
+%
+%%  This file must accompany radga.sty to
+%   create camera-ready Radio Science copy.
+
+
+\typeout{^^J
+^^J
+AGU11 -- August 6, 1996 Version
+^^J
+^^J
+}
+    
+\lineskip 1pt
+\normallineskip 1pt
+\def\baselinestretch{1}
+\def\@normalsize{\@setsize\normalsize{13pt}\xipt\@xipt
+\abovedisplayskip 11pt plus3pt minus6pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3pt%
+\belowdisplayshortskip  6.5pt plus3.5pt minus3pt%
+\let\@listi\@listI}
+\def\small{\@setsize\small{12pt}\xpt\@xpt
+\abovedisplayskip 10pt plus2pt minus5pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3pt%
+\belowdisplayshortskip  6pt plus3pt minus3pt
+\def\@listi{\leftmargin\leftmargini
+\topsep 6pt plus 2pt minus 2pt\parsep 3pt plus 2pt minus 1pt
+\itemsep \parsep}}
+\def\footnotesize{\@setsize\footnotesize{10.5pt}\ixpt\@ixpt
+\abovedisplayskip 8pt plus 2pt minus 4pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus 1pt%
+\belowdisplayshortskip 4pt plus 2pt minus 2pt
+\def\@listi{\leftmargin\leftmargini
+\topsep 4pt plus 2pt minus 2pt\parsep 2pt plus 1pt minus 1pt
+\itemsep \parsep}}
+\def\scriptsize{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\def\petite{\@setsize\petite{8pt}\viipt\@viipt}
+\def\tiny{\@setsize\tiny{7pt}\vipt\@vipt}
+\def\slarge{\@setsize\slarge{12pt}\xipt\@xipt}
+\def\large{\@setsize\large{14pt}\xiipt\@xiipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+\normalsize
+
+    
+\if@twoside
+\oddsidemargin 36pt
+\evensidemargin 74pt
+\marginparwidth 100pt
+\else
+\oddsidemargin 54pt
+\evensidemargin 54pt
+\marginparwidth 83pt
+\fi
+\marginparsep 10pt
+\topmargin 27pt
+\headheight 12pt
+\headsep 25pt
+\footskip 30pt
+\textheight = 38\baselineskip
+\advance\textheight by \topskip
+\textwidth 360pt
+\columnsep 10pt
+\columnseprule 0pt
+\footnotesep 7.7pt
+\skip\footins 10pt plus 4pt minus 2pt
+\floatsep 12pt plus 2pt minus 2pt
+\textfloatsep 20pt plus 2pt minus 4pt
+\intextsep 12pt plus 2pt minus 2pt
+\@maxsep 20pt
+\dblfloatsep 12pt plus 2pt minus 2pt
+\dbltextfloatsep 20pt plus 2pt minus 4pt
+\@dblmaxsep 20pt
+\@fptop 0pt plus 1fil
+\@fpsep 8pt plus 2fil
+\@fpbot 0pt plus 1fil
+\@dblfptop 0pt plus 1fil
+\@dblfpsep 8pt plus 2fil
+\@dblfpbot 0pt plus 1fil
+\marginparpush 5pt
+
+    
+\parskip 0pt plus 1pt
+\parindent 17pt
+\partopsep 3pt plus 1pt minus 2pt
+\@lowpenalty   51
+\@medpenalty  151
+\@highpenalty 301
+\@beginparpenalty -\@lowpenalty
+\@endparpenalty   -\@lowpenalty
+\@itempenalty     -\@lowpenalty
+
+    
+\def\part{\par
+\addvspace{4ex}
+\@afterindentfalse
+\secdef\@part\@spart}
+\def\@part[#1]#2{\ifnum \c@secnumdepth >\m@ne
+\refstepcounter{part}
+\addcontentsline{toc}{part}{\thepart
+\hspace{1em}#1}\else
+\addcontentsline{toc}{part}{#1}\fi
+{ \parindent 0pt \raggedright
+\ifnum \c@secnumdepth >\m@ne
+\Large \bf Part \thepart
+\par\nobreak
+\fi
+\huge \bf
+#2\markboth{}{}\par }
+\nobreak
+\vskip 3ex
+\@afterheading
+}
+\def\@spart#1{{\parindent 0pt \raggedright
+\huge \bf
+#1\par}
+\nobreak
+\vskip 3ex
+\@afterheading
+}
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
+-.2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
+-.2ex}{1.5ex plus .2ex}{\large\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
+-1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+\def\paragraph{\@startsection
+{paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+{subparagraph}{4}{\parindent}{3.25ex plus 1ex minus
+.2ex}{-1em}{\normalsize\bf}}
+\setcounter{secnumdepth}{3}
+\def\appendix{\par
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\def\thesection{\Alph{section}}}
+
+    
+\leftmargini 2.5em
+\leftmarginii 2.2em
+\leftmarginiii 1.87em
+\leftmarginiv 1.7em
+\leftmarginv 1em
+\leftmarginvi 1em
+\leftmargin\leftmargini
+\labelsep .5em
+\labelwidth\leftmargini\advance\labelwidth-\labelsep
+\def\@listI{\leftmargin\leftmargini 
+\parsep 4.5pt plus 2pt minus 1pt%
+\topsep 9pt plus 3pt minus 5pt%
+\itemsep 4.5pt plus 2pt minus 1pt}
+\let\@listi\@listI
+\@listi
+\def\@listii{\leftmargin\leftmarginii
+\labelwidth\leftmarginii\advance\labelwidth-\labelsep
+\topsep 4.5pt plus 2pt minus 1pt
+\parsep 2pt plus 1pt minus 1pt
+\itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+\labelwidth\leftmarginiii\advance\labelwidth-\labelsep
+\topsep 2pt plus 1pt minus 1pt
+\parsep \z@ \partopsep 1pt plus 0pt minus 1pt
+\itemsep \topsep}
+\def\@listiv{\leftmargin\leftmarginiv
+\labelwidth\leftmarginiv\advance\labelwidth-\labelsep}
+\def\@listv{\leftmargin\leftmarginv
+\labelwidth\leftmarginv\advance\labelwidth-\labelsep}
+\def\@listvi{\leftmargin\leftmarginvi
+\labelwidth\leftmarginvi\advance\labelwidth-\labelsep}
+    
+% Changes needed for all styles
+    
+% Alternate affiliations appearing 
+% at the end of the article
+    
+\def\altaffiltext#1#2{%
+\global\advance\totalaffils by 1
+\expandafter\xdef\csname altaffil#1\endcsname{%
+\noindent\hskip\saveparindent$^{#1}${#2}}}
+    
+    
+\def\doaltaffils{\loop\ifnum\affilnum<\totalaffils
+\ifnum\affilnum=0
+\vskip14pt
+\footnoterule
+\vskip1pt\fi
+\csname altaffil\the\affilnum\endcsname
+\vskip.5pt
+\global\advance\affilnum by 1
+\repeat
+\expandafter\ifx\csname altaffil\the\affilnum\endcsname\relax
+\else
+\csname altaffil\the\affilnum\endcsname\fi
+\global\affilnum=0
+\global\totalaffils=0
+\vskip12pt
+}
+\let\doaffils\doaltaffils
+    
+    
+\newcount\affilnum
+\affilnum=0
+\newcount\totalaffils
+
+% Changes to citations
+    
+\def\newcite{\@ifnextchar
+[{\@tempswatrue\@citex}{\@tempswafalse\x@citex[]}}
+    
+\def\x@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}
+\fi
+  \let\@citea\@empty
+  \@cite{\@for\@citeb:=#2\do
+ {\@citea\def\@citea{;\penalty\@m\ }%
+ \def\@tempa##1##2\@nil{\edef\@citeb
+ {\if##1\space##2\else##1##2\fi}}%
+     \expandafter\@tempa\@citeb\@nil
+     \@ifundefined{b@\@citeb}{{\reset@font\bf ?}\@warning
+       {Citation `\@citeb' on page 
+        \thepage \space undefined}}%
+%\hbox{ commented out to 
+% let citation break over lines
+\expandafter\csname b@\@citeb\endcsname    %}
+}}{#1}}
+    
+\def\cite{\futurelet\next\lookforbrac}
+    
+\def\dobrac[#1]#2{\newcite[#1]{#2}}
+    
+\def\donobrac#1{\newcite{#1}}
+    
+\def\lookforbrac{\if\next[\let\go\dobrac\else\let\go\donobrac\fi\go}
+    
+%
+    
+\def\article{\global\hsize\@bodywidth
+\xdef\@thefnmark{\null}}
+    
+\def\endarticle{\clearpage
+\@normalsize\global\hsize=345pt}
+    
+%
+    
+\def\footnoterule{\kern-3\p@
+  \hrule width 4pc
+  \kern 2.6\p@}
+    
+% Make \eqnum work in \eqnarray:
+   
+\def\arrayeqnum#1{\gdef\xtheequation{#1}%
+\let\@currentlabel\xtheequation
+\addtocounter{equation}{\m@ne}}
+
+\def\eqnarray{\let\eqnum\arrayeqnum
+% <== to make eqnum work in eqnarray
+\stepcounter{equation}%
+\let\@currentlabel\theequation
+\global\@eqnswtrue\m@th
+\global\@eqcnt\z@\tabskip\@centering\let\\\@eqncr
+$$\halign to\displaywidth\bgroup\@eqnsel\hskip\@centering
+  $\displaystyle\tabskip\z@{##}$&\global\@eqcnt\@ne
+  \hskip 2\arraycolsep \hfil${##}$\hfil
+  &\global\@eqcnt\tw@ \hskip 2\arraycolsep
+$\displaystyle\tabskip\z@{##}$\hfil
+   \tabskip\@centering&\llap{##}\tabskip\z@\cr}
+    
+    
+\def\@@eqncr{\let\@tempa\relax
+  \ifcase\@eqcnt 
+  \def\@tempa{& & &}\or \def\@tempa{& &}%
+  \else \def\@tempa{&}\fi
+  \@tempa \if@eqnsw\expandafter\ifx\csname xtheequation\endcsname\relax
+\@eqnnum\else(\xtheequation)\global\let\xtheequation\relax\fi
+% <===
+\stepcounter{equation}\fi
+     \global\@eqnswtrue\global\@eqcnt\z@\cr}
+    
+%
+    
+\def\broadside{\bgroup
+\global\dimen0=\the\textheight
+\global\dimen1=\the\textwidth
+\global\textheight = \dimen1
+\global\textwidth= \dimen0
+\clearpage
+%
+\thispagestyle{empty}
+%
+\figurewidth{\textwidth}
+\tablewidth{\textwidth}}
+    
+\def\endbroadside{\egroup
+\global\textheight\dimen0
+\global\textwidth\dimen1\clearpage}
+    
+    
+% Reset these to more generous values 
+% to make it easier to position floats.
+    
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+    
+\def\topfraction{.99}
+\def\bottomfraction{.99}
+\def\textfraction{.01}
+\def\floatpagefraction{.5}
+    
+\setcounter{totalnumber}{20}
+    
+\setcounter{dbltopnumber}{2}
+\def\dbltopfraction{.7}
+\def\dblfloatpagefraction{.5}
+\newdimen\onecolwide
+\newdimen\twocolwide
+    
+\newdimen\ponecolwide
+\newdimen\ptwocolwide
+    
+\def\figurewidth#1{\global\onecolwide=#1\relax}
+\def\insidefigurewidth#1{\onecolwide=#1\relax}
+\let\savefigwidth\figurewidth
+    
+\def\incapfigurewidth#1{\hsize=#1\relax}
+    
+\def\insideplatewidth#1{\ponecolwide=#1\relax}
+\def\platewidth#1{\global\ponecolwide=#1\relax}
+\let\saveplatewidth\platewidth
+    
+\def\xplate{plate}
+    
+    
+\let\savecaption\caption
+\def\eatone#1{}
+\def\doublecaption#1
+{\savecaption{\hsize=\onecolwide%
+\let\figurewidth\incapfigurewidth#1}%
+\let\figurewidth\savefigwidth
+\global\advance\c@figure-1
+\goodbreak%
+\savecaption{\hsize=\twocolwide\let\figurewidth\eatone#1}}
+    
+\def\platedoublecaption#1
+{\savecaption{\hsize=\ponecolwide#1}%
+\let\platewidth\saveplatewidth
+\global\advance\c@plate-1
+\goodbreak%
+\savecaption{\hsize=\ptwocolwide\let\platewidth\eatone#1}}
+    
+    
+\let\caption\doublecaption
+    
+\def\lookbrac{\if\next[\let\go\catchbrac\else\let\go\relax\fi\go}
+\def\catchbrac[#1]{\relax}
+    
+    
+\def\figure{\bgroup%
+\let\normalsize\small
+\let\figurewidth\insidefigurewidth
+\def\@captype{figure}\futurelet\next\lookbrac}
+\let\endfigure\egroup
+    
+\def\tablook{\futurelet\next\lookbrac}
+    
+    
+\def\plate{\bgroup%
+\let\caption\platedoublecaption
+\let\platewidth\insideplatewidth
+\let\normalsize\small
+\def\@captype{plate}\futurelet\next\lookbrac}
+\let\endplate\egroup

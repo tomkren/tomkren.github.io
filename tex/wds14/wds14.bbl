@@ -1,0 +1,38 @@
+\begin{thebibliography}{6}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Barendregt et~al.(2010)Barendregt, Dekkers, and
+  Statman}]{barendregt10}
+Barendregt, H., Dekkers, W., and Statman, R., {\em Lambda Calculus With
+  Types\/}, Cambridge University Press, 2010.
+
+\bibitem[{Binard and Felty(2008)}]{binard2008genetic}
+Binard, F. and Felty, A., Genetic programming with polymorphic types and
+  higher-order functions, in {\em Proceedings of the 10th annual conference on
+  Genetic and evolutionary computation\/}, pp. 1187--1194, ACM, 2008.
+
+\bibitem[{Briggs and O'Neill(2008)}]{kes}
+Briggs, F. and O'Neill, M., Functional genetic programming and exhaustive
+  program search with combinator expressions, {\em International Journal of
+  Knowledge-Based and Intelligent Engineering Systems\/}, {\em 12\/}, 47--68,
+  \urlprefix\url{http://iospress.metapress.com/content/u6l4j13p67w66370/},
+  2008.
+
+\bibitem[{Koza(1992)}]{koza92}
+Koza, J.~R., {\em Genetic programming: on the programming of computers by means
+  of natural selection\/}, MIT Press, Cambridge, MA, USA, 1992.
+
+\bibitem[{Peyton~Jones(1987)}]{jones87}
+Peyton~Jones, S.~L., {\em The Implementation of Functional Programming
+  Languages (Prentice-Hall International Series in Computer Science)\/},
+  Prentice-Hall, Inc., Upper Saddle River, NJ, USA, 1987.
+
+\bibitem[{Yu(2001)}]{yu01}
+Yu, T., Hierarchical processing for evolving recursive and modular programs
+  using higher-order functions and lambda abstraction, {\em Genetic Programming
+  and Evolvable Machines\/}, {\em 2\/}, 345--380, 2001.
+
+\end{thebibliography}

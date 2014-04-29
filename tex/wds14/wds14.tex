@@ -1,0 +1,266 @@
+%to be compiled with LATEX 2e
+
+%use this setting with 11pt basic font:
+\documentclass[11pt]{article}
+\usepackage{wds11,epsf}
+
+%use this setting with 10pt basic font:
+%\documentclass{article}
+%\usepackage{wds10,epsf}
+
+%use to get author-year citations with BibTeX
+\usepackage[square]{natbib}
+
+
+
+
+
+\usepackage{xspace}
+
+
+\newcommand{\Lets}{Let us\xspace}
+\newcommand{\lets}{let us\xspace}
+\newcommand{\lterm}{$\lambda$-term\xspace}
+\newcommand{\lterms}{$\lambda$-terms\xspace}
+\newcommand{\lhead}{$\lambda$-head\xspace}
+\newcommand{\lheads}{$\lambda$-heads\xspace}
+\newcommand{\myla}{\leftarrow\xspace}
+\newcommand{\Lp}  {\Lambda^{\prime}\xspace}
+\newcommand{\tur}[3]{#1\vdash{}#2 \colon #3}
+\newcommand{\turst}[3]{$#1\vdash{}#2:#3$\xspace}
+\newcommand{\GMS}{\turst{\Gamma}{M}{\sigma}}
+\newcommand{\atTree}{@-tree\xspace}
+\newcommand{\setDots}[2]{ \lbrace #1 , \dots , #2 \rbrace}
+\newcommand{\lh}[1]{\lambda #1}
+\newcommand{\sexprTree}{sexpr-tree\xspace}
+\newcommand{\SexprTree}{Sexpr-tree\xspace}
+\newcommand{\then}{\Rightarrow\xspace}
+\newcommand{\lamb}[2]{( \lambda \, #1 \, . \, #2 )}
+\newcommand{\lam}[2]{\lambda \, #1 \, . \, #2}
+\newcommand{\ST}{\mathop{\mathrm{ST}}}
+\newcommand{\FV}{\mathop{\mathrm{FV}}}
+\newcommand{\Scomb }{\mathbf{S}}
+\newcommand{\Kcomb }{\mathbf{K}}
+\newcommand{\Icomb }{\mathbf{I}}
+\newcommand{\bbarr}{\twoheadrightarrow_\beta}
+\newcommand{\barr}{\rightarrow_\beta}
+\newcommand{\beq}{=_\beta}
+\newcommand{\eearr}{\twoheadrightarrow_\eta}
+\newcommand{\earr}{\rightarrow_\eta}
+\newcommand{\eeq}{=_\eta}
+\newcommand{\bearr}{\rightarrow_{\beta\eta}}
+\newcommand{\bbeearr}{\twoheadrightarrow_{\beta\eta}}
+\newcommand{\beeq}{=_{\beta\eta}}
+\newcommand{\etar}{\twoheadrightarrow_\eta}
+\newcommand{\ered}{$\eta$-reduction\xspace}
+\newcommand{\bnf}{$\beta$-\textit{nf}\xspace}
+\newcommand{\enf}{$\eta$-\textit{nf}\xspace}
+\newcommand{\eenf}{$\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\beenf}{$\beta\eta^{-1}$-\textit{nf}\xspace}
+\newcommand{\benf}{$\beta\eta$-\textit{nf}\xspace}
+\newcommand{\bredex}{$\beta$-redex\xspace} 
+\newcommand{\lnf}{\textit{lnf}\xspace}
+\newcommand{\Ae}{\mathop{\mathrm{\AE}}}
+\newcommand{\Bcomb }{\mathbf{B}}   
+\newcommand{\BBcomb }{\mathbf{B*}}
+\newcommand{\Ccomb }{\mathbf{C}}   
+\newcommand{\CCcomb }{\mathbf{C'}}
+\newcommand{\SScomb }{\mathbf{S'}}
+\newcommand{\ar}{\rightarrow\xspace}
+\newcommand{\T}{\mathbb{T}\xspace}
+\newcommand{\C}{\mathbb{C}\xspace}
+\newcommand{\Real}{\mathbb{R}}
+
+\newenvironment{todo}
+{~\\ {\color{red}\textbf{TODO}}
+  \begin{easylist}[itemize]}
+{ \end{easylist}}
+
+\newcommand{\Lpr}{\Lambda^\prime}
+\newcommand{\ul}[2]{\langle #1 ; #2 \rangle}
+\newcommand{\ro}[1]{{\color{blue} #1}}
+\newcommand{\tom}[1]{{\color{ForestGreen} #1}}
+\newcommand{\red}[1]{{\color{red} #1}}
+
+
+
+
+%\tighten
+
+% Preamble Information
+
+
+%%%%%%%%%%% nevim co to tu bylo za omg, tak jsem to zakomentoval
+%%\lefthead{SAFRANKOVA ET AL.}
+%%\righthead{MAGNETOSHEATH RESPONSE}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+\title{Typed Genetic Programming over Lambda Calculus}
+
+\author{T. K\v ren}
+
+\affil{Charles University, Faculty  of  Mathematics  and  Physics,
+     Prague, Czech Republic.}
+
+
+\begin{abstract}
+Todo.
+\end{abstract}
+
+\begin{article}
+
+\section{Introduction}
+
+\section{Related work}
+\label{related}
+
+\cite{yu01} presents a GP system utilizing
+polymorphic higher-order functions\footnote{Higher-order 
+function takes another function as an input parameter.
+} and lambda abstractions.
+Important point of interest in this work is use of \texttt{foldr}\footnote{ In the functional programming language Haskell \texttt{foldr} can be defined as:\\ \texttt{foldr f z [] $~~~$  = z\\ 
+foldr f z (x:xs) = f x (foldr f z xs) }} function as a tool for \textit{implicit recursion},
+i.e. recursion without explicit recursive calls. 
+The terminal set for constructing lambda abstraction subtrees 
+is limited to use only constants and variables of that particular
+lambda abstraction, i.e., outer variables are not allowed to be used
+as terminals in this work. This is significant difference from our approach 
+since we permit all well-typed normalized \lterms. From this difference also
+comes different crossover operation. We focus more on term generating process; 
+their term generation is performed in a similar way as the standard one, 
+whereas our term generation also tries to utilize techniques of systematic enumeration. 
+
+\cite{kes} present technique 
+utilizing typed GP with combinators.
+The difference between approach presented in this work
+and our approach is that in this work terms are generated
+straight from \textit{library} of combinators and no lambda abstractions
+are used. They are using more general polymorphic type system than us
+-- the Hindley–Milner type system. They also discuss the 
+properties of exhaustive enumeration of terms and compare it with GP search.  
+They also present interesting concept of \textit{Generalized
+genetic operator} based on term generation. 
+
+\cite{binard2008genetic} use even 
+stronger type system (\textit{System F}).  
+But with increasing power of the type system comes increasing difficulty of term generation.
+For this reason evolution in this work takes interesting and nonstandard shape 
+(fitness is associated with \textit{genes} which are evolved together with \textit{species}
+which together participate in creation of individuals).
+This differs from our approach, which tries to be generalization of
+the standard GP\cite{koza92}.
+
+In contrast with above mentioned works our approach uses very simple type system 
+(simply typed lambda calculus) and concentrates on process of generation  
+able to generate all possible well-typed normalized lambda terms. In order to do
+so we use technique based on \textit{inhabitation machines} 
+described by Barendregt \cite{barendregt10}.    
+
+
+
+
+%%% Abych věděl jak citovat tak sem si tu kousek nechal
+%The interaction of the solar wind with the Earth's magnetosphere
+%generates a population of backstreaming ions directed from the
+%bow shock into the solar wind. This high-energy population was
+%invoked to explain Hot Flow Anomalies (HFAs)
+%\citep[e.g.][]{sw}. \citet{th} identified as heated regions of solar wind plasma
+%flowing nearly perpendicular to the Earth-Sun line.
+%The main observational features of HFAs include \citep[and others]{sw}: (1) Central regions with hot plasma flowing
+%significantly slower than that in the ambient solar wind in a
+%direction highly deflected (nearly $90^o$) from the Sun-Earth line.
+%The flow velocities are often roughly tangential to the nominal
+%bow shock shape \citep{sw}.
+%(2) HFAs are bounded by regions of enhanced
+%magnetic field strength, density, and temperature. The outer
+%edges of these enhancements are fast shocks generated by
+%pressure enhancements within the core region. The inner
+%edges of the enhancements are probably  tangential
+%discontinuities.
+%Published examples indicated that  many HFAs are bounded by only
+%one enhancement.
+%(3) HFAs occur in conjunction with significant changes in the IMF
+%direction. The angle between pre- and post event orientations is
+%typically $\sim 70^o$.
+
+Todo.
+
+\section{Conclusion}
+Todo.
+
+
+\acknowledgments %\footnotesize
+{???}
+
+
+%% TWO METHODS FOR INCLUDING THE BIBLIOGRAPHY (LIST OF REFERENCES)
+%% EITHER TYPE IN THE ENTRIES YOURSELF AS SHOWN HERE IN
+%% `thebibliography' ENVIRONMENT,
+%%        OR
+%% USE THE FOLLOWING TWO COMMANDS SO THAT BIBTEX WILL GENERATE
+%% `thebibliography' TEXT FOR YOU AND READ IT IN.
+%%
+\bibliographystyle{egs}%<-- LIST OF REFERENCES TO BE IN "EGS" STYLE (FILE "EGS.STY")
+\bibliography{my}       %<-- REFERENCES ARE IN FILE "SAMPLE.BIB"
+%%
+%%  IF THE ABOVE TWO COMMANDS ARE USED, THEN thebibliography ENVIRONMENT
+%%  MUST BE REMOVED.
+
+%\begin{thebibliography}{}
+%
+%\itemsep=0.4ex
+%%\footnotesize
+%\bibitem[\it Klimov and Friend(1997)]{kl}
+%Klimov, S., Friend A., ASPI experiment: Measurements of fields and
+%waves onboard the Interball-1 spacecraft, {\it Ann. Geophys.}, 15,
+%514-527, 1997.
+%
+%\bibitem[\it Kudela et al.(1995)]{ku}
+%Kudela, K., M. Slivka, J. Rojko, and V. N. Lutsenko, The
+%apparatus DOK-2 (project INTERBALL): Output data structure and
+%modes of operation, preprint of Inst. Exp. Phys. UEF-01-95,
+%Kosice, 20, 1995.
+%
+%\bibitem[\it Lin(1997)]{li}
+%Lin Y., Generation of anomalous flows near the bow shock by
+%its interaction with interplanetary discontinuities, {\it J. Geophys.
+%Res.}, 102, 24265-24281, 1997.
+%
+%\bibitem[\it Lutsenko et al.(1995)]{lu}
+%Lutsenko, V. N., J. Rojko, K. Kudela, T. V. Gretchko, J. Balaz,
+%J. Matisin, E. T. Sarris, K. Kalaitzides, and N. Paschalidis,
+%Energetic particle experiment DOK-2 (Interball project), in:
+%{it INTERBALL Mission and Payload,} ed. by Yu. Galperin, IKI-CNES,
+%249, 1995.
+%
+%
+%\bibitem[\it Onsager et al.(1990a)]{ona}
+%Onsager, T. G., M. F. Thomsen, J. G. Gosling, and S. J.
+%Bame, Observational test of a hot flow anomaly formation
+%mechanism, {\it J. Geophys. Res.}, 95, 11.967-11.974, 1990a.
+%
+%\bibitem[\it Onsager et al.(1990b)]{onb}
+%Onsager, T. G., M. F. Thomsen, and D. Winske,
+%Hot flow anomaly formation by magnetic deflection,
+%{\it Geophys. Res. Lett.}, 17, 1621-1624, 1990b.
+%
+%\bibitem[\it Schwartz et al.(1999d)]{sw}
+%Schwartz, S. J., G. E. Paschmann, N. Sckopke, T. M. Bauer, M. W.
+%Dunlop, A. N. Fazakerley, and M. F. Thomsen,  Hot flow anomalies
+%revisited, {\it Int. J. Geomag. and Aeronomy}, 1, 1999, in print.
+%
+%\bibitem[\it Thomsen et al.(1992)]{th}
+%Thomsen M. F., J. G. Gosling, and S. J.
+%Bame, Observational test of a hot flow anomaly formation
+%mechanism, {\it J. Geophys. Res.}, 97, 1967-1974, 1992.
+%
+%
+%\end{thebibliography}
+
+
+\end{article}
+\end{document}
+
