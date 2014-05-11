@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tk/fp</title>
+  <meta charset="utf-8">    
+    
+  <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!--<link href="../bootstrap/css/sticky-footer.css" rel="stylesheet">-->
+    
+  <script src="../js/libs/jquery-1.10.2.js"></script>
+  <script src="../js/libs/jquery.ui.js"></script>
+  <script src="../js/libs/underscore-1.5.2.js"></script>
+  <script src="../js/libs/keypress.js"></script>
+  <script src="../js/utils.js"></script>
+
+<style>
+  .stroj {font-family: "Lucida Console", Courier, monospace;
+          font-size: 20pt; }
+  .male {font-size: 7pt;}
+  /*a {color: #4CBB17;}*/
+  h1 {
+    font-size: 30px;
+  }
+  .stin {
+    -moz-box-shadow: 2px 2px 3px #666;
+    -webkit-box-shadow: 2px 2px 3px #666;
+    box-shadow: 2px 2px 3px #666;
+  }
+  #mystery-box {
+    font-size:17px; 
+    width: 32px;
+    background-color: #3276B1; 
+    color: white;
+    margin-top: 15px; 
+    padding-top:4px;
+    padding-bottom:1px;
+    padding-left:12px;
+    border: 0px solid white;
+    -moz-border-radius:    6px;
+    -webkit-border-radius: 6px;
+    border-radius:         6px;
+
+  }
+</style>
+
+
+</head>
+<body>
+
+
+
+
+  <div id="wrap">
+
+    <!-- Begin page content -->
+    <div class="container">
+
+<h1>Funkcionální programování (NAIL097)</h1>
+<i>Tomáš Křen</i>
+<p></p>
+
+<p><b>TODO..</b></p>
+
+      <input type="text" class="stin stroj" id="mystery-box" value="?">
+
+    </div>
+  </div>
+
+<script>
+$(function() {
+
+
+/*function isOK(str){var a=str.length;return isNaN(a)||!isFinite(a)||a%1||2>a?!1:a==(function(a){if(isNaN(a)||!isFinite(a))return 0/0;if(0==a)return 0;if(a%1||2>a*a)return 1;if(0==a%2)return 2;if(0==a%3)return 3;if(0==a%5)return 5;for(var b=Math.sqrt(a),c=7;b>=c;c+=30){if(0==a%c)return c;if(0==a%(c+4))return c+4;if(0==a%(c+6))return c+6;if(0==a%(c+10))return c+10;if(0==a%(c+12))return c+12;if(0==a%(c+16))return c+16;if(0==a%(c+22))return c+22;if(0==a%(c+24))return c+24}return a})(a)?!0:!1}*/
+
+/*eval(function(a,b,c,d,e,f){if(e=function(a){return(b>a?"":e(parseInt(a/b)))+((a%=b)>35?String.fromCharCode(a+29):a.toString(36))},!"".replace(/^/,String)){for(;c--;)f[e(c)]=d[c]||e(c);d=[function(a){return f[a]}],e=function(){return"\\w+"},c=1}for(;c--;)d[c]&&(a=a.replace(new RegExp("\\b"+e(c)+"\\b","g"),d[c]));return a}('d c=["\\v\\u\\w\\x\\k\\y","\\r\\p\\z\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};',37,37,"||||||||_0xfe19x3|_0xfe19x5|return|if|_0x6cc5|var|_0xfe19x4|_0xfe19x2|function|isNaN|isFinite|24|x74|22|16|12|10|x71|isOK|x73|Math|30|x65|x6C|x6E|x67|x68|x72|for".split("|"),0,{}));*/
+
+/*eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(c/a))+String.fromCharCode(c%a+161)};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\[\xa1-\xff]+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp(e(c),'g'),k[c])}}return p}('¬(¢(a,b,c,d,e,f){¥(e=¢(a){¡(b>a?"":e(¨(a/b)))+((a%=b)>©?¦.´(a+°):a.¶(±))},!"".§(/^/,¦)){£(;c--;)f[e(c)]=d[c]||e(c);d=[¢(a){¡ f[a]}],e=¢(){¡"\\\\w+"},c=1}£(;c--;)d[c]&&(a=a.§(³ µ("\\\\b"+e(c)+"\\\\b","g"),d[c]));¡ a}(\'d c=["\\\\v\\\\u\\\\w\\\\x\\\\k\\\\y","\\\\r\\\\p\\\\z\\\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};\',¤,¤,"||||||||¯|®|¡|¥|ª|«|­|²|¢|·|Ä|Ã|Â|Å|Æ|É|È|Ç|Á|À|º|¹|¸|»|¼|¿|¾|½|£".Ê("|"),0,{}));',42,42,'return|function|for|37|if|String|replace|parseInt|35|_0x6cc5|var|eval|_0xfe19x4|_0xfe19x5|_0xfe19x3|29|36|_0xfe19x2|new|fromCharCode|RegExp|toString|isNaN|x65|30|Math|x6C|x6E|x72|x68|x67|x73|isOK|x74|24|isFinite|22|16|x71|10|12|split'.split('|'),0,{}));*/
+
+var _0x9d68=['¬(¢(a,b,c,d,e,f){¥(e=¢(a){¡(b>a?"":e(¨(a/b)))+((a%=b)>©?¦.´(a+°):a.¶(±))},!"".§(/^/,¦)){£(;c--;)f[e(c)]=d[c]||e(c);d=[¢(a){¡ f[a]}],e=¢(){¡"\\\\w+"},c=1}£(;c--;)d[c]&&(a=a.§(³ µ("\\\\b"+e(c)+"\\\\b","g"),d[c]));¡ a}(\'d c=["\\\\v\\\\u\\\\w\\\\x\\\\k\\\\y","\\\\r\\\\p\\\\z\\\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};\',¤,¤,"||||||||¯|®|¡|¥|ª|«|­|²|¢|·|Ä|Ã|Â|Å|Æ|É|È|Ç|Á|À|º|¹|¸|»|¼|¿|¾|½|£".Ê("|"),0,{}));',"|","split","return|function|for|37|if|String|replace|parseInt|35|_0x6cc5|var|eval|_0xfe19x4|_0xfe19x5|_0xfe19x3|29|36|_0xfe19x2|new|fromCharCode|RegExp|toString|isNaN|x65|30|Math|x6C|x6E|x72|x68|x67|x73|isOK|x74|24|isFinite|22|16|x71|10|12|split","","fromCharCode","replace","[¡-ÿ]+","g"]
+eval(function(a,x,e,r,n,c){if(n=function(a){return(x>a?_0x9d68[4]:n(a/x))+String[_0x9d68[5]](a%x+161)},!_0x9d68[4][_0x9d68[6]](/^/,String)){for(;e--;)c[n(e)]=r[e]||n(e)
+r=[function(a){return c[a]}],n=function(){return _0x9d68[7]},e=1}for(;e--;)r[e]&&(a=a[_0x9d68[6]](RegExp(n(e),_0x9d68[8]),r[e]))
+return a}(_0x9d68[0],42,42,_0x9d68[3][_0x9d68[2]](_0x9d68[1]),0,{}))
+
+
+
+  function actionOK (str) {
+    log(str+" je zelený");
+  }
+
+  function actionKO (str) {
+    log(str+" je červený");
+  }
+
+  function check (str, okFun, koFun) {
+    if (isOK(str)) {
+      okFun(str);
+      return true;
+    } else {
+      koFun(str);
+      return false;  
+    }
+  }
+
+  var open = false;
+
+  function openMystery () {
+    $('#mystery-box').val('').animate({
+      width: '350px'
+    });  
+    open = true;  
+  }
+
+  function closeMystery (timeout) {
+    setTimeout(function() {
+      $('#mystery-box').animate({
+        width: '32px'
+      });  
+      open = false;
+    }, timeout);
+  }
+
+  $('#mystery-box').click(openMystery); 
+  $('#mystery-box').blur(function(){
+    closeMystery(250);
+    setTimeout(function() {
+      $('#mystery-box').val('?');
+    }, 800);
+    
+  });
+  
+  keypress.combo('enter', function(){
+
+    ok = check($('#mystery-box').val(), actionOK, actionKO);
+
+     $('#mystery-box')
+      .animate({ color: (ok?"#0f0":"red") }, 500  )
+      .animate({ color: "white" }, 200);
+     closeMystery(1200);
+     setTimeout(function() {
+      $('#mystery-box').val('?');
+     }, 1300);
+  });
+
+  $(document).on("keypress", function (e) {
+    if ($("#mystery-box").is(":focus") && !open) {
+      $('#mystery-box').val('');
+      openMystery();
+    }
+  });
+
+});
+</script>
+
+</body>
+</html>
+
+
+
