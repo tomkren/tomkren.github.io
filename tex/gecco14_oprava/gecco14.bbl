@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{barendregt84}
+H.~Barendregt.
+\newblock {\em The Lambda Calculus: its Syntax and Semantics, revised ed.}
+\newblock North-Holland, 1984.
+
+\bibitem{barendregt10}
+H.~Barendregt, W.~Dekkers, and R.~Statman.
+\newblock {\em Lambda Calculus With Types}.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{binard2008genetic}
+F.~Binard and A.~Felty.
+\newblock Genetic programming with polymorphic types and higher-order
+  functions.
+\newblock In {\em Proceedings of the 10th annual conference on Genetic and
+  evolutionary computation}, pages 1187--1194. ACM, 2008.
+
+\bibitem{kes}
+F.~Briggs and M.~O'Neill.
+\newblock Functional genetic programming and exhaustive program search with
+  combinator expressions.
+\newblock {\em International Journal of Knowledge-Based and Intelligent
+  Engineering Systems}, 12(1):47--68, 2008.
+
+\bibitem{koza92}
+J.~R. Koza.
+\newblock {\em Genetic programming: on the programming of computers by means of
+  natural selection}.
+\newblock MIT Press, Cambridge, MA, USA, 1992.
+
+\bibitem{koza03}
+J.~R. Koza.
+\newblock {\em Genetic Programming IV: Routine Human-Competitive Machine
+  Intelligence}.
+\newblock Kluwer Academic Publishers, Norwell, MA, USA, 2003.
+
+\bibitem{nasecec}
+T.~K\v{r}en and R.~Neruda.
+\newblock Generating lambda term individuals in typed genetic programming using
+  forgetful {A}*.
+\newblock In {\em Proceedings of the Congress on Evolutionary Computation}.
+  IEEE Computer Press, 2014.
+\newblock (in print).
+
+\bibitem{luke2002perfect}
+S.~Luke and L.~Panait.
+\newblock Is the perfect the enemy of the good?
+\newblock In {\em GECCO}, pages 820--828, 2002.
+
+\bibitem{montana95}
+D.~Montana.
+\newblock Strongly typed genetic programming.
+\newblock {\em Evolutionary computation}, 3(2):199--230, 1995.
+
+\bibitem{jones87}
+S.~L. Peyton~Jones.
+\newblock {\em The Implementation of Functional Programming Languages
+  (Prentice-Hall International Series in Computer Science)}.
+\newblock Prentice-Hall, Inc., Upper Saddle River, NJ, USA, 1987.
+
+\bibitem{yu01}
+T.~Yu.
+\newblock Hierarchical processing for evolving recursive and modular programs
+  using higher-order functions and lambda abstraction.
+\newblock {\em Genetic Programming and Evolvable Machines}, 2(4):345--380,
+  2001.
+
+\bibitem{yu1998polygp}
+T.~Yu and C.~Clack.
+\newblock Poly{GP}: A polymorphic genetic programming system in haskell.
+\newblock {\em Genetic Programming}, 98, 1998.
+
+\end{thebibliography}
