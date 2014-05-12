@@ -14,12 +14,19 @@
   <script src="../js/utils.js"></script>
 
 <style>
+  .red {color: red; font-weight: bold;}
+  .add {color: red; }
+  .remove {color: red; text-decoration: line-through;}
+  .green {color: #0d0; font-weight: bold;}
   .stroj {font-family: "Lucida Console", Courier, monospace;
           font-size: 20pt; }
   .male {font-size: 7pt;}
   /*a {color: #4CBB17;}*/
   h1 {
     font-size: 30px;
+  }
+  .traktor {
+    width: 100px;
   }
   .stin {
     -moz-box-shadow: 2px 2px 3px #666;
@@ -50,38 +57,195 @@
 
 
 
-  <div id="wrap">
+<div id="wrap">
+<div class="container">
 
-    <!-- Begin page content -->
-    <div class="container">
+<h1>Funkcionální programování (<A target="_blank" HREF="http://is.cuni.cz/studium/predmety/index.php?do=predmet&kod=NAIL097">NAIL097</A>)</h1>
+<i>Tomáš Křen (záskok za Petra Pudláka, 
+  <A HREF="http://petr.pudlak.name/fp/">http://petr.pudlak.name/fp/</A>)
+<p>Vyučováno v zimním semestru 2014/15 - Zk 2/0.</p>
+</i>
 
-<h1>Funkcionální programování (NAIL097)</h1>
-<i>Tomáš Křen</i>
-<p></p>
+<br>
+<p id="wip"><b><!--<img class="traktor" src="wip.gif">--> Letošní stránky předmětu se zatím připravují. <img class="traktor" src="wip.gif"></b></p>
 
-<p><b>TODO..</b></p>
 
-      <input type="text" class="stin stroj" id="mystery-box" value="?">
+<h2>Info o předmětu</h2>
+<a id="toggle-popisky" class="btn btn-default btn-xs"></a>
 
-    </div>
-  </div>
+<h3>Anotace</h3>
+<p class="green">(neměněno)</p>
+
+<p>Základní pojmy, datové struktury a techniky funkcionálního programování, se zaměřením na jejich teoretické základy. Orientace zejména na funkcionální programovací jazyk Haskell.</p>
+
+
+
+<h3>Cíl předmětu</h3>
+<p class="green">(neměněno)</p>
+
+<p>Naučit teoretické základy funkcionálního programování a jejich uplatnění, zejména v prostředí jazyka Haskell.</p>
+
+<p>Upozornit na možnosti zavádění pojmů vysoké abstrakce ve funkcionálních jazycích, které umožňují obecná řešení širokého spektra úloh.</p>
+
+<p>Přínos typových systémů pro korektnost programů.</p>
+
+
+<h3>Sylabus</h3>
+<p class="red">(změněno)</p>
+
+<p>Úvod do lambda kalkulu, funkcionálního programování a programovacího jazyka Haskell. Operační sémantika funkcionálních programů, beta-redukce a normální formy výrazů (NF, HNF, WHNF).</p>
+
+<p>Funkce jakožto základní prvek funkcionálních jazyků. Rekurzivní funkce, funkce vyšších řádů, kombinátory.</p>
+
+<p>Churchovo kódování datových struktur. Algebraické datové struktury. Rozpoznávání vzorů (pattern matching).<span class="red">(Celý odstavec přesunut o něco výš. Odebráno "a jeho implementace" u pattern matchingu.)</span></p>
+
+<p>Typované lambda kalkuly. Intuicionistická logika, systém přirozené dedukce a souvislost s typovanými lambda kalkuly. Curry-Howardova korespondence. Základní pojmy kombinatorické logiky. 
+<span class="add">Závislé typy.</span> <span class="red">("závislé typy" přesunuty sem z odstraněného konce)</span></p>
+
+<p>Odvozování typů výrazů. Hindley-Milnerův typový systém a algoritmus pro odvozování principiálního (nejobecnějšího) typu. <span class="add">Generování programů požadovaného typu a jeho aplikace.</span>
+<span class="red">(Přidáno nové téma o generování programů.)</span> </p>
+
+<p>Ad-hoc polymorfismus - typové třídy. <span class="add">Souvislost s logickým programováním.</span>
+  <span class="red">(Téma typových tříd rozšířeno o diskusi vztahu s logickým programováním.)</span></p>
+
+<p>Rekurzivní, nekonečné, induktivní a koinduktivní datové struktury. Totální funkcionální programování. Typové systémy popisující dokazatelně totální funkce - Gödelův Systém T a Girard-Reynoldsův Systém F.</p>
+
+<p>Základní pojmy z teorie kategorií v kontextu funkcionálních jazyků. Funktory, Kleisliho kategorie, monády.</p>
+
+<p class="red">Dva poslední odstavce sylabu byly vypuštěny, aby bylo realističtější vše stihnout.
+Některá témata ale mouho být přirozeně zmíněna v předchozích odstavcích.</p>
+
+<p class="remove">Typové systémy pro práci s vedlejšími efekty. Monády, unikátní typy, lineární typy a lineární logika.</p>
+
+<p class="remove">Rozšíření standardních typových systémů používaná v různých funkcionálních jazycích. Typové systémy v imperativních jazycích. Generalizované algebraické datové typy. Závislé typy.</p>
+
+<p>Stránka předmětu: <A HREF="http://tomkren.cz/fp/">http://tomkren.cz/fp/</A>
+<span class="red">(změněna stránka předmětu)</span></p>
+
+
+<h3>Literatura</h3>
+<p class="red">(přidáno [7])</p>
+
+<ol>
+  <li>Bryan O'Sullivan, Don Stewart, and John Goerzen: Real World Haskell - Code You Can Believe In. 
+      O'Reilly, November 2008, ISBN-10: 0596514980, ISBN-13: 978-0596514983.<br>
+      <a href="http://book.realworldhaskell.org/read/">http://book.realworldhaskell.org/read/</a></li>
+  <li>Paul Hudak: The Haskell School of Expression: Learning Functional Programming through Multimedia
+      Cambridge University Press, New York, 2000, ISBN 0521644089 / 0521643384.</li>
+  <li>Thompson, S.: Haskell, The Craft of Functional Programming. 
+      Addison-Wesley, 1999, ISBN 0-201-34275-8</li>
+  <li>Benjamin C. Pierce: Types and Programming Languages. 
+      The MIT Press, 2002, ISBN 0262162091</li>
+  <li>Girard J-Y, Lafont Y, Taylor P: Proofs and Types. Cambridge Press, 1989.<br>
+      <a href="http://www.paultaylor.eu/stable/Proofs+Types.html">
+       http://www.paultaylor.eu/stable/Proofs+Types.html</a></li>
+  <li>Simon Peyton Jones: Haskell 98 language and libraries: the Revised Report. 
+      Cambridge University Press, 2003, ISBN 0521826144.<br> 
+      <A HREF="http://haskell.org/onlinereport/">http://haskell.org/onlinereport/</A></li>
+  <li><span class="red">[nová]</span>
+      Barendregt, Henk, Wil Dekkers, and Richard Statman. Lambda calculus with types. Cambridge University Press, 2013.</li>
+</ol>
+
+
+
+
+
+
+
+<h2>Info (EN version)</h2>
+
+<h3>Annotation</h3>
+<p class="green">(nezměněna)</i>
+
+<p>Basic notions, data structures and techniques in functional programming, focused on its theoretical foundations. Oriented mainly towards functional programming language Haskell.</p>
+
+
+
+<h3>Aim of the course</h3>
+<p class="green">(nezměněna)</i>
+
+<p>Learn theoretical foundations of functional programming and their uses, in particular in the environment of Haskell language.</p>
+
+<p>Draw the attention to possibilities of introducing notions of high abstractions in functional languages that allow general solutions of broad spectrum of tasks.</p>
+
+<p>Contribution of type systems for program correctness.</p>
+
+
+<h3>Syllabus</h3>
+<p class="red">(změněno)</p>
+
+<p>Introduction to lambda calculus, functional programming and the Haskell programming language. Operational semantics of functional programs, beta-reduction and normal forms of expressions (NF, HNF, WHNF).</p>
+
+<p>Functions as first-class objects of functional languages. Recursive functions, higher-order functions, combinators.</p>
+
+<p>Church encoding of data types. Algebraic data structures. Pattern matching.</p>
+
+<p>Typed lambda calculi. Intuitionistic logic, natural deduction calculus and its connection to typed lambda calculi. Curry-Howard correspondence. Basic notions of combinatory logic. 
+<span class="add">Dependent types.</span></p>
+
+<p>Expression type inference. Hindley/Milner type system and principal type inference algorithm. 
+<span class="add">Generating expressions of given type and its applications.</span></p>
+
+<p>Ad-hoc polymorphism - type classes. <span class="add">Connection to logic programming.</span></p>
+
+<p>Recursive, infinite, inductive and coinductive data structures. Total functional programming. Type systems describing provably total functions - Gödel System T and Girard-Reynold System F.</p>
+
+<p>Basic notions from category theory in the context of functional languages. Functors, Kleisli category, monads.</p>
+
+<p class="remove">Type systems for working with side effects. Monads, unique types, linear types and linear logic.</p>
+
+<p class="remove">Extension of standard type systems used in various functional languages. Type systems in imperative languages. Generalized algebraic data structures. Dependent types.</p>
+
+<p>Web page: <A HREF="http://tomkren.cz/fp/">http://tomkren.cz/fp/</A>
+</p>
+
+
+<h3>Literature</h3>
+<p><b>Stejná jako v české verzi..</b></p>
+
+
+<input type="text" class="stin stroj" id="mystery-box" value="?">
+
+<br><br>
+
+</div>
+</div>
 
 <script>
 $(function() {
 
+  setTimeout(function() {
+    $('.traktor').hide(800);
+    setTimeout(function() {
+      $('#wip').hide(400);
+    }, 100);
+  }, 4000);
 
-/*function isOK(str){var a=str.length;return isNaN(a)||!isFinite(a)||a%1||2>a?!1:a==(function(a){if(isNaN(a)||!isFinite(a))return 0/0;if(0==a)return 0;if(a%1||2>a*a)return 1;if(0==a%2)return 2;if(0==a%3)return 3;if(0==a%5)return 5;for(var b=Math.sqrt(a),c=7;b>=c;c+=30){if(0==a%c)return c;if(0==a%(c+4))return c+4;if(0==a%(c+6))return c+6;if(0==a%(c+10))return c+10;if(0==a%(c+12))return c+12;if(0==a%(c+16))return c+16;if(0==a%(c+22))return c+22;if(0==a%(c+24))return c+24}return a})(a)?!0:!1}*/
 
-/*eval(function(a,b,c,d,e,f){if(e=function(a){return(b>a?"":e(parseInt(a/b)))+((a%=b)>35?String.fromCharCode(a+29):a.toString(36))},!"".replace(/^/,String)){for(;c--;)f[e(c)]=d[c]||e(c);d=[function(a){return f[a]}],e=function(){return"\\w+"},c=1}for(;c--;)d[c]&&(a=a.replace(new RegExp("\\b"+e(c)+"\\b","g"),d[c]));return a}('d c=["\\v\\u\\w\\x\\k\\y","\\r\\p\\z\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};',37,37,"||||||||_0xfe19x3|_0xfe19x5|return|if|_0x6cc5|var|_0xfe19x4|_0xfe19x2|function|isNaN|isFinite|24|x74|22|16|12|10|x71|isOK|x73|Math|30|x65|x6C|x6E|x67|x68|x72|for".split("|"),0,{}));*/
+  var skrytStr = 'skrýt popisky změn oproti předchozím ročníkům';
+  var zobrazStr= 'zobrazit popisky změn oproti předchozím ročníkům';
+  var isTogglePop = true;
+  $('#toggle-popisky').html(isTogglePop?skrytStr:zobrazStr);
+  $('#toggle-popisky').click(function(){
+    if(isTogglePop) {
+      $(".red, .green, .remove").hide(1000);
+      $('#toggle-popisky').html(zobrazStr); 
+      $('.add').css('color','#333333');
+    } else {
+      $(".red, .green, .remove").show(1000);
+      $('#toggle-popisky').html(skrytStr);
+      $('.add').css('color','red');
+    }
+    isTogglePop = !isTogglePop;    
+  });
 
-/*eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(c/a))+String.fromCharCode(c%a+161)};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\[\xa1-\xff]+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp(e(c),'g'),k[c])}}return p}('¬(¢(a,b,c,d,e,f){¥(e=¢(a){¡(b>a?"":e(¨(a/b)))+((a%=b)>©?¦.´(a+°):a.¶(±))},!"".§(/^/,¦)){£(;c--;)f[e(c)]=d[c]||e(c);d=[¢(a){¡ f[a]}],e=¢(){¡"\\\\w+"},c=1}£(;c--;)d[c]&&(a=a.§(³ µ("\\\\b"+e(c)+"\\\\b","g"),d[c]));¡ a}(\'d c=["\\\\v\\\\u\\\\w\\\\x\\\\k\\\\y","\\\\r\\\\p\\\\z\\\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};\',¤,¤,"||||||||¯|®|¡|¥|ª|«|­|²|¢|·|Ä|Ã|Â|Å|Æ|É|È|Ç|Á|À|º|¹|¸|»|¼|¿|¾|½|£".Ê("|"),0,{}));',42,42,'return|function|for|37|if|String|replace|parseInt|35|_0x6cc5|var|eval|_0xfe19x4|_0xfe19x5|_0xfe19x3|29|36|_0xfe19x2|new|fromCharCode|RegExp|toString|isNaN|x65|30|Math|x6C|x6E|x72|x68|x67|x73|isOK|x74|24|isFinite|22|16|x71|10|12|split'.split('|'),0,{}));*/
+
+
 
 var _0x9d68=['¬(¢(a,b,c,d,e,f){¥(e=¢(a){¡(b>a?"":e(¨(a/b)))+((a%=b)>©?¦.´(a+°):a.¶(±))},!"".§(/^/,¦)){£(;c--;)f[e(c)]=d[c]||e(c);d=[¢(a){¡ f[a]}],e=¢(){¡"\\\\w+"},c=1}£(;c--;)d[c]&&(a=a.§(³ µ("\\\\b"+e(c)+"\\\\b","g"),d[c]));¡ a}(\'d c=["\\\\v\\\\u\\\\w\\\\x\\\\k\\\\y","\\\\r\\\\p\\\\z\\\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};\',¤,¤,"||||||||¯|®|¡|¥|ª|«|­|²|¢|·|Ä|Ã|Â|Å|Æ|É|È|Ç|Á|À|º|¹|¸|»|¼|¿|¾|½|£".Ê("|"),0,{}));',"|","split","return|function|for|37|if|String|replace|parseInt|35|_0x6cc5|var|eval|_0xfe19x4|_0xfe19x5|_0xfe19x3|29|36|_0xfe19x2|new|fromCharCode|RegExp|toString|isNaN|x65|30|Math|x6C|x6E|x72|x68|x67|x73|isOK|x74|24|isFinite|22|16|x71|10|12|split","","fromCharCode","replace","[¡-ÿ]+","g"]
 eval(function(a,x,e,r,n,c){if(n=function(a){return(x>a?_0x9d68[4]:n(a/x))+String[_0x9d68[5]](a%x+161)},!_0x9d68[4][_0x9d68[6]](/^/,String)){for(;e--;)c[n(e)]=r[e]||n(e)
 r=[function(a){return c[a]}],n=function(){return _0x9d68[7]},e=1}for(;e--;)r[e]&&(a=a[_0x9d68[6]](RegExp(n(e),_0x9d68[8]),r[e]))
 return a}(_0x9d68[0],42,42,_0x9d68[3][_0x9d68[2]](_0x9d68[1]),0,{}))
-
-
 
   function actionOK (str) {
     log(str+" je zelený");
