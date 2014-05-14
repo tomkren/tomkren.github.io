@@ -1,21 +1,34 @@
 %to be compiled with LATEX 2e
-
 %use this setting with 11pt basic font:
 \documentclass[11pt]{article}
-\usepackage{wds11,epsf}
 
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{xspace}
+\usepackage[ampersand]{easylist}
+\usepackage{qtree}
+\usepackage{color}
+
+%
+
+
+
+\usepackage{wds11,epsf}
 %use this setting with 10pt basic font:
 %\documentclass{article}
 %\usepackage{wds10,epsf}
-
 %use to get author-year citations with BibTeX
 \usepackage[square]{natbib}
 
 
-
-
-
-\usepackage{xspace}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
 
 
 \newcommand{\Lets}{Let us\xspace}
@@ -60,7 +73,7 @@
 \newcommand{\benf}{$\beta\eta$-\textit{nf}\xspace}
 \newcommand{\bredex}{$\beta$-redex\xspace} 
 \newcommand{\lnf}{\textit{lnf}\xspace}
-\newcommand{\Ae}{\mathop{\mathrm{\AE}}}
+\newcommand{\Ae}{\mathop{\mathrm{AE}}} %{\mathop{\mathrm{\AE}}}
 \newcommand{\Bcomb }{\mathbf{B}}   
 \newcommand{\BBcomb }{\mathbf{B*}}
 \newcommand{\Ccomb }{\mathbf{C}}   
@@ -70,6 +83,15 @@
 \newcommand{\T}{\mathbb{T}\xspace}
 \newcommand{\C}{\mathbb{C}\xspace}
 \newcommand{\Real}{\mathbb{R}}
+
+\newcommand{\gar}{\longmapsto}
+\newcommand{\bRedex}{$\beta$-redex\xspace}
+\newcommand{\bRedexes}{$\beta$-redexes\xspace}
+\newcommand{\bArrow}{\rightarrow_\beta\xspace}
+\newcommand{\eArrow}{\rightarrow_\eta\xspace}
+\newcommand{\eeArrow}{\rightarrow_{\eta^{-1}}\xspace}
+
+
 
 \newenvironment{todo}
 {~\\ {\color{red}\textbf{TODO}}
@@ -98,7 +120,11 @@
 
 \begin{document}
 
-\title{Typed Genetic Programming over Lambda Calculus}
+\setlength{\pdfpagewidth}{210mm}
+\setlength{\pdfpageheight}{297mm}
+
+
+\title{Typed Genetic Programming in Lambda Calculus}
 
 \author{T. K\v ren}
 
@@ -107,12 +133,326 @@
 
 
 \begin{abstract}
-Todo.
+\red{TODO}
 \end{abstract}
 
 \begin{article}
 
 \section{Introduction}
+
+
+Genetic programming (GP) is an AI technique, which falls into broader category of evolutionary algorithms  ---  mataheuristic  search algorithms inspired  by biological evolution by natural selection. GP was developed by John Koza in 1992 \cite{koza92}. I dare say many people perceive its beauty in the fact that GP is a computer program  constructing other computer programs with desired properties by breeding them. It is also pretty successful technique in a number of areas \citep{koza2003genetic}. And perhaps that is why GP has become very popular.
+
+
+Early attempts to enhance the GP approach with the concept of types include the seminal work~\citep{montana95} where the ideas from Ada programming language were used to define a so-called strongly typed GP.   
+Usage of types naturally opens door to enriching S-expressions,
+the traditional GP representation of individuals, with concepts from
+lambda calculus, which is a simple yet powerful functional, mathematical and programming language extensively used in type theory~\citep{yu01}. 
+
+One of the motivations for using lambda calculus is that it is backed by a considerable theoretical background. From this background we can utilize several useful concepts such as reductions, normalization or abstraction elimination, and use them to enhance the standard GP algorithm.
+
+
+\red{(- ještě něco k tomu že LC je cool pro TGP (taky z článků) ?)}
+
+\red{- že důležitý je navrhnout generování a gene ops. že gener de přímoč do mutace.}
+
+The rest of the paper is organized as follows: \red{TODO}
+
+\section{Preliminaries}
+
+In this section, several notions necessary to build a typed GP based on lambda calculus are introduced.
+
+\subsection{Genetic programming}
+
+A problem to be solved is given to GP in a form of \textit{fitness function}. Fitness function is a function which takes computer program as its input and  returns numerical value called \textit{fitness} as output. The bigger fitness of a computer program is, the better solution of a problem.
+GP maintains a collection of computer programs called \textit{population}.  A member of population is called \textit{individual}. By running GP algorithm evolution of those individuals is performed.
+
+Individuals are computer program \textit{expressions} kept as \textit{syntactic trees}. Basically those trees are rooted trees with a function symbol in each internal node and with constant symbol or variable symbol in each leaf node. 
+Number of child nodes for each internal node corresponds to the number of arguments of a function whose symbol is in that node.
+
+Another crucial input besides fitness function is a collection of \textit{building symbols}. It is a collection of symbols (accompanied with an information about number of arguments). Those symbols are used to construct trees representing individuals.
+
+\Lets describe GP algorithm briefly. At the beginning, initial population is generated from building blocks randomly. A step of GP algorithm is stochastic transformation of the current population into the next population.
+
+This step consists of two sub steps:
+
+\begin{itemize} 
+\item Selection of \textit{parents} for individuals of the next population based on the fitness. The bigger fitness of an individual of the current population is, the better chance of success being selected as parent it has.  
+\item Application of genetic operators (such as \textit{crossover},\textit{reproduction} and \textit{mutation}) on parent individuals producing new individuals of the next population.  
+\end{itemize}
+	  
+This transformation is repeatedly applied for a predefined number of steps (which is called number of \textit{generations}) or until some predefined criterion is met.
+
+\subsection{Lambda calculus}
+
+\Lets describe a programming language, 
+in which the GP algorithm generates individual programs --- the so called \lterms.
+
+\begin{definition}
+Let $V$ be infinite countable set of {\it 
+variable names}. Let $C$ be set of {\it constant names}, 
+$V \cap C = \emptyset$.	 	
+Then $\Lambda$ is set of {\it \lterms} defined inductively as follows.	
+\begin{align*}
+x   \in V \cup C  &\then x     \in \Lambda \\
+M,N \in \Lambda   &\then (M~N) \in \Lambda 
+\textit{~~~~~~(Function application)} \\
+x   \in V , M \in \Lambda &\then \lamb{x}{M} \in \Lambda
+\textit{~~~~($\lambda$-abstraction)} 
+\end{align*}
+\end{definition}
+
+\textit{Function application} and 
+\textit{$\lambda$-abstraction} are concepts
+well known from common programming languages. 
+For example, in JavaScript, 
+$(M~N)$ translates to expression \texttt{$M$($N$)} and
+$\lamb{x}{M}$ translates to expression \texttt{function($x$)\{return $M$;\}}.
+In other words, the function application 
+corresponds to the act of supplying a function 
+with an argument, and
+the $\lambda$-abstraction is equivalent to 
+\textit{anonymous function}\footnote{Apart from JavaScript, anonymous functions are common e.g. in Python and Ruby, 
+they were recently introduced to C++, and they are expected to be supported in Java 8.}.
+To ensure better readability, 
+$M_1~M_2~M_3~\dots~M_n$ will be an abbreviation for 
+$(\dots((M_1~M_2)~M_3)~\dots~M_n)$.
+And $\lam{x_1 \dots x_n }{M}$  for
+$\lamb{x_1}{\dots\lamb{x_n}{M}\dots}$.
+
+\subsection{Reductions}
+
+In order to perform computation, there must be some
+mechanism for term evaluation. In $\lambda$-calculus there
+is a \mbox{$\beta$-reduction} procedure for this reason.
+
+A term of a form $\lamb{x}{M}N$ is called \textit{\bRedex}.
+A \bRedex can be $\beta$-reduced to term $M[x:=N]$. 
+This fact is written as \textit{relation} $\bArrow$ 
+of those two terms:
+\begin{equation} \label{eq:bRed}
+\lamb{x}{M}N \bArrow M[x:=N]
+\end{equation}
+It is also possible to reduce \textit{subterm \bRedexes} 
+which can be formally stated as:
+\begin{align*}
+P \bArrow Q &\then (R~P)      \bArrow (R~Q) \\
+P \bArrow Q &\then (P~R)      \bArrow (Q~R) \\
+P \bArrow Q &\then \lam{x}{P} \bArrow \lam{x}{Q}  
+\end{align*}
+
+In other words, $\beta$-reduction is the process 
+of insertion of arguments supplied to a function into 
+its body.
+
+Another useful relations are $\bbarr$ and $\beq$ defined as follows. 
+
+\begin{enumerate}
+ \item \begin{enumerate}
+ 	\item $M \bbarr M$
+ 	\item $M \barr N \then M \bbarr N$
+ 	\item $M \bbarr N , N \bbarr L \then M \bbarr L$ 	
+ \end{enumerate}
+ \item \begin{enumerate}
+ 	\item $M \bbarr N \then M \beq N$
+ 	\item $M \beq N \then N \beq M$
+ 	\item $M \beq N , N \beq L \then M \beq L$
+ \end{enumerate}
+
+\end{enumerate}
+
+We read those relations as follows.
+\begin{enumerate}
+ 	\item $M \bbarr N$ --- "$M$ $\beta$-reduces to $N$."  
+ 	\item $M \barr N$  --- "$M$ $\beta$-reduces to $N$
+ 	      in one step."
+ 	\item $M \beq N$ --- "$M$ is $\beta$-convertible to $N$."	
+ \end{enumerate}
+
+
+Similarly as for $\beta$-reduction we can define $\eta$-reduction except that now it is defined as follows.  
+$$\lamb{x}{(M~x)} \eArrow M \textbf{ ~~~~if } x \not\in FV(M) $$
+
+Analogically, a term of a form $\lamb{x}{(M~x)}$ is called 
+\textit{$\eta$-redex}.
+
+Relation\footnote{Relation $R = \{\;(a,b)\;|\;a\;R\;b\;\}$.} $\bearr\;=\;\barr \cup \earr$.
+Similarly as for $\bbarr$ and $\beq$ we can define relations 
+$\eearr$, $\eeq$,$\bbeearr$ and $\beeq$.
+
+The $\eta^{-1}$-reduction (also called $\eta$-expansion) is 
+the reduction converse to $\eta$-reduction.
+It is defined as follows.  
+$$M \eeArrow \lamb{x}{(M~x)} \textbf{ ~~~~if } x \not\in FV(M) $$
+
+
+\subsection{Normal forms}
+\begin{definition}~
+
+\begin{easylist}[enumerate]
+& A \lterm is a \textit{$\beta$-normal form} (\bnf) 
+if it does not have a $\beta$-redex as subterm.
+& A \lterm M \textit{has} a \bnf if $M \beq N$
+and $N$ is a \bnf.
+\end{easylist}
+\end{definition}
+
+A normal form may be thought of as a result of a term evaluation. 
+Normalization of the term $M$ is the process of finding normal form of $M$. 
+Similarly we can define \enf and \benf.
+
+\subsection{Types}
+
+A \lterm as described above
+corresponds to a program expression with no type information
+included. Now we will describe \textit{types} (or \textit{type terms}).
+
+\begin{definition}
+Let $A$ be set of {\it atomic type names}. 
+Then $\mathbb{T}$ is set of {\it types} inductively defined as follows.
+\begin{align*}
+\alpha      \in A  &\then   \alpha \in \T \\
+\sigma,\tau \in \T &\then ( \sigma \ar  \tau ) \in \T 
+\end{align*}
+\end{definition}
+
+
+Type $\sigma \ar \tau$ is type for functions taking as input
+something of a type $\sigma$ and returning 
+as output something of a type $\tau$. 
+$\tau_1 \ar \tau_2 \ar \dots \ar \tau_n$ is an abbreviation for 
+$\tau_1 \ar (\tau_2 \ar (\dots \ar (\tau_{n-1} \ar \tau_n)\dots))$.
+The system called \textit{simply typed $\lambda$-calculus} is now easily obtained by
+combining the previously defined \textit{\lterms} and \textit{types} together.
+
+\begin{definition}~
+
+\begin{enumerate}
+ \item 	Let $\Lambda$ be set of {\it \lterms}. 
+	Let $\mathbb{T}$ be set of {\it types}.       
+	A {\it statement} $M : \sigma$ is a pair 
+	$(M,\sigma) \in \Lambda \times \mathbb{T}$.
+	Statement $M : \sigma$ is vocalized as 
+	{\it "$M$ has type $\sigma$"}.
+	The term $M$ is called the {\it subject} of the 
+	statement $M : \sigma$.
+ \item A \textit{declaration} is a statement 
+ $x : \sigma$ where $x \in V \cup C$.
+  
+ \item A \textit{context} 
+ is set of declarations with distinct variables as subjects.
+\end{enumerate}
+\end{definition}
+%~\\
+
+Context is a basic type theoretic concept suitable as a typed alternative
+for terminal, and function set in standard GP. 
+Notation $\Gamma,x:\sigma $ denotes $ \Gamma\cup\{(x:\sigma)\}$ 
+such that $\Gamma$ does not contain any declaration with $x$ as subject.
+We also write $x:\sigma \in \Gamma$ instead of $(x,\sigma) \in \Gamma$.
+
+\begin{definition}
+A statement $M\colon\sigma$ is \textit{derivable from}
+context $\Gamma$ (notation 
+\mbox{$\Gamma\vdash{}M\colon\sigma$}) 
+if it can be produced by the following rules.
+\begin{align*}
+x : \sigma \in \Gamma &~\then~ \tur{\Gamma}{x}{\sigma}\\
+\tur{\Gamma}{M}{\sigma \ar \tau}~,~\tur{\Gamma}{N}{\sigma} 
+&~\then~ \tur{\Gamma}{(M~N)}{\tau}\\  
+\tur{\Gamma,x:\sigma}{M}{\tau}
+&~\then~ \tur{\Gamma}{\lamb{x}{M}}{\sigma \ar \tau} 
+\end{align*}
+\end{definition}
+
+Our goal in term generation is to produce terms $M$
+for a given pair $\ul{\tau}{\Gamma}$
+such that for each $M$ is $\tur{\Gamma}{M}{\tau}$.
+
+\subsection{Long normal form}
+\label{lnf}
+
+%v barendrechtovi je to v definici lnf
+%$\lam{x_1 \dots x_n}{f~M_1~\dots~M_n}$ místo $M_m$ 
+%ale to musí bejt určitě překlep...
+
+\begin{definition}
+Let \GMS where 
+$\sigma = \tau_1 \ar \dots \ar \tau_n \ar \alpha, n \geq 0$.
+	\begin{enumerate}
+	  \item	
+		Then $M$ is in \textit{long normal form} (\lnf) if following 
+		conditions are satisfied.
+		\begin{enumerate}
+		 \item $M$ is term of the form $\lam{x_1 \dots x_n}{f~M_1~\dots~M_m}$\\
+		  (specially for $n = 0$, $M$ is term of the form $f$).
+		 \item Each $M_i$ is in \lnf.
+		\end{enumerate}	
+	  \item 
+	    $M$ has a \lnf if $M =_{\beta\eta} N$ and $N$ is in \lnf.
+	\end{enumerate}
+\end{definition}~
+
+As is shown in \cite{barendregt10}, \lnf has following nice properties.
+
+\begin{proposition}
+If $M$ has a \bnf, 
+%which according to Theorem 2B.4 is always the case, 
+then it also has an unique \lnf, 
+which is also its unique \beenf.
+\end{proposition}
+
+\begin{proposition}
+Every $B$ in \bnf has a \lnf 
+$L$ such that $L \twoheadrightarrow_{\eta} B$.
+\end{proposition}
+
+\subsection{Abstraction elimination}
+\textit{Abstraction elimination} is a process of transforming 
+an arbitrary \lterm into \lterm that contains no lambda abstractions
+and no bound variables.
+The newly produced \lterm may contain function applications, 
+free symbols from former \lterm and some new symbols standing for 
+combinators $\Scomb$, $\Kcomb$ and $\Icomb$.
+
+Those combinators are defined as:
+\begin{align*}
+\Scomb &= \lam{f\,g\,x}{f\,x\,(g\,x)} \\
+\Kcomb &= \lam{x\,y}{x} \\
+\Icomb &= \lam{x}{x} 
+\end{align*}
+
+
+\Lets describe transformation $\Ae$ performing this 
+process.
+%\footnote{In our implementation we must also deal with types, because our individuals are annotated with types. But since this process is fairly straightforward but cumbersome to describe, we will skip explaining it here. Reader interested in seeing it can see the source code of our implementation. }
+\begin{align*}
+\Ae[x]           &= x\\[0.4em]
+\Ae[\,(M\,N)\,]  &= (\Ae[M]\;\;\Ae[N])\\[0.4em]
+\Ae[\lam{x}{x}]  &= \Icomb\\
+\Ae[\lam{x}{M}]  &= (\Kcomb~\Ae[M]) \textbf{ if } x \not\in \FV(M)\\
+\Ae[\lam{x}{\lamb{y}{M}}] &= \Ae[\lam{x}{\Ae[\lam{y}{M}]}]  \textbf{ if } x \in \FV(M)\\
+\Ae[\lam{x}{(M\,N)}] &= (\Scomb~\Ae[\lam{x}{M}]~\Ae[\lam{x}{N}])\\
+&\textbf{ if } x \in \FV(M) \vee~ x \in \FV(N)\\
+\end{align*}
+
+As is stated in \citep{jones87},
+the biggest disadvantage of this technique is that the translated
+term is often much larger than in its lambda form --- the size of
+the translated term can be proportional to the square of the size 
+of the original term. But the advantage is also tempting --- no need to deal with variables and lambda abstractions.
+
+The algorithm presented here is a simple version of this process. 
+More optimized version (used in our \textit{hybrid} cross\-over described below), by means of the size of resulting term and its time performance is presented in \citep{jones87}. 
+
+
+\red{- HM - z papírů, wiki}
+
+\red{- Typová unifikace}
+
+\red{- Type classes - z papírů (asi ne tak formální)}
+
+\red{- naznačit celou hierarchii, řict že na vršku je jakoby DTT.}
 
 \section{Related work}
 \label{related}
@@ -186,80 +526,220 @@ described by Barendregt \cite{barendregt10}.
 %direction. The angle between pre- and post event orientations is
 %typically $\sim 70^o$.
 
-Todo.
+\red{Todo, eště neco?}
+
+\section{Our current approach}
+
+\subsection{Generating}
+
+Our approach to \lterm generating is based on technique 
+briefly described in \citep{barendregt10}, which generates
+well-typed \lterms in their long normal form. 
+We use this technique to perform a systematic exhaustive enumeration
+of \lterms in their long normal form in order from the smallest to the largest.
+We use well known \textit{A* algorithm} \citep{AIMA} for this task.
+A* is used to search in a given state space for a goal state. 
+It finds the optimal solution (in our case the smallest term)
+and uses "advising" heuristic function.
+It maintains a priority queue to organize states yet to be explored.
+Initially this queue contains only the initial state.  
+
+Our state space to search in is the space of unfinished \lterms. 
+The initial state is the unfinished term $\ul{\tau}{\Gamma}$, 
+where $\tau$ is the desired type of
+terms to be generated and $\Gamma$ is the context
+representing the set of building symbols to be used in construction of
+terms (it corresponds to the set $T \cup F$ in
+standard GP enriched with types). The process of determining 
+successors of a state described below is designed so it constructs well-typed 
+\lterms and omits no \lterm in its long normal form. 
+A state is considered a goal state if it contains no unfinished
+leaf, i.e., it is a finished \lterm.
+
+Our generating method is based on simple modification of the
+standard A*, which we call \textit{forgetful A*}. This modification consist in 
+additional parameter for the A* algorithm -- the \textit{search strategy}. 
+It is a simple filtration function (along with initialization procedure)
+that is given the set of all successors of the state that is being examined
+and returns a subset of this input. This subset is added to the priority queue 
+to be further explored. In this way the search space may be reduced as 
+the filtration function may \textit{forget} some successors.
+If the queue becomes empty before the desired number of \lterms
+is generated, then the initial state is inserted to the queue
+and the process continues. For the standard A* this would be meaningless,
+but since our A* is forgetful this kind of restart makes sense.
+
+A* keeps a priority queue of states during the generation process,
+on the other hand the \textit{ramped half-and-half method}, 
+the standard GP algorithm for generating individuals, 
+keeps only one individual which is gradually constructed. This 
+behavior is easily achieved by use of suitable search strategy 
+that returns subset consisting of only one successor.
+The systematic search is obtained by search strategy that 
+returns whole input set.      
+Our novel \textit{geometric strategy} can be understood as
+point somewhere between those two extremes.
+
+
+%.... metaevoluce remark
+
+
+A remarkable benefit of parameterizing the generating method 
+by a search strategy taking the form of a simple filtration function
+is that such a function can be expressed by functional language in a very 
+economical way. Take for instance a search strategy that behaves same
+as the \textit{geometric} except that when it comes to 
+situation where all the elements are filtered out it
+acts as the \textit{ramped half-and-half}. 
+Such \textit{strategy composition}
+is easily describable as a higher order function. Thus comes 
+to mind the possibility of using our system to come up with new
+search strategies on its own.
+
+
+\subsection{Crossover}
+
+
+
+Our system utilizes generalization of the standard 
+tree-swapping crossover operator. Two main concerns with swapping typed 
+subtrees are types and free variables. Well-typed offspring is obtained 
+by swapping only subtrees of the same type. Only subtrees with 
+corresponding counterpart in the second parent are randomly chosen from.
+More interesting problem lies in free variables, which may cause trouble
+if swapped somewhere where it is suddenly not bounded. In order to circumvent this
+difficulty we utilize technique called \textit{abstraction elimination}\citep{jones87}
+that transforms an arbitrary \lterm into \lterm that contains no lambda abstractions
+and no bound variables. After the initial population is generated,  it is transformed
+by abstraction elimination. Another possible transformation taking place
+after initialization is $\eta$-normalization shortening 
+rather long long normal form into shorter $\beta\eta$-normal form.  
+Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation. Favorable properties of applicative tree representation are also reported in \citep{yu1998polygp}. 
+
+\section{Future work}
+\red{
+Jak pojmout podstatu článku?
+
+Řekl bych, že vtip je v použití typovejch tříd na hendlování typovýho systému TGP.
+
+Tahle pasáž je imho klíčová a tak bych jí napsal jako první,
+podle noušnů v ní obsaženejch bych pak upravil preliminaries
+a akordingly to zmínil v related work na konci (něco jako, na rozdíl od 
+kanaďanů my se chceme skusit vydat na cestu k zobecnění HM tak, že 
+využijem typeclasses : výhody videíme v tom, že se prakticky využívaj 
+haskellu a jejich použití výrazně neztěžuje inferenční proces, naopak do něj
+přirozeně pasuje)
+}
+\red{nekde dyštak zmínit že to jsou fikaný javovský interfacy}
+
+
+Zásadním rozhodnutím při budování systému pro typované GP je volba underlying typového sytému. Současné přístupy k typovanému GP nad lambda calculem nejčastěji používají hidley-milnerův typový system \red{citovat yu, kombinatory} nebo experimentují s Systemem F, kterýžto je zobecněním HM. Alternativní přístup k obohacení HM would be enriching the HM type system with the type classes.  
+
+A type class is a type system construct that supports ad-hoc polymorphism in a mathematically elegant way. The concept of the type class first appeared in the Haskell programming language \citep{morris2013type} and was originally designed as a way of implementing overloaded arithmetic and equality operators in a systematic fashion \citep{wadler1989make}.
+
+Basically a type class is a predicate over types. Let us demonstrate this notion on the simple example of a type class, the \texttt{Eq} type class for handling the equality operator. 
+
+Funkci \texttt{intMember} zjištující zda číslo x je v seznamu čísel xs můžeme zapsat jako:
+
+\texttt{~\\
+intMember :: Int -> [Int] -> Bool\\
+intMember y [] = False\\
+intMember y (x:xs) = (x == y) || intMember y xs\\} 
+
+Abychom nemusel mít funkci pro každý typ zvlášť, hodilo by se mít zobecněnou funkci \texttt{member :: a -> [a] -> Bool}, navíc bychom chtěli abychom její definici mohli převzít z intMember. Tomu brání pouze použití equality operatoru (==).  Abychom tuto definici mohli použít, potřebujeme aby nad typem a byla definována rovnost. Tento fakt můžeme vyjádřit jako predikát \texttt{Eq a}. 
+V typu funkce member se tato dodatečná podmínka projeví jako \texttt{member :: (Eq a) => a -> [a] -> Bool}. Zbívá však dořešit jakým způsobem se typová třída Eq definuje. Nejjednoduším způsobem definice by bylo(footnote doopravdy je složitější ale to je jedno):
+
+\texttt{~\\
+class Eq a where\\
+ (==) :: a -> a -> Bool\\}
+
+Ještě zbývá poslední věc a to jak říct systému, že nějaký typ splňuje predikát Eq. Řekněme, že to chceme udělat pro typ Int a že máme k dispozici funkci eqInt :: Int -> Int -> Bool která implemetuje operator rovnosti nad cisly. Pak stačí deklarovat následující:
+
+\texttt{~\\
+instance Eq Int where\\
+ (==) = eqInt\\}
+
+Co kdybychom ale chtěli definovat Eq nad parametrickým typem, řekněme nad stromem. Jak se vyhneme tomu abychom nemuseli deklarovat instanci pro každý typ seznamu zvlášť? K tomu nám poslouží následující notace:
+
+\texttt{~\\
+instance (Eq a) => Eq (Tree a) where\\ 
+  Leaf a         == Leaf b          =  a == b\\
+  (Branch l1 r1) == (Branch l2 r2)  =  (l1==l2) \&\& (r1==r2)\\
+  \_              == \_               =  False\\}
+
+\red{v rychlosti okomentovat a zmínit že obecně těch předpokladů tam může bejt víc a jakou to má notaci. řict že pro nás je z typovýho hlediska podstatná ta deklarace a to co následuje po where už je otázka implementace (možná to dohrotit tak, že tu implementaci ...-ovat.) }
+
+Jak to převést do GP? Konkrétněji jak generovat programy v HM rozšířeném o TC?
+Pro generování bez TC je potřeba zadat požadovaný typ a mn. stavebních symbolu (s informací o jejich typech) tj. context. Pro HM s TC musíme navíc zahrnout deklarace tříd a instancí.
+
+Deklarace tříd udává jednak podmínky které musí splnit deklarace instancí. Navíc pokud používáme TC Eq, je patrně nasnadě aby součástí contextu byly funkce, které daná třída definuje. E.g., pro smysluplné použití třídy Eq je potřeba aby součástí vstupniho contextu bylo \texttt{(==) :: (Eq a) => a -> a -> Bool}. 
+
+Hlavní novinku do vstupu generujícího algoritmu zajišťují deklarace instancí.  
+Množina instancí nám  v záseadě přidává informaci o struktuře typů, nad kterými operují funkce z kontextu.
+
+Pro účely generování nás zajíma jen "info z prvního řádku", v zasadě máme dva typy instancí jednoduchou a s předpoklady. Zásadním faktem je, že tyto informace o instancích můžeme přímočaře vyjádřit jako logické programy \red{citovat něco kde se to dělá}. 
+
+\texttt{instance $P$ $T$ where ...} odpovídá faktu $P(T)$.
+
+\texttt{instance ($P_1$ $T_1$,$\dots$,$P_n$ $T_n$) => $P$ $T$ where ...} odpovídá hornovské klauzuli $P(T) \leftarrow P_1(T_1),\dots,P_n(T_n)$.
+
+Pro přehlednost jsme uvedli predikátové symboli jen s jedním argumentem, přímočaře to však můžeme zobecnit pro predikáty libovolné arity.
+
+Odpověď na otázku zda daný typ je instancí nějaké TC zodpovíme odpovídajícím dotazem pro logický program odpovídající naší množině instancí.
+
+
+\red{
+- dodat tuto LP složku je na programátarovy, GP se pak stará o generování. 
+  TC jsou ale obecné konstrukty které jde jednoduše používat napříč problémy
+  (užití Systému F naopak nechává vše na GP, minimum na programátorovi) 
+
+- neboť LP tur completní tak v zasadě můžeme naprogramovat libovolnej predikát
+
+- blackboxing - můžeme se vysrat na to pracně definovat predikáty v LP, stačí když se budou zvenku chovat tak jako by byli a vevnitř mohou bejt napsaný třeba v javě
+
+- praktický příklad takovýho blackboxingu - např plánování. ukazuje, že tyto dvě problem solving approaches are uzce connected - využití např že se muže GP inspirovat technikama z Planování, naopak zas že type theory může dát plánování expresivní jazyk / novej pohled na pro škatulkizaci různejch pojmů co odpovídaj nějakejm věcem co v GP jsou přirozeně (fce víc argumentů..., lamb abstr...)
+
+- nakonec (/na začatek) zmínit že máme i další future worky ale že vybíráme tento konkrétní
+}
+
+\section{Starší poznámky ...}
+
+- HM .. místo = dá unifikaci, a bez letu.
+
+(možná tam dát dk, spiš ne)
+
+- uvod k hm+tc 1-3 věty.
+
+\subsection{hinley milner + type classes}
+
+příklady
+
+(možná i ten s planovanim, dle času a místa)
+
+(metaevoluce)
+
+\subsection{Problémy}
+
+- sada benchmarku - citovat ten šit co sem našel
+
+- trhy
+
+. - vyhody: propojenej uzel uloh (slechteni manazera, modelu, konstruktera stroju, ), je to vypocetni model, na trh muzeme koukat jako na 
+. - meta model - výpočetní model co má to co optimalizuje zakodovany jako komoditu to co 
+. - navazuje na spolupráci mezi plánovánim a 
 
 \section{Conclusion}
 Todo.
 
 
+\red{v referencích změnit toho barendrechta na toho z roku 2013}
+
 \acknowledgments %\footnotesize
 {???}
 
 
-%% TWO METHODS FOR INCLUDING THE BIBLIOGRAPHY (LIST OF REFERENCES)
-%% EITHER TYPE IN THE ENTRIES YOURSELF AS SHOWN HERE IN
-%% `thebibliography' ENVIRONMENT,
-%%        OR
-%% USE THE FOLLOWING TWO COMMANDS SO THAT BIBTEX WILL GENERATE
-%% `thebibliography' TEXT FOR YOU AND READ IT IN.
-%%
 \bibliographystyle{egs}%<-- LIST OF REFERENCES TO BE IN "EGS" STYLE (FILE "EGS.STY")
 \bibliography{my}       %<-- REFERENCES ARE IN FILE "SAMPLE.BIB"
-%%
-%%  IF THE ABOVE TWO COMMANDS ARE USED, THEN thebibliography ENVIRONMENT
-%%  MUST BE REMOVED.
-
-%\begin{thebibliography}{}
-%
-%\itemsep=0.4ex
-%%\footnotesize
-%\bibitem[\it Klimov and Friend(1997)]{kl}
-%Klimov, S., Friend A., ASPI experiment: Measurements of fields and
-%waves onboard the Interball-1 spacecraft, {\it Ann. Geophys.}, 15,
-%514-527, 1997.
-%
-%\bibitem[\it Kudela et al.(1995)]{ku}
-%Kudela, K., M. Slivka, J. Rojko, and V. N. Lutsenko, The
-%apparatus DOK-2 (project INTERBALL): Output data structure and
-%modes of operation, preprint of Inst. Exp. Phys. UEF-01-95,
-%Kosice, 20, 1995.
-%
-%\bibitem[\it Lin(1997)]{li}
-%Lin Y., Generation of anomalous flows near the bow shock by
-%its interaction with interplanetary discontinuities, {\it J. Geophys.
-%Res.}, 102, 24265-24281, 1997.
-%
-%\bibitem[\it Lutsenko et al.(1995)]{lu}
-%Lutsenko, V. N., J. Rojko, K. Kudela, T. V. Gretchko, J. Balaz,
-%J. Matisin, E. T. Sarris, K. Kalaitzides, and N. Paschalidis,
-%Energetic particle experiment DOK-2 (Interball project), in:
-%{it INTERBALL Mission and Payload,} ed. by Yu. Galperin, IKI-CNES,
-%249, 1995.
-%
-%
-%\bibitem[\it Onsager et al.(1990a)]{ona}
-%Onsager, T. G., M. F. Thomsen, J. G. Gosling, and S. J.
-%Bame, Observational test of a hot flow anomaly formation
-%mechanism, {\it J. Geophys. Res.}, 95, 11.967-11.974, 1990a.
-%
-%\bibitem[\it Onsager et al.(1990b)]{onb}
-%Onsager, T. G., M. F. Thomsen, and D. Winske,
-%Hot flow anomaly formation by magnetic deflection,
-%{\it Geophys. Res. Lett.}, 17, 1621-1624, 1990b.
-%
-%\bibitem[\it Schwartz et al.(1999d)]{sw}
-%Schwartz, S. J., G. E. Paschmann, N. Sckopke, T. M. Bauer, M. W.
-%Dunlop, A. N. Fazakerley, and M. F. Thomsen,  Hot flow anomalies
-%revisited, {\it Int. J. Geomag. and Aeronomy}, 1, 1999, in print.
-%
-%\bibitem[\it Thomsen et al.(1992)]{th}
-%Thomsen M. F., J. G. Gosling, and S. J.
-%Bame, Observational test of a hot flow anomaly formation
-%mechanism, {\it J. Geophys. Res.}, 97, 1967-1974, 1992.
-%
-%
-%\end{thebibliography}
-
 
 \end{article}
 \end{document}

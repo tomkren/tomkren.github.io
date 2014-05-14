@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  15 APR 2014 12:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  14 MAY 2014 16:59
 entering extended mode
 **article.tex
-(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.tex
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\IEEEtran.cls
+(C:\wamp\www\tomkren.github.io\tex\cec14\IEEEtran.cls
 Document Class: IEEEtran 2012/11/21 V1.8c by Harald Hanche-Olsen and Anders Chr
 istensen
 -- Based on V1.7a by Michael Shell
@@ -547,7 +547,7 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algocf@algobox=\box38
 )
 \c@definition=\count122
- (C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux)
+ (C:\wamp\www\tomkren.github.io\tex\cec14\article.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
 LaTeX Font Info:    ... okay on input line 115.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
@@ -650,7 +650,7 @@ File: omlptm.fd
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <7> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 927.
- [6 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/SSR-eps-converted-to.pdf>]
+ [6 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/SSR-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <imgs/EP.eps>
 (epstopdf)                    date: 2014-04-15 00:02:02
 (epstopdf)                    size: 212400 bytes
@@ -668,8 +668,8 @@ File: imgs/EP-eps-converted-to.pdf Graphic file (type pdf)
 <use imgs/EP-eps-converted-to.pdf>
 Package pdftex.def Info: imgs/EP-eps-converted-to.pdf used on input line 992.
 (pdftex.def)             Requested size: 138.70343pt x 361.74301pt.
- [7 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/ANT-eps-converted-to.pdf>]
-(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.bbl
+ [7 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/ANT-eps-converted-to.pdf>]
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
@@ -688,35 +688,35 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8 <C:/Users/sekol/Dropbox/MASOMRK/tom/cec14/imgs/EP-eps-converted-to.pdf>]
-(C:\Users\sekol\Dropbox\MASOMRK\tom\cec14\article.aux) ) 
+[8 <C:/wamp/www/tomkren.github.io/tex/cec14/imgs/EP-eps-converted-to.pdf>]
+(C:\wamp\www\tomkren.github.io\tex\cec14\article.aux) ) 
 Here is how much of TeX's memory you used:
  5256 strings out of 493921
- 74638 string characters out of 3144876
+ 74627 string characters out of 3144876
  172405 words of memory out of 3000000
  8449 multiletter control sequences out of 15000+200000
  50864 words of font info for 108 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  42i,24n,29p,920b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)
-/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8
-a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on article.pdf (8 pages, 705584 bytes).
+{C:/Program Files (x86)/
+MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on article.pdf (8 pages, 705581 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

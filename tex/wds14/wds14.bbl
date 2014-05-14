@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{12}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{{\tt #1}}\fi
@@ -21,18 +21,44 @@ Briggs, F. and O'Neill, M., Functional genetic programming and exhaustive
   \urlprefix\url{http://iospress.metapress.com/content/u6l4j13p67w66370/},
   2008.
 
+\bibitem[{Koza(2003)}]{koza2003genetic}
+Koza, J., {\em Genetic Programming IV\/}, Genetic Programming IV: Routine
+  Human-competitive Machine Intelligence, Kluwer Academic Publishers,
+  \urlprefix\url{http://books.google.cz/books?id=vMaVhoI-hVUC}, 2003.
+
 \bibitem[{Koza(1992)}]{koza92}
 Koza, J.~R., {\em Genetic programming: on the programming of computers by means
   of natural selection\/}, MIT Press, Cambridge, MA, USA, 1992.
+
+\bibitem[{Montana(1995)}]{montana95}
+Montana, D., Strongly typed genetic programming, {\em Evolutionary
+  computation\/}, {\em 3\/}, 199--230, 1995.
+
+\bibitem[{Morris(2013)}]{morris2013type}
+Morris, J.~G., {\em Type Classes and Instance Chains: A Relational Approach\/},
+  Ph.D. thesis, Portland State University, 2013.
 
 \bibitem[{Peyton~Jones(1987)}]{jones87}
 Peyton~Jones, S.~L., {\em The Implementation of Functional Programming
   Languages (Prentice-Hall International Series in Computer Science)\/},
   Prentice-Hall, Inc., Upper Saddle River, NJ, USA, 1987.
 
+\bibitem[{Russell and Norvig(2010)}]{AIMA}
+Russell, S.~J. and Norvig, P., {\em Artificial Intelligence - A Modern Approach
+  (3rd Ed.)\/}, Prentice Hall, 2010.
+
+\bibitem[{Wadler and Blott(1989)}]{wadler1989make}
+Wadler, P. and Blott, S., How to make ad-hoc polymorphism less ad hoc, in {\em
+  Proceedings of the 16th ACM SIGPLAN-SIGACT symposium on Principles of
+  programming languages\/}, pp. 60--76, ACM, 1989.
+
 \bibitem[{Yu(2001)}]{yu01}
 Yu, T., Hierarchical processing for evolving recursive and modular programs
   using higher-order functions and lambda abstraction, {\em Genetic Programming
   and Evolvable Machines\/}, {\em 2\/}, 345--380, 2001.
+
+\bibitem[{Yu and Clack(1998)}]{yu1998polygp}
+Yu, T. and Clack, C., Poly{GP}: A polymorphic genetic programming system in
+  haskell, {\em Genetic Programming\/}, {\em 98\/}, 1998.
 
 \end{thebibliography}
