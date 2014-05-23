@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  29 APR 2014 09:20
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  14 MAY 2014 21:20
 entering extended mode
 **wds2e_ex.tex
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.tex
+(C:\wamp\www\tomkren.github.io\tex\wds14\2\wds2e_ex.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -30,12 +30,12 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds11.sty
+(C:\wamp\www\tomkren.github.io\tex\wds14\2\wds11.sty
 \@maxsep=\dimen103
 \@dblmaxsep=\dimen104
 
 MFF WDS galley substyle, v5.01wds <April 12, 2000>.
-(C:\wamp\www\tomkren.github.io\tex\wds14\agu11.sty
+(C:\wamp\www\tomkren.github.io\tex\wds14\2\agu11.sty
 
  
  AGU11 -- August 6, 1996 Version 
@@ -88,7 +88,7 @@ This is `epsf.tex' v2.7.4 <14 February 2011>
 \epsfxsize=\dimen125
 \epsfysize=\dimen126
 \pspoints=\dimen127
-) (C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.aux)
+) (C:\wamp\www\tomkren.github.io\tex\wds14\2\wds2e_ex.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
@@ -115,25 +115,25 @@ Overfull \hbox (4.16348pt too wide) in paragraph at lines 116--127
 re-sen-ta-tive ex-am-ples with favourable
  []
 
-[2] [3] [4] (C:\wamp\www\tomkren.github.io\tex\wds14\wds2e_ex.aux) ) 
+[2] [3] [4] (C:\wamp\www\tomkren.github.io\tex\wds14\2\wds2e_ex.aux) ) 
 Here is how much of TeX's memory you used:
  679 strings out of 493921
- 7045 string characters out of 3144876
+ 7067 string characters out of 3144876
  62859 words of memory out of 3000000
  4035 multiletter control sequences out of 15000+200000
  9518 words of font info for 33 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 21i,6n,19p,501b,200s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+ 21i,6n,19p,163b,200s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on wds2e_ex.pdf (4 pages, 136073 bytes).
 PDF statistics:
  51 PDF objects out of 1000 (max. 8388607)
