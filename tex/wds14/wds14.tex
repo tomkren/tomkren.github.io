@@ -115,7 +115,7 @@
 
 %%%%%%%%%%% nevim co to tu bylo za omg, tak jsem to zakomentoval
 \lefthead{K\v{R}EN}
-\righthead{Typed Genetic Programming in Lambda Calculus}
+\righthead{Typed Genetic Programming in Lambda Calculus with Type Classes}
 
 \setcounter{secnumdepth}{0}
 
@@ -125,7 +125,7 @@
 \setlength{\pdfpageheight}{297mm}
 
 
-\title{Typed Genetic Programming in Lambda Calculus}
+\title{Typed Genetic Programming in Lambda Calculus with Type Classes}
 
 \author{T. K\v ren}
 
@@ -134,10 +134,29 @@
 
 
 \begin{abstract}
-\red{TODO\\~[Článek zatím obsahuje i české poznámky, které jsou hodně hala bala a neformální. A celkově je to ještě dost neučesané. Dost jsem zápasil s nedostatkem místem a hodně toho dal pryč, protože jsem dal radši přednost podrobnějšímu popisu klíčových pojmů.. ]}
+Genetic programming (GP) traditionally uses simple S-expressions to represent programs. Lambda calculus representation of programs offers a more expressive alternative, which can exhibit better results. Moreover, lambda calculus representation can benefit from a considerable theoretical background. The crucial decision behind the design of a typed GP system is the choice of the underlying type system. The majority of such systems uses \HM (HM) type system. And there are also experiments with System F, which is a generalization of HM. In this paper we outline a novel typed GP system  based on HM enriched with the concept of type classes -- an alternative way to generalizing HM. We discuss its benefits and connection to logic programming. 
 \end{abstract}
 
+%\red{TODO\\~[Článek zatím obsahuje i české poznámky, které jsou hodně hala bala a neformální. A celkově je to ještě dost neučesané. Dost jsem zápasil s nedostatkem místem a hodně toho dal pryč, protože jsem dal radši přednost podrobnějšímu popisu klíčových pojmů.. ]}
+
+
 \begin{article}
+
+\red{\textbf{TODO: Přidat názorné příklady ...a par dalších poznámek}
+
+Základní příklad, který by se mohl táhnout napříč textem jsou seznamy. Můžeme ukázat, jak v simply typed LC je potřeba pro každý typ seznamu (seznam čísel, znaků, boolů) přidat zvlášť atomický typ, zatímco v HM to jde udělat díky polymorfizmu najednou. Ale pro specializovanější datovou strukturu \textbf{seznam pevné délky} je už HM slabý a každá delka se musí definovat zvlášť (problém je že potřebuju typ stojící za konkrétní číslo, a že typ seznamového konstruktoru musí v sobe obsahovat omezení, že vzniklý list je o jedna delší než ten z kterého vznikl přidáním prvku, což jde v HM těžko vyjádřit, protože máme jen "funkční symboly" ale žádný "predikáty".) ...a to je podobnost s předchozím omezením (v LC musim dělat zvlášť typy seznamů, tady zas zvlášť dýlky). 
+
+Další příklad, který myslím hezky ilustruje moc TC a přitom neni moc komplikovaný je udělat dědičnost pomocí TC.
+
+Další příklad (navíc i příklad na "blackboxing") je "plánování jako special case typovanýho GP s TC" ale to je dost komplikovaný vysvětlit srozumitelně a zároveň stručně, takže to asi ne.
+
+A samozřejmě přichází výhoda v použití toho k čemu se používaj TC v Haskellu prakticky tzn. různý monády, arrows, funktory, atd. 
+%Např monáda je definovaná dvěma funkcema (>>= a return), ale pro pro každou svou instanci dělá něco komplet zajímavýho a jinýho (na listech "dělá paralelizmus",  ).
+
+Důležitý je zdůraznit, že oproti Systemu F se výrazně nezesložiťuje generující procedura, ale že to tam naopak celkem přirozeně zapadá jako rozšíření (výpočet logického porgramu a generování typovaného stromu v HM jsou skoro stejné procesy), což kontrastuje s tím co dělaj System F lidi, který kvůli komplexitě inference v SF používaj dost nestandardní GP proceduru (i když teda zajímavou). 
+
+Myslim, že je také dobré jasně vymezit rozdíl ve filozofii použití SF a TC: system F jde cestou \textit{vše nechám na GP systému a to včetně definice typů samotných}, zatímco mnou navrhovaný přístup se nese více v duchu: \textit{rozdělme pole působnosti GP systému a programátora ve stylu programování vs meta-programování, GP-systém programuje (skládá funkce do programů) zatímco programátor nachystá vhodnou "knihovnu" a její datové struktury, ty však mezi sebou mohou mít poměrně komplexní vztahy - "programátor meta-programuje logický program (vztahů datových struktur) pomocí typových tříd"}.
+}
 
 \section{Introduction}
 
@@ -165,22 +184,24 @@ One of the motivations for using lambda calculus is that it is backed by a consi
 In this paper we compare typed lambda calculus approaches to GP known to us with approach we are suggesting as possible alternative. The crucial decision behind the design of a TGP system is the choice of the underlying \textit{type system}.
 The majority of such TGP systems uses \textit{\HM type system (HM)}. There are also experiments with more powerful type systems such as System F. An alternative approach we proposse is to use \textit{HM} enriching with the \textit{type classes}.  
 
-The rest of the paper is organized as follows: \red{TODO}
+%The rest of the paper is organized as follows: \red{TODO}
 
-\section{Preliminaries}
+\section{Basic notions} %\section{Preliminaries}
 
 In this section several useful notions 
 %\textit{(GP, LC, STLC, HM, SF, TC)} 
 are described.
 
-\subsection{Genetic programming}
+\subsection{\textit{Genetic programming}}
 
 A problem to be solved is given to GP in the form of a \textit{fitness function}. A fitness function is a function which takes a computer program as its input and  returns a numerical value called \textit{fitness} as an output. The bigger fitness of a computer program is, the better solution of a problem.
 GP maintains a collection of computer programs called \textit{population}.  A member of a population is called \textit{individual}. By running GP algorithm evolution of those individuals is performed. Individuals are computer program \textit{expressions} kept as \textit{syntactic trees}. Another crucial input besides fitness function is a collection of \textit{building symbols}. It is a collection of symbols (accompanied with an information about number of arguments; or in the case of the typed GP, this information is the type of the symbol). Those symbols are used to construct trees representing individuals.
 
 %\Lets describe GP algorithm briefly. At the beginning, initial population is generated randomly from the set of building symbols. A step of GP algorithm is stochastic transformation of the current population into the next population. This transformation is given by the choice of genetic operators (e.g. crossover, mutation) and selection mechanism based on individual fitness. The transformation is repeatedly applied for a predefined number of steps (which is called number of \textit{generations}) or until some predefined criterion is met.
 
-\subsection{Lambda calculus}
+\subsection{\textit{Lambda calculus}}
+\red{\textit{tuto subsekci zkracovat v případě překročení limitu....}}
+
 \Lets describe a programming language, 
 in which the GP algorithm generates individual programs --- the so called \lterms.
 
@@ -226,7 +247,7 @@ In other words, $\beta$-reduction is the process
 of insertion of arguments supplied to a function into 
 its body.
 
-\subsection{Simply typed lambda calculus}
+\subsection{\textit{Simply typed lambda calculus}}
 
 A \lterm as described above corresponds to a program expression with no type information included. Now we will describe \textit{simple types}. 
 
@@ -288,7 +309,7 @@ Those rules are called \textit{inference rules} (see the similarity with the \te
 More complex type systems (e.g. \HM or System F) can be defined similarly by specifying their set of inference rules, but (for the sake of brevity) we prefer to continue the overview in a less formal fashion.
 
 
-\subsection{\HM type system}
+\subsection{\textit{\HM type system}}
 
 \HM type system \citep{hindley1969principal} is a generalization of the simply typed lambda calculus extended by two concepts: parametric types and type variables (and with the \texttt{let} expression, but we omit its discussion since it is less important for the type related matter).
 
@@ -298,14 +319,14 @@ Those two concepts play nicely together, we can see this by observing following 
  
 %možná líp na ... replicate :: Int -> a -> [a]
 
-\subsection{System F}
+\subsection{\textit{System F}}
 
 System F \red{\citep{TODO}} can be seen as a further generalization of both STLC and \HM. 
 The concept of type variables brings the question of variable quantification. 
 \HM uses implicit general quantification. System F is about making things explicit.
 This holds both for placing variable quantification symbols ($\forall$) explicitly inside the type terms, and for need to explicitly place the type term into the polymorphic function in order to cast it to the specific instance with no type variables. This for example enables possibility of generating "anonymous" type definitions\footnote{E.g., the standard \texttt{List a = Cons a (List a) | Nil} can be expressed "anonymously" as $\forall \alpha \forall \beta : (\alpha \ar \beta \ar \beta) \ar \beta \ar \beta  $.}. This rise in power brings the disadvantage of the substantially more computationally complex term generating procedure. 
 
-\subsection{Type classes}
+\subsection{\textit{Type classes}}
 
 A type class is a type system construct that supports ad-hoc polymorphism in a mathematically elegant way. The concept of the type class first appeared in the Haskell programming language \citep{morris2013type} and was originally designed as a way of implementing overloaded arithmetic and equality operators in a systematic fashion \citep{wadler1989make}.
 
@@ -350,7 +371,7 @@ In order to state the fact that a certain concrete type (e.g. \texttt{Int}) is a
 \section{Related work}
 \label{related}
 
-\red{Todo, přepsat aby to pasovalo na porovnání s type classama; připadně to porovnání udělat celý až v následující sekci o our approach}
+\red{Todo, přepsat aby to pasovalo na porovnání s type classama; připadně to porovnání udělat celý až v následující sekci o our approach, ocitovat krátce kdo ukázal na propojení TC a LP a možnost programovat v typovym systému}
 
 
 \cite{yu01} presents a GP system utilizing
@@ -423,37 +444,38 @@ described by Barendregt \cite{barendregt10}.
 %typically $\sim 70^o$.
 
 
-\section{Our current approach}
+\section{Our approach}
 
-\red{
-In our previous work jsme se rozhodli pro přístup: nejdřív vzít nejjednoduší typovej systém a v něm navrhnout generování a gen operace tak aby jednak byly zobecnění std GP, a jednak aby byly schopný generovat libovolnej term (modulo NF), ne jen nějakou jednodušší podmnožinu.
+\red{následující dvě subsekce (generování, křížení) pojmout tak, aby řekli: oporti obecnému trendu se my  zatim soustředíme výrazně víc na generující proceduru (než na operátory atd jak bejvá zvykem) a pojímame jí jako kontinuum od klasického GP přístupu až k systematické enumeraci bližšší automatickému dokazování. Uvidíme že tento přístup nám napomáhá hladce integrovat výpočet logického porgramu stojícího za soustavou typovejch tříd do generující procedury. }
 
-Pokud se to tam vejde tak zmínit, že HM lze z STLC získat tak že (zjednodušeně řečeno) na vhodných mistech změníme porovnání rovnosti typových termů za unifikaci typových termů. (V tý nasledující sekci pak k tomu navíc přidat, že se k unifikaci přidává běh logickýho programu, který je ale nutno pouštět po krokách tak, aby byly na stejný urovni kroky generujícího algoritmu a kroky běhu toho LP (tzn že rozpracovaný term muže být několik kroků A* v tom samém termu ale s jiným stádiem dopočítanosti logického programu pracujícího na doplnění dalšího symbolu). )
+%\red{In our previous work jsme se rozhodli pro přístup: nejdřív vzít nejjednoduší typovej systém a v něm navrhnout generování a gen operace tak aby jednak byly zobecnění std GP, a jednak aby byly schopný generovat libovolnej term (modulo NF), ne jen nějakou jednodušší podmnožinu.
 
-Konkretní popis mojí generující (a křížící) metody zatim zakomentován protože to zabírá moc místa, nejdřív dopsat zbytek a pak vzít co se vejde, pokud vůbec něco..}
+%Pokud se to tam vejde tak zmínit, že HM lze z STLC získat tak že (zjednodušeně řečeno) na vhodných mistech změníme porovnání rovnosti typových termů za unifikaci typových termů. (V tý nasledující sekci pak k tomu navíc přidat, že se k unifikaci přidává běh logickýho programu, který je ale nutno pouštět po krokách tak, aby byly na stejný urovni kroky generujícího algoritmu a kroky běhu toho LP (tzn že rozpracovaný term muže být několik kroků A* v tom samém termu ale s jiným stádiem dopočítanosti logického programu pracujícího na doplnění dalšího symbolu). )
+
+%Konkretní popis mojí generující (a křížící) metody zatim zakomentován protože to zabírá moc místa, nejdřív dopsat zbytek a pak vzít co se vejde, pokud vůbec něco..}
 
 
 
-%\subsection{Generating}
+\subsection{\textit{Generating}}
 
-%Our approach to \lterm generating is based on technique briefly described in \citep{barendregt10}, which generates well-typed \lterms in their \textit{long normal form}. 
+Our approach to \lterm generating is based on technique briefly described in \citep{barendregt10}, which generates well-typed \lterms in their \textit{long normal form}. 
 
-%Our generating method is based on simple modification of the standard A* \citep{AIMA}, which we call \textit{forgetful A*}. This modification consist in additional parameter for the A* algorithm -- the \textit{search strategy}. It is a simple filtration function that is given the set of all successors of the state that is being examined and returns a subset of this input. This subset is added to the priority queue to be further explored. In this way the search space may be reduced as the filtration function may \textit{forget} some successors.
+Our generating method is based on simple modification of the standard A* \citep{AIMA}, which we call \textit{forgetful A*}. This modification consist in additional parameter for the A* algorithm -- the \textit{search strategy}. It is a simple filtration function that is given the set of all successors of the state that is being examined and returns a subset of this input. This subset is added to the priority queue to be further explored. In this way the search space may be reduced as the filtration function may \textit{forget} some successors.
 
-%A* keeps a priority queue of states during the generation process, on the other hand the \textit{ramped half-and-half method}, the standard GP algorithm for generating individuals, keeps only one individual which is gradually constructed. This behavior is easily achieved by use of suitable search strategy that returns subset consisting of only one successor. The systematic exhaustive search is obtained by search strategy that returns whole input set. Our novel \textit{geometric strategy} can be understood as point somewhere between those two extremes.
+A* keeps a priority queue of states during the generation process, on the other hand the \textit{ramped half-and-half method}, the standard GP algorithm for generating individuals, keeps only one individual which is gradually constructed. This behavior is easily achieved by use of suitable search strategy that returns subset consisting of only one successor. The systematic exhaustive search is obtained by search strategy that returns whole input set. Our novel \textit{geometric strategy} can be understood as point somewhere between those two extremes.
 
 
 %%.... metaevoluce remark
 %%A remarkable benefit of parameterizing the generating method by a search strategy taking the form of a simple filtration function is that such a function can be expressed by functional language in a very economical way. Take for instance a search strategy that behaves same as the \textit{geometric} except that when it comes to situation where all the elements are filtered out it acts as the \textit{ramped half-and-half}. Such \textit{strategy composition} is easily describable as a higher order function. Thus comes to mind the possibility of using our system to come up with new search strategies on its own.
 
 
-%\subsection{Crossover}
+\subsection{\textit{Crossover}}
 
-%Our system utilizes generalization of the standard tree-swapping crossover operator. Two main concerns with swapping typed subtrees are types and free variables. Well-typed offspring is obtained by swapping only subtrees of the same type. Only subtrees with corresponding counterpart in the second parent are randomly chosen from. More interesting problem lies in free variables, which may cause trouble if swapped somewhere where it is suddenly not bounded. In order to circumvent this difficulty we utilize technique called \textit{abstraction elimination}\citep{jones87} that transforms an arbitrary \lterm into \lterm that contains no lambda abstractions and no bound variables. After the initial population is generated,  it is transformed by abstraction elimination. Another possible transformation taking place after initialization is $\eta$-normalization shortening rather long long normal form into shorter $\beta\eta$-normal form.  
+Our system utilizes generalization of the standard tree-swapping crossover operator. Two main concerns with swapping typed subtrees are types and free variables. Well-typed offspring is obtained by swapping only subtrees of the same type. Only subtrees with corresponding counterpart in the second parent are randomly chosen from. More interesting problem lies in free variables, which may cause trouble if swapped somewhere where it is suddenly not bounded. In order to circumvent this difficulty we utilize technique called \textit{abstraction elimination}\citep{jones87} that transforms an arbitrary \lterm into \lterm that contains no lambda abstractions and no bound variables. After the initial population is generated,  it is transformed by abstraction elimination. Another possible transformation taking place after initialization is $\eta$-normalization shortening rather long long normal form into shorter $\beta\eta$-normal form.  
 
-%Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation. Favorable properties of applicative tree representation are also reported in \citep{yu1998polygp}. 
+Another performance enhancing transformation is option of using "applicative" tree representation (coming directly from inductive definition of \lterms) instead of more traditional S-expression representation. Favorable properties of applicative tree representation are also reported in \citep{yu1998polygp}. 
 
-\section{Future work}
+\section{\textit{Using \HM with type classes}}
 
 %\red{Jak pojmout podstatu článku? Řekl bych, že vtip je v použití typovejch tříd na hendlování typovýho systému TGP. Tahle pasáž je imho klíčová a tak bych jí napsal jako první, podle noušnů v ní obsaženejch bych pak upravil preliminaries a akordingly to zmínil v related work na konci (něco jako, na rozdíl od kanaďanů my se chceme skusit vydat na cestu k zobecnění HM tak, že využijem typeclasses : výhody videíme v tom, že se prakticky využívaj haskellu a jejich použití výrazně neztěžuje inferenční proces, naopak do něj přirozeně pasuje)}
 
@@ -530,7 +552,7 @@ Odpověď na otázku zda daný typ je instancí nějaké TC zodpovíme odpovída
 %. - meta model - výpočetní model co má to co optimalizuje zakodovany jako komoditu to co 
 %. - navazuje na spolupráci mezi plánovánim a 
 
-\section{Conclusion}
+\section{Conclusions}
 Todo nebo spojit s future work do jedný subsekce.
 
 
