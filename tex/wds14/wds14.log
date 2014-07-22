@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.4.26)  24 MAY 2014 04:27
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.6.26)  26 JUN 2014 22:26
 entering extended mode
 **wds14.tex
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds14.tex
+(C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\wds14.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -319,8 +319,8 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
-Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
+(C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\easylist\easylist.sty
+Package: easylist 2014/01/11 v.1.4 Numbered items with a single command.
 \el@CounterTotal=\count99
 \el@Scratch=\count100
 \el@ControlCounter=\count101
@@ -341,11 +341,11 @@ Package: easylist 2010/02/28 v.1.3 Numbered items with a single command.
 \el@TotalMargin=\dimen113
 \el@LeftMove=\dimen114
 )
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\qtree\qtree.sty
+(C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\qtree\qtree.sty
 Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
 Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\pict2e.sty
-Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
+(C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\pict2e.sty
+Package: pict2e 2014/01/12 v0.2z Improved picture commands (HjG,RN,JT)
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\pict2e.cfg"
 File: pict2e.cfg 2005/12/29 v1.0 MiKTeX 'pict2e' configuration
@@ -365,7 +365,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
 
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\p2e-pdftex.def
+(C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\pict2e\p2e-pdftex.def
 File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
@@ -489,12 +489,12 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds11.sty
+(C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\wds11.sty
 \@maxsep=\dimen118
 \@dblmaxsep=\dimen119
 
 MFF WDS galley substyle, v5.01wds <April 12, 2000>.
-(C:\wamp\www\tomkren.github.io\tex\wds14\agu11.sty
+(C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\agu11.sty
 
  
  AGU11 -- August 6, 1996 Version 
@@ -536,7 +536,7 @@ MFF WDS galley substyle, v5.01wds <April 12, 2000>.
 \tablebox=\box54
 \tabnotecount=\count131
 \loopnotecount=\count132
-) (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\epsf\epsf.sty
+) (C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\epsf\epsf.sty
 This is `epsf.tex' v2.7.4 <14 February 2011>
 \epsffilein=\read1
 \epsfframemargin=\dimen135
@@ -547,7 +547,7 @@ This is `epsf.tex' v2.7.4 <14 February 2011>
 \epsfxsize=\dimen140
 \epsfysize=\dimen141
 \pspoints=\dimen142
-) (C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib.sty
+) (C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip120
 \bibsep=\skip121
@@ -557,7 +557,7 @@ LaTeX Info: Redefining \cite on input line 694.
 \c@definition=\count134
 \c@proposition=\count135
 
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds14.aux)
+(C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\wds14.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
 LaTeX Font Info:    ... okay on input line 122.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
@@ -571,7 +571,7 @@ LaTeX Font Info:    ... okay on input line 122.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
 LaTeX Font Info:    ... okay on input line 122.
 
-(C:\Users\sekol\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+(C:\Users\user\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count136
 \scratchdimen=\dimen143
@@ -597,7 +597,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Running head information too long by 79.23683pt.
 [1
 
-{C:/Users/sekol/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/Users/user/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 227
 .
 LaTeX Font Info:    No file OMScmtt.fd. on input line 227.
@@ -619,7 +619,7 @@ Running head information too long by 79.23683pt.
 Running head information too long by 79.23683pt.
 [5]
 Running head information too long by 79.23683pt.
-[6] (C:\wamp\www\tomkren.github.io\tex\wds14\wds14.bbl
+[6] (C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\wds14.bbl
 Running head information too long by 79.23683pt.
 [7])
 Running head information too long by 79.23683pt.
@@ -627,16 +627,16 @@ Running head information too long by 79.23683pt.
 
 Package natbib Warning: There were undefined citations.
 
-(C:\wamp\www\tomkren.github.io\tex\wds14\wds14.aux)
+(C:\Users\user\Documents\GitHub\tomkren.github.io\tex\wds14\wds14.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3751 strings out of 493921
- 43649 string characters out of 3144876
- 117362 words of memory out of 3000000
- 6992 multiletter control sequences out of 15000+200000
+ 3758 strings out of 493921
+ 44024 string characters out of 3144879
+ 117391 words of memory out of 3000000
+ 6999 multiletter control sequences out of 15000+200000
  14456 words of font info for 54 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  27i,13n,24p,971b,314s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -658,7 +658,7 @@ onts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
 /type1/public/amsfonts/cm/cmtt9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on wds14.pdf (8 pages, 248794 bytes).
+Output written on wds14.pdf (8 pages, 248805 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
