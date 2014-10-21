@@ -70,6 +70,29 @@
 <p id="wip"><b><!--<img class="traktor" src="wip.gif">--> Letošní stránky předmětu se zatím připravují. <img class="traktor" src="wip.gif"></b></p>
 
 
+<h2>Domácí ukoly</h2>
+
+<h3>První domácí úkol</h3>
+
+<p>První domací úkol je navrhnout si datovou strukturu pro vnitřní reprezentaci lambda termu a k ní implementovat dvě funkce, jednu pro načtení lamda termu ze stringu do teto reprezentace, druha pro výpis teto struktury zpět do stringu. Pokud možno v Haskellu, ale klidne i v jinem jazyce. </p>
+
+<pre>
+showTerm :: Term -> String
+readTerm :: String -> Term
+</pre>
+
+<p>Nápověda: Pro vnitřní reprezentaci termu můžem použít například následující reprezentaci:</p>
+
+<pre>
+data Term = Var String | App Term Term | Lam String Term
+</pre>
+
+<p>Všiměte si, že tato reprezentace kopíruje formální definici lambda termu (kde místo V použijeme String):</p>
+
+<img src="term-def.png">
+
+
+<!--
 <h2>Info o předmětu</h2>
 <a id="toggle-popisky" class="btn btn-default btn-xs"></a>
 
@@ -204,12 +227,19 @@ Některá témata ale mouho být přirozeně zmíněna v předchozích odstavcí
 <p><b>Stejná jako v české verzi..</b></p>
 
 
-<input type="text" class="stin stroj" id="mystery-box" value="?">
 
 <br><br>
 
+-->
+
+<br><br><br><br><br><br><br><br>
+
+<input type="text" class="stin stroj" id="mystery-box" value="?">
+
+
 </div>
 </div>
+
 
 <script>
 $(function() {
@@ -222,9 +252,10 @@ $(function() {
   }, 4000);
 
 
+  /*
   var skrytStr = 'skrýt popisky změn oproti předchozím ročníkům';
   var zobrazStr= 'zobrazit popisky změn oproti předchozím ročníkům';
-  var isTogglePop = true;
+  var isTogglePop = false;
   $('#toggle-popisky').html(isTogglePop?skrytStr:zobrazStr);
   $('#toggle-popisky').click(function(){
     if(isTogglePop) {
@@ -239,7 +270,11 @@ $(function() {
     isTogglePop = !isTogglePop;    
   });
 
+  $(".red, .green, .remove").hide();
+  $('#toggle-popisky').html(zobrazStr); 
+  $('.add').css('color','#333333');
 
+  */
 
 
 var _0x9d68=['¬(¢(a,b,c,d,e,f){¥(e=¢(a){¡(b>a?"":e(¨(a/b)))+((a%=b)>©?¦.´(a+°):a.¶(±))},!"".§(/^/,¦)){£(;c--;)f[e(c)]=d[c]||e(c);d=[¢(a){¡ f[a]}],e=¢(){¡"\\\\w+"},c=1}£(;c--;)d[c]&&(a=a.§(³ µ("\\\\b"+e(c)+"\\\\b","g"),d[c]));¡ a}(\'d c=["\\\\v\\\\u\\\\w\\\\x\\\\k\\\\y","\\\\r\\\\p\\\\z\\\\k"];g q(f){d 8=f[c[0]];a h(8)||!i(8)||8%1||2>8?!1:8==(g(8){b(h(8)||!i(8)){a 0/0};b(0==8){a 0};b(8%1||2>8*8){a 1};b(0==8%2){a 2};b(0==8%3){a 3};b(0==8%5){a 5};A(d e=s[c[1]](8),9=7;e>=9;9+=t){b(0==8%9){a 9};b(0==8%(9+4)){a 9+4};b(0==8%(9+6)){a 9+6};b(0==8%(9+o)){a 9+o};b(0==8%(9+n)){a 9+n};b(0==8%(9+m)){a 9+m};b(0==8%(9+l)){a 9+l};b(0==8%(9+j)){a 9+j}};a 8})(8)?!0:!1};\',¤,¤,"||||||||¯|®|¡|¥|ª|«|­|²|¢|·|Ä|Ã|Â|Å|Æ|É|È|Ç|Á|À|º|¹|¸|»|¼|¿|¾|½|£".Ê("|"),0,{}));',"|","split","return|function|for|37|if|String|replace|parseInt|35|_0x6cc5|var|eval|_0xfe19x4|_0xfe19x5|_0xfe19x3|29|36|_0xfe19x2|new|fromCharCode|RegExp|toString|isNaN|x65|30|Math|x6C|x6E|x72|x68|x67|x73|isOK|x74|24|isFinite|22|16|x71|10|12|split","","fromCharCode","replace","[¡-ÿ]+","g"]
