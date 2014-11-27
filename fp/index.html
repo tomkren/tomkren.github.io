@@ -66,9 +66,14 @@
 <p>Vyučováno v zimním semestru 2014/15 - Zk 2/0.</p>
 </i>
 
-<br>
-<p id="wip"><b><!--<img class="traktor" src="wip.gif">--> Letošní stránky předmětu se zatím připravují. <img class="traktor" src="wip.gif"></b></p>
+<!--<br>
+<p id="wip"><b> Letošní stránky předmětu se zatím připravují. <img class="traktor" src="wip.gif"></b></p>
+-->
 
+<h2>Slidy</h2>
+
+Přednáší se hlavně podle slidu Petra Pudláka, které jsou <a href="http://petr.pudlak.name/dw/fp:slidy">zde</a>.
+Zatím (k 27.11. včetně) jsme probrali 1-4.
 
 <h2>Domácí ukoly</h2>
 
@@ -91,6 +96,32 @@ data Term = Var String | App Term Term | Lam String Term
 
 <img src="term-def.png">
 
+
+<h3>Druhý domácí úkol</h3>
+<p>Implementujte vyhodnocení termů pro různé redukční strategie, tzn. alespoň pro "línou" (redukuje nejlevější redex, tj. ten na který narazíme při preorder procházení jako na první) a "aplikativní" (redukuje nejvnitřnější nejlevější redex, tj. ten na který narazíme při postorder procházení jako na první) redukční strategii. (viz <a href="http://petr.pudlak.name/fp/fp02-lambda.pdf">2. slidy</a>)</p>
+
+
+
+<p>Můžete použít například následující mustr:</p>
+
+<pre>
+-- jeden krok redukční strategie (vrací Nothing pro term v NF)
+type Strategy = Term -> Maybe Term
+
+lazy :: Strategy
+lazy t = ...
+
+eager :: Strategy
+eager t = ...
+
+-- Spočítá normální formu danou redukční strategií za maximálně n kroků 
+-- (vrací Nothing, pokud se nepovedlo redukovat za daný počet kroků)
+toNormalForm :: Strategy -> Int -> Term -> Maybe Term
+toNormalForm s n t = ...
+</pre>
+
+<h3>Třetí domácí úkol</h3>
+Implementujte Hindley-Milnerův algoritmus (aka algoritmus W). (viz <a href="http://petr.pudlak.name/fp/fp03-hm.pdf">3. slidy</a>).
 
 <!--
 <h2>Info o předmětu</h2>
